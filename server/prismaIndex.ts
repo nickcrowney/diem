@@ -9,9 +9,9 @@ async function main() {
   // await prisma.user.createMany({
   //   data: users,
   // });
-  await prisma.event.create({
-    data: events[0],
-  });
+  // // // // // await prisma.event.create({
+  // // // // //   data: events[0],
+  // // // // // });
   // // // await prisma.userDiem.create({
   // // //   data: {
   // // //     diemId: 8,
