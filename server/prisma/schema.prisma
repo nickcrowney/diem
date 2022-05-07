@@ -12,18 +12,14 @@ datasource db {
 
 //IMPLICIT M:N
 
-model Profile {
-  id        Int     @id @default(autoincrement())
-  status    String? @db.VarChar(255)
-  user      User    @relation(fields: [userId], references: [id])
-  userId    Int     @unique
-}
+
 
 model Diem {
   id         Int       @id @default(autoincrement())
-  title      String    @db.VarChar(255)
-  events     String[]
+  title      String    @db.VarChar(50)
+  events     Event[]
   users      User[]   @relation(references: [id])
+  date       DateTime @db.Date @default(now())
   // created    DateTime  @default(now())
   // author      User @relation(fields:[authorId], references: [id])
   // authorId    Int
@@ -31,12 +27,31 @@ model Diem {
 
 model User {
   id        Int       @id @default(autoincrement())
-  name      String    @db.VarChar(255)
+  name      String    @db.VarChar(50)
+  password  String    @db.VarChar(25) @default("password")
   // diems     Diem[]
   profile   Profile?
   diems     Diem[]  @relation(references: [id])
 }
 
+model Profile {
+  id        Int     @id @default(autoincrement())
+  status    String? @db.VarChar(255)
+  user      User    @relation(fields: [userId], references: [id])
+  userId    Int     @unique
+}
+
+model Event {
+  id        Int     @id @default(autoincrement())
+  metaDiem  Diem @relation(fields: [metaDiemId], references: [id])
+  metaDiemId Int
+  address   String?
+  photo     String?
+  title     String
+  time      String? //@db.Time(2)
+  location  String?
+  mapLink   String?
+}
 
 
 

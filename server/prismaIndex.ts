@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { users, diems, assignments } from './data/data';
+import { users, diems, events } from './data/data';
 
 const prisma = new PrismaClient();
 
@@ -9,17 +9,9 @@ async function main() {
   // await prisma.user.createMany({
   //   data: users,
   // });
-  // await prisma.user.create({
-  //   data: {
-  //     name: 'Guillem',
-  //     // diems: {
-  //     //   create: { title: 'Santi visit', events: ['Vermut', 'Museum', 'Bar'] },
-  //     // },
-  //     // profile: {
-  //     //   create: { status: 'Ready for beers!' },
-  //     // },
-  //   },
-  // });
+  await prisma.event.create({
+    data: events[0],
+  });
   // // // await prisma.userDiem.create({
   // // //   data: {
   // // //     diemId: 8,
@@ -32,18 +24,18 @@ async function main() {
   // // //     // },
   // // //   },
   // // // });
-  await prisma.diem.create({
-    data: diems[0],
-    // {
-    //   // authorId: 5,
-    //   title: 'Codeworks',
-    //   events: [
-    //     'learn SQL',
-    //     'read motivational quotes on t-shirt',
-    //     'laugh at student coding ideas',
-    //   ],
-    // },
-  });
+  // // // // await prisma.diem.create({
+  // // // //   data: diems[0],
+  // // // //   // {
+  // // // //   //   // authorId: 5,
+  // // // //   //   title: 'Codeworks',
+  // // // //   //   events: [
+  // // // //   //     'learn SQL',
+  // // // //   //     'read motivational quotes on t-shirt',
+  // // // //   //     'laugh at student coding ideas',
+  // // // //   //   ],
+  // // // //   // },
+  // // // // });
   //   await prisma.profile.create({
   //     data: {
   //       userId: 4,
@@ -61,7 +53,7 @@ async function main() {
   //   where: { id: 3 },
   //   data: {
   //     //   profile: { status: 'Having a bath' },
-  //     users: {
+  //     events: {
   //       connect: {
   //         id: 4,
   //       },
@@ -71,24 +63,17 @@ async function main() {
   //   },
   // });
   // console.log(post);
-  // const post = await prisma.user.update({
-  //   where: { id: 1 },
-  //   data: {
-  //     //   profile: { status: 'Having a bath' },
-  //     diems: {
-  //       create: {
-  //         title: 'Learning prisma',
-  //         events: ['get frustrated', 'cry'],
-  //       },
-  //     },
-  //     profile: {
-  //       create: { status: 'arriiit man owsit goin' },
-  //     },
-  //     // title: 'Bath time with Guillem',
-  //     // events: ['suds and wash', 'coding'],
-  //   },
-  // });
-  // console.log(post);
+  // // const post = await prisma.event.update({
+  // //   where: { id: 1 },
+  // //   data: {
+  // //     //   profile: { status: 'Having a bath' },
+  // //     time: '14:00',
+  // //     location: 'Carrer Avila',
+  // //     // title: 'Bath time with Guillem',
+  // //     // events: ['suds and wash', 'coding'],
+  // //   },
+  // // });
+  // // console.log(post);
   // DELETE
   //   const deleteDiem = await prisma.diem.delete({
   //     where: {
@@ -108,7 +93,7 @@ async function main() {
   const allUsers = await prisma.user.findMany({
     // where: { id: 3 },
     include: {
-      diems: true, //{ include: { diem: true } },
+      diems: { include: { events: true } },
       // profile: true,
     },
   });

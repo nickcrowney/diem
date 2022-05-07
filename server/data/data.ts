@@ -118,58 +118,67 @@ export const diems = [
   //   },
 ];
 
-export const assignments = [
+export const events = [
   {
-    diemId: 6,
-    userId: 1,
+    title: 'pre-drinks',
+    metaDiemId: 4,
+    location: 'Hoppiness',
+    time: '12:00',
   },
-  //   {
-  //     diemId: 5,
-  //     userId: 2,
-  //   },
-  //   {
-  //     diemId: 5,
-  //     userId: 3,
-  //   },
-  //   {
-  //     diemId: 1,
-  //     userId: 1,
-  //   },
-  //   {
-  //     diemId: 1,
-  //     userId: 2,
-  //   },
-  //   {
-  //     diemId: 1,
-  //     userId: 3,
-  //   },
-  //   {
-  //     diemId: 2,
-  //     userId: 2,
-  //   },
-  //   {
-  //     diemId: 2,
-  //     userId: 3,
-  //   },
-  //   {
-  //     diemId: 3,
-  //     userId: 3,
-  //   },
-  //   {
-  //     diemId: 3,
-  //     userId: 1,
-  //   },
-
-  //   {
-  //     diemId: 4,
-  //     userId: 4,
-  //   },
-  //   {
-  //     diemId: 4,
-  //     userId: 3,
-  //   },
-  //   {
-  //     diemId: 4,
-  //     userId: 2,
-  //   },
 ];
+
+// // export const assignments = [
+// //   {
+// //     diemId: 6,
+// //     userId: 1,
+// //   },
+// //   //   {
+// //   //     diemId: 5,
+// //   //     userId: 2,
+// //   //   },
+// //   //   {
+// //   //     diemId: 5,
+// //   //     userId: 3,
+// //   //   },
+// //   //   {
+// //   //     diemId: 1,
+// //   //     userId: 1,
+// //   //   },
+// //   //   {
+// //   //     diemId: 1,
+// //   //     userId: 2,
+// //   //   },
+// //   //   {
+// //   //     diemId: 1,
+// //   //     userId: 3,
+// //   //   },
+// //   //   {
+// //   //     diemId: 2,
+// //   //     userId: 2,
+// //   //   },
+// //   //   {
+// //   //     diemId: 2,
+// //   //     userId: 3,
+// //   //   },
+// //   //   {
+// //   //     diemId: 3,
+// //   //     userId: 3,
+// //   //   },
+// //   //   {
+// //   //     diemId: 3,
+// //   //     userId: 1,
+// //   //   },
+
+// //   //   {
+// //   //     diemId: 4,
+// //   //     userId: 4,
+// //   //   },
+// //   //   {
+// //   //     diemId: 4,
+// //   //     userId: 3,
+// //   //   },
+// //   //   {
+// //   //     diemId: 4,
+// //   //     userId: 2,
+// //   //   },
+// // ];
