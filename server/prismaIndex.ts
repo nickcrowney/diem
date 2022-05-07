@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-import { users, diems, events } from './data/data';
+import { PrismaClient } from "@prisma/client";
+import { users, diems, events } from "./data/data";
 
 const prisma = new PrismaClient();
 
