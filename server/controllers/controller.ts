@@ -4,12 +4,12 @@ import Express, { Request, Response } from "express";
 const prisma = new PrismaClient();
 
 export async function getUsers(req: Request, res: Response) {
-  const diems = await prisma.diem.findMany({
+  const users = await prisma.user.findMany({
     include: {
-      users: { include: { profile: true } },
+      diems: { include: { events: true } },
     },
   });
-  res.json(diems);
+  res.json(users);
 }
 
 export async function getDiems(req: Request, res: Response) {
@@ -22,10 +22,10 @@ export async function getDiems(req: Request, res: Response) {
 }
 
 export async function createUser(req: Request, res: Response) {
-  const { username, password } = req.body;
+  const { name, password } = req.body;
   const user = await prisma.user.create({
     data: {
-      name: username,
+      name: name,
       password: password,
     },
   });
