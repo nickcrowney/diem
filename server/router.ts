@@ -1,32 +1,28 @@
-import Router from "express";
+import { Router } from "express";
 import {
   getUsers,
   getUserById,
   getDiems,
   getDiemById,
-} from "./controllers/controllers";
+  createUser,
+  createDiem,
+  updateUser,
+  updateDiem,
+  deleteUser,
+  deleteDiem,
+} from "./controllers/controller";
 
-const router = Router();
+export const router = Router();
 
-//GET All Diems
-router.get("/diems", getDiems);
-
-//GET Diem by Id
-router.get("/diem/byId/:id", getDiemById);
-
-//GET all Users
 router.get("/users", getUsers);
-
-//GET User by Id
 router.get("/user/byId/:id", getUserById);
+router.get("/diems", getDiems);
+router.get("/diem/byId/:id", getDiemById);
+router.post("/user", createUser);
+router.post("/diem", createDiem);
+router.put("/user", updateUser);
+router.put("diem", updateDiem);
+router.delete("/user", deleteUser);
+router.delete("/diem", deleteDiem);
 
-//POST new Diem by Id
-
-//POST new User by Id
-
-//PUT add user to Diem
-
-//PUT remove user from Diem
-
-//Delete Diem by Id
-export default router;
+//module.exports = router;
