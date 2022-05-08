@@ -22,7 +22,7 @@ router.post("/user", createUser);
 router.post("/diem", createDiem);
 router.put("/user", updateUser);
 router.put("diem", updateDiem);
-router.delete("/user", deleteUser);
-router.delete("/diem", deleteDiem);
+router.delete("/user/:id", deleteUser);
+router.delete("/diem/:id", deleteDiem);
 
 //module.exports = router;
