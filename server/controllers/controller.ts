@@ -1,6 +1,7 @@
 import { User, Diem, Profile, Event } from ".prisma/client";
 import { PrismaClient } from "@prisma/client";
 import Express, { Request, Response } from "express";
+import { diems } from "../data/data";
 const prisma = new PrismaClient();
 
 export async function getUsers(req: Request, res: Response) {
@@ -63,7 +64,7 @@ export async function getDiemById(req: Request, res: Response) {
 }
 
 export async function updateUser(req: Request, res: Response) {
-  const { id, name, password, profile, diems } = req.body;
+  const { id, name, password, diems, profile } = req.body;
   const updatedUser = await prisma.user.update({
     where: {
       id: id,
@@ -71,8 +72,8 @@ export async function updateUser(req: Request, res: Response) {
     data: {
       name: name,
       password: password,
-      profile: profile,
       diems: diems,
+      profile: profile,
     },
   });
   res.json(updatedUser);
