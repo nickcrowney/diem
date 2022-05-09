@@ -64,7 +64,7 @@ export async function getDiemById(req: Request, res: Response) {
 }
 
 export async function updateUser(req: Request, res: Response) {
-  const { id, name, password, diems } = req.body;
+  const { id, name, password, diems, profile } = req.body;
   const updatedUser = await prisma.user.update({
     where: {
       id: id,
@@ -73,6 +73,7 @@ export async function updateUser(req: Request, res: Response) {
       name: name,
       password: password,
       diems: diems,
+      profile: profile,
     },
   });
   res.json(updatedUser);
