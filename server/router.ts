@@ -14,8 +14,6 @@ import {
   updateDiemTitle,
   updateDiemUsers,
   updateUserDiems,
-  updateUserProfile,
-  getProfiles,
   getEvents,
 } from "./controllers/controller";
 
@@ -25,7 +23,7 @@ router.get("/users", getUsers);
 router.get("/user/byId/:id", getUserById);
 router.get("/diems", getDiems);
 router.get("/diem/byId/:id", getDiemById);
-router.get("/profiles", getProfiles);
+//router.get("/profiles", getProfiles);
 router.get("/events", getEvents);
 router.post("/user", createUser);
 router.post("/diem", createDiem);
@@ -35,7 +33,7 @@ router.delete("/user/:id", deleteUser);
 router.delete("/diem/:id", deleteDiem);
 
 router.patch("/user/updateDiems", updateUserDiems);
-router.patch("/user/updateProfile", updateUserProfile);
+//router.patch("/user/updateProfile", updateUserProfile);
 router.patch("/diem/updateEvents", updateDiemEvents);
 router.patch("/diem/updateUsers", updateDiemUsers);
 router.patch("/diem/updateTitle", updateDiemTitle);
