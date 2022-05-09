@@ -28,22 +28,23 @@ datasource db {
 ////////////////// Diem Code /////////////////
 
 model Diem {
-  id     Int      @id @default(autoincrement())
-  title  String   @db.VarChar(50)
-  events Event[]
-  users  User[]   @relation(references: [id])
-  date   DateTime @default(now()) @db.Date
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(50)
+  events      Event[]
+  users       User[]   @relation(references: [id])
+  date        DateTime @default(now()) @db.Date
   // created    DateTime  @default(now())
   // author      User @relation(fields:[authorId], references: [id])
   // authorId    Int
+  chatHistory
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
-  name     String   @db.VarChar(50)
-  password String   @default("password") @db.VarChar(25)
-  diems    Diem[]
-  profile  Profile?
+  id      Int      @id @default(autoincrement())
+  name    String   @db.VarChar(50)
+  // password String   @default("password") @db.VarChar(25)
+  diems   Diem[]
+  profile Profile?
   //diems    Diem[]   @relation(references: [id])
 }
 
