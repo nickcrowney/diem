@@ -16,6 +16,7 @@ const Diems: NextPage = () => {
   useEffect(() => {}, [setData]);
   const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 
+  const currentUser = 1;
   return (
     <div>
       <Head>
@@ -38,7 +39,7 @@ const Diems: NextPage = () => {
                 onSubmit={handleSubmit((data) => {
                   console.log(data.title, 'TITLE');
                   console.log(data.date, 'DATE');
-                  props.submitNewDiem(data.title, data.date);
+                  props.submitNewDiem(data.title, data.date, currentUser);
 
                   // setData(JSON.stringify(data));
                 })}
