@@ -1,7 +1,7 @@
-import React from "react";
-import { FcGoogle } from "react-icons/fc";
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-import { firebaseApp } from "../firebase-config";
+import React from 'react';
+import { FcGoogle } from 'react-icons/fc';
+import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
+import { firebaseApp } from '../firebase-config';
 
 const Login = () => {
   const firebaseAuth = getAuth(firebaseApp);
@@ -16,11 +16,11 @@ const Login = () => {
       email: String,
       picture: String
     ) => {
-      const response = await fetch("http://localhost:4000/user", {
-        method: "POST",
+      const response = await fetch('http://localhost:4000/user', {
+        method: 'POST',
         body: JSON.stringify({ name, email, picture }),
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
       const data = await response.json();
