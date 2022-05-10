@@ -1,14 +1,13 @@
-<<<<<<< HEAD
-import React from "react";
-=======
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import Image from 'next/image';
-import styles from '../styles/Home.module.css';
-import LoginForm from '../components/LoginForm';
->>>>>>> 7e9ffcb0f1dce6212910b98de6aed5f434e92502
+import type { NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
+import LoginForm from "../components/LoginForm";
+import testHook from "../services/testHook";
 
 const Home: NextPage = () => {
+  const { state } = testHook();
+
   return (
     <div className={styles.container}>
       <Head>
@@ -24,8 +23,4 @@ const Home: NextPage = () => {
   );
 };
 
-<<<<<<< HEAD
-export default index;
-=======
 export default Home;
->>>>>>> 7e9ffcb0f1dce6212910b98de6aed5f434e92502
