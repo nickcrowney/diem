@@ -1,5 +1,4 @@
 import React from "react";
-
 import { FcGoogle } from "react-icons/fc";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { firebaseApp } from "../firebase-config";
@@ -10,15 +9,13 @@ const Login = () => {
 
   const signIn = async () => {
     const response = await signInWithPopup(firebaseAuth, provider); //All the data
-    console.log(
-      response.user.displayName,
-      response.user.email,
-      response.user.phoneNumber,
-      response.user.photoURL,
-      response
-    );
+    //console.log(response);
 
-    const submitNewUser = async (name, email, picture) => {
+    const submitNewUser = async (
+      name: String,
+      email: String,
+      picture: String
+    ) => {
       const response = await fetch("http://localhost:4000/user", {
         method: "POST",
         body: JSON.stringify({ name, email, picture }),
@@ -30,10 +27,12 @@ const Login = () => {
       console.log(data);
     };
 
+    //If user is new, POST new user
     submitNewUser(
       response.user.displayName,
       response.user.email,
       response.user.photoURL
+      // response.user.phoneNumber
     );
 
     //POST new user if not already done

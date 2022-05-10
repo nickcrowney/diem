@@ -22,7 +22,9 @@ function bootstrap() {
 }
 bootstrap();
 
+//TODO impliment chat server logic in here
 io.on("connection", (socket: Socket) => {
+
   // ...
 });
 

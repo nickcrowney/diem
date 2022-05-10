@@ -40,14 +40,15 @@ model Diem {
 }
 
 model User {
-  id        Int     @id @default(autoincrement())
-  name      String  @db.VarChar(50)
+  id          Int     @id @default(autoincrement())
+  name        String  @db.VarChar(50)
   //password  String  @default("password") @db.VarChar(25)
-  diems     Diem[]
+  diems       Diem[]
   //profile   Profile?
-  status    String? @db.VarChar(255)
-  userPhoto String?
-  email     String?
+  status      String? @db.VarChar(255)
+  userPhoto   String?
+  email       String?
+  phoneNumber String?
 
   //diems    Diem[]   @relation(references: [id])
 }
