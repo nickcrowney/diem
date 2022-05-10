@@ -32,7 +32,7 @@ model Diem {
   title  String   @db.VarChar(50)
   events Event[]
   users  User[]   @relation(references: [id])
-  date   DateTime @default(now()) @db.Date
+  date   String? //@default(now()) @db.Date
   // created    DateTime  @default(now())
   // author      User @relation(fields:[authorId], references: [id])
   // authorId    Int
