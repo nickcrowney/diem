@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { firebaseApp } from "../firebase-config";
 
 const Login = () => {
+  const [loginData, setLoginData] = useState([]);
+
   const firebaseAuth = getAuth(firebaseApp);
   const provider = new GoogleAuthProvider();
 
   const signIn = async () => {
     const response = await signInWithPopup(firebaseAuth, provider); //All the data
     //console.log(response);
+    setLoginData([response]);
 
     //TODO move this to api services
     const submitNewUser = async (
