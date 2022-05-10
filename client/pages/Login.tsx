@@ -1,38 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { firebaseApp } from "../firebase-config";
+import props from "../services/ApiServices";
 
 const Login = () => {
-  const [loginData, setLoginData] = useState([]);
+  const [loginData, setLoginData] = useState({}); //Use this to identify the current user
+  const [users, setUsers] = useState([]);
 
   const firebaseAuth = getAuth(firebaseApp);
   const provider = new GoogleAuthProvider();
 
+  const allUsers = props.getUsers();
+  console.log(props.getUsers(), "USERSSSS");
+
+  // setUsers((prev)=> [prev, ...allUsers])
+
   const signIn = async () => {
     const response = await signInWithPopup(firebaseAuth, provider); //All the data
-    //console.log(response);
-    setLoginData([response]);
+    // setLoginData({response.user});
+    console.log(loginData, "LOGINDATA");
+    console.log(response.user, "TESTS");
+
+    // useEffect(() => {
+    //   setLoginData((prev) => [response]);
+    // }, []);
 
     //TODO move this to api services
-    const submitNewUser = async (
-      name: String,
-      email: String,
-      picture: String
-    ) => {
-      const response = await fetch("http://localhost:4000/user", {
-        method: "POST",
-        body: JSON.stringify({ name, email, picture }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      console.log(data);
-    };
+    // const submitNewUser = async (
+    //   name: String,
+    //   email: String,
+    //   picture: String
+    // ) => {
+    //   const response = await fetch("http://localhost:4000/user", {
+    //     method: "POST",
+    //     body: JSON.stringify({ name, email, picture }),
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   });
+    //   const data = await response.json();
+    //   console.log(data);
+    // };
+
+    // const loginInput = (val: any) => {
+    //   setLoginData(val);
+    // };
 
     //If user is new, POST new user
-    submitNewUser(
+    props.submitNewUser(
       response.user.displayName,
       response.user.email,
       response.user.photoURL
