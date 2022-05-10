@@ -24,7 +24,7 @@ const Tile: React.FunctionComponent = () => {
 
       <h1>22nd May 2022</h1>
 
-      <h2>John's stag party</h2>
+      <h2>John\'s stag party</h2>
     </div>
   );
 };
