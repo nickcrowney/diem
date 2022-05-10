@@ -10,6 +10,11 @@
   justify-content: space-between;
 }
 
+.tile:hover {
+  cursor: pointer;
+  opacity: 0.75;
+}
+
 .tile__profilePics_container {
   display: flex;
   justify-content: flex-end;
