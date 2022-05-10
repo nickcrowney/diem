@@ -58,10 +58,10 @@ const submitNewUser = async (name: String, email: String, picture: String) => {
 };
 
 //POST new diem
-const submitNewDiem = async (title: String, date: String) => {
+const submitNewDiem = async (title: String, date: String, user: Number) => {
   const response = await fetch('http://localhost:4000/diem', {
     method: 'POST',
-    body: JSON.stringify({ title, date }),
+    body: JSON.stringify({ title, date, user }),
     headers: {
       'Content-Type': 'application/json',
     },
