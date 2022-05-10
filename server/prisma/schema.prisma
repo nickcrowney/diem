@@ -40,21 +40,27 @@ model Diem {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
-  name     String   @db.VarChar(50)
-  password String   @default("password") @db.VarChar(25)
-  diems    Diem[]
-  profile  Profile?
+  id          Int     @id @default(autoincrement())
+  name        String  @db.VarChar(50)
+  //password  String  @default("password") @db.VarChar(25)
+  diems       Diem[]
+  //profile   Profile?
+  status      String? @db.VarChar(255)
+  userPhoto   String?
+  email       String?
+  phoneNumber String?
+
   //diems    Diem[]   @relation(references: [id])
 }
 
-model Profile {
-  id        Int     @id @default(autoincrement())
-  status    String? @db.VarChar(255)
-  user      User    @relation(fields: [userId], references: [id])
-  userId    Int     @unique
-  userPhoto String?
-}
+// model Profile {
+//   id        Int     @id @default(autoincrement())
+//   status    String? @db.VarChar(255)
+//   user      User    @relation(fields: [userId], references: [id])
+//   userId    Int     @unique
+//   userPhoto String?
+//   email     String?
+// }
 
 model Event {
   id         Int     @id @default(autoincrement())
