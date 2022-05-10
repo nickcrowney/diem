@@ -1,32 +1,53 @@
-import { User, Diem, Profile, Event } from ".prisma/client";
+import { User, Diem, Event } from ".prisma/client";
 import { PrismaClient } from "@prisma/client";
+//import { profile } from "console";
 import Express, { Request, Response } from "express";
+import { diems } from "../data/data";
 const prisma = new PrismaClient();
 
 export async function getUsers(req: Request, res: Response) {
-  const diems = await prisma.diem.findMany({
+  const users = await prisma.user.findMany({
     include: {
-      users: { include: { profile: true } },
+      diems: { include: { events: true } },
     },
   });
-  res.json(diems);
+  res.json(users);
 }
 
 export async function getDiems(req: Request, res: Response) {
   const diems = await prisma.diem.findMany({
-    include: {
-      users: { include: { profile: true } },
-    },
+    // include: {
+    //   users: { include: { profile: true } },
+    // },
   });
   res.json(diems);
 }
 
+export async function getEvents(req: Request, res: Response) {
+  const events = await prisma.event.findMany({
+    // include: {
+    //   diems: { include: { events: true } },
+    // },
+  });
+  res.json(events);
+}
+
+// export async function getProfiles(req: Request, res: Response) {
+//   const profiles = await prisma.profile.findMany({
+//     // include: {
+//     //   diems: { include: { events: true } },
+//     // },
+//   });
+//   res.json(profiles);
+// }
+
 export async function createUser(req: Request, res: Response) {
-  const { username, password } = req.body;
+  const { name, email, picture } = req.body;
   const user = await prisma.user.create({
     data: {
-      name: username,
-      password: password,
+      name: name,
+      email: email,
+      userPhoto: picture,
     },
   });
   res.json(user);
@@ -42,6 +63,18 @@ export async function createDiem(req: Request, res: Response) {
   });
   res.json(diem);
 }
+
+// export async function createProfile(req: Request, res: Response) {
+//   const { email, picture, user} = req.body;
+//   const profile = await prisma.profile.create({
+//     data: {
+//       email: email, //Only title is required to create diem
+//       userPhoto: picture,
+//       user:
+//     },
+//   });
+//   res.json(profile);
+// }
 
 export async function getUserById(req: Request, res: Response) {
   const id = req.params.id;
@@ -64,20 +97,47 @@ export async function getDiemById(req: Request, res: Response) {
 }
 
 export async function updateUser(req: Request, res: Response) {
-  const { id, name, password, profile, diems } = req.body;
+  const { id, name, diems, profile } = req.body;
   const updatedUser = await prisma.user.update({
     where: {
       id: id,
     },
     data: {
       name: name,
-      password: password,
-      profile: profile,
       diems: diems,
+      //profile: profile,
     },
   });
   res.json(updatedUser);
 }
+
+//Patch a users's diem (add or delete)
+export async function updateUserDiems(req: Request, res: Response) {
+  const { id, diem } = req.body;
+  const updatedUser = await prisma.user.update({
+    where: {
+      id: id,
+    },
+    data: {
+      diems: diem,
+    },
+  });
+  res.json(updatedUser);
+}
+
+//Patch a users's profile
+// export async function updateUserProfile(req: Request, res: Response) {
+//   const { id, profile } = req.body;
+//   const updatedUser = await prisma.user.update({
+//     where: {
+//       id: id,
+//     },
+//     data: {
+//       profile: profile,
+//     },
+//   });
+//   res.json(updatedUser);
+// }
 
 export async function updateDiem(req: Request, res: Response) {
   const { id, title, events, users, date } = req.body;
@@ -93,6 +153,62 @@ export async function updateDiem(req: Request, res: Response) {
     },
   });
   res.json(updatedUser);
+}
+
+//Patch a diem's events (add or replace an event)
+export async function updateDiemEvents(req: Request, res: Response) {
+  const { id, events } = req.body;
+  const updatedDiem = await prisma.diem.update({
+    where: {
+      id: id,
+    },
+    data: {
+      events: events,
+    },
+  });
+  res.json(updatedDiem);
+}
+
+//Patch a diem's users (add or replace an event)
+export async function updateDiemUsers(req: Request, res: Response) {
+  const { id, users } = req.body;
+  const updatedDiem = await prisma.diem.update({
+    where: {
+      id: id,
+    },
+    data: {
+      users: users,
+    },
+  });
+  res.json(updatedDiem);
+}
+
+//Patch a diem's title (add or replace an event)
+export async function updateDiemTitle(req: Request, res: Response) {
+  const { id, title } = req.body;
+  const updatedDiem = await prisma.diem.update({
+    where: {
+      id: id,
+    },
+    data: {
+      title: title,
+    },
+  });
+  res.json(updatedDiem);
+}
+
+//Patch a diem's users (add or replace an event)
+export async function updateDiemDate(req: Request, res: Response) {
+  const { id, date } = req.body;
+  const updatedDiem = await prisma.diem.update({
+    where: {
+      id: id,
+    },
+    data: {
+      date: date,
+    },
+  });
+  res.json(updatedDiem);
 }
 
 export async function deleteUser(req: Request, res: Response) {
