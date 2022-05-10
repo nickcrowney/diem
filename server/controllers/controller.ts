@@ -1,8 +1,8 @@
-import { User, Diem, Event } from ".prisma/client";
-import { PrismaClient } from "@prisma/client";
+import { User, Diem, Event } from '.prisma/client';
+import { PrismaClient } from '@prisma/client';
 //import { profile } from "console";
-import Express, { Request, Response } from "express";
-import { diems } from "../data/data";
+import Express, { Request, Response } from 'express';
+import { diems } from '../data/data';
 const prisma = new PrismaClient();
 
 export async function getUsers(req: Request, res: Response) {
