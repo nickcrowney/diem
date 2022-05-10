@@ -1,0 +1,14 @@
+.form_container {
+  margin: 0 auto;
+  max-width: 50vw;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form input {
+  margin-bottom: 1rem;
+}
