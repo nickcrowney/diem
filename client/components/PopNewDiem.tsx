@@ -36,8 +36,6 @@ function PopNewDiem() {
               })}
               className={styles.input}
             >
-              <input {...register('diem-name')} placeholder="Diem Name..." />
-
               <input {...register('title')} placeholder="Diem Name..." />
 
               <input
