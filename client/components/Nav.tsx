@@ -5,6 +5,7 @@ import more from '../public/images/more.png';
 import menu from '../public/images/menu.png';
 import PopNewDiem from './PopNewDiem';
 import guillems from '../services/ApiServices';
+import mypic from '../public/images/filipe-almeida-XHpgMMiOvuM-unsplash.jpg';
 
 const Nav = ({ users, setUsers }) => {
   const addClick = () => {
