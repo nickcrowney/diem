@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router } from 'express';
 import {
   getUsers,
   getUserById,
@@ -15,15 +15,19 @@ import {
   updateDiemUsers,
   updateUserDiems,
   getEvents,
-} from "./controllers/controller";
+  deleteEvent,
+  createEvent,
+} from './controllers/controller';
+
 
 export const router = Router();
 
-router.get("/users", getUsers);
-router.get("/user/byId/:id", getUserById);
-router.get("/diems", getDiems);
-router.get("/diem/byId/:id", getDiemById);
+router.get('/users', getUsers);
+router.get('/user/byId/:id', getUserById);
+router.get('/diems', getDiems);
+router.get('/diem/byId/:id', getDiemById);
 //router.get("/profiles", getProfiles);
+
 router.get("/events", getEvents);
 router.post("/user", createUser);
 router.post("/diem", createDiem);
@@ -32,8 +36,19 @@ router.patch("diem", updateDiem);
 router.delete("/user/:id", deleteUser);
 router.delete("/diem/:id", deleteDiem);
 
-router.patch("/user/updateDiems", updateUserDiems);
+router.post('/user', createUser);
+router.post('/diem', createDiem);
+router.post('/event', createEvent);
+
+router.patch('/user', updateUser);
+router.patch('diem', updateDiem);
+
+router.delete('/user/:id', deleteUser);
+router.delete('/diem/:id', deleteDiem);
+router.delete('/event/:id', deleteEvent);
+
+router.patch('/user/updateDiems', updateUserDiems);
 //router.patch("/user/updateProfile", updateUserProfile);
-router.patch("/diem/updateEvents", updateDiemEvents);
-router.patch("/diem/updateUsers", updateDiemUsers);
-router.patch("/diem/updateTitle", updateDiemTitle);
+router.patch('/diem/updateEvents', updateDiemEvents);
+router.patch('/diem/updateUsers', updateDiemUsers);
+router.patch('/diem/updateTitle', updateDiemTitle);
