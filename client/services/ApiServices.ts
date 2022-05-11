@@ -103,9 +103,15 @@ const deleteEvent = async (id: Number) => {
   console.log(data);
 };
 
-const submitNewEvent = async (title: String, id: Number) => {
-  const response = await fetch("http://localhost:4000/event", {
-    method: "POST",
+
+const submitNewEvent = async (
+  title: String,
+  // time: String,
+  id: Number
+) => {
+  const response = await fetch('http://localhost:4000/event', {
+    method: 'POST',
+
     body: JSON.stringify({ title, id }),
     headers: {
       "Content-Type": "application/json",

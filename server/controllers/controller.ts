@@ -18,6 +18,7 @@ export async function getDiems(req: Request, res: Response) {
   const diems = await prisma.diem.findMany({
     include: {
       users: true,
+      events: true,
     },
   });
   res.json(diems);
@@ -71,11 +72,15 @@ export async function createDiem(req: Request, res: Response) {
 
 //TODO
 export async function createEvent(req: Request, res: Response) {
-  const { id, title } = req.body;
+  const { title, id } = req.body;
   const event = await prisma.event.create({
     data: {
       title: title, //Only title is required to create diem
-      metaDiemId: id,
+      metaDiem: {
+        connect: {
+          id: id,
+        },
+      },
     },
   });
   res.json(event);
