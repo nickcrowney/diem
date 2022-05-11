@@ -16,9 +16,9 @@ export async function getUsers(req: Request, res: Response) {
 
 export async function getDiems(req: Request, res: Response) {
   const diems = await prisma.diem.findMany({
-    // include: {
-    //   users: { include: { profile: true } },
-    // },
+    include: {
+      users: true,
+    },
   });
   res.json(diems);
 }
@@ -54,13 +54,26 @@ export async function createUser(req: Request, res: Response) {
 }
 
 export async function createDiem(req: Request, res: Response) {
-  const { title } = req.body;
+  const { title, date } = req.body;
   const diem = await prisma.diem.create({
     data: {
       title: title, //Only title is required to create diem
+      date: date,
     },
   });
   res.json(diem);
+}
+
+//TODO
+export async function createEvent(req: Request, res: Response) {
+  const { id, title } = req.body;
+  const event = await prisma.event.create({
+    data: {
+      title: title, //Only title is required to create diem
+      metaDiemId: id,
+    },
+  });
+  res.json(event);
 }
 
 // export async function createProfile(req: Request, res: Response) {
@@ -228,4 +241,14 @@ export async function deleteDiem(req: Request, res: Response) {
     },
   });
   res.json(deletedDiem);
+}
+
+export async function deleteEvent(req: Request, res: Response) {
+  const id = req.params.id;
+  const deletedEvent = await prisma.event.delete({
+    where: {
+      id: Number(id),
+    },
+  });
+  res.json(deletedEvent);
 }

@@ -1,7 +1,7 @@
-import React from 'react';
-import { FcGoogle } from 'react-icons/fc';
-import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
-import { firebaseApp } from '../firebase-config';
+import React from "react";
+import { FcGoogle } from "react-icons/fc";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { firebaseApp } from "../firebase-config";
 
 const Login = () => {
   const firebaseAuth = getAuth(firebaseApp);
@@ -11,16 +11,17 @@ const Login = () => {
     const response = await signInWithPopup(firebaseAuth, provider); //All the data
     //console.log(response);
 
+    //TODO move this to api services
     const submitNewUser = async (
       name: String,
       email: String,
       picture: String
     ) => {
-      const response = await fetch('http://localhost:4000/user', {
-        method: 'POST',
+      const response = await fetch("http://localhost:4000/user", {
+        method: "POST",
         body: JSON.stringify({ name, email, picture }),
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
       const data = await response.json();
@@ -34,9 +35,6 @@ const Login = () => {
       response.user.photoURL
       // response.user.phoneNumber
     );
-
-    //POST new user if not already done
-    //POST default new profile if not already done
   };
 
   return (
@@ -54,15 +52,3 @@ const Login = () => {
 };
 
 export default Login;
-
-// <div className="w-screen h-screen flex justify-center items-center bg-white relative">
-// <div className="absolute top-0 left-0 right-0 bottom-0 bg-slate-900 bg-opacity-50">
-
-// </div>
-// <div className='z-10'>
-//     <FcGoogle fontSize={30} />
-//     <p className="text-lg font-semibold ml-4">Sign in with Google</p>
-
-// </div>
-
-// </div>
