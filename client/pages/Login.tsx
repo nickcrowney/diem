@@ -1,26 +1,35 @@
-import React, { useEffect, useState } from "react";
-import { FcGoogle } from "react-icons/fc";
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-import { firebaseApp } from "../firebase-config";
-import props from "../services/ApiServices";
-import usersHook from "../services/testHook";
+import React, { useEffect, useState } from 'react';
+import { FcGoogle } from 'react-icons/fc';
+import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
+import { firebaseApp } from '../firebase-config';
+import props from '../services/ApiServices';
+import usersHook from '../services/testHook';
 
 const Login = () => {
-  const [loginData, setLoginData] = useState({}); //Use this to identify the current user
+  // const [loginData, setLoginData] = useState({}); //Use this to identify the current user
   // const [users, setUsers] = useState([]);
 
   const firebaseAuth = getAuth(firebaseApp);
   const provider = new GoogleAuthProvider();
 
-  const { state } = usersHook();
+  const [loginData, setLoginData] = useState();
+  const { state } = usersHook(); //All our users
 
   const signIn = async () => {
-    console.log(state);
     const response = await signInWithPopup(firebaseAuth, provider);
-    console.log(state[0].email, "EMAIL"); //IF there are no users, this will throw an error
-    if (state.some((el): any => el.email !== response.user.email)) {
-      //TODO change any to appropiate interface
+
+    setLoginData(response.user); //Change
+    console.log(loginData, response);
+
+    // console.log(response.user);
+    // console.log(state[0].email, "EMAIL"); //IF there are no users, this will throw an error
+
+    if (
+      state !== 'undefined' && //Don't think you need the second half of this logic
+      state.some((el): any => el.email !== response.user.email)
+    ) {
       //If user exists in database, we don't re-POST them to db
+      //TODO change any to appropiate interface
       props.submitNewUser(
         response.user.displayName,
         response.user.email,
@@ -45,28 +54,3 @@ const Login = () => {
 };
 
 export default Login;
-
-// useEffect(() => {
-//   setLoginData((prev) => [response]);
-// }, []);
-
-//TODO move this to api services
-// const submitNewUser = async (
-//   name: String,
-//   email: String,
-//   picture: String
-// ) => {
-//   const response = await fetch("http://localhost:4000/user", {
-//     method: "POST",
-//     body: JSON.stringify({ name, email, picture }),
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   });
-//   const data = await response.json();
-//   console.log(data);
-// };
-
-// const loginInput = (val: any) => {
-//   setLoginData(val);
-// };

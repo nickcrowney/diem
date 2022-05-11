@@ -5,24 +5,96 @@ import Diem from '../components/Diem';
 import Nav from '../components/Nav';
 import styles from '../styles/Home.module.css';
 import { useEffect, useState } from 'react';
-import props from '../services/ApiServices';
+import dayjs from 'dayjs';
+import guillems from '../services/ApiServices';
+import { async } from '@firebase/util';
+// (async function func () {
+//   await props.getUsers()
+// return
+// })();
 const Diems: NextPage = () => {
   const { register, handleSubmit } = useForm();
   const [data, setData] = useState('');
   const [mainDiem, setDiem] = useState('');
-  useEffect(() => {}, [setData]);
-  const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+  const [allDiems, setAllDiems] = useState([]);
 
+  const [users, setUsers] = useState([]);
+  useEffect(() => {}, [data]);
+  useEffect(() => {
+    guillems
+      .getUsers()
+      .then((res) => setUsers(res))
+      .catch((error) => console.log(error));
+  }, []);
+
+  useEffect(() => {
+    guillems
+      .getDiems()
+      .then((res) => setAllDiems(res))
+      .catch((error) => console.log(error));
+  }, []);
+  console.log(guillems.getDiems(), 'AWAITED DIEMS');
+  const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
   const currentUser = 1;
   return (
     <div>
       <Nav />
       <main className={styles.container}>
+        {/* <div>
+          <Popup
+            className={styles.plusdiem}
+            trigger={<button> ➕ </button>}
+            position="right top"
+          >
+            <div className={styles.newdiem}>
+              <div>{data}</div>
+
+              <form
+                onSubmit={handleSubmit((data) => {
+                  console.log(data.title, 'TITLE');
+                  console.log(data.date, 'DATE');
+                  props.submitNewDiem(data.title, data.date, currentUser);
+
+                  // setData(JSON.stringify(data));
+                })}
+                className={styles.input}
+              >
+                <input {...register('diem-name')} placeholder="Diem Name..." />
+
+                <input {...register('title')} placeholder="Diem Name..." />
+
+                <input
+                  type="date"
+                  min={currentDate}
+                  name="date"
+                  {...register('date', { required: true })}
+                ></input>
+                <input type="submit" />
+              </form>
+
+              <button>Click here</button>
+            </div>
+          </Popup>
+        </div> */}
         <div className={styles.tiles}>
-          <Tile setDiem={setDiem} mainDiem={mainDiem} />
-          <Tile setDiem={setDiem} mainDiem={mainDiem} />
-          <Tile setDiem={setDiem} mainDiem={mainDiem} />
-          <Tile setDiem={setDiem} mainDiem={mainDiem} />
+          <div>
+            {users.map((el) => {
+              return <div>{el.name}</div>;
+            })}
+            {allDiems.map((el) => {
+              return (
+                <div key={el.id}>
+                  <Tile
+                    setDiem={setDiem}
+                    mainDiem={mainDiem}
+                    allDiems={allDiems}
+                    setAllDiems={setAllDiems}
+                    diem={el}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
         <div className={styles.diem}>
           <Diem mainDiem={mainDiem} />

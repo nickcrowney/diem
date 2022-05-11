@@ -3,11 +3,11 @@ import styles from './Nav.module.css';
 import Image from 'next/image';
 import more from '../public/images/more.png';
 import menu from '../public/images/menu.png';
-import mypic from '../public/images/amir-seilsepour-Pc0ToyoR5Xo-unsplash.jpg';
+import PopNewDiem from './PopNewDiem';
 
 const Nav = () => {
   const addClick = () => {
-    console.log('fegregreg');
+    // console.log('fegregreg');
   };
 
   return (
@@ -28,6 +28,15 @@ const Nav = () => {
             <Image src={mypic} alt="Picture of the author" />
           </div>
         </div>
+        <button type="button" onClick={addClick}>
+          {/* <Image src={plus} height="50" width="50" />
+          <div> */}
+          <PopNewDiem />
+          {/* </div> */}
+        </button>
+        <button type="button" onClick={addClick}>
+          <Image src={menu} height="50" width="45" />
+        </button>
       </div>
     </div>
   );
