@@ -4,8 +4,10 @@ import Image from 'next/image';
 
 import menu from '../public/images/menu.png';
 import PopNewDiem from './PopNewDiem';
+
 import hooks from '../services/ApiServices';
 import mypic from '../public/images/daniil-lobachev-XAo09LtQiAQ-unsplash.jpg';
+
 
 const Nav = ({ users, setUsers }) => {
   // let use = [];
