@@ -34,10 +34,6 @@ const Diems: NextPage = () => {
       })
       .catch((error) => console.log(error));
   }, []);
-<<<<<<< HEAD
-
-=======
->>>>>>> 07736f94c70e76605882ff3cc3c6c1febd222b09
   console.log(hooks.getDiems(), 'AWAITED DIEMS');
   // const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
   return (
