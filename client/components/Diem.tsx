@@ -6,6 +6,7 @@ import mypic2 from '../public/images/art-hauntington-jzY0KRJopEI-unsplash.jpg';
 import mypic3 from '../public/images/christian-buehner-6YQmQgcQ0VA-unsplash.jpg';
 //
 import styles from './Diem.module.css';
+import AddNewEvent from './AddNewEvent';
 
 const Diem: React.FunctionComponent = ({ mainDiem, currentDiem }) => {
   const pics = [mypic, mypic2, mypic3];
@@ -18,6 +19,7 @@ const Diem: React.FunctionComponent = ({ mainDiem, currentDiem }) => {
           <h1>{event}</h1>
           <h2>{date}</h2>
         </div>
+        <AddNewEvent currentDiem={currentDiem} />
         <div className={styles.diem__profilePics_container}>
           {pics.map((pic) => {
             return (
@@ -26,6 +28,12 @@ const Diem: React.FunctionComponent = ({ mainDiem, currentDiem }) => {
               </div>
             );
           })}
+        </div>
+        <div>
+          {currentDiem.events &&
+            currentDiem.events.map((el) => {
+              return <ul>{el.title}</ul>;
+            })}
         </div>
       </div>
     </div>
