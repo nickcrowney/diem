@@ -4,11 +4,15 @@ import Image from 'next/image';
 import more from '../public/images/more.png';
 import menu from '../public/images/menu.png';
 import PopNewDiem from './PopNewDiem';
+import guillems from '../services/ApiServices';
 
-const Nav = () => {
+const Nav = ({ users, setUsers }) => {
   const addClick = () => {
     // console.log('fegregreg');
   };
+  // let use = [];
+  // guillems.getUsers().then((res) => (use = res));
+  // console.log(use, 'USE');
 
   return (
     <div className={styles.navContainer}>
@@ -29,14 +33,17 @@ const Nav = () => {
           </div>
         </div>
         <button type="button" onClick={addClick}>
-          {/* <Image src={plus} height="50" width="50" />
-          <div> */}
           <PopNewDiem />
-          {/* </div> */}
         </button>
         <button type="button" onClick={addClick}>
           <Image src={menu} height="50" width="45" />
         </button>
+        <div>
+          {' '}
+          {users.map((el) => {
+            return <div>{el.userPhoto}</div>;
+          })}
+        </div>
       </div>
     </div>
   );
