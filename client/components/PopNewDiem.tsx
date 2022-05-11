@@ -20,7 +20,7 @@ function PopNewDiem() {
       <div>
         <Popup
           className={styles.plusdiem}
-          trigger={<Image src={plus} height="50" width="50" />}
+          trigger={<Image src={plus} height="40" width="40" />}
           position="right top"
         >
           <div className={styles.newdiem}>
