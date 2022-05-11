@@ -20,15 +20,15 @@ const Nav = ({ users, setUsers }) => {
         <button type="button" onClick={addClick}>
           <PopNewDiem />
         </button>
-        <div>
-          {' '}
-          {users.map((el) => {
-            return <div>{el.name}</div>;
-          })}
-        </div>
         <button type="button" onClick={addClick}>
           <Image src={menu} height="50" width="45" />
         </button>
+        <div>
+          {' '}
+          {users.map((el) => {
+            return <div>{el.userPhoto}</div>;
+          })}
+        </div>
       </div>
     </div>
   );
