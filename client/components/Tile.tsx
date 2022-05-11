@@ -6,14 +6,19 @@ import mypic2 from '../public/images/art-hauntington-jzY0KRJopEI-unsplash.jpg';
 import mypic3 from '../public/images/christian-buehner-6YQmQgcQ0VA-unsplash.jpg';
 import styles from './Tile.module.css';
 
-const Tile: React.FunctionComponent = ({ setDiem, mainDiem }) => {
+const Tile: React.FunctionComponent = ({
+  setDiem,
+  mainDiem,
+  allDiems,
+  diem,
+}) => {
   const divClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
     console.log(mainDiem);
   };
 
   const pics = [mypic, mypic2, mypic3];
-  const date = '22nd May 2022';
-  const event = "Tim's BBQ";
+  const date = diem.date;
+  const event = diem.title;
 
   return (
     <div className={styles.tile} onClick={divClickedHandler}>
