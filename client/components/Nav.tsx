@@ -1,15 +1,18 @@
 import React from 'react';
 import styles from './Nav.module.css';
 import Image from 'next/image';
+
 import menu from '../public/images/menu.png';
 import PopNewDiem from './PopNewDiem';
+
 import hooks from '../services/ApiServices';
-import mypic from '../public/images/filipe-almeida-XHpgMMiOvuM-unsplash.jpg';
+import mypic from '../public/images/daniil-lobachev-XAo09LtQiAQ-unsplash.jpg';
 
 const Nav = ({ users, setUsers }) => {
   // let use = [];
-  // guillems.getUsers().then((res) => (use = res));
+  // hooks.getUsers().then((res) => (use = res));
   // console.log(use, 'USE');
+  // const mypic= users[0].userPhoto
 
   return (
     <div className={styles.navContainer}>
