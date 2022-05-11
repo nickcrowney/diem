@@ -8,21 +8,41 @@ import Popup from 'reactjs-popup';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
-import props from '../services/ApiServices';
-
+import guillems from '../services/ApiServices';
+import { async } from '@firebase/util';
+// (async function func () {
+//   await props.getUsers()
+// return
+// })();
 const Diems: NextPage = () => {
   const { register, handleSubmit } = useForm();
   const [data, setData] = useState('');
   const [mainDiem, setDiem] = useState('');
-  useEffect(() => {}, [setData]);
-  const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+  const [allDiems, setAllDiems] = useState([]);
 
+  const [users, setUsers] = useState([]);
+  useEffect(() => {}, [data]);
+  useEffect(() => {
+    guillems
+      .getUsers()
+      .then((res) => setUsers(res))
+      .catch((error) => console.log(error));
+  }, []);
+
+  useEffect(() => {
+    guillems
+      .getDiems()
+      .then((res) => setAllDiems(res))
+      .catch((error) => console.log(error));
+  }, []);
+  console.log(guillems.getDiems(), 'AWAITED DIEMS');
+  const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
   const currentUser = 1;
   return (
     <div>
       <Nav />
       <main className={styles.container}>
-        <div>
+        {/* <div>
           <Popup
             className={styles.plusdiem}
             trigger={<button> ➕ </button>}
@@ -54,15 +74,29 @@ const Diems: NextPage = () => {
                 <input type="submit" />
               </form>
 
-              {/* <button>Click here</button> */}
+              <button>Click here</button>
             </div>
           </Popup>
-        </div>
+        </div> */}
         <div className={styles.tiles}>
-          <Tile setDiem={setDiem} mainDiem={mainDiem} />
-          <Tile setDiem={setDiem} mainDiem={mainDiem} />
-          <Tile setDiem={setDiem} mainDiem={mainDiem} />
-          <Tile setDiem={setDiem} mainDiem={mainDiem} />
+          <div>
+            {users.map((el) => {
+              return <div>{el.name}</div>;
+            })}
+            {allDiems.map((el) => {
+              return (
+                <div key={el.id}>
+                  <Tile
+                    setDiem={setDiem}
+                    mainDiem={mainDiem}
+                    allDiems={allDiems}
+                    setAllDiems={setAllDiems}
+                    diem={el}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
         <div className={styles.diem}>
           <Diem mainDiem={mainDiem} />
