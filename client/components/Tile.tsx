@@ -1,20 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
-// replace images with data from db
 import mypic from '../public/images/amir-seilsepour-Pc0ToyoR5Xo-unsplash.jpg';
 import mypic2 from '../public/images/art-hauntington-jzY0KRJopEI-unsplash.jpg';
 import mypic3 from '../public/images/christian-buehner-6YQmQgcQ0VA-unsplash.jpg';
 import styles from './Tile.module.css';
 
-const Tile: React.FunctionComponent = ({
-  setDiem,
-  mainDiem,
-  allDiems,
-  diem,
-  setCurrentDiem,
-}) => {
+const Tile: React.FunctionComponent = ({ allDiems, diem, setCurrentDiem }) => {
   const divClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
-    console.log(mainDiem);
     setCurrentDiem(diem);
   };
 
