@@ -24,17 +24,16 @@ const Login = () => {
     // console.log(response.user);
     // console.log(state[0].email, "EMAIL"); //IF there are no users, this will throw an error
 
+    //If user exists in database, we don't re-POST them to db
     if (
       state !== "undefined" &&
       state.some((el): any => el.email !== response.user.email)
     ) {
-      //If user exists in database, we don't re-POST them to db
       //TODO change any to appropiate interface
       props.submitNewUser(
         response.user.displayName,
         response.user.email,
         response.user.photoURL
-        //response.user.phoneNumber
       );
     }
   };
