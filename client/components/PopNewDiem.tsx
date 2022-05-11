@@ -12,7 +12,7 @@ const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ')
 
 const currentUser = 1;
 function PopNewDiem() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const [data, setData] = useState('');
 
   return (
@@ -31,6 +31,7 @@ function PopNewDiem() {
                 console.log(data.title, 'TITLE');
                 console.log(data.date, 'DATE');
                 props.submitNewDiem(data.title, data.date, currentUser);
+                reset({ title: '', venue: '', date: '' });
 
                 // setData(JSON.stringify(data));
               })}
