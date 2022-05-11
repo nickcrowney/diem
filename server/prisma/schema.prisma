@@ -32,7 +32,7 @@ model Diem {
   title  String   @db.VarChar(50)
   events Event[]
   users  User[]   @relation(references: [id])
-  date   DateTime @default(now()) @db.Date
+  date   String? //@default(now()) @db.Date
   // created    DateTime  @default(now())
   // author      User @relation(fields:[authorId], references: [id])
   // authorId    Int
@@ -49,10 +49,16 @@ model User {
   userPhoto   String?
   email       String?
   phoneNumber String?
+  friends     Friend[]
 
   //diems    Diem[]   @relation(references: [id])
 }
 
+model Friend {
+  id          Int     @id @default(autoincrement())
+  user        User    @relation(fields: [friendId], references: [id])
+  friendId    Int
+}
 // model Profile {
 //   id        Int     @id @default(autoincrement())
 //   status    String? @db.VarChar(255)
