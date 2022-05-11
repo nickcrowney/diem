@@ -1,5 +1,5 @@
 import React from 'react';
-// import dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import Popup from 'reactjs-popup';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
@@ -8,7 +8,7 @@ import props from '../services/ApiServices';
 import Image from 'next/image';
 import plus from '../public/images/more.png';
 
-// const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 
 const currentUser = 1;
 function PopNewDiem() {
@@ -20,7 +20,7 @@ function PopNewDiem() {
       <div>
         <Popup
           className={styles.plusdiem}
-          trigger={<Image src={plus} height="50" width="50" />}
+          trigger={<Image src={plus} height="40" width="40" />}
           position="right top"
         >
           <div className={styles.newdiem}>
@@ -40,7 +40,7 @@ function PopNewDiem() {
 
               <input
                 type="date"
-                // min={currentDate}
+                min={currentDate}
                 name="date"
                 {...register('date', { required: true })}
               ></input>
