@@ -19,6 +19,7 @@ const Diems: NextPage = () => {
   const [data, setData] = useState('');
   const [mainDiem, setDiem] = useState('');
   const [allDiems, setAllDiems] = useState([]);
+  const [currentDiem, setCurrentDiem] = useState({ title: 'Select Diem' });
 
   const [users, setUsers] = useState([]);
   useEffect(() => {}, [data]);
@@ -33,6 +34,11 @@ const Diems: NextPage = () => {
     guillems
       .getDiems()
       .then((res) => setAllDiems(res))
+      // .then((res) => setCurrentDiem(allDiems[0]))
+      //   !currentDiem
+      //     ? (res) => setCurrentDiem(res[0])
+      //     : console.log('current diem unchanged')
+      // )
       .catch((error) => console.log(error));
   }, []);
   console.log(guillems.getDiems(), 'AWAITED DIEMS');
@@ -92,6 +98,7 @@ const Diems: NextPage = () => {
                     allDiems={allDiems}
                     setAllDiems={setAllDiems}
                     diem={el}
+                    setCurrentDiem={setCurrentDiem}
                   />
                 </div>
               );
@@ -99,7 +106,7 @@ const Diems: NextPage = () => {
           </div>
         </div>
         <div className={styles.diem}>
-          <Diem mainDiem={mainDiem} />
+          <Diem mainDiem={mainDiem} currentDiem={currentDiem} />
         </div>
       </main>
     </div>

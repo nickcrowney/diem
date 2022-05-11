@@ -11,9 +11,11 @@ const Tile: React.FunctionComponent = ({
   mainDiem,
   allDiems,
   diem,
+  setCurrentDiem,
 }) => {
   const divClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
     console.log(mainDiem);
+    setCurrentDiem(diem);
   };
 
   const pics = [mypic, mypic2, mypic3];

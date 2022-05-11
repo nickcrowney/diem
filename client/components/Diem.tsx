@@ -1,16 +1,16 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
 // replace images with data from db
-import mypic from "../public/images/amir-seilsepour-Pc0ToyoR5Xo-unsplash.jpg";
-import mypic2 from "../public/images/art-hauntington-jzY0KRJopEI-unsplash.jpg";
-import mypic3 from "../public/images/christian-buehner-6YQmQgcQ0VA-unsplash.jpg";
+import mypic from '../public/images/amir-seilsepour-Pc0ToyoR5Xo-unsplash.jpg';
+import mypic2 from '../public/images/art-hauntington-jzY0KRJopEI-unsplash.jpg';
+import mypic3 from '../public/images/christian-buehner-6YQmQgcQ0VA-unsplash.jpg';
 //
-import styles from "./Diem.module.css";
+import styles from './Diem.module.css';
 
-const Diem: React.FunctionComponent = ({ mainDiem }) => {
+const Diem: React.FunctionComponent = ({ mainDiem, currentDiem }) => {
   const pics = [mypic, mypic2, mypic3];
-  const date = '22nd May 2022';
-  const event = "Tim's BBQ";
+  const date = currentDiem.date;
+  const event = currentDiem.title;
   return (
     <div className={styles.diem}>
       <div className={styles.diem__infobar}>
