@@ -29,12 +29,12 @@ const Diem: React.FunctionComponent = ({ mainDiem, currentDiem }) => {
             );
           })}
         </div>
-        <div>
-          {currentDiem.events &&
-            currentDiem.events.map((el) => {
-              return <ul>{el.title}</ul>;
-            })}
-        </div>
+      </div>
+      <div>
+        {currentDiem.events &&
+          currentDiem.events.map((el) => {
+            return <ul>{el.title}</ul>;
+          })}
       </div>
     </div>
   );
