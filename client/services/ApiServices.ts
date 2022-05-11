@@ -2,11 +2,6 @@ import { response } from 'express';
 import React, { useState } from 'react';
 
 const ApiServices = {};
-// const [users, setUsers] = useState([]);
-// const [diems, setDiems] = useState([]);
-// const [user, setUser] = useState();
-// const [diem, setDiem] = useState();
-// const [events, setEvents] = useState([]);
 
 //GET request for all users
 const getUsers = async () => {
