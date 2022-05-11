@@ -12,6 +12,7 @@ const ApiServices = {};
 const getUsers = async () => {
   const response = await fetch('http://localhost:4000/users');
   const data = await response.json();
+  return data;
   // setUsers(data);
 };
 
@@ -19,6 +20,7 @@ const getUsers = async () => {
 const getDiems = async () => {
   const response = await fetch('http://localhost:4000/diems');
   const data = await response.json();
+  return data;
   // setDiems(data);
 };
 
@@ -26,6 +28,7 @@ const getDiems = async () => {
 const getEvents = async () => {
   const response = await fetch('http://localhost:4000/events');
   const data = await response.json();
+  return data;
   //setEvents(data);
 };
 
@@ -33,6 +36,7 @@ const getEvents = async () => {
 const getUserById = async (id: Number) => {
   const response = await fetch(`http://localhost:4000/user/byId/${id}`);
   const data = await response.json();
+  return data;
   //setUser(data);
 };
 
@@ -40,6 +44,7 @@ const getUserById = async (id: Number) => {
 const getDiemById = async (id: Number) => {
   const response = await fetch(`http://localhost:4000/diem/byId/${id}`);
   const data = await response.json();
+  return data;
   //setDiem(data);
 };
 
@@ -53,6 +58,7 @@ const submitNewUser = async (name: String, email: String, picture: String) => {
     },
   });
   const data = await response.json();
+  return data;
   // setUser(data);
   console.log(data);
 };
@@ -67,6 +73,7 @@ const submitNewDiem = async (title: String, date: String, user: Number) => {
     },
   });
   const data = await response.json();
+  return data;
   // setDiem(data);
   console.log(data, 'DATA');
 };
@@ -77,6 +84,7 @@ const deleteUser = async (id: Number) => {
     method: 'DELETE',
   });
   const data = await response.json();
+  return data;
   console.log(data);
 };
 
@@ -86,6 +94,7 @@ const deleteDiem = async (id: Number) => {
     method: 'DELETE',
   });
   const data = await response.json();
+  return data;
   console.log(data);
 };
 
@@ -95,6 +104,7 @@ const deleteEvent = async (id: Number) => {
     method: 'DELETE',
   });
   const data = await response.json();
+  return data;
   console.log(data);
 };
 
@@ -107,6 +117,7 @@ const submitNewEvent = async (title: String, id: Number) => {
     },
   });
   const data = await response.json();
+  return data;
   console.log(data);
 };
 

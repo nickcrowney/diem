@@ -1,3 +1,4 @@
+
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Tile from '../components/Tile';
@@ -17,6 +18,7 @@ const Diems: NextPage = () => {
   const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 
   const currentUser = 1;
+
   return (
     <div>
       <Head>
@@ -45,12 +47,16 @@ const Diems: NextPage = () => {
                 })}
                 className={styles.input}
               >
+
+                <input {...register("diem-name")} placeholder="Diem Name..." />
+
                 <input {...register('title')} placeholder="Diem Name..." />
+
                 <input
                   type="date"
                   min={currentDate}
                   name="date"
-                  {...register('date', { required: true })}
+                  {...register("date", { required: true })}
                 ></input>
                 <input type="submit" />
               </form>
