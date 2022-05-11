@@ -4,7 +4,9 @@ import Tile from '../components/Tile';
 import Diem from '../components/Diem';
 import Nav from '../components/Nav';
 import styles from '../styles/Home.module.css';
+
 import { useForm } from 'react-hook-form';
+
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import guillems from '../services/ApiServices';

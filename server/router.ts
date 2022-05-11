@@ -31,10 +31,12 @@ router.get('/diem/byId/:id', getDiemById);
 router.get("/events", getEvents);
 router.post("/user", createUser);
 router.post("/diem", createDiem);
+router.post("/event", createEvent);
 router.patch("/user", updateUser);
 router.patch("diem", updateDiem);
 router.delete("/user/:id", deleteUser);
 router.delete("/diem/:id", deleteDiem);
+router.delete("/event/:id", deleteEvent);
 
 router.post('/user', createUser);
 router.post('/diem', createDiem);
