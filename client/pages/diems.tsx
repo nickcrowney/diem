@@ -1,6 +1,4 @@
-
 import type { NextPage } from 'next';
-import { useState } from 'react';
 import Head from 'next/head';
 import Tile from '../components/Tile';
 import Diem from '../components/Diem';
@@ -11,10 +9,8 @@ import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import props from '../services/ApiServices';
+
 const Diems: NextPage = () => {
-
-
-  const [mainDiem, setDiem] = useState(['ajjj']);
   const { register, handleSubmit } = useForm();
   const [data, setData] = useState('');
   const [mainDiem, setDiem] = useState('');
@@ -45,8 +41,7 @@ const Diems: NextPage = () => {
                 })}
                 className={styles.input}
               >
-
-                <input {...register("diem-name")} placeholder="Diem Name..." />
+                <input {...register('diem-name')} placeholder="Diem Name..." />
 
                 <input {...register('title')} placeholder="Diem Name..." />
 
@@ -54,7 +49,7 @@ const Diems: NextPage = () => {
                   type="date"
                   min={currentDate}
                   name="date"
-                  {...register("date", { required: true })}
+                  {...register('date', { required: true })}
                 ></input>
                 <input type="submit" />
               </form>
