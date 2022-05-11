@@ -22,7 +22,7 @@ const Diems: NextPage = () => {
     <div>
       <Nav />
       <main className={styles.container}>
-        <div>
+        {/* <div>
           <Popup
             className={styles.plusdiem}
             trigger={<button> ➕ </button>}
@@ -54,10 +54,10 @@ const Diems: NextPage = () => {
                 <input type="submit" />
               </form>
 
-              {/* <button>Click here</button> */}
+              <button>Click here</button>
             </div>
           </Popup>
-        </div>
+        </div> */}
         <div className={styles.tiles}>
           <Tile setDiem={setDiem} mainDiem={mainDiem} />
           <Tile setDiem={setDiem} mainDiem={mainDiem} />
