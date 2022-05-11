@@ -20,8 +20,8 @@ const Diems: NextPage = () => {
   const [mainDiem, setDiem] = useState('');
   const [allDiems, setAllDiems] = useState([]);
   const [currentDiem, setCurrentDiem] = useState({ title: 'Select Diem' });
-
   const [users, setUsers] = useState([]);
+
   useEffect(() => {}, [data]);
   useEffect(() => {
     guillems
@@ -33,7 +33,11 @@ const Diems: NextPage = () => {
   useEffect(() => {
     guillems
       .getDiems()
-      .then((res) => setAllDiems(res))
+      .then((res) => {
+        setAllDiems(res);
+        setCurrentDiem(res[0]);
+      })
+
       // .then((res) => setCurrentDiem(allDiems[0]))
       //   !currentDiem
       //     ? (res) => setCurrentDiem(res[0])
@@ -46,7 +50,7 @@ const Diems: NextPage = () => {
   const currentUser = 1;
   return (
     <div>
-      <Nav />
+      <Nav users={users} setUsers={setUsers} />
       <main className={styles.container}>
         {/* <div>
           <Popup
@@ -86,9 +90,6 @@ const Diems: NextPage = () => {
         </div> */}
         <div className={styles.tiles}>
           <div>
-            {users.map((el) => {
-              return <div>{el.name}</div>;
-            })}
             {allDiems.map((el) => {
               return (
                 <div key={el.id}>
