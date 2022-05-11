@@ -17,13 +17,15 @@ const Login = () => {
   const signIn = async () => {
     console.log(state);
     const response = await signInWithPopup(firebaseAuth, provider);
-    if (state.includes((el): any => el.email === response.user.email)) {
+    console.log(state[0].email, "EMAIL"); //IF there are no users, this will throw an error
+    if (state.some((el): any => el.email !== response.user.email)) {
+      //TODO change any to appropiate interface
       //If user exists in database, we don't re-POST them to db
       props.submitNewUser(
         response.user.displayName,
         response.user.email,
         response.user.photoURL
-        // response.user.phoneNumber
+        //response.user.phoneNumber
       );
     }
   };
