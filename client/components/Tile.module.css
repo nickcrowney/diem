@@ -1,10 +1,11 @@
 .tile {
+  /* position: relative; */
   height: 10rem;
   width: 15rem;
-  border-radius: 7px;
-  background-color: rgb(255, 127, 140);
-  padding: 0.75rem;
-  margin: 0.75rem;
+  border-radius: 5px;
+  background-color: rgb(255, 157, 166);
+  padding: 1rem;
+  margin: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -13,26 +14,26 @@
 
 .tile:hover {
   cursor: pointer;
-  opacity: 0.85;
+  opacity: 0.75;
   transform: scaleX(1.02);
 }
 
 .tile__profilePics_container {
   display: flex;
+  /* position: absolute; */
+  /* left: 7.4em; */
   justify-content: flex-end;
   margin-bottom: 1.75em;
+  margin-right: 0.75rem;
 }
 
 .tile__profilePic {
   border-radius: 50%;
   overflow: hidden;
+  margin-right: -14px;
   height: 50px;
   width: 50px;
   object-fit: cover;
-}
-
-.tile__date {
-  font-weight: 700;
 }
 
 .tile h1 {
