@@ -4,10 +4,15 @@ import Tile from '../components/Tile';
 import Diem from '../components/Diem';
 import Nav from '../components/Nav';
 import styles from '../styles/Home.module.css';
+import Popup from 'reactjs-popup';
+import { useForm } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+import dayjs from 'dayjs';
 
 const Diems: NextPage = () => {
 <<<<<<< HEAD
   const [mainDiem, setDiem] = useState(['ajjj']);
+=======
 
 
   const { register, handleSubmit } = useForm();
