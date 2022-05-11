@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { FcGoogle } from "react-icons/fc";
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-import { firebaseApp } from "../firebase-config";
-import props from "../services/ApiServices";
-import usersHook from "../services/testHook";
+import React, { useEffect, useState } from 'react';
+import { FcGoogle } from 'react-icons/fc';
+import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
+import { firebaseApp } from '../firebase-config';
+import props from '../services/ApiServices';
+import usersHook from '../services/testHook';
 
 const Login = () => {
   // const [loginData, setLoginData] = useState({}); //Use this to identify the current user
@@ -25,7 +25,7 @@ const Login = () => {
     // console.log(state[0].email, "EMAIL"); //IF there are no users, this will throw an error
 
     if (
-      state !== "undefined" &&
+      state !== 'undefined' && //Don't think you need the second half of this logic
       state.some((el): any => el.email !== response.user.email)
     ) {
       //If user exists in database, we don't re-POST them to db
