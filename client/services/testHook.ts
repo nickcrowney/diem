@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const testHook = () => {
+const usersHook = () => {
   const [state, setState] = useState();
   useEffect(() => {
     fetch("http://localhost:4000/users")
@@ -12,4 +12,4 @@ const testHook = () => {
   return { state };
 };
 
-export default testHook;
+export default usersHook;
