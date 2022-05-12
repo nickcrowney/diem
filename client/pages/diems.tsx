@@ -8,8 +8,12 @@ import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import hooks from "../services/ApiServices";
 import { async } from "@firebase/util";
+import { useLoginContext } from "../contexts/Context";
 
 const Diems: NextPage = () => {
+  const { state, setLoginInfo } = useLoginContext();
+
+  //const state = useLoginContext()
   const [newDiemPop, setNewDiemPop] = useState(false);
   const [data, setData] = useState("");
   const [mainDiem, setDiem] = useState("");
@@ -17,8 +21,13 @@ const Diems: NextPage = () => {
   const [currentDiem, setCurrentDiem] = useState({
     title: "Select Diem",
   });
-  const [users, setUsers] = useState([]);
 
+  const [users, setUsers] = useState([]);
+  if (state) {
+    //console.warn(state.loginInfo);
+    console.log("FUCK");
+    console.log(state.userInfo);
+  }
   useEffect(() => {}, [data]);
   useEffect(() => {
     hooks
@@ -40,7 +49,13 @@ const Diems: NextPage = () => {
   // const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
   return (
     <div>
-      <Nav users={users} setUsers={setUsers} toggleNewDiemPop={setNewDiemPop} />
+      {state && (
+        <Nav
+          users={users}
+          setUsers={setUsers}
+          toggleNewDiemPop={setNewDiemPop}
+        />
+      )}
       <main className={styles.container}>
         <div className={styles.tiles}>
           <PopNewDiem />

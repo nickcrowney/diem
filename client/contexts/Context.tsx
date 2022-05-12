@@ -4,16 +4,17 @@ export const LoginContext = createContext({});
 
 export const loginProvider = ({ children }) => {
   const [loginInfo, setLoginInfo] = useState([]);
-  React.useEffect(() => {}, []);
-  const values = React.useMemo(
-    () => ({
-      loginInfo,
-      setLoginInfo,
-    }),
-    [loginInfo]
-  );
+  // const values = React.useMemo(
+  //   () => ({
+  //     loginInfo,
+  //     setLoginInfo,
+  //   }),
+  //   [loginInfo]
+  // );
   return (
-    <LoginContext.Provider value={values}>{children}</LoginContext.Provider>
+    <LoginContext.Provider value={{ loginInfo, setLoginInfo }}>
+      {children}
+    </LoginContext.Provider>
   );
 };
 
