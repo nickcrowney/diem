@@ -103,10 +103,16 @@ const deleteEvent = async (id: Number) => {
   console.log(data);
 };
 
-const submitNewEvent = async (title: String, id: Number) => {
+const submitNewEvent = async (
+  title: String,
+  id: Number,
+  location: String,
+  time: String
+) => {
   const response = await fetch('http://localhost:4000/event', {
     method: 'POST',
-    body: JSON.stringify({ title, id }),
+
+    body: JSON.stringify({ title, id, location, time }),
     headers: {
       'Content-Type': 'application/json',
     },
@@ -129,6 +135,19 @@ const submitNewEvent = async (title: String, id: Number) => {
 //       })} */}
 //   </div>
 // );
+
+const modifyDiem = async (title: String, id: Number) => {
+  const response = await fetch('http://localhost:4000/event', {
+    method: 'PATCH',
+    body: JSON.stringify({ title, id }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const data = await response.json();
+  return data;
+  console.log(data);
+};
 
 export default {
   getUsers,

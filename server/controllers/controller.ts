@@ -1,5 +1,6 @@
 import { User, Diem, Event } from '.prisma/client';
 import { PrismaClient } from '@prisma/client';
+import { time } from 'console';
 //import { profile } from "console";
 import Express, { Request, Response } from 'express';
 import { diems } from '../data/data';
@@ -18,6 +19,7 @@ export async function getDiems(req: Request, res: Response) {
   const diems = await prisma.diem.findMany({
     include: {
       users: true,
+      events: true,
     },
   });
   res.json(diems);
@@ -71,11 +73,17 @@ export async function createDiem(req: Request, res: Response) {
 
 //TODO
 export async function createEvent(req: Request, res: Response) {
-  const { id, title } = req.body;
+  const { title, id, location, time } = req.body;
   const event = await prisma.event.create({
     data: {
       title: title, //Only title is required to create diem
-      metaDiemId: id,
+      metaDiem: {
+        connect: {
+          id: id,
+        },
+      },
+      location: location,
+      time: time,
     },
   });
   res.json(event);

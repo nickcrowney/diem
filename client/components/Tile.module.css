@@ -1,5 +1,4 @@
 .tile {
-  /* position: relative; */
   height: 10rem;
   width: 15rem;
   border-radius: 5px;
@@ -20,8 +19,6 @@
 
 .tile__profilePics_container {
   display: flex;
-  /* position: absolute; */
-  /* left: 7.4em; */
   justify-content: flex-end;
   margin-bottom: 1.75em;
   margin-right: 0.75rem;
