@@ -31,38 +31,39 @@ const Diem: React.FunctionComponent = ({ mainDiem, currentDiem, users }) => {
           <Image src={calendar} height="20" width="40" />
         </div>
         <div>
-          <button type="button">
-            <Image src={more} height="40" width="40" />
-          </button>
-          <PopAddUsers users={users} />
-          <div className={styles.diem__profilePics_container}>
-            {pics.map((pic) => {
-              return (
-                <div key={pic} className={styles.diem__profilePic}>
-                  <Image src={pic} alt="Picture of the author" />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-      <div className={styles.diem__events}>
-        <AddNewEvent currentDiem={currentDiem} />
-        <AddNewEventTest />
-        <div>
-          {currentDiem.events &&
-            currentDiem.events.map((el) => {
-              return (
-                <ul key={el.id}>
-                  <div>
-                    {el.title}
-                    {el.location ? ' at ' : ''}{' '}
-                    {el.location ? el.location + '. ' : ''}
-                    {el.time ? `Start time: ${el.time}` : ''}
+          <div className={styles.diem__users}>
+            <button type="button">
+              <Image src={more} height="40" width="40" />
+            </button>
+            <div className={styles.diem__profilePics_container}>
+              {pics.map((pic) => {
+                return (
+                  <div key={pic} className={styles.diem__profilePic}>
+                    <Image src={pic} alt="Picture of the author" />
                   </div>
-                </ul>
-              );
-            })}
+                );
+              })}
+            </div>
+          </div>
+          <PopAddUsers users={users} />
+        </div>
+        <div className={styles.diem__events}>
+          <AddNewEvent currentDiem={currentDiem} />
+          <div>
+            {currentDiem.events &&
+              currentDiem.events.map((el) => {
+                return (
+                  <ul key={el.id}>
+                    <div>
+                      {el.title}
+                      {el.location ? ' at ' : ''}{' '}
+                      {el.location ? el.location + '. ' : ''}
+                      {el.time ? `Start time: ${el.time}` : ''}
+                    </div>
+                  </ul>
+                );
+              })}
+          </div>
         </div>
       </div>
     </>
