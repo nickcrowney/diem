@@ -36,8 +36,9 @@ const Login = () => {
     }
     //return <Link href="/diems" />;
     if (response.user.emailVerified) {
-      router.replace("/diems");
+      router.replace("/diems", loginInfo);
     }
+    //TODO Throw invalid login error here
   };
 
   return (
