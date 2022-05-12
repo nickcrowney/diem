@@ -165,16 +165,20 @@ export async function updateUserDiems(req: Request, res: Response) {
 // }
 
 export async function updateDiem(req: Request, res: Response) {
-  const { id, title, events, users, date } = req.body;
+  const { diemId, userId } = req.body;
   const updatedUser = await prisma.diem.update({
     where: {
-      id: id,
+      id: diemId,
     },
     data: {
-      title: title,
-      events: events,
-      users: users,
-      date: date,
+      // title: title,
+      // events: events,
+      users: {
+        connect: {
+          id: userId,
+        },
+      },
+      // date: date,
     },
   });
   res.json(updatedUser);
@@ -194,7 +198,7 @@ export async function updateDiemEvents(req: Request, res: Response) {
   res.json(updatedDiem);
 }
 
-//Patch a diem's users (add or replace an event)
+//Patch a diem's users (add or replace a user)
 export async function updateDiemUsers(req: Request, res: Response) {
   const { id, users } = req.body;
   const updatedDiem = await prisma.diem.update({
