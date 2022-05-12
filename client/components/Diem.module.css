@@ -43,3 +43,10 @@
 .diem__events {
   padding-top: 20px;
 }
+
+.diem__users {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: end;
+}
