@@ -5,10 +5,7 @@ import { firebaseApp } from "../firebase-config";
 import props from "../services/ApiServices";
 import usersHook from "../services/testHook";
 import { useLoginContext } from "../contexts/Context";
-<<<<<<< HEAD
-=======
 import { useRouter } from "next/router";
->>>>>>> 835b3fd033d8a5cb8e66c6bc32e78e3d6d95c968
 
 const Login = () => {
   const firebaseAuth = getAuth(firebaseApp);

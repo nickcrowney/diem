@@ -8,17 +8,12 @@ import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import hooks from "../services/ApiServices";
 import { async } from "@firebase/util";
-<<<<<<< HEAD
-
-const Diems: NextPage = () => {
-=======
 import { useLoginContext } from "../contexts/Context";
 
 const Diems: NextPage = () => {
   const { state, setLoginInfo } = useLoginContext();
 
   //const state = useLoginContext()
->>>>>>> 835b3fd033d8a5cb8e66c6bc32e78e3d6d95c968
   const [newDiemPop, setNewDiemPop] = useState(false);
   const [data, setData] = useState("");
   const [mainDiem, setDiem] = useState("");
@@ -30,8 +25,8 @@ const Diems: NextPage = () => {
   const [users, setUsers] = useState([]);
   if (state) {
     //console.warn(state.loginInfo);
-    console.log("FUCK");
-    console.log(state.userInfo);
+    // console.log("FUCK");
+    // console.log(state.userInfo);
   }
   useEffect(() => {}, [data]);
   useEffect(() => {
@@ -50,11 +45,7 @@ const Diems: NextPage = () => {
       })
       .catch((error) => console.log(error));
   }, []);
-<<<<<<< HEAD
-  console.log(hooks.getDiems(), "AWAITED DIEMS");
-=======
   //console.log(hooks.getDiems(), "AWAITED DIEMS");
->>>>>>> 835b3fd033d8a5cb8e66c6bc32e78e3d6d95c968
   // const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
   return (
     <div>
