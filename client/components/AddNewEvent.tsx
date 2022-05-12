@@ -46,16 +46,8 @@ const AddNewEvent = ({ currentDiem }) => {
             <input {...register('location')} placeholder="Event Location..." />
             <input {...register('time')} type="time" />
 
-            {/* <input
-              type="date"
-              // min={currentDate}
-              name="date"
-              {...register('date', { required: true })}
-            ></input> */}
             <input type="submit" />
           </form>
-          <div></div>
-          {/* <button>Click here</button> */}
         </div>
       </Popup>
     </div>
