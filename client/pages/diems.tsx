@@ -1,7 +1,8 @@
 import type { NextPage } from 'next';
+import Nav from '../components/Nav';
 import Tile from '../components/Tile';
 import Diem from '../components/Diem';
-import Nav from '../components/Nav';
+import PopNewDiem from '../components/PopNewDiem';
 import styles from '../styles/Home.module.css';
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
@@ -9,6 +10,7 @@ import hooks from '../services/ApiServices';
 import { async } from '@firebase/util';
 
 const Diems: NextPage = () => {
+  const [newDiemPop, setNewDiemPop] = useState(false);
   const [data, setData] = useState('');
   const [mainDiem, setDiem] = useState('');
   const [allDiems, setAllDiems] = useState([]);
@@ -38,26 +40,26 @@ const Diems: NextPage = () => {
   // const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
   return (
     <div>
-      <Nav users={users} setUsers={setUsers} />
+      <Nav users={users} setUsers={setUsers} toggleNewDiemPop={setNewDiemPop} />
       <main className={styles.container}>
         <div className={styles.tiles}>
-          <div>
-            {allDiems.map((el) => {
-              return (
-                <div key={el.id}>
-                  <Tile
-                    setDiem={setDiem}
-                    mainDiem={mainDiem}
-                    allDiems={allDiems}
-                    setAllDiems={setAllDiems}
-                    diem={el}
-                    setCurrentDiem={setCurrentDiem}
-                  />
-                </div>
-              );
-            })}
-          </div>
+          <PopNewDiem />
+          {allDiems.map((el) => {
+            return (
+              <div key={el.id}>
+                <Tile
+                  setDiem={setDiem}
+                  mainDiem={mainDiem}
+                  allDiems={allDiems}
+                  setAllDiems={setAllDiems}
+                  diem={el}
+                  setCurrentDiem={setCurrentDiem}
+                />
+              </div>
+            );
+          })}
         </div>
+
         <div className={styles.diem}>
           <Diem mainDiem={mainDiem} currentDiem={currentDiem} />
         </div>

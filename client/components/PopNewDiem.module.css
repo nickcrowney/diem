@@ -1,0 +1,41 @@
+.newdiem {
+  display: none;
+  height: 16rem;
+  width: 15rem;
+  border-radius: 5px;
+  background-color: rgb(185, 128, 255);
+  padding: 1rem;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.newdiem input {
+  margin-bottom: 1rem;
+}
+
+/* $colors: (
+  red: #db2828,
+  orange: #f2711c,
+  yellow: #fbbd08,
+  olive: #b5cc18,
+  purple: #a333c8,
+  pink: #e03997
+);
+
+input[type="radio"] {
+  display: none;
+  &:checked + label {
+    @each $name, $value in $colors {
+      .#{$name} {
+        border: 2px solid darken($value, 25%);
+      }
+    } // !@each
+  } // !&:checked + label
+} */

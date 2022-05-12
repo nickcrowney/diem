@@ -1,25 +1,29 @@
 import React from 'react';
 import styles from './Nav.module.css';
 import Image from 'next/image';
-
+import more from '../public/images/more.png';
 import menu from '../public/images/menu.png';
 import PopNewDiem from './PopNewDiem';
 
 import hooks from '../services/ApiServices';
 import mypic from '../public/images/daniil-lobachev-XAo09LtQiAQ-unsplash.jpg';
 
-const Nav = ({ users, setUsers }) => {
+const Nav = ({ users, setUsers, setNewDiemPop }) => {
   // let use = [];
   // hooks.getUsers().then((res) => (use = res));
   // console.log(use, 'USE');
   // const mypic= users[0].userPhoto
 
+  function handleClick() {
+    setNewDiemPop();
+  }
+
   return (
     <div className={styles.navContainer}>
       <div className={styles.navBar}>
         <div className={styles.addDiem}>
-          <button type="button">
-            <PopNewDiem />
+          <button type="button" onClick={handleClick}>
+            <Image src={more} height="40" width="40" />
           </button>
         </div>
 

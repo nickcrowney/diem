@@ -12,7 +12,7 @@
 .diem {
   width: 75%;
 }
-.plusdiem {
+/* .plusdiem {
   padding: 5vh;
 }
 .newdiem {
@@ -24,7 +24,7 @@
 .input {
   display: flex;
   flex-direction: column;
-}
+} */
 
 /* .main {
   min-height: 50vh;
