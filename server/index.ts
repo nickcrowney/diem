@@ -22,10 +22,15 @@ function bootstrap() {
 }
 bootstrap();
 
+let chatHistory: String[] = [];
+
 //TODO impliment chat server logic in here
 io.on("connection", (socket: Socket) => {
+  socket.on("Message", (message) => {
+    chatHistory = [...chatHistory, message];
+  });
 
-  // ...
+  socket.emit("updatedChat", chatHistory);
 });
 
 module.exports = app;

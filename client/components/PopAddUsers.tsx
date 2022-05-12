@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import dayjs from 'dayjs';
 import Popup from 'reactjs-popup';
@@ -19,17 +20,21 @@ const currentUser = 1;
 // ];
 function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
   const { register, handleSubmit, reset } = useForm();
+
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   const handleChange = (options) => {
     setSelectedOptions(options);
   };
   //   users && console.log(users, 'USERS IN POP ADD USERS');
+
   const options = users.map((el) => ({
     value: el.id,
     label: el.name,
   }));
+
   //   console.log(options);
+
   //   const [data, setData] = useState('Add new diem');
   console.log(currentDiem, 'CURRENT DIEM HERE');
   const submitHandler = (formData, event) => {
