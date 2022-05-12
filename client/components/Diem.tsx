@@ -33,7 +33,16 @@ const Diem: React.FunctionComponent = ({ mainDiem, currentDiem }) => {
       <div>
         {currentDiem.events &&
           currentDiem.events.map((el) => {
-            return <ul>{el.title}</ul>;
+            return (
+              <ul key={el.id}>
+                <div>
+                  {el.title}
+                  {el.location ? ' at ' : ''}{' '}
+                  {el.location ? el.location + '. ' : ''}
+                  {el.time ? `Start time: ${el.time}` : ''}
+                </div>
+              </ul>
+            );
           })}
       </div>
     </div>

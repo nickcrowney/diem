@@ -1,11 +1,11 @@
-import { response } from "express";
-import React, { useState } from "react";
+import { response } from 'express';
+import React, { useState } from 'react';
 
 const ApiServices = {};
 
 //GET request for all users
 const getUsers = async () => {
-  const response = await fetch("http://localhost:4000/users");
+  const response = await fetch('http://localhost:4000/users');
   const data = await response.json();
   return data;
   // setUsers(data);
@@ -13,7 +13,7 @@ const getUsers = async () => {
 
 //GET request for all diems
 const getDiems = async () => {
-  const response = await fetch("http://localhost:4000/diems");
+  const response = await fetch('http://localhost:4000/diems');
   const data = await response.json();
   return data;
   // setDiems(data);
@@ -21,7 +21,7 @@ const getDiems = async () => {
 
 //GET request for all events
 const getEvents = async () => {
-  const response = await fetch("http://localhost:4000/events");
+  const response = await fetch('http://localhost:4000/events');
   const data = await response.json();
   return data;
   //setEvents(data);
@@ -45,11 +45,11 @@ const getDiemById = async (id: Number) => {
 
 //POST new user
 const submitNewUser = async (name: String, email: String, picture: String) => {
-  const response = await fetch("http://localhost:4000/user", {
-    method: "POST",
+  const response = await fetch('http://localhost:4000/user', {
+    method: 'POST',
     body: JSON.stringify({ name, email, picture }),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
   const data = await response.json();
@@ -60,23 +60,23 @@ const submitNewUser = async (name: String, email: String, picture: String) => {
 
 //POST new diem
 const submitNewDiem = async (title: String, date: String, user: Number) => {
-  const response = await fetch("http://localhost:4000/diem", {
-    method: "POST",
+  const response = await fetch('http://localhost:4000/diem', {
+    method: 'POST',
     body: JSON.stringify({ title, date, user }),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
   const data = await response.json();
   return data;
   // setDiem(data);
-  console.log(data, "DATA");
+  console.log(data, 'DATA');
 };
 
 //DELETE user
 const deleteUser = async (id: Number) => {
   const response = await fetch(`http://localhost:4000/user/${id}`, {
-    method: "DELETE",
+    method: 'DELETE',
   });
   const data = await response.json();
   return data;
@@ -86,7 +86,7 @@ const deleteUser = async (id: Number) => {
 //DELETE diem
 const deleteDiem = async (id: Number) => {
   const response = await fetch(`http://localhost:4000/diem/${id}`, {
-    method: "DELETE",
+    method: 'DELETE',
   });
   const data = await response.json();
   return data;
@@ -96,25 +96,25 @@ const deleteDiem = async (id: Number) => {
 //DELETE event
 const deleteEvent = async (id: Number) => {
   const response = await fetch(`http://localhost:4000/event/${id}`, {
-    method: "DELETE",
+    method: 'DELETE',
   });
   const data = await response.json();
   return data;
   console.log(data);
 };
 
-
 const submitNewEvent = async (
   title: String,
-  // time: String,
-  id: Number
+  id: Number,
+  location: String,
+  time: String
 ) => {
   const response = await fetch('http://localhost:4000/event', {
     method: 'POST',
 
-    body: JSON.stringify({ title, id }),
+    body: JSON.stringify({ title, id, location, time }),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
   const data = await response.json();
@@ -137,11 +137,11 @@ const submitNewEvent = async (
 // );
 
 const modifyDiem = async (title: String, id: Number) => {
-  const response = await fetch("http://localhost:4000/event", {
-    method: "PATCH",
+  const response = await fetch('http://localhost:4000/event', {
+    method: 'PATCH',
     body: JSON.stringify({ title, id }),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
   const data = await response.json();
