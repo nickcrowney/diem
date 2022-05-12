@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
@@ -6,14 +5,6 @@ import { firebaseApp } from "../firebase-config";
 import props from "../services/ApiServices";
 import usersHook from "../services/testHook";
 import { useLoginContext } from "../contexts/Context";
-=======
-import React, { useEffect, useState } from 'react';
-import { FcGoogle } from 'react-icons/fc';
-import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
-import { firebaseApp } from '../firebase-config';
-import props from '../services/ApiServices';
-import usersHook from '../services/testHook';
->>>>>>> 0dfea56943d8103f846e20e8786fe2072790e920
 
 const Login = () => {
   const firebaseAuth = getAuth(firebaseApp);
@@ -30,7 +21,7 @@ const Login = () => {
 
     //If user exists in database, we don't re-POST them to db
     if (
-      state !== 'undefined' && //Don't think you need the second half of this logic
+      state !== "undefined" && //Don't think you need the second half of this logic
       state.some((el): any => el.email !== response.user.email)
     ) {
       //TODO change any to appropiate interface
