@@ -1,16 +1,22 @@
 import React from "react";
 import Image from "next/image";
 // replace images with data from db
-import mypic from "../public/images/amir-seilsepour-Pc0ToyoR5Xo-unsplash.jpg";
-import mypic2 from "../public/images/art-hauntington-jzY0KRJopEI-unsplash.jpg";
-import mypic3 from "../public/images/christian-buehner-6YQmQgcQ0VA-unsplash.jpg";
-import chat from "../public/images/chat.png";
-import calendar from "../public/images/calendar.png";
-//
-import styles from "./Diem.module.css";
-import AddNewEvent from "./AddNewEvent";
 
-const Diem: React.FunctionComponent = ({ mainDiem, currentDiem }) => {
+import mypic from '../public/images/amir-seilsepour-Pc0ToyoR5Xo-unsplash.jpg';
+import mypic2 from '../public/images/art-hauntington-jzY0KRJopEI-unsplash.jpg';
+import mypic3 from '../public/images/christian-buehner-6YQmQgcQ0VA-unsplash.jpg';
+import chat from '../public/images/chat.png';
+import calendar from '../public/images/calendar.png';
+import more from '../public/images/more.png';
+
+
+import styles from './Diem.module.css';
+import AddNewEvent from './AddNewEvent';
+import PopAddUsers from './PopAddUsers';
+import AddNewEventTest from './AddNewEventTest';
+
+
+const Diem: React.FunctionComponent = ({ mainDiem, currentDiem, users }) => {
   const pics = [mypic, mypic2, mypic3];
   const date = currentDiem.date;
   const event = currentDiem.title;
@@ -26,32 +32,41 @@ const Diem: React.FunctionComponent = ({ mainDiem, currentDiem }) => {
           <Image src={chat} height="35" width="45" />
           <Image src={calendar} height="20" width="40" />
         </div>
-        <div className={styles.diem__profilePics_container}>
-          {pics.map((pic) => {
-            return (
-              <div className={styles.diem__profilePic}>
-                <Image src={pic} alt="Picture of the author" />
-              </div>
-            );
-          })}
-        </div>
-      </div>
-      <div className={styles.diem__events}>
-        <AddNewEvent currentDiem={currentDiem} />
         <div>
-          {currentDiem.events &&
-            currentDiem.events.map((el) => {
-              return (
-                <ul key={el.id}>
-                  <div>
-                    {el.title}
-                    {el.location ? " at " : ""}{" "}
-                    {el.location ? el.location + ". " : ""}
-                    {el.time ? `Start time: ${el.time}` : ""}
+
+          <div className={styles.diem__users}>
+            <button type="button">
+              <Image src={more} height="40" width="40" />
+            </button>
+            <div className={styles.diem__profilePics_container}>
+              {pics.map((pic) => {
+                return (
+                  <div key={pic} className={styles.diem__profilePic}>
+                    <Image src={pic} alt="Picture of the author" />
                   </div>
-                </ul>
-              );
-            })}
+                );
+              })}
+            </div>
+          </div>
+          <PopAddUsers users={users} />
+        </div>
+        <div className={styles.diem__events}>
+          <AddNewEvent currentDiem={currentDiem} />
+          <div>
+            {currentDiem.events &&
+              currentDiem.events.map((el) => {
+                return (
+                  <ul key={el.id}>
+                    <div>
+                      {el.title}
+                      {el.location ? ' at ' : ''}{' '}
+                      {el.location ? el.location + '. ' : ''}
+                      {el.time ? `Start time: ${el.time}` : ''}
+                    </div>
+                  </ul>
+                );
+              })}
+          </div>
         </div>
       </div>
     </>
