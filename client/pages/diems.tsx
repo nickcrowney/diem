@@ -44,6 +44,7 @@ const Diems: NextPage = () => {
       <main className={styles.container}>
         <div className={styles.tiles}>
           <PopNewDiem />
+
           {allDiems.map((el) => {
             return (
               <div key={el.id}>
@@ -61,7 +62,7 @@ const Diems: NextPage = () => {
         </div>
 
         <div className={styles.diem}>
-          <Diem mainDiem={mainDiem} currentDiem={currentDiem} />
+          <Diem mainDiem={mainDiem} currentDiem={currentDiem} users={users} />
         </div>
       </main>
     </div>

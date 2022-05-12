@@ -6,6 +6,7 @@ import Popup from 'reactjs-popup';
 import styles from '../styles/Home.module.css';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import Select from 'react-select';
 
 const currentUser = 1;
 
@@ -36,7 +37,7 @@ const AddNewEvent = ({ currentDiem }) => {
                 data.location,
                 data.time
               );
-              reset({ title: '' });
+              reset({ title: '', location: '', time: '' });
 
               // setData(JSON.stringify(data));
             })}
