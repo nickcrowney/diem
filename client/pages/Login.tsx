@@ -5,10 +5,13 @@ import { firebaseApp } from "../firebase-config";
 import props from "../services/ApiServices";
 import usersHook from "../services/testHook";
 import { useLoginContext } from "../contexts/Context";
+import { useRouter } from "next/router";
 
 const Login = () => {
   const firebaseAuth = getAuth(firebaseApp);
   const provider = new GoogleAuthProvider();
+
+  const router = useRouter();
 
   const { loginInfo, setLoginInfo } = useLoginContext();
 
@@ -30,6 +33,10 @@ const Login = () => {
         response.user.email,
         response.user.photoURL
       );
+    }
+    //return <Link href="/diems" />;
+    if (response.user.emailVerified) {
+      router.replace("/diems");
     }
   };
 
