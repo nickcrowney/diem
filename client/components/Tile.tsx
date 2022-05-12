@@ -19,7 +19,7 @@ const Tile: React.FunctionComponent = ({ allDiems, diem, setCurrentDiem }) => {
       <div className={styles.tile__profilePics_container}>
         {pics.map((pic) => {
           return (
-            <div className={styles.tile__profilePic}>
+            <div key={pic} className={styles.tile__profilePic}>
               <Image src={pic} alt="Picture of the author" />
             </div>
           );
