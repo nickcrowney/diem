@@ -4,25 +4,20 @@ import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { firebaseApp } from "../firebase-config";
 import props from "../services/ApiServices";
 import usersHook from "../services/testHook";
+import { useLoginContext } from "../contexts/Context";
 
 const Login = () => {
-  // const [loginData, setLoginData] = useState({}); //Use this to identify the current user
-  // const [users, setUsers] = useState([]);
-
   const firebaseAuth = getAuth(firebaseApp);
   const provider = new GoogleAuthProvider();
 
-  const [loginData, setLoginData] = useState();
+  const { loginInfo, setLoginInfo } = useLoginContext();
+
   const { state } = usersHook(); //All our users
 
   const signIn = async () => {
     const response = await signInWithPopup(firebaseAuth, provider);
 
-    setLoginData(response.user); //Change
-    console.log(loginData, response);
-
-    // console.log(response.user);
-    // console.log(state[0].email, "EMAIL"); //IF there are no users, this will throw an error
+    setLoginInfo(response.user);
 
     if (
       state !== "undefined" &&
