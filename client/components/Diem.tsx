@@ -8,20 +8,25 @@ import chat from '../public/images/chat.png';
 import calendar from '../public/images/calendar.png';
 //
 import styles from './Diem.module.css';
+import AddNewEvent from './AddNewEvent';
 
 const Diem: React.FunctionComponent = ({ mainDiem, currentDiem }) => {
   const pics = [mypic, mypic2, mypic3];
   const date = currentDiem.date;
   const event = currentDiem.title;
+
   return (
-    <div className={styles.diem}>
-      <div className={styles.diem__infobar}>
-        {/* <div className={styles.tile__info}>
-          <h1>{event}</h1>
-          <h2>{date}</h2>
-        </div> */}
-        <Image src={chat} height="35" width="45" />
-        <Image src={calendar} height="20" width="40" />
+    <>
+      <div className={styles.diem}>
+        <div className={styles.diem__infobar}>
+          <div className={styles.tile__info}>
+            <h1>{event}</h1>
+            <h2>{date}</h2>
+          </div>
+          <Image src={chat} height="35" width="45" />
+          <Image src={calendar} height="20" width="40" />
+        </div>
+        <AddNewEvent currentDiem={currentDiem} />
         <div className={styles.diem__profilePics_container}>
           {pics.map((pic) => {
             return (
@@ -32,7 +37,13 @@ const Diem: React.FunctionComponent = ({ mainDiem, currentDiem }) => {
           })}
         </div>
       </div>
-    </div>
+      <div>
+        {currentDiem.events &&
+          currentDiem.events.map((el) => {
+            return <ul>{el.title}</ul>;
+          })}
+      </div>
+    </>
   );
 };
 
