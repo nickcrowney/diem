@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
-import styles from './Nav.module.css';
-import Image from 'next/image';
-import more from '../public/images/more.png';
-import menu from '../public/images/menu.png';
-import PopNewDiem from './PopNewDiem';
-import usersHook from '../services/testHook';
-import hooks from '../services/ApiServices';
-import mypic from '../public/images/daniil-lobachev-XAo09LtQiAQ-unsplash.jpg';
+import React, { useEffect } from "react";
+import styles from "./Nav.module.css";
+import Image from "next/image";
+import more from "../public/images/more.png";
+import menu from "../public/images/menu.png";
+import PopNewDiem from "./PopNewDiem";
+import usersHook from "../services/testHook";
+import hooks from "../services/ApiServices";
+import mypic from "../public/images/daniil-lobachev-XAo09LtQiAQ-unsplash.jpg";
 
 const Nav = ({ users, setUsers, setNewDiemPop }) => {
   // const { state } = usersHook(); //All our users
@@ -19,7 +19,7 @@ const Nav = ({ users, setUsers, setNewDiemPop }) => {
   function handleClick() {
     setNewDiemPop();
   }
-  console.log(users[0], '0th user');
+  //console.log(users[0], '0th user');
   // console.log(usersNew, ' user');
 
   return (

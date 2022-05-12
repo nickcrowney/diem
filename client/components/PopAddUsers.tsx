@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import dayjs from 'dayjs';
-import Popup from 'reactjs-popup';
-import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
-import styles from './PopNewDiem.module.css';
-import props from '../services/ApiServices';
-import Image from 'next/image';
-import plus from '../public/images/more.png';
-import Select from 'react-select';
+import React, { Component } from "react";
+import dayjs from "dayjs";
+import Popup from "reactjs-popup";
+import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import styles from "./PopNewDiem.module.css";
+import props from "../services/ApiServices";
+import Image from "next/image";
+import plus from "../public/images/more.png";
+import Select from "react-select";
 
 const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 const currentUser = 1;
@@ -19,12 +19,12 @@ const currentUser = 1;
 // ];
 function PopAddUsers({ users }) {
   const { register, handleSubmit, reset } = useForm();
-  users && console.log(users, 'USERS IN POP ADD USERS');
+  //users && console.log(users, 'USERS IN POP ADD USERS');
   const options = users.map((el) => ({
     value: el.id,
     label: el.name,
   }));
-  console.log(options);
+  // console.log(options);
   //   const [data, setData] = useState('Add new diem');
 
   return (

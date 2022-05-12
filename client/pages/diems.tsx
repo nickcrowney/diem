@@ -25,8 +25,8 @@ const Diems: NextPage = () => {
   const [users, setUsers] = useState([]);
   if (state) {
     //console.warn(state.loginInfo);
-    console.log("FUCK");
-    console.log(state.userInfo);
+    // console.log("FUCK");
+    // console.log(state.userInfo);
   }
   useEffect(() => {}, [data]);
   useEffect(() => {
