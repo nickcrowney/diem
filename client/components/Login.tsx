@@ -4,27 +4,24 @@ import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { firebaseApp } from "../firebase-config";
 import props from "../services/ApiServices";
 import usersHook from "../services/testHook";
-import { useLoginContext } from "../contexts/Context";
-<<<<<<< HEAD
-=======
-import { useRouter } from "next/router";
->>>>>>> 835b3fd033d8a5cb8e66c6bc32e78e3d6d95c968
+import { useDispatch } from "react-redux";
 
-const Login = () => {
+const Login: React.FunctionComponent = () => {
   const firebaseAuth = getAuth(firebaseApp);
   const provider = new GoogleAuthProvider();
 
-  const router = useRouter();
-
-  const { loginInfo, setLoginInfo } = useLoginContext();
-
+  //const [loginData, setLoginData] = useState();
   const { state } = usersHook(); //All our users
 
   const signIn = async () => {
     const response = await signInWithPopup(firebaseAuth, provider);
 
-    setLoginInfo(response.user);
+    //setLoginData(response.user); //Change
+    // console.log(loginData, response);
 
+    const dispatch = useDispatch();
+    dispatch({ type: "POPULATE", loginData: [response] });
+    // GetLoginInfo([response.user]);
     //If user exists in database, we don't re-POST them to db
     if (
       state !== "undefined" && //Don't think you need the second half of this logic
@@ -37,11 +34,6 @@ const Login = () => {
         response.user.photoURL
       );
     }
-    //return <Link href="/diems" />;
-    if (response.user.emailVerified) {
-      router.replace("/diems", loginInfo);
-    }
-    //TODO Throw invalid login error here
   };
 
   return (
