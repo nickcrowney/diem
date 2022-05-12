@@ -54,7 +54,7 @@ const AddNewEvent = ({ currentDiem }) => {
             ></input> */}
             <input type="submit" />
           </form>
-
+          <div></div>
           {/* <button>Click here</button> */}
         </div>
       </Popup>
