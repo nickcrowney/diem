@@ -4,21 +4,24 @@ import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { firebaseApp } from "../firebase-config";
 import props from "../services/ApiServices";
 import usersHook from "../services/testHook";
-import { useLoginContext } from "../contexts/Context";
+import { useDispatch } from "react-redux";
 
-const Login = () => {
+const Login: React.FunctionComponent = () => {
   const firebaseAuth = getAuth(firebaseApp);
   const provider = new GoogleAuthProvider();
 
-  const { loginInfo, setLoginInfo } = useLoginContext();
-
+  //const [loginData, setLoginData] = useState();
   const { state } = usersHook(); //All our users
 
   const signIn = async () => {
     const response = await signInWithPopup(firebaseAuth, provider);
 
-    setLoginInfo(response.user);
+    //setLoginData(response.user); //Change
+    // console.log(loginData, response);
 
+    const dispatch = useDispatch();
+    dispatch({ type: "POPULATE", loginData: [response] });
+    // GetLoginInfo([response.user]);
     //If user exists in database, we don't re-POST them to db
     if (
       state !== "undefined" && //Don't think you need the second half of this logic
