@@ -7,7 +7,7 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .diem__infobar {
@@ -38,4 +38,8 @@
 .diem h1 {
   font-size: 24px;
   font-weight: 700;
+}
+
+.diem__events {
+  padding-top: 20px;
 }
