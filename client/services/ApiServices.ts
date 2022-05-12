@@ -122,6 +122,20 @@ const submitNewEvent = async (
   console.log(data);
 };
 
+const updateDiemUser = async (diemId: Number, userId: Number) => {
+  const response = await fetch('http://localhost:4000/diem', {
+    method: 'PATCH',
+
+    body: JSON.stringify({ diemId, userId }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const data = await response.json();
+  return data;
+  console.log(data);
+};
+
 //TODO add patches for user, diem, and events
 // return (
 //   <div
@@ -161,6 +175,7 @@ export default {
   deleteDiem,
   deleteEvent,
   deleteUser,
+  updateDiemUser,
 };
 
 //export default ApiServices;

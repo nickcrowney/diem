@@ -22,12 +22,18 @@ const Diems: NextPage = () => {
     title: "Select Diem",
   });
 
+  useEffect(() => {
+    console.log(currentDiem, 'CURR DEEZ NUTZ');
+  }, [currentDiem]);
   const [users, setUsers] = useState([]);
+  console.log(currentDiem, 'RENDER DAMNIT');
+
   if (state) {
     //console.warn(state.loginInfo);
     // console.log("FUCK");
     // console.log(state.userInfo);
   }
+
   useEffect(() => {}, [data]);
   useEffect(() => {
     hooks
@@ -77,7 +83,12 @@ const Diems: NextPage = () => {
         </div>
 
         <div className={styles.diem}>
-          <Diem mainDiem={mainDiem} currentDiem={currentDiem} users={users} />
+          <Diem
+            mainDiem={mainDiem}
+            currentDiem={currentDiem}
+            setCurrentDiem={setCurrentDiem}
+            users={users}
+          />
         </div>
       </main>
     </div>

@@ -1,5 +1,6 @@
-import React from "react";
-import Image from "next/image";
+import React, { useEffect } from 'react';
+import Image from 'next/image';
+
 // replace images with data from db
 
 import mypic from "../public/images/amir-seilsepour-Pc0ToyoR5Xo-unsplash.jpg";
@@ -14,10 +15,19 @@ import AddNewEvent from "./AddNewEvent";
 import PopAddUsers from "./PopAddUsers";
 import AddNewEventTest from "./AddNewEventTest";
 
-const Diem: React.FunctionComponent = ({ mainDiem, currentDiem, users }) => {
+const Diem: React.FunctionComponent = ({
+  mainDiem,
+  currentDiem,
+  setCurrentDiem,
+  users,
+}) => {
+  useEffect(() => {
+    console.log(currentDiem, 'CURR DEEZ NUTZ');
+  }, [currentDiem]);
   const pics = [mypic, mypic2, mypic3];
   const date = currentDiem.date;
   const event = currentDiem.title;
+  console.log(currentDiem.users, 'CURRENT USERS');
 
   return (
     <>
@@ -36,16 +46,39 @@ const Diem: React.FunctionComponent = ({ mainDiem, currentDiem, users }) => {
               <Image src={more} height="40" width="40" />
             </button>
             <div className={styles.diem__profilePics_container}>
-              {pics.map((pic) => {
+              {/* {pics.map((pic) => {
                 return (
                   <div key={pic} className={styles.diem__profilePic}>
                     <Image src={pic} alt="Picture of the author" />
                   </div>
                 );
-              })}
+              })} */}
+              {currentDiem.users &&
+                currentDiem.users.map((el) => {
+                  return (
+                    <div key={el.id} className={styles.diem__profilePic}>
+                      <Image
+                        src={el.userPhoto}
+                        height="50"
+                        width="50"
+                        alt="Picture of the author"
+                      />
+                    </div>
+                  );
+                })}
             </div>
           </div>
-          <PopAddUsers users={users} />
+          <PopAddUsers
+            users={users}
+            currentDiem={currentDiem}
+            setCurrentDiem={setCurrentDiem}
+          />
+        </div>
+        <div>
+          {currentDiem.users &&
+            currentDiem.users.map((el) => {
+              return <div>{el.name}</div>;
+            })}
         </div>
         <div className={styles.diem__events}>
           <AddNewEvent currentDiem={currentDiem} />
