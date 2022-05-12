@@ -27,10 +27,15 @@ const AddNewEvent = ({ currentDiem }) => {
             onSubmit={handleSubmit((data) => {
               console.log(data.title, 'TITLE');
               console.log(data.location, 'LOCATION');
-              //   console.log(data.time, 'DATE');
+              console.log(data.time, 'TIME');
               console.log(currentDiem.id, 'CURRENT');
 
-              props.submitNewEvent(data.title, currentDiem.id, data.location);
+              props.submitNewEvent(
+                data.title,
+                currentDiem.id,
+                data.location,
+                data.time
+              );
               reset({ title: '' });
 
               // setData(JSON.stringify(data));
@@ -38,7 +43,8 @@ const AddNewEvent = ({ currentDiem }) => {
             className={styles.input}
           >
             <input {...register('title')} placeholder="Event Name..." />
-            <input {...register('location')} placeholder="Event Name..." />
+            <input {...register('location')} placeholder="Event Location..." />
+            <input {...register('time')} type="time" />
 
             {/* <input
               type="date"
@@ -48,7 +54,7 @@ const AddNewEvent = ({ currentDiem }) => {
             ></input> */}
             <input type="submit" />
           </form>
-
+          <div></div>
           {/* <button>Click here</button> */}
         </div>
       </Popup>
