@@ -26,7 +26,6 @@ const Diem: React.FunctionComponent = ({ mainDiem, currentDiem }) => {
           <Image src={chat} height="35" width="45" />
           <Image src={calendar} height="20" width="40" />
         </div>
-        <AddNewEvent currentDiem={currentDiem} />
         <div className={styles.diem__profilePics_container}>
           {pics.map((pic) => {
             return (
@@ -37,11 +36,23 @@ const Diem: React.FunctionComponent = ({ mainDiem, currentDiem }) => {
           })}
         </div>
       </div>
-      <div>
-        {currentDiem.events &&
-          currentDiem.events.map((el) => {
-            return <ul>{el.title}</ul>;
-          })}
+      <div className={styles.diem__events}>
+        <AddNewEvent currentDiem={currentDiem} />
+        <div>
+          {currentDiem.events &&
+            currentDiem.events.map((el) => {
+              return (
+                <ul key={el.id}>
+                  <div>
+                    {el.title}
+                    {el.location ? ' at ' : ''}{' '}
+                    {el.location ? el.location + '. ' : ''}
+                    {el.time ? `Start time: ${el.time}` : ''}
+                  </div>
+                </ul>
+              );
+            })}
+        </div>
       </div>
     </>
   );
