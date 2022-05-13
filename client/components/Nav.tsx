@@ -8,9 +8,11 @@ import usersHook from '../services/testHook';
 import hooks from '../services/ApiServices';
 import mypic from '../public/images/daniil-lobachev-XAo09LtQiAQ-unsplash.jpg';
 
-const Nav = ({ users, setUsers, setNewDiemPop }) => {
+
+const Nav = ({ users, setUsers, toggleNewDiemPop }) => {
+ 
   function handleClick() {
-    setNewDiemPop();
+    toggleNewDiemPop();
   }
   //console.log(users[0], '0th user');
   const mainUser = users.filter((el) => {

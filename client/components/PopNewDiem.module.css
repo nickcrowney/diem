@@ -20,6 +20,10 @@
   margin-bottom: 1rem;
 }
 
+#submit {
+  justify-self: end;
+}
+
 /* $colors: (
   red: #db2828,
   orange: #f2711c,
