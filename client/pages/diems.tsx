@@ -13,7 +13,9 @@ import io from 'socket.io-client';
 import { disconnect } from 'process';
 
 const Diems: NextPage = () => {
+
   // const socket = io('http://localhost:4000');
+
 
   // const [onlineStatus, setOnlineStatus] = useState(false);
   // const [onlineUsers, setOnlineUsers] = useState([]); //Grab onlineStatus emits from other users and use this to render online
@@ -22,6 +24,9 @@ const Diems: NextPage = () => {
 
   // let socId = '00000000';
   // const [history, setHistory] = useState();
+
+
+
 
   // socket.on('connect', (arg) => {
   //   ////MAIN SOCKET CONNECTION
@@ -60,6 +65,7 @@ const Diems: NextPage = () => {
   //   console.log(`User has disconnected`)
   // });
 
+
   const { state, setLoginInfo } = useLoginContext();
 
   //const state = useLoginContext()
@@ -70,6 +76,7 @@ const Diems: NextPage = () => {
   const [currentDiem, setCurrentDiem] = useState({
     title: 'Select Diem',
   });
+
 
   useEffect(() => {}, [currentDiem]);
   const [users, setUsers] = useState([]);
