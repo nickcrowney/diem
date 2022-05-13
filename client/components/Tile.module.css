@@ -33,6 +33,17 @@
   object-fit: cover;
 }
 
+.tile__profilePic_plusSign {
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: -5px;
+  height: 20px;
+  width: 20px;
+  object-fit: cover;
+  z-index: 10;
+  align-self: center;
+}
+
 .tile h1 {
   font-size: 20px;
   font-weight: 700;
