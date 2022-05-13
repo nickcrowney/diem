@@ -9,9 +9,6 @@ import Image from 'next/image';
 import plus from '../public/images/more.png';
 import Select from 'react-select';
 
-const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
-const currentUser = 1;
-
 function PopRemoveUsers({ users, currentDiem, setCurrentDiem }) {
   const { register, handleSubmit, reset } = useForm();
   const [selectedOptions, setSelectedOptions] = useState([]);
