@@ -34,7 +34,7 @@ io.on("connection", (socket: Socket) => {
   });
   socket.on("disconnect", (arg) => {
     console.log("disconnecting now", socket.id);
-    onlineUsers = [...onlineUserIds.filter((el) => el !== socket.id)];
+    //onlineUsers = [...onlineUserIds.filter((el) => el !== socket.id)];
 
     socket.emit("currentlyOnline");
   });

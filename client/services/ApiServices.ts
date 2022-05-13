@@ -2,8 +2,6 @@ import { response } from "express";
 import React, { useState } from "react";
 import { Message } from "react-hook-form";
 
-const ApiServices = {};
-
 //GET request for all users
 const getUsers = async () => {
   const response = await fetch("http://localhost:4000/users");
@@ -134,7 +132,7 @@ const updateDiemUser = async (diemId: Number, userId: Number) => {
   });
   const data = await response.json();
   return data;
-  console.log(data);
+  //console.log(data);
 };
 
 const updateDiemChatHistory = async (
@@ -150,8 +148,8 @@ const updateDiemChatHistory = async (
     },
   });
   const data = await response.json();
-
   console.log(data);
+  return data;
 };
 
 //TODO add patches for user, diem, and events

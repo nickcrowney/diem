@@ -2,19 +2,23 @@ import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 
 const ChatServer: React.FunctionComponent = (props) => {
-  const socket = io("http://192.168.1.150.4000");
-
   //RENDER a list of messages
+
+  //Fetch a chathistory
 
   //OnClick if message is not empty push message content
   function handleSubmit(content: String) {
-    chatHistory.push(content);
+    //chatHistory.push(content);
+
     //Re-render chathistory
 
     //Patch backend chathistory with the corresponding diem ID
 
     useEffect(() => {});
   }
+
+  //Render a list with all chat history for that diem
+  //Text input field with submit button
 
   return (
     <div className="w-screen h-screen flex justify-center items-center bg-white relative">
