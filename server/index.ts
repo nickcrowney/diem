@@ -28,9 +28,11 @@ let chatHistory: String[] = [];
 io.on("connection", (socket: Socket) => {
   socket.on("Message", (message) => {
     chatHistory = [...chatHistory, message];
+    socket.emit("updatedChat", chatHistory);
   });
-
-  socket.emit("updatedChat", chatHistory);
+  socket.on("disconnect", (arg) => {
+    console.log("disconnecting now", socket.id);
+  });
 });
 
 module.exports = app;
