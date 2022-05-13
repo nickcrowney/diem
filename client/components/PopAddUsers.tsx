@@ -14,6 +14,7 @@ const currentUser = 1;
 
 function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
   const { register, handleSubmit, reset } = useForm();
+
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   const handleChange = (options) => {
@@ -50,7 +51,9 @@ function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
     label: el.name,
     userPhoto: el.userPhoto,
   }));
+
   //   console.log(options);
+
   //   const [data, setData] = useState('Add new diem');
   console.log(currentDiem, 'CURRENT DIEM HERE');
   const submitHandler = (formData, event) => {

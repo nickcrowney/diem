@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import Image from 'next/image';
+
 // replace images with data from db
+
 import mypic from '../public/images/amir-seilsepour-Pc0ToyoR5Xo-unsplash.jpg';
 import mypic2 from '../public/images/art-hauntington-jzY0KRJopEI-unsplash.jpg';
 import mypic3 from '../public/images/christian-buehner-6YQmQgcQ0VA-unsplash.jpg';
@@ -8,13 +10,11 @@ import chat from '../public/images/chat.png';
 import calendar from '../public/images/calendar.png';
 import more from '../public/images/more.png';
 
-//
 import styles from './Diem.module.css';
 import AddNewEvent from './AddNewEvent';
 import PopAddUsers from './PopAddUsers';
 import AddNewEventTest from './AddNewEventTest';
 import PopRemoveUsers from './PopRemoveUsers';
-
 const Diem: React.FunctionComponent = ({
   mainDiem,
   currentDiem,
