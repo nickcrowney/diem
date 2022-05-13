@@ -15,13 +15,12 @@ const Nav = ({ users, setUsers, setNewDiemPop }) => {
   function handleClick() {
     setNewDiemPop();
   }
-  console.log(users[0], '0th user');
+  //console.log(users[0], '0th user');
   const mainUser = users.filter((el) => {
     return el.id === 1;
   });
 
-  console.log(mainUser);
-
+  //console.log(mainUser);
 
   return (
     <div className={styles.navContainer}>

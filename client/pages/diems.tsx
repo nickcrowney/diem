@@ -26,7 +26,7 @@ const Diems: NextPage = () => {
     console.log(currentDiem, "CURR DEEZ NUTZ");
   }, [currentDiem]);
   const [users, setUsers] = useState([]);
-  console.log(currentDiem, "RENDER DAMNIT");
+  //console.log(currentDiem, "RENDER DAMNIT");
 
   if (state) {
     //console.warn(state.loginInfo);

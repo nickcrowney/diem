@@ -1,14 +1,13 @@
-
-import React, { Component } from 'react';
-import dayjs from 'dayjs';
-import Popup from 'reactjs-popup';
-import { useForm, Controller } from 'react-hook-form';
-import { useEffect, useState } from 'react';
-import styles from './PopNewDiem.module.css';
-import props from '../services/ApiServices';
-import Image from 'next/image';
-import plus from '../public/images/more.png';
-import Select from 'react-select';
+import React, { Component } from "react";
+import dayjs from "dayjs";
+import Popup from "reactjs-popup";
+import { useForm, Controller } from "react-hook-form";
+import { useEffect, useState } from "react";
+import styles from "./PopNewDiem.module.css";
+import props from "../services/ApiServices";
+import Image from "next/image";
+import plus from "../public/images/more.png";
+import Select from "react-select";
 
 const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 const currentUser = 1;
@@ -36,16 +35,16 @@ function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
   //   console.log(options);
 
   //   const [data, setData] = useState('Add new diem');
-  console.log(currentDiem, 'CURRENT DIEM HERE');
+  //console.log(currentDiem, 'CURRENT DIEM HERE');
   const submitHandler = (formData, event) => {
-    console.log('Form Data: ', formData);
-    console.log('Selected Options: ', selectedOptions);
+    console.log("Form Data: ", formData);
+    console.log("Selected Options: ", selectedOptions);
     selectedOptions.forEach((el) => {
       props.updateDiemUser(currentDiem.id, el.value);
       setCurrentDiem((prev) => {
         console.log(prev);
         prev.users = [...prev.users, { id: el.value, name: el.label }];
-        console.log(prev, 'AFTER');
+        console.log(prev, "AFTER");
         return prev;
         // let diem = Object.assign({}, prev);
 
@@ -59,7 +58,7 @@ function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
       });
     });
 
-    reset({ label: '' });
+    reset({ label: "" });
   };
   useEffect(() => {
     setCurrentDiem((prev) => (prev = prev));
