@@ -184,6 +184,26 @@ export async function updateDiem(req: Request, res: Response) {
   res.json(updatedUser);
 }
 
+export async function removeDiemUser(req: Request, res: Response) {
+  const { diemId, userId } = req.body;
+  const updatedUser = await prisma.diem.update({
+    where: {
+      id: diemId,
+    },
+    data: {
+      // title: title,
+      // events: events,
+      users: {
+        disconnect: {
+          id: userId,
+        },
+      },
+      // date: date,
+    },
+  });
+  res.json(updatedUser);
+}
+
 //Patch a diem's events (add or replace an event)
 export async function updateDiemEvents(req: Request, res: Response) {
   const { id, events } = req.body;

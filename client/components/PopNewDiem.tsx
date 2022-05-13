@@ -17,37 +17,25 @@ function PopNewDiem() {
 
   return (
     <div className={styles.newdiem}>
-      {/* <form
-        className={styles.form}
-        onSubmit={handleSubmit((data) => {
-          console.log(data.title, 'TITLE');
-          console.log(data.date, 'DATE');
-          props.submitNewDiem(data.title, data.date, currentUser);
-          // setData(JSON.stringify(data));
-        })}
-      >
-        <input
-          {...register('title')}
-          placeholder="Diem Name..."
-          className="py-2 px-4 rounded"
-        /> */}
-
       <form
         onSubmit={handleSubmit((data) => {
           console.log(data.title, 'TITLE');
           console.log(data.date, 'DATE');
-          props.submitNewDiem(data.title, data.date, currentUser);
-          reset({ title: '', date: '' });
-
-          // setData(JSON.stringify(data));
+          console.log(data.city, 'City');
+          props.submitNewDiem(
+            data.title,
+            data.date,
+            data.location,
+            currentUser
+          );
+          reset({ title: '', city: '', date: '' });
         })}
         className={styles.form}
       >
-        <input
-          {...register('title')}
-          placeholder="Diem Name..."
-          className="py-2 px-4 rounded"
-        />
+
+        <input {...register('title')} placeholder="Diem Name..." className="py-2 px-4 rounded"/>
+        <input {...register('city')} placeholder="Enter city..." />
+
 
         <input
           type="date"

@@ -8,10 +8,9 @@ import usersHook from '../services/testHook';
 import hooks from '../services/ApiServices';
 import mypic from '../public/images/daniil-lobachev-XAo09LtQiAQ-unsplash.jpg';
 
+
 const Nav = ({ users, setUsers, toggleNewDiemPop }) => {
-  // // let use = [];
-  // // hooks.getUsers().then((res) => (use = res));
-  // // console.log(use, 'USE');
+ 
   function handleClick() {
     toggleNewDiemPop();
   }
@@ -20,7 +19,7 @@ const Nav = ({ users, setUsers, toggleNewDiemPop }) => {
     return el.id === 1;
   });
 
-  //console.log(mainUser);
+
 
   return (
     <div className={styles.navContainer}>
@@ -38,7 +37,6 @@ const Nav = ({ users, setUsers, toggleNewDiemPop }) => {
           <div className={styles.nav__profilePic}>
             {mainUser && (
               <Image
-                // src={users[0]?.userPhoto ?? mypic}
                 src={mainUser[0]?.userPhoto ?? mypic}
                 alt="Picture of the author"
                 // layout='fill'
