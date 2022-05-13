@@ -192,6 +192,7 @@ export default {
   deleteEvent,
   deleteUser,
   updateDiemUser,
+  updateDiemChatHistory,
 };
 
 //export default ApiServices;

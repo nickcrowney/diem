@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
+import getDiems from "../services/ApiServices";
+import updateDiemChatHistory from "../services/ApiServices";
 
 const ChatServer: React.FunctionComponent = (props) => {
   //RENDER a list of messages
 
-  //Fetch a chathistory
+  //Fetch a chathistory from api services
 
   //OnClick if message is not empty push message content
   function handleSubmit(content: String) {
