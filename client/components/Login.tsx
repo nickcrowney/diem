@@ -4,7 +4,6 @@ import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { firebaseApp } from "../firebase-config";
 import props from "../services/ApiServices";
 import usersHook from "../services/testHook";
-import { useDispatch } from "react-redux";
 
 const Login: React.FunctionComponent = () => {
   const firebaseAuth = getAuth(firebaseApp);
@@ -19,8 +18,6 @@ const Login: React.FunctionComponent = () => {
     //setLoginData(response.user); //Change
     // console.log(loginData, response);
 
-    const dispatch = useDispatch();
-    dispatch({ type: "POPULATE", loginData: [response] });
     // GetLoginInfo([response.user]);
     //If user exists in database, we don't re-POST them to db
     if (

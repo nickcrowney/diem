@@ -9,8 +9,45 @@ import dayjs from "dayjs";
 import hooks from "../services/ApiServices";
 import { async } from "@firebase/util";
 import { useLoginContext } from "../contexts/Context";
+import io from "socket.io-client";
+import { disconnect } from "process";
 
 const Diems: NextPage = () => {
+  const socket = io("http://localhost:4000");
+
+  const [onlineStatus, setOnlineStatus] = useState(false);
+  const [onlineUsers, setOnlineUsers] = useState([]); //Grab onlineStatus emits from other users and use this to render online
+
+  //IF a user's socket id belongs to a user whose email state exists in context, emit to other users that that user is online
+
+  //
+
+  let socId = "00000000";
+
+  useEffect(() => {
+    socket.on("connect", (arg) => {
+      //On connection set onlineStatus to true
+      socId = socket.id;
+      console.log("connected to Sockets on front end");
+      setOnlineStatus(true);
+
+      socket.emit("online", onlineStatus);
+    });
+
+    socket.on("onlineUsers", (onlineUserIds) => {
+      //When we recieve the online users
+      console.log(onlineUserIds);
+      setOnlineUsers(onlineUserIds);
+    });
+
+    socket.on("updateMessages", (messages) => {
+      //When we recieve the updated message history
+      console.log(messages);
+      chatHistory: messages; //Set the most updated chat history to chatHistory of the diem
+      console.log(messages);
+    });
+  });
+
   const { state, setLoginInfo } = useLoginContext();
 
   //const state = useLoginContext()
