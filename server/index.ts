@@ -33,11 +33,11 @@ io.on("connection", (socket: Socket) => {
   //   chatHistory = [...chatHistory, message];
   //   socket.emit("updatedChat", chatHistory);
   // });
-  socket.on("leavingroom" (cb) => {
-    if(socket.rooms) {
-      socket.leave(socket.rooms)
-    }
-  })
+  // socket.on("leavingroom" (cb) => {
+  //   if(socket.rooms) {
+  //     socket.leave(socket.rooms)
+  //   }
+  // })
 
   socket.on("joinroom", (roomId) => {
     socket.join(roomId);

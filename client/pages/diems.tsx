@@ -22,6 +22,10 @@ const Diems: NextPage = () => {
 
   let socId = "00000000";
   const [history, setHistory] = useState();
+  const [currentDiem, setCurrentDiem] = useState({
+    title: "Select Diem",
+    diemId: 1,
+  });
 
   socket.on("connect", (arg) => {
     ////MAIN SOCKET CONNECTION
@@ -67,9 +71,6 @@ const Diems: NextPage = () => {
   const [data, setData] = useState("");
   const [mainDiem, setDiem] = useState("");
   const [allDiems, setAllDiems] = useState([]);
-  const [currentDiem, setCurrentDiem] = useState({
-    title: "Select Diem",
-  });
 
   useEffect(() => {
     console.log(currentDiem, "CURR DEEZ NUTZ");
