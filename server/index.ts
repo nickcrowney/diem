@@ -6,6 +6,7 @@ import http from "http";
 import { createServer } from "http";
 import { Server, Socket } from "socket.io";
 import { router } from "./router";
+import { emit } from "process";
 
 const app = Express();
 const httpServer = http.createServer(app);
@@ -23,6 +24,7 @@ function bootstrap() {
 bootstrap();
 
 let chatHistory: String[] = [];
+let onlineUserIds: Number[] = [];
 
 //TODO impliment chat server logic in here
 io.on("connection", (socket: Socket) => {
@@ -32,6 +34,9 @@ io.on("connection", (socket: Socket) => {
   });
   socket.on("disconnect", (arg) => {
     console.log("disconnecting now", socket.id);
+    onlineUsers = [...onlineUserIds.filter((el) => el !== socket.id)];
+
+    socket.emit("currentlyOnline");
   });
 });
 
