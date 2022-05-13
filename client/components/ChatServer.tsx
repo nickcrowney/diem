@@ -23,6 +23,7 @@ const ChatServer: React.FunctionComponent = (props) => {
 
   //OnClick if message is not empty push message content
   function handleSubmit(author: Number, content: String, timestamp: String) {
+    //Emit the most recent message user sends
     socket.emit("newMessage", {
       //Emit the new message to backend
       author: Number,
@@ -30,13 +31,15 @@ const ChatServer: React.FunctionComponent = (props) => {
       timestamp: String,
     });
 
-    setHistory((prev) => [...prev, { author, content, timestamp }]);
+    //Set user's local history NOT NEEDED
+    //setHistory((prev) => [...prev, { author: Number, content: String, timestamp: String}]);
 
-    //chatHistory.push(content);
+    //PATCH request to update the chatHistory of current diem
 
-    //Re-render chathistory
-
-    //Patch backend chathistory with the corresponding diem ID
+    updateDiemChatHistory(props.diemId, [
+      ...history,
+      { author, content, timestamp },
+    ]);
   }
 
   //Render a list with all chat history for that diem
@@ -45,7 +48,7 @@ const ChatServer: React.FunctionComponent = (props) => {
   return (
     <div className="w-screen h-screen flex justify-center items-center bg-white relative">
       <div className="historyContainer">
-        {/* {chatHistory && chatHistory.map((mes) => {
+        {/* {history && history.map((mes) => {
             return (
                 <div>{mes.content}</div>
                 <div>{mes.author}</div>
