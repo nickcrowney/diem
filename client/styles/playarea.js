@@ -83,7 +83,14 @@ const availableUsers = users.filter((user) => {
 console.log(availableUsers, 'CURRENT DIEM USERZ');
 console.log(users, 'users');
 
-const filteredUsers = users.filter((user) => {
-  return !availableUsers.includes(user);
+// const filteredUsers = users.filter((user) => {
+//   return !availableUsers.includes(user);
+// });
+const filteredUsers = users.filter((el) => {
+  return selectedOptions.some((elem) => {
+    //   if (elem.id === el.id) return false;
+    //   else return true;
+    return elem.id !== el.id;
+  });
 });
 console.log(filteredUsers, 'FILTERED');

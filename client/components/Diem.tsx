@@ -46,17 +46,15 @@ const Diem: React.FunctionComponent = ({
               <Image src={more} height="40" width="40" />
             </button>
             <div className={styles.diem__profilePics_container}>
-              {/* {pics.map((pic) => {
-                return (
-                  <div key={pic} className={styles.diem__profilePic}>
-                    <Image src={pic} alt="Picture of the author" />
-                  </div>
-                );
-              })} */}
               {currentDiem.users &&
                 currentDiem.users.map((el) => {
                   return (
-                    <div key={el.id} className={styles.diem__profilePic}>
+                    <div
+                      key={el.id}
+                      className={styles.diem__profilePic}
+                      // onMouseEnter={showText()}
+                      // onMouseLeave={hideText()}
+                    >
                       <Image
                         src={el.userPhoto}
                         height="50"

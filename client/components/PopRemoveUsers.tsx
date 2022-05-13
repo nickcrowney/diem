@@ -31,113 +31,51 @@ function PopRemoveUsers({ users, currentDiem, setCurrentDiem }) {
   };
 
   const availableUsers = users.filter((user) => {
-    if (currentDiem) {
+    if (currentDiem.users) {
       return currentDiem.users.some((el) => el.id == user.id);
     }
   });
-  //   users && console.log(users, 'USERS IN POP ADD USERS');
-  // // // //   const availableUsers = users.filter((el) => {
-  // // // //     let arrayIds = currentDiem.users.map((elem) => {
-  // // // //       elem.id;
-  // // // //       //   elem.id !== el.id;
-  // // // //     });
-  // // // //     !arrayIds.includes(el);
-  // // // //   });
 
-  // // // //   console.log(availableUsers, 'CURRENT DIEM USERZ');
   const options = availableUsers.map((el) => ({
     value: el.id,
     label: el.name,
     userPhoto: el.userPhoto,
   }));
-  //   console.log(options);
-  //   const [data, setData] = useState('Add new diem');
-  console.log(currentDiem, 'CURRENT DIEM HERE');
+
   const submitHandler = (formData, event) => {
-    console.log(selectedOptions, 'SELECTEDDDDD');
-
-    // selectedOptions.forEach((el) => {
-    //   console.log(el, 'EEELLLLLL');
-
-    //   props.updateDiemUser(currentDiem.id, el.id);
-    // });
+    selectedOptions.forEach((el) => {
+      props.removeDiemUser(currentDiem.id, el.id);
+    });
     setCurrentDiem((prev) => {
       const obj = { ...prev };
-      // const TESTOBJ = JSON.stringify(prev).split(':');
-      obj.users = obj.users.filter((user) => {
-        return !selectedOptions.includes(user);
+
+      const user = obj.users.filter((el) => {
+        console.log(el, 'ELLLLLL');
+        return !selectedOptions.some((elem) => {
+          if (elem.id === el.id) return true;
+          else return false;
+        });
       });
+
+      obj.users = user;
+      console.log(obj, 'OBJ USERSZZZ');
+      setSelectedOptions([]);
       return obj;
-      // // //   obj.users = [...obj.users, ...selectedOptions];
-      // // //   return (prev = obj);
-      // const newObj = {};
-      //   prev.users = [...prev.users, ...selectedOptions];
-      //   Object.assign(newObj, prev);
-      //   setSelectedOptions([]);
-      //   return newObj;
     });
-    setSelectedOptions([]);
     reset({ label: '', value: '' });
   };
 
-  //   function submitHandler(data) {
-  //     console.log(data, 'DATA HERE');
-  //     //   console.log(data.date, 'DATE');
-  //     //   props.submitNewDiem(data.title, data.date, currentUser);
-  //     // setData(JSON.stringify(data));
-  //   }
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
       <div className={styles.newdiem}>
-        {/* <form
-        className={styles.form}
-        onSubmit={handleSubmit((data) => {
-            console.log(data.title, 'TITLE');
-            console.log(data.date, 'DATE');
-            props.submitNewDiem(data.title, data.date, currentUser);
-            // setData(JSON.stringify(data));
-        })}
-    > */}
-        {/* <input
-          {...register('title')}
-          placeholder="Diem Name..."
-          className="py-2 px-4 rounded"
-        /> */}
-
-        {/* <form
-        onSubmit={handleSubmit((data) => {
-            console.log(data.title, 'TITLE');
-            console.log(data.date, 'DATE');
-            props.submitNewDiem(data.title, data.date, currentUser);
-            reset({ title: '', date: '' });
-
-            // setData(JSON.stringify(data));
-        })}
-        className={styles.input}
-        >
-        <input {...register('title')} placeholder="Diem Name..." />
-
-        <input
-        type="date"
-        min={currentDate}
-        name="date"
-        {...register('date', { required: true })}
-        ></input>
-        <input type="submit" />
-    </form> */}
-        {/* <Controller> */}
         <Select
           options={options}
           isMulti
-          // {...register('title')}
           placeholder=" Remove people..."
           closeMenuOnScroll
           closeMenuOnSelect={true}
           onChange={handleChange}
-          //   value={options.find((c) => c.value === value)}
-          //   onChange={(val) => onChange(val.value)}
         />
-        {/* </Controller> */}
 
         <button type="submit">Submit</button>
       </div>

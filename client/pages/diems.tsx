@@ -1,25 +1,25 @@
-import type { NextPage } from "next";
-import Nav from "../components/Nav";
-import Tile from "../components/Tile";
-import Diem from "../components/Diem";
-import PopNewDiem from "../components/PopNewDiem";
-import styles from "../styles/Home.module.css";
-import { useEffect, useState } from "react";
-import dayjs from "dayjs";
-import hooks from "../services/ApiServices";
-import { async } from "@firebase/util";
-import { useLoginContext } from "../contexts/Context";
+import type { NextPage } from 'next';
+import Nav from '../components/Nav';
+import Tile from '../components/Tile';
+import Diem from '../components/Diem';
+import PopNewDiem from '../components/PopNewDiem';
+import styles from '../styles/Home.module.css';
+import { useEffect, useState } from 'react';
+import dayjs from 'dayjs';
+import hooks from '../services/ApiServices';
+import { async } from '@firebase/util';
+import { useLoginContext } from '../contexts/Context';
 
 const Diems: NextPage = () => {
   const { state, setLoginInfo } = useLoginContext();
 
   //const state = useLoginContext()
   const [newDiemPop, setNewDiemPop] = useState(false);
-  const [data, setData] = useState("");
-  const [mainDiem, setDiem] = useState("");
+  const [data, setData] = useState('');
+  const [mainDiem, setDiem] = useState('');
   const [allDiems, setAllDiems] = useState([]);
   const [currentDiem, setCurrentDiem] = useState({
-    title: "Select Diem",
+    title: 'Select Diem',
   });
 
   useEffect(() => {
@@ -51,8 +51,7 @@ const Diems: NextPage = () => {
       })
       .catch((error) => console.log(error));
   }, []);
-  //console.log(hooks.getDiems(), "AWAITED DIEMS");
-  // const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+
   return (
     <div>
       {state && (
