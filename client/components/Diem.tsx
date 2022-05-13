@@ -13,6 +13,7 @@ import styles from './Diem.module.css';
 import AddNewEvent from './AddNewEvent';
 import PopAddUsers from './PopAddUsers';
 import AddNewEventTest from './AddNewEventTest';
+import PopRemoveUsers from './PopRemoveUsers';
 
 const Diem: React.FunctionComponent = ({
   mainDiem,
@@ -68,6 +69,13 @@ const Diem: React.FunctionComponent = ({
             </div>
           </div>
           <PopAddUsers
+            users={users}
+            currentDiem={currentDiem}
+            setCurrentDiem={setCurrentDiem}
+          />
+        </div>
+        <div>
+          <PopRemoveUsers
             users={users}
             currentDiem={currentDiem}
             setCurrentDiem={setCurrentDiem}
