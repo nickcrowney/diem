@@ -25,7 +25,7 @@ const Login = () => {
     //If user exists in database, we don't re-POST them to db
     if (
       state !== "undefined" && //Don't think you need the second half of this logic
-      state.some((el): any => el.email !== response.user.email)
+      state.some((el): any => el.email !== response.user.email)s
     ) {
       //TODO change any to appropiate interface
       props.submitNewUser(
