@@ -22,12 +22,7 @@ function PopNewDiem() {
           console.log(data.title, 'TITLE');
           console.log(data.date, 'DATE');
           console.log(data.city, 'City');
-          props.submitNewDiem(
-            data.title,
-            data.date,
-            data.location,
-            currentUser
-          );
+          props.submitNewDiem(data.title, data.date, data.city, currentUser);
           reset({ title: '', city: '', date: '' });
         })}
         className={styles.input}
