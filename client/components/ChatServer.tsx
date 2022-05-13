@@ -4,19 +4,39 @@ import getDiems from "../services/ApiServices";
 import updateDiemChatHistory from "../services/ApiServices";
 
 const ChatServer: React.FunctionComponent = (props) => {
+  const socket = io("http://localhost:4000");
   //RENDER a list of messages
+  // const chatHis = props.chatHistory;
+  const [history, setHistory] = useState();
+
+  useEffect(() => {
+    socket.on("updateMessages", (messages) => {
+      //When we recieve the updated message history
+      setHistory((prev) => messages);
+      console.log(messages);
+      chatHistory: messages; //Set the most updated chat history to chatHistory of the diem
+      console.log(messages);
+    });
+  });
 
   //Fetch a chathistory from api services
 
   //OnClick if message is not empty push message content
-  function handleSubmit(content: String) {
+  function handleSubmit(author: Number, content: String, timestamp: String) {
+    socket.emit("newMessage", {
+      //Emit the new message to backend
+      author: Number,
+      content: String,
+      timestamp: String,
+    });
+
+    setHistory((prev) => [...prev, { author, content, timestamp }]);
+
     //chatHistory.push(content);
 
     //Re-render chathistory
 
     //Patch backend chathistory with the corresponding diem ID
-
-    useEffect(() => {});
   }
 
   //Render a list with all chat history for that diem

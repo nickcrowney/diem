@@ -25,6 +25,7 @@ bootstrap();
 
 let chatHistory: String[] = [];
 let onlineUserIds: Number[] = [];
+let isOnline = false;
 
 //TODO impliment chat server logic in here
 io.on("connection", (socket: Socket) => {
@@ -35,8 +36,8 @@ io.on("connection", (socket: Socket) => {
   socket.on("disconnect", (arg) => {
     console.log("disconnecting now", socket.id);
     //onlineUsers = [...onlineUserIds.filter((el) => el !== socket.id)];
-
-    socket.emit("currentlyOnline");
+    isOnline = false
+    socket.emit("currentlyOnline" isOnline);
   });
 });
 
