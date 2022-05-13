@@ -37,9 +37,9 @@ const Diems: NextPage = () => {
     //This will change the current chat room to the maindiem's chatroom
     socket.emit("leavingroom");
 
-    socket.emit("joinroom", mainDiem.id); //Send to backend socket to inform it to join room with correct diemId.
-    console.log(`Connected to room with diemId ${mainDiem.id}`);
-  }, [mainDiem]);
+    socket.emit("joinroom", currentDiem.id); //Send to backend socket to inform it to join room with correct diemId.
+    console.log(`Connected to room with diemId ${currentDiem.id}`);
+  }, [currentDiem]);
 
   socket.on("updateMessages", (messages) => {
     //When we recieve the updated message history from backend
@@ -49,17 +49,16 @@ const Diems: NextPage = () => {
     // console.log(messages);
   });
 
-    // socket.on("onlineUsers", (onlineUserIds) => {
-    //   ///SEE IF USER IS ONLINE not used right now
-    //   //When we recieve the online users
-    //   console.log(onlineUserIds);
-    //   setOnlineUsers(onlineUserIds);
-    // });
+  // socket.on("onlineUsers", (onlineUserIds) => {
+  //   ///SEE IF USER IS ONLINE not used right now
+  //   //When we recieve the online users
+  //   console.log(onlineUserIds);
+  //   setOnlineUsers(onlineUserIds);
+  // });
 
-    socket.on("disconnect" () => {
-      console.log(`User has disconnected`)
-    });
-  
+  socket.on("disconnect", () => {
+    console.log(`User has disconnected`);
+  });
 
   const { state, setLoginInfo } = useLoginContext();
 

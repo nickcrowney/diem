@@ -1,7 +1,7 @@
-import ChatServer from "../components/ChatServer";
+// import ChatServer from "../components/ChatServer";
 
-const ChatServerTestPage: NextPage = () => {
-  return <ChatServer />;
-};
+// const ChatServerTestPage: NextPage = () => {
+//   return <ChatServer />;
+// };
 
-export default ChatServerTestPage;
+// export default ChatServerTestPage;
