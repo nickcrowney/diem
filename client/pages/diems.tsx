@@ -1,3 +1,4 @@
+
 import type { NextPage } from "next";
 import Nav from "../components/Nav";
 import Tile from "../components/Tile";
@@ -65,11 +66,11 @@ const Diems: NextPage = () => {
 
   //const state = useLoginContext()
   const [newDiemPop, setNewDiemPop] = useState(false);
-  const [data, setData] = useState("");
-  const [mainDiem, setDiem] = useState("");
+  const [data, setData] = useState('');
+  const [mainDiem, setDiem] = useState('');
   const [allDiems, setAllDiems] = useState([]);
   const [currentDiem, setCurrentDiem] = useState({
-    title: "Select Diem",
+    title: 'Select Diem',
   });
 
   useEffect(() => {
@@ -101,8 +102,7 @@ const Diems: NextPage = () => {
       })
       .catch((error) => console.log(error));
   }, []);
-  //console.log(hooks.getDiems(), "AWAITED DIEMS");
-  // const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+
   return (
     <div>
       {state && (

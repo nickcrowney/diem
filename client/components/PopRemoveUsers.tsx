@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import dayjs from 'dayjs';
 import Popup from 'reactjs-popup';
@@ -10,13 +9,11 @@ import Image from 'next/image';
 import plus from '../public/images/more.png';
 import Select from 'react-select';
 
-
 const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 const currentUser = 1;
 
-function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
+function PopRemoveUsers({ users, currentDiem, setCurrentDiem }) {
   const { register, handleSubmit, reset } = useForm();
-
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   const handleChange = (options) => {
@@ -35,7 +32,7 @@ function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
 
   const availableUsers = users.filter((user) => {
     if (currentDiem.users) {
-      return !currentDiem.users.some((el) => el.id == user.id);
+      return currentDiem.users.some((el) => el.id == user.id);
     }
   });
 
@@ -45,21 +42,27 @@ function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
     userPhoto: el.userPhoto,
   }));
 
-
   const submitHandler = (formData, event) => {
     selectedOptions.forEach((el) => {
-      props.updateDiemUser(currentDiem.id, el.id);
-
+      props.removeDiemUser(currentDiem.id, el.id);
     });
     setCurrentDiem((prev) => {
       const obj = { ...prev };
 
-      obj.users = [...obj.users, ...selectedOptions];
-      return (prev = obj);
-    });
-    setSelectedOptions([]);
-    reset({ label: '', value: '' });
+      const user = obj.users.filter((el) => {
+        console.log(el, 'ELLLLLL');
+        return !selectedOptions.some((elem) => {
+          if (elem.id === el.id) return true;
+          else return false;
+        });
+      });
 
+      obj.users = user;
+      console.log(obj, 'OBJ USERSZZZ');
+      setSelectedOptions([]);
+      return obj;
+    });
+    reset({ label: '', value: '' });
   };
 
   return (
@@ -68,7 +71,7 @@ function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
         <Select
           options={options}
           isMulti
-          placeholder=" Add people..."
+          placeholder=" Remove people..."
           closeMenuOnScroll
           closeMenuOnSelect={true}
           onChange={handleChange}
@@ -80,4 +83,4 @@ function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
   );
 }
 
-export default PopAddUsers;
+export default PopRemoveUsers;

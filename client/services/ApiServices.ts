@@ -131,7 +131,23 @@ const updateDiemUser = async (diemId: Number, userId: Number) => {
     },
   });
   const data = await response.json();
+  console.log(data, 'UPDAAAAATTTETEE');
   return data;
+};
+
+const removeDiemUser = async (diemId: Number, userId: Number) => {
+  const response = await fetch('http://localhost:4000/user/removeDiemUser', {
+    method: 'PATCH',
+
+    body: JSON.stringify({ diemId, userId }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const data = await response.json();
+  console.log(data, 'REMOOOOOOOOVVVEE');
+  return data;
+
   //console.log(data);
 };
 
@@ -150,6 +166,7 @@ const updateDiemChatHistory = async (
   const data = await response.json();
   console.log(data);
   return data;
+
 };
 
 //TODO add patches for user, diem, and events
@@ -192,7 +209,11 @@ export default {
   deleteEvent,
   deleteUser,
   updateDiemUser,
+
+  removeDiemUser,
+
   updateDiemChatHistory,
+
 };
 
 //export default ApiServices;

@@ -17,8 +17,6 @@ function AddNewEventTest() {
         name="options"
         render={({ field: { onChange, value, ref } }) => (
           <Select
-            // inputRef={ref}
-            // value={options.filter((c) => value.includes(c.value))}
             onChange={(val) => onChange(val.map((c) => c.value))}
             options={options}
             isMulti

@@ -17,10 +17,15 @@ const Tile: React.FunctionComponent = ({ allDiems, diem, setCurrentDiem }) => {
   return (
     <div className={styles.tile} onClick={divClickedHandler}>
       <div className={styles.tile__profilePics_container}>
-        {pics.map((pic) => {
+        {diem.users.map((el) => {
           return (
-            <div key={pic} className={styles.tile__profilePic}>
-              <Image src={pic} alt="Picture of the author" />
+            <div key={el.id} className={styles.tile__profilePic}>
+              <Image
+                src={el.userPhoto}
+                height="50"
+                width="50"
+                alt="Picture of the author"
+              />
             </div>
           );
         })}
