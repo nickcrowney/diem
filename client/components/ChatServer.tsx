@@ -9,6 +9,8 @@ const ChatServer: React.FunctionComponent = (props) => {
   // const chatHis = props.chatHistory;
   const [history, setHistory] = useState();
 
+  socket.emit("joinDiemRoom", props.diemId); //Send to backend socket to inform it to join room with correct diemId.
+
   useEffect(() => {
     socket.on("updateMessages", (messages) => {
       //When we recieve the updated message history

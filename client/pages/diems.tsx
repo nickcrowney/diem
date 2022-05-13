@@ -20,8 +20,6 @@ const Diems: NextPage = () => {
 
   //IF a user's socket id belongs to a user whose email state exists in context, emit to other users that that user is online
 
-  //
-
   let socId = "00000000";
 
   useEffect(() => {
