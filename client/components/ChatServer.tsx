@@ -2,14 +2,25 @@ import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 import getDiems from "../services/ApiServices";
 import updateDiemChatHistory from "../services/ApiServices";
+import Message from "./Message";
 
 const ChatServer: React.FunctionComponent = (props) => {
   const socket = io("http://localhost:4000");
   //RENDER a list of messages
   // const chatHis = props.chatHistory;
+  const mockData = [
+    { content: "This is a message", author: 1, timestamp: "Friday" },
+    { content: "A second message", author: 1, timestamp: "Wednesday" },
+    { content: "Yet another message", author: 2, timestamp: "Sunday" },
+  ];
+
   const [history, setHistory] = useState();
 
-  socket.emit("joinDiemRoom", props.diemId); //Send to backend socket to inform it to join room with correct diemId.
+  socket.on("connect", (cb) => {
+    socket.emit("joinroom", 1); //Send to backend socket to inform it to join room with correct diemId.
+    console.log("Connected to room 1");
+  });
+  // socket.emit("joinroom", 1); //Send to backend socket to inform it to join room with correct diemId.
 
   useEffect(() => {
     socket.on("updateMessages", (messages) => {
@@ -19,7 +30,7 @@ const ChatServer: React.FunctionComponent = (props) => {
       chatHistory: messages; //Set the most updated chat history to chatHistory of the diem
       console.log(messages);
     });
-  });
+  }, [history]);
 
   //Fetch a chathistory from api services
 
@@ -49,19 +60,10 @@ const ChatServer: React.FunctionComponent = (props) => {
 
   return (
     <div className="w-screen h-screen flex justify-center items-center bg-white relative">
-      <div className="historyContainer">
-        {/* {history && history.map((mes) => {
-            return (
-                <div>{mes.content}</div>
-                <div>{mes.author}</div>
-                <div>{mes.timestamp}</div>
-
-        })} */}
-      </div>
-      <div className="inputContainer">
-        <input></input>
-        <button></button>
-      </div>
+      {mockData.map((el) => {
+        return <Message message={el} />;
+      })}
     </div>
   );
 };
+export default ChatServer;
