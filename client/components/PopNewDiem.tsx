@@ -41,17 +41,27 @@ function PopNewDiem() {
 
           // setData(JSON.stringify(data));
         })}
-        className={styles.input}
+        className={styles.form}
       >
-        <input {...register('title')} placeholder="Diem Name..." />
+        <input
+          {...register('title')}
+          placeholder="Diem Name..."
+          className="py-2 px-4 rounded"
+        />
 
         <input
           type="date"
+          className="py-2 px-4 rounded border-none"
           min={currentDate}
           name="date"
           {...register('date', { required: true })}
-        ></input>
-        <input type="submit" />
+        />
+
+        <input
+          id="submit"
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        />
       </form>
     </div>
   );
