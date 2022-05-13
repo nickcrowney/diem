@@ -9,8 +9,15 @@ import dayjs from "dayjs";
 import hooks from "../services/ApiServices";
 import { async } from "@firebase/util";
 import { useLoginContext } from "../contexts/Context";
+import io from "socket.io-client";
 
 const Diems: NextPage = () => {
+  const socket = io("http://localhost:4000");
+
+  socket.on("connect", (arg) => {
+    console.log("connected to Sockets on front end");
+  });
+
   const { state, setLoginInfo } = useLoginContext();
 
   //const state = useLoginContext()
