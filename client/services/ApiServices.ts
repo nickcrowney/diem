@@ -72,9 +72,9 @@ const submitNewDiem = async (
     },
   });
   const data = await response.json();
+  console.log(data, 'DATA');
   return data;
   // setDiem(data);
-  console.log(data, 'DATA');
 };
 
 //DELETE user
@@ -197,6 +197,22 @@ const modifyDiem = async (title: String, id: Number) => {
   return data;
   console.log(data);
 };
+
+const options = {
+  method: 'GET',
+  headers: {
+    'X-RapidAPI-Host': 'visual-crossing-weather.p.rapidapi.com',
+    'X-RapidAPI-Key': '294e3b096bmshc3e04cb163d697fp132784jsn7e91ff88ee8e',
+  },
+};
+
+fetch(
+  'https://visual-crossing-weather.p.rapidapi.com/forecast?aggregateHours=24&location=Washington%2CDC%2CUSA&contentType=csv&unitGroup=us&shortColumnNames=0',
+  options
+)
+  .then((response) => response.json())
+  .then((response) => console.log(response))
+  .catch((err) => console.error(err));
 
 export default {
   getUsers,
