@@ -21,12 +21,19 @@ function PopNewDiem() {
         onSubmit={handleSubmit((data) => {
           console.log(data.title, 'TITLE');
           console.log(data.date, 'DATE');
-          props.submitNewDiem(data.title, data.date, currentUser);
-          reset({ title: '', date: '' });
+          console.log(data.city, 'City');
+          props.submitNewDiem(
+            data.title,
+            data.date,
+            data.location,
+            currentUser
+          );
+          reset({ title: '', city: '', date: '' });
         })}
         className={styles.input}
       >
         <input {...register('title')} placeholder="Diem Name..." />
+        <input {...register('city')} placeholder="Enter city..." />
 
         <input
           type="date"

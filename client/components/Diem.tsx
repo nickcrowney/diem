@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
-import Image from "next/image";
-
-// replace images with data from db
+import React, { useEffect } from 'react';
+import Image from 'next/image';
 
 import mypic from '../public/images/amir-seilsepour-Pc0ToyoR5Xo-unsplash.jpg';
 import mypic2 from '../public/images/art-hauntington-jzY0KRJopEI-unsplash.jpg';
@@ -21,13 +19,10 @@ const Diem: React.FunctionComponent = ({
   setCurrentDiem,
   users,
 }) => {
-  useEffect(() => {
-    console.log(currentDiem, "CURR DEEZ NUTZ");
-  }, [currentDiem]);
+  useEffect(() => {}, [currentDiem]);
   const pics = [mypic, mypic2, mypic3];
   const date = currentDiem.date;
   const event = currentDiem.title;
-  //console.log(currentDiem.users, 'CURRENT USERS');
 
   return (
     <>
