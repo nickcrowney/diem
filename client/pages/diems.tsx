@@ -20,33 +20,46 @@ const Diems: NextPage = () => {
 
   //IF a user's socket id belongs to a user whose email state exists in context, emit to other users that that user is online
 
-  //
-
   let socId = "00000000";
+  const [history, setHistory] = useState();
+
+  socket.on("connect", (arg) => {
+    ////MAIN SOCKET CONNECTION
+    //On connection set onlineStatus to true
+    socId = socket.id;
+    console.log("connected to Sockets on front end");
+    setOnlineStatus(true);
+
+    socket.emit("online", onlineStatus);
+  });
 
   useEffect(() => {
-    socket.on("connect", (arg) => {
-      //On connection set onlineStatus to true
-      socId = socket.id;
-      console.log("connected to Sockets on front end");
-      setOnlineStatus(true);
+    //This will change the current chat room to the maindiem's chatroom
+    socket.emit("leavingroom");
 
-      socket.emit("online", onlineStatus);
-    });
+    socket.emit("joinroom", mainDiem.id); //Send to backend socket to inform it to join room with correct diemId.
+    console.log(`Connected to room with diemId ${mainDiem.id}`);
+  }, [mainDiem]);
 
-    socket.on("onlineUsers", (onlineUserIds) => {
-      //When we recieve the online users
-      console.log(onlineUserIds);
-      setOnlineUsers(onlineUserIds);
-    });
-
-    socket.on("updateMessages", (messages) => {
-      //When we recieve the updated message history
-      console.log(messages);
-      chatHistory: messages; //Set the most updated chat history to chatHistory of the diem
-      console.log(messages);
-    });
+  socket.on("updateMessages", (messages) => {
+    //When we recieve the updated message history from backend
+    setHistory((prev) => messages);
+    console.log(messages);
+    //chatHistory: messages; //Set the most updated chat history to chatHistory of the diem
+    // console.log(messages);
   });
+
+    // socket.on("onlineUsers", (onlineUserIds) => {
+    //   ///SEE IF USER IS ONLINE not used right now
+    //   //When we recieve the online users
+    //   console.log(onlineUserIds);
+    //   setOnlineUsers(onlineUserIds);
+    // });
+
+    socket.on("disconnect" () => {
+      console.log(`User has disconnected`)
+    });
+  
 
   const { state, setLoginInfo } = useLoginContext();
 
