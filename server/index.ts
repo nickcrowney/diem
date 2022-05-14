@@ -29,10 +29,16 @@ let chatHistory: String[] = [];
 
 //TODO impliment chat server logic in here
 io.on("connection", (socket: Socket) => {
+  console.log("Socket connection made");
   socket.on("Message", (message) => {
     //Recieve a message from a user, put this in chat history array, and ship back to all participant's of
-    chatHistory = [...chatHistory, message];
-    socket.emit("updatedChat", chatHistory);
+    //chatHistory = [...chatHistory, message];
+    //socket.emit("updatedChat", chatHistory);
+  });
+
+  socket.on("leavingroom", (cb) => {
+    console.log("leaving the room!!!");
+    socket.emit("left the room!!!");
   });
   // socket.on("leavingroom" (cb) => {
   //   if(socket.rooms) {
@@ -45,11 +51,11 @@ io.on("connection", (socket: Socket) => {
       `User with socketid: ${socket.id}joined room with diemId: ${roomId}`
     );
     socket.emit(`joined room with diem id ${roomId}`);
-    socket.on("Message", (message) => {
-      //Recieve a message from a user, put this in chat history array, and ship back to all participant's of
-      chatHistory = [...chatHistory, message];
-      socket.emit("updatedChat", chatHistory);
-    });
+    // socket.on("Message", (message) => {
+    //   //Recieve a message from a user, put this in chat history array, and ship back to all participant's of
+    //   chatHistory = [...chatHistory, message];
+    //   socket.emit("updatedChat", chatHistory);
+    // });
   });
   socket.on("disconnect", (arg) => {
     console.log("disconnecting now", socket.id);

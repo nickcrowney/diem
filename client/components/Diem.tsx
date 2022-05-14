@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react';
-import Image from 'next/image';
+import React, { useEffect } from "react";
+import Image from "next/image";
 
-import mypic from '../public/images/amir-seilsepour-Pc0ToyoR5Xo-unsplash.jpg';
-import mypic2 from '../public/images/art-hauntington-jzY0KRJopEI-unsplash.jpg';
-import mypic3 from '../public/images/christian-buehner-6YQmQgcQ0VA-unsplash.jpg';
-import chat from '../public/images/chat.png';
-import calendar from '../public/images/calendar.png';
-import more from '../public/images/more.png';
+import mypic from "../public/images/amir-seilsepour-Pc0ToyoR5Xo-unsplash.jpg";
+import mypic2 from "../public/images/art-hauntington-jzY0KRJopEI-unsplash.jpg";
+import mypic3 from "../public/images/christian-buehner-6YQmQgcQ0VA-unsplash.jpg";
+import chat from "../public/images/chat.png";
+import calendar from "../public/images/calendar.png";
+import more from "../public/images/more.png";
 
-import styles from './Diem.module.css';
-import AddNewEvent from './AddNewEvent';
-import PopAddUsers from './PopAddUsers';
-import AddNewEventTest from './AddNewEventTest';
-import PopRemoveUsers from './PopRemoveUsers';
+import styles from "./Diem.module.css";
+import AddNewEvent from "./AddNewEvent";
+import PopAddUsers from "./PopAddUsers";
+import AddNewEventTest from "./AddNewEventTest";
+import PopRemoveUsers from "./PopRemoveUsers";
 const Diem: React.FunctionComponent = ({
   mainDiem,
   currentDiem,
@@ -21,8 +21,8 @@ const Diem: React.FunctionComponent = ({
 }) => {
   useEffect(() => {}, [currentDiem]);
   const pics = [mypic, mypic2, mypic3];
-  const date = currentDiem.date;
-  const event = currentDiem.title;
+  const date = currentDiem && currentDiem.date;
+  const event = currentDiem && currentDiem.title;
 
   return (
     <>
@@ -41,7 +41,8 @@ const Diem: React.FunctionComponent = ({
               <Image src={more} height="40" width="40" />
             </button>
             <div className={styles.diem__profilePics_container}>
-              {currentDiem.users &&
+              {currentDiem &&
+                currentDiem.users &&
                 currentDiem.users.map((el) => {
                   return (
                     <div
@@ -75,7 +76,8 @@ const Diem: React.FunctionComponent = ({
           />
         </div>
         <div>
-          {currentDiem.users &&
+          {currentDiem &&
+            currentDiem.users &&
             currentDiem.users.map((el) => {
               return <div>{el.name}</div>;
             })}
@@ -83,15 +85,16 @@ const Diem: React.FunctionComponent = ({
         <div className={styles.diem__events}>
           <AddNewEvent currentDiem={currentDiem} />
           <div>
-            {currentDiem.events &&
+            {currentDiem &&
+              currentDiem.events &&
               currentDiem.events.map((el) => {
                 return (
                   <ul key={el.id}>
                     <div>
                       {el.title}
-                      {el.location ? ' at ' : ''}{' '}
-                      {el.location ? el.location + '. ' : ''}
-                      {el.time ? `Start time: ${el.time}` : ''}
+                      {el.location ? " at " : ""}{" "}
+                      {el.location ? el.location + ". " : ""}
+                      {el.time ? `Start time: ${el.time}` : ""}
                     </div>
                   </ul>
                 );

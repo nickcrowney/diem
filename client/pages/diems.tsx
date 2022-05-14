@@ -24,6 +24,16 @@ const Diems: NextPage = (props) => {
 
   console.log(loginInfo, "LOGIN INFO");
 
+  async function connectionToSocketRoom(diem: any) {
+    console.log("CONNECTION FUNCTION TRIGGERED", diem);
+    //This will change the current chat room to the maindiem's chatroom
+    socket.emit("leavingroom");
+    console.log("Current Diem has changed");
+
+    socket.emit("joinroom", diem.id); //Send to backend socket to inform it to join room with correct diemId.
+    console.log(`Connected to room with diemId ${diem.id}`);
+  }
+
   //IF a user's socket id belongs to a user whose email state exists in context, emit to other users that that user is online
 
   let socId = "00000000";
@@ -34,22 +44,23 @@ const Diems: NextPage = (props) => {
     id: 1,
   });
 
-  // socket.on("connect", (arg) => {
-  //   ////MAIN SOCKET CONNECTION
-  //   //On connection set onlineStatus to true
-  //   socId = socket.id;
-  //   console.log("connected to Sockets on front end");
-  //   setOnlineStatus(true);
+  socket.on("connect", (arg) => {
+    ////MAIN SOCKET CONNECTION
+    //On connection set onlineStatus to true
+    socId = socket.id;
+    console.log("connected to Sockets on front end");
+    setOnlineStatus(true);
 
-  //   socket.emit("online", onlineStatus);
-  // });
+    socket.emit("online", onlineStatus);
+  });
 
   // useEffect(() => {
   //   //This will change the current chat room to the maindiem's chatroom
-  //   socket.emit("leavingroom");
+  //   // socket.emit("leavingroom");
+  //   console.log("Current Diem has changed");
 
-  //   socket.emit("joinroom", currentDiem.id); //Send to backend socket to inform it to join room with correct diemId.
-  //   console.log(`Connected to room with diemId ${currentDiem.id}`);
+  //   // socket.emit("joinroom", currentDiem.id); //Send to backend socket to inform it to join room with correct diemId.
+  //   // console.log(`Connected to room with diemId ${currentDiem.id}`);
   // }, [currentDiem]);
 
   // socket.on("updateMessages", (messages) => {
@@ -117,6 +128,7 @@ const Diems: NextPage = (props) => {
             return (
               <div key={el.id}>
                 <Tile
+                  func={connectionToSocketRoom}
                   setDiem={setDiem}
                   mainDiem={mainDiem}
                   allDiems={allDiems}
