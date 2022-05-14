@@ -50,3 +50,12 @@
   font-size: 18px;
   font-weight: 800;
 }
+
+.diem_date_first {
+  font-size: xx-large;
+  font-weight: bolder;
+}
+.diem_date_second {
+  font-size: x-large;
+  /* font-weight: ; */
+}

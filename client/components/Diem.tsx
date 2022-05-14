@@ -21,8 +21,41 @@ const Diem: React.FunctionComponent = ({
 }) => {
   useEffect(() => {}, [currentDiem]);
   const pics = [mypic, mypic2, mypic3];
-  const date = currentDiem.date;
-  const event = currentDiem.title;
+  function dateFixer(calendarDate) {
+    const options = {
+      // weekday: 'long',
+      // year: 'numeric',
+      day: 'numeric',
+      month: 'long',
+    };
+    const currentDate = new Date(calendarDate).toLocaleDateString(
+      'en-GB',
+      options
+    );
+    const firstWhite = currentDate.indexOf(' ');
+    const firstBit = currentDate.slice(0, firstWhite);
+    const secondBit = currentDate.slice(firstWhite);
+    const nth = function (d) {
+      const dString = String(d);
+      const last = +dString.slice(-2);
+      if (last > 3 && last < 21) return 'th';
+      switch (last % 10) {
+        case 1:
+          return 'st';
+        case 2:
+          return 'nd';
+        case 3:
+          return 'rd';
+        default:
+          return 'th';
+      }
+    };
+    const finishedDate = firstBit + nth(firstBit) + secondBit;
+    return finishedDate;
+  }
+  const date = dateFixer(currentDiem && currentDiem.date);
+  // const date = currentDiem && currentDiem.date;
+  const event = currentDiem && currentDiem.title;
 
   return (
     <>
@@ -30,7 +63,8 @@ const Diem: React.FunctionComponent = ({
         <div className={styles.diem__infobar}>
           <div className={styles.tile__info}>
             <h1>{event}</h1>
-            <h2>{date}</h2>
+            <span className={styles.diem_date_first}>{date.slice(0, 4)}</span>
+            <span className={styles.diem_date_second}>{date.slice(4)}</span>
           </div>
           <Image src={chat} height="35" width="45" />
           <Image src={calendar} height="20" width="40" />
@@ -41,7 +75,8 @@ const Diem: React.FunctionComponent = ({
               <Image src={more} height="40" width="40" />
             </button>
             <div className={styles.diem__profilePics_container}>
-              {currentDiem.users &&
+              {currentDiem &&
+                currentDiem.users &&
                 currentDiem.users.map((el) => {
                   return (
                     <div
@@ -75,15 +110,18 @@ const Diem: React.FunctionComponent = ({
           />
         </div>
         <div>
-          {currentDiem.users &&
+          {currentDiem &&
+            currentDiem.users &&
             currentDiem.users.map((el) => {
               return <div>{el.name}</div>;
             })}
         </div>
         <div className={styles.diem__events}>
           <AddNewEvent currentDiem={currentDiem} />
+
           <div>
-            {currentDiem.events &&
+            {currentDiem &&
+              currentDiem.events &&
               currentDiem.events.map((el) => {
                 return (
                   <ul key={el.id}>
