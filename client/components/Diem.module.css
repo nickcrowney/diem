@@ -50,3 +50,12 @@
   align-items: flex-end;
   justify-content: flex-end;
 }
+
+.diem_date_first {
+  font-size: xx-large;
+  font-weight: bolder;
+}
+.diem_date_second {
+  font-size: large;
+  /* font-weight: ; */
+}

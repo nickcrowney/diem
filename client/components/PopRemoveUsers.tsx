@@ -28,7 +28,7 @@ function PopRemoveUsers({ users, currentDiem, setCurrentDiem }) {
   };
 
   const availableUsers = users.filter((user) => {
-    if (currentDiem.users) {
+    if (currentDiem && currentDiem.users) {
       return currentDiem.users.some((el) => el.id == user.id);
     }
   });

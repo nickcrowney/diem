@@ -19,7 +19,9 @@ function PopNewDiem() {
     <div className={styles.newdiem}>
       <form
         onSubmit={handleSubmit((data) => {
+          const dateLong = new Date(data.date);
           console.log(data.title, 'TITLE');
+          console.log(dateLong, 'date long');
           console.log(data.date, 'DATE');
           console.log(data.city, 'City');
           props.submitNewDiem(data.title, data.date, data.city, currentUser);
