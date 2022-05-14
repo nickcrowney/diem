@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://alastairfletcher:postgres@localhost:5432/DiemDb?schema=public"
 }
 
 // model User {
@@ -98,5 +98,3 @@ model Event {
 //   //users   User[] @relation(fields: [diemIds], references: [id])
 //   users   pivotTable[]
 // }
-
-
