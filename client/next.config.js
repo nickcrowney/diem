@@ -15,6 +15,7 @@ const nextConfig = {
       'media.revistavanityfair.es',
       'ta.azureedge.net',
       'www.biography.com',
+      'images.unsplash.com',
     ],
   },
 };
