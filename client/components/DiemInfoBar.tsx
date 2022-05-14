@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import Image from 'next/image';
-import chat from '../public/images/chat.png';
 import calendar from '../public/images/calendar.png';
-import more from '../public/images/more.png';
+import chat from '../public/images/chat.png';
+import prosAndCons from '../public/images/pros-and-cons.png';
+import plus from '../public/images/plus.png';
 import styles from './DiemInfoBar.module.css';
 
 const DiemInfoBar: React.FunctionComponent = ({ currentDiem }) => {
@@ -16,15 +17,13 @@ const DiemInfoBar: React.FunctionComponent = ({ currentDiem }) => {
       </div>
       <div className={styles.diemInfoBar__picsAndButtons}>
         <div className={styles.diemInfoBar__profilePics_container}>
+          <div className={styles.diemInfoBar__profilePic_plusSign}>
+            <Image src={plus} alt="Picture of the author" />
+          </div>
           {currentDiem.users &&
             currentDiem.users.map((el) => {
               return (
-                <div
-                  key={el.id}
-                  className={styles.diemInfoBar__profilePic}
-                  // onMouseEnter={showText()}
-                  // onMouseLeave={hideText()}
-                >
+                <div key={el.id} className={styles.diemInfoBar__profilePic}>
                   <Image
                     src={el.userPhoto}
                     height="50"
@@ -43,7 +42,7 @@ const DiemInfoBar: React.FunctionComponent = ({ currentDiem }) => {
             <Image src={chat} height="40" width="40" />
           </button>
           <button type="button">
-            <Image src={more} height="40" width="40" />
+            <Image src={prosAndCons} height="40" width="40" />
           </button>
         </div>
       </div>
