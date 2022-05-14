@@ -1,52 +1,58 @@
-import type { NextPage } from 'next';
-import Nav from '../components/Nav';
-import Tile from '../components/Tile';
-import Diem from '../components/Diem';
-import PopNewDiem from '../components/PopNewDiem';
-import styles from '../styles/Home.module.css';
-import { useEffect, useState } from 'react';
-import dayjs from 'dayjs';
-import hooks from '../services/ApiServices';
-import { async } from '@firebase/util';
-import { useLoginContext } from '../contexts/Context';
-import io from 'socket.io-client';
-import { disconnect } from 'process';
+import type { NextPage } from "next";
+import Nav from "../components/Nav";
+import Tile from "../components/Tile";
+import Diem from "../components/Diem";
+import PopNewDiem from "../components/PopNewDiem";
+import styles from "../styles/Home.module.css";
+import { useEffect, useState } from "react";
+import dayjs from "dayjs";
+import hooks from "../services/ApiServices";
+import { async } from "@firebase/util";
+import { useLoginContext } from "../contexts/Context";
+import io from "socket.io-client";
 
-const Diems: NextPage = () => {
+const Diems: NextPage = (props) => {
+  const socket = io("http://localhost:4000");
 
-  // const socket = io('http://localhost:4000');
+  const [onlineStatus, setOnlineStatus] = useState(false);
+  const [onlineUsers, setOnlineUsers] = useState([]); //Grab onlineStatus emits from other users and use this to render online
+  const { loginInfo, setLoginInfo } = useLoginContext();
+  const [newDiemPop, setNewDiemPop] = useState(false);
+  const [data, setData] = useState("");
+  const [mainDiem, setDiem] = useState("");
+  const [allDiems, setAllDiems] = useState([]);
 
+  console.log(loginInfo, "LOGIN INFO");
 
-  // const [onlineStatus, setOnlineStatus] = useState(false);
-  // const [onlineUsers, setOnlineUsers] = useState([]); //Grab onlineStatus emits from other users and use this to render online
+  //IF a user's socket id belongs to a user whose email state exists in context, emit to other users that that user is online
 
-  // //IF a user's socket id belongs to a user whose email state exists in context, emit to other users that that user is online
+  let socId = "00000000";
+  const [history, setHistory] = useState();
 
-  // let socId = '00000000';
-  // const [history, setHistory] = useState();
+  const [currentDiem, setCurrentDiem] = useState({
+    title: "Select Diem",
+    id: 1,
+  });
 
-
-
-
-  // socket.on('connect', (arg) => {
+  // socket.on("connect", (arg) => {
   //   ////MAIN SOCKET CONNECTION
   //   //On connection set onlineStatus to true
   //   socId = socket.id;
-  //   console.log('connected to Sockets on front end');
+  //   console.log("connected to Sockets on front end");
   //   setOnlineStatus(true);
 
-  //   socket.emit('online', onlineStatus);
+  //   socket.emit("online", onlineStatus);
   // });
 
   // useEffect(() => {
   //   //This will change the current chat room to the maindiem's chatroom
-  //   socket.emit('leavingroom');
+  //   socket.emit("leavingroom");
 
-  //   socket.emit('joinroom', mainDiem.id); //Send to backend socket to inform it to join room with correct diemId.
-  //   console.log(`Connected to room with diemId ${mainDiem.id}`);
-  // }, [mainDiem]);
+  //   socket.emit("joinroom", currentDiem.id); //Send to backend socket to inform it to join room with correct diemId.
+  //   console.log(`Connected to room with diemId ${currentDiem.id}`);
+  // }, [currentDiem]);
 
-  // socket.on('updateMessages', (messages) => {
+  // socket.on("updateMessages", (messages) => {
   //   //When we recieve the updated message history from backend
   //   setHistory((prev) => messages);
   //   console.log(messages);
@@ -65,28 +71,15 @@ const Diems: NextPage = () => {
   //   console.log(`User has disconnected`)
   // });
 
-
-  const { state, setLoginInfo } = useLoginContext();
-
-  //const state = useLoginContext()
-  const [newDiemPop, setNewDiemPop] = useState(false);
-  const [data, setData] = useState('');
-  const [mainDiem, setDiem] = useState('');
-  const [allDiems, setAllDiems] = useState([]);
-  const [currentDiem, setCurrentDiem] = useState({
-    title: 'Select Diem',
-  });
-
-
   useEffect(() => {}, [currentDiem]);
   const [users, setUsers] = useState([]);
   //console.log(currentDiem, "RENDER DAMNIT");
 
-  if (state) {
-    //console.warn(state.loginInfo);
-    // console.log("FUCK");
-    // console.log(state.userInfo);
-  }
+  // if (state) {
+  //   console.warn("Testing context", state);
+  //   console.log("Inside if");
+  //   console.log(state.userInfo);
+  // }
 
   useEffect(() => {}, [data]);
   useEffect(() => {
@@ -108,13 +101,14 @@ const Diems: NextPage = () => {
 
   return (
     <div>
-      {state && (
+      {
         <Nav
+          loginData={loginInfo}
           users={users}
           setUsers={setUsers}
           toggleNewDiemPop={setNewDiemPop}
         />
-      )}
+      }
       <main className={styles.container}>
         <div className={styles.tiles}>
           <PopNewDiem />

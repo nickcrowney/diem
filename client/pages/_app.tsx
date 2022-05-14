@@ -2,16 +2,14 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { LoginContext } from "../contexts/Context";
 import { useState } from "react";
+import ChatServer from "../components/ChatServer";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [loginInfo, setLoginInfo] = useState([]);
-
+  const [loginInfo, setLoginInfo] = useState();
   return (
     <LoginContext.Provider
       value={{
-        state: {
-          loginInfo: loginInfo,
-        },
+        loginInfo: loginInfo,
         setLoginInfo: setLoginInfo,
       }}
     >
