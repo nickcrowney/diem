@@ -56,11 +56,12 @@ export async function createUser(req: Request, res: Response) {
 }
 
 export async function createDiem(req: Request, res: Response) {
-  const { title, date, user } = req.body;
+  const { title, date, city, user } = req.body;
   const diem = await prisma.diem.create({
     data: {
       title: title, //Only title is required to create diem
       date: date,
+      city: city,
       users: {
         connect: {
           id: user,
@@ -68,6 +69,9 @@ export async function createDiem(req: Request, res: Response) {
       },
     },
   });
+  console.log('NEW DIEM');
+  console.log(title, 'title');
+  console.log(city, 'city');
   res.json(diem);
 }
 
