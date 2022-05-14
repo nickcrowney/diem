@@ -18,7 +18,9 @@ const Tile: React.FunctionComponent = ({
 }) => {
   const divClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
     setCurrentDiem(async (prev) => {
+      console.log(diem);
       await func(diem);
+
       return diem;
     });
     console.log("State has changed");

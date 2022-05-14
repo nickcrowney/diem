@@ -23,45 +23,48 @@ function bootstrap() {
 }
 bootstrap();
 
-let chatHistory: String[] = [];
-// let onlineUserIds: Number[] = [];
+let onlineUserIds: String[] = [];
 // let isOnline = false;
 
-//TODO impliment chat server logic in here
 io.on("connection", (socket: Socket) => {
-  console.log("Socket connection made");
-  socket.on("Message", (message) => {
-    //Recieve a message from a user, put this in chat history array, and ship back to all participant's of
-    //chatHistory = [...chatHistory, message];
-    //socket.emit("updatedChat", chatHistory);
+  ////console.log("socket connected on backend")
+  //console.log(socket.rooms);
+
+  //Recieving online status
+  socket.on("currentlyOnline", (loginInfo) => {
+    onlineUserIds.push(loginInfo);
+    console.log(`${loginInfo} is currently online`);
+    socket.emit("onlineUsers", onlineUserIds); //Send back array of online users
   });
 
-  socket.on("leavingroom", (cb) => {
-    console.log("leaving the room!!!");
-    socket.emit("left the room!!!");
+  //new chat
+  socket.on("message", (messages) => {
+    //emit the array of full chat history here
+    socket.emit("updatedMessages", messages);
   });
-  // socket.on("leavingroom" (cb) => {
-  //   if(socket.rooms) {
-  //     socket.leave(socket.rooms)
-  //   }
-  // })
-  socket.on("joinroom", (roomId) => {
+
+  socket.on("leavingRoom", () => {
+    //console.log("leaving the room!!!");
+    //Exit current room
+
+    // if (socket.rooms) {
+    //   socket.leave(socket.rooms);
+    //   console.log(socket.rooms);
+    // }
+
+    console.log(`Leaving room with diemId ${socket.rooms}`);
+  });
+
+  socket.on("joiningRoom", (roomId) => {
     socket.join(roomId);
     console.log(
       `User with socketid: ${socket.id}joined room with diemId: ${roomId}`
     );
-    socket.emit(`joined room with diem id ${roomId}`);
-    // socket.on("Message", (message) => {
-    //   //Recieve a message from a user, put this in chat history array, and ship back to all participant's of
-    //   chatHistory = [...chatHistory, message];
-    //   socket.emit("updatedChat", chatHistory);
-    // });
   });
-  socket.on("disconnect", (arg) => {
-    console.log("disconnecting now", socket.id);
-    //onlineUsers = [...onlineUserIds.filter((el) s=> el !== socket.id)];
-    // isOnline = false
-    // socket.emit("currentlyOnline" isOnline);
+
+  socket.on("disconnect", (loginInfo) => {
+    onlineUserIds = onlineUserIds.filter((el) => el !== loginInfo);
+    socket.emit("onlineUsers", onlineUserIds);
   });
 });
 

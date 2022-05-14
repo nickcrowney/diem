@@ -4,83 +4,61 @@ import Tile from "../components/Tile";
 import Diem from "../components/Diem";
 import PopNewDiem from "../components/PopNewDiem";
 import styles from "../styles/Home.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import dayjs from "dayjs";
 import hooks from "../services/ApiServices";
 import { async } from "@firebase/util";
 import { useLoginContext } from "../contexts/Context";
-import io from "socket.io-client";
+import io, { Socket } from "socket.io-client";
 
 const Diems: NextPage = (props) => {
   const socket = io("http://localhost:4000");
 
-  const [onlineStatus, setOnlineStatus] = useState(false);
   const [onlineUsers, setOnlineUsers] = useState([]); //Grab onlineStatus emits from other users and use this to render online
   const { loginInfo, setLoginInfo } = useLoginContext();
   const [newDiemPop, setNewDiemPop] = useState(false);
   const [data, setData] = useState("");
   const [mainDiem, setDiem] = useState("");
   const [allDiems, setAllDiems] = useState([]);
+  const [history, setHistory] = useState([]);
 
   console.log(loginInfo, "LOGIN INFO");
 
+  //On connection, emit that this user is online to all other users
+  socket.on("connect", (arg) => {
+    console.log("connected to Sockets on front end");
+    // socket.emit("currentlyOnline", loginInfo.email);
+  });
+
+  //When we recieve the message array from backend, set the updated state of history
+  socket.on("updatedMessages", (message) => {
+    setHistory((prev) => [...prev, message]);
+  });
+
+  //When we recieve current online user update, we set state of current online users
+  socket.on("onlineUsers", (onlineUserIds) => {
+    setOnlineUsers(onlineUserIds);
+  });
+
+  // //Function being passed to the tile component
   async function connectionToSocketRoom(diem: any) {
     console.log("CONNECTION FUNCTION TRIGGERED", diem);
     //This will change the current chat room to the maindiem's chatroom
-    socket.emit("leavingroom");
-    console.log("Current Diem has changed");
-
-    socket.emit("joinroom", diem.id); //Send to backend socket to inform it to join room with correct diemId.
-    console.log(`Connected to room with diemId ${diem.id}`);
+    socket.emit("leavingRoom"); //Leave the current roomsocket.
+    socket.emit("joiningRoom", diem.id); //Join the new room
   }
 
-  //IF a user's socket id belongs to a user whose email state exists in context, emit to other users that that user is online
+  // socket.emit("joiningRoom", diem.id); //Send to backend socket to inform it to join room with correct diemId.
+  // console.log(`Connected to room with diemId ${diem.id}`);
 
-  let socId = "00000000";
-  const [history, setHistory] = useState();
+  async function submitMessageSocket(message: any) {
+    socket.emit("message", message);
+  }
 
   const [currentDiem, setCurrentDiem] = useState({
     title: "Select Diem",
     id: 1,
   });
-
-  socket.on("connect", (arg) => {
-    ////MAIN SOCKET CONNECTION
-    //On connection set onlineStatus to true
-    socId = socket.id;
-    console.log("connected to Sockets on front end");
-    setOnlineStatus(true);
-
-    socket.emit("online", onlineStatus);
-  });
-
-  // useEffect(() => {
-  //   //This will change the current chat room to the maindiem's chatroom
-  //   // socket.emit("leavingroom");
-  //   console.log("Current Diem has changed");
-
-  //   // socket.emit("joinroom", currentDiem.id); //Send to backend socket to inform it to join room with correct diemId.
-  //   // console.log(`Connected to room with diemId ${currentDiem.id}`);
-  // }, [currentDiem]);
-
-  // socket.on("updateMessages", (messages) => {
-  //   //When we recieve the updated message history from backend
-  //   setHistory((prev) => messages);
-  //   console.log(messages);
-  //   //chatHistory: messages; //Set the most updated chat history to chatHistory of the diem
-  //   // console.log(messages);
-  // });
-
-  // socket.on("onlineUsers", (onlineUserIds) => {
-  //   ///SEE IF USER IS ONLINE not used right now
-  //   //When we recieve the online users
-  //   console.log(onlineUserIds);
-  //   setOnlineUsers(onlineUserIds);
-  // });
-
-  // socket.on("disconnect" () => {
-  //   console.log(`User has disconnected`)
-  // });
 
   useEffect(() => {}, [currentDiem]);
   const [users, setUsers] = useState([]);
