@@ -103,6 +103,7 @@ const Diems: NextPage = (props) => {
     <div>
       {
         <Nav
+          loginData={loginInfo}
           users={users}
           setUsers={setUsers}
           toggleNewDiemPop={setNewDiemPop}
