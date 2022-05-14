@@ -1,18 +1,13 @@
 import React, { useEffect } from 'react';
 import Image from 'next/image';
 
-import mypic from '../public/images/amir-seilsepour-Pc0ToyoR5Xo-unsplash.jpg';
-import mypic2 from '../public/images/art-hauntington-jzY0KRJopEI-unsplash.jpg';
-import mypic3 from '../public/images/christian-buehner-6YQmQgcQ0VA-unsplash.jpg';
-import chat from '../public/images/chat.png';
-import calendar from '../public/images/calendar.png';
-import more from '../public/images/more.png';
-
 import styles from './Diem.module.css';
+import DiemInfoBar from './DiemInfoBar';
 import AddNewEvent from './AddNewEvent';
 import PopAddUsers from './PopAddUsers';
 import AddNewEventTest from './AddNewEventTest';
 import PopRemoveUsers from './PopRemoveUsers';
+
 const Diem: React.FunctionComponent = ({
   mainDiem,
   currentDiem,
@@ -20,6 +15,7 @@ const Diem: React.FunctionComponent = ({
   users,
 }) => {
   useEffect(() => {}, [currentDiem]);
+
   const pics = [mypic, mypic2, mypic3];
   function dateFixer(calendarDate) {
     const options = {
@@ -57,10 +53,13 @@ const Diem: React.FunctionComponent = ({
   // const date = currentDiem && currentDiem.date;
   const event = currentDiem && currentDiem.title;
 
+
   return (
     <>
       <div className={styles.diem}>
-        <div className={styles.diem__infobar}>
+        <DiemInfoBar currentDiem={currentDiem} />
+        {/* <h1 contenteditable="true"> I am editable by the user </h1> */}
+        {/* <div className={styles.diem__infobar}>
           <div className={styles.tile__info}>
             <h1>{event}</h1>
             <span className={styles.diem_date_first}>{date.slice(0, 4)}</span>
@@ -101,7 +100,7 @@ const Diem: React.FunctionComponent = ({
             currentDiem={currentDiem}
             setCurrentDiem={setCurrentDiem}
           />
-        </div>
+        </div> */}
         <div>
           <PopRemoveUsers
             users={users}

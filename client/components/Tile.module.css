@@ -32,7 +32,6 @@
   height: 50px;
   width: 50px;
   object-fit: cover;
-  box-shadow: 2px 1px 2px 1px rgba(0, 0, 0, 0.5);
 }
 
 .tile__profilePic_plusSign {
@@ -44,6 +43,7 @@
   object-fit: cover;
   z-index: 10;
   align-self: center;
+  border: solid 2px #f7f9fb;
 }
 
 .tile h1 {
