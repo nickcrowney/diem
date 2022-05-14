@@ -8,18 +8,17 @@ import usersHook from '../services/testHook';
 import hooks from '../services/ApiServices';
 import mypic from '../public/images/daniil-lobachev-XAo09LtQiAQ-unsplash.jpg';
 
-
-const Nav = ({ users, setUsers, toggleNewDiemPop }) => {
- 
+const Nav = ({ users, setUsers, toggleNewDiemPop, loginData }) => {
   function handleClick() {
     toggleNewDiemPop();
   }
   //console.log(users[0], '0th user');
   const mainUser = users.filter((el) => {
+    // return el.email === loginData.email;
     return el.id === 1;
   });
 
-
+  console.log('PROPS HERE', loginData);
 
   return (
     <div className={styles.navContainer}>

@@ -15,11 +15,15 @@ const Diem: React.FunctionComponent = ({
 }) => {
   useEffect(() => {}, [currentDiem]);
 
+  const event = currentDiem && currentDiem.title;
+
   return (
     <>
       <div className={styles.diem}>
         <DiemInfoBar currentDiem={currentDiem} />
+
         <div className={styles.addRemoveUsers}>
+
           <PopAddUsers
             users={users}
             currentDiem={currentDiem}
@@ -33,7 +37,8 @@ const Diem: React.FunctionComponent = ({
         </div>
         <DiemColorPicker />
         <div>
-          {currentDiem.users &&
+          {currentDiem &&
+            currentDiem.users &&
             currentDiem.users.map((el) => {
               return <div>{el.name}</div>;
             })}
@@ -41,8 +46,10 @@ const Diem: React.FunctionComponent = ({
 
         <div className={styles.diem__events}>
           <AddNewEvent currentDiem={currentDiem} />
+
           <div>
-            {currentDiem.events &&
+            {currentDiem &&
+              currentDiem.events &&
               currentDiem.events.map((el) => {
                 return (
                   <ul key={el.id}>

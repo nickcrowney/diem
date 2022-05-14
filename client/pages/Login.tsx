@@ -11,6 +11,8 @@ const Login = () => {
   const firebaseAuth = getAuth(firebaseApp);
   const provider = new GoogleAuthProvider();
 
+  const [loginDat, setLoginDat] = useState([]);
+
   const router = useRouter();
 
   const { loginInfo, setLoginInfo } = useLoginContext();
@@ -19,13 +21,16 @@ const Login = () => {
 
   const signIn = async () => {
     const response = await signInWithPopup(firebaseAuth, provider);
-
+    console.log(state, 'STATE HERE');
+    console.log(response);
     setLoginInfo(response.user);
+
+    //setLoginDat([response.user]);
 
     //If user exists in database, we don't re-POST them to db
     if (
-      state !== 'undefined' &&
-      state.some((el): any => el.email !== response.user.email)
+      state.length === 0 ||
+      (state && state.some((el): any => el.email !== response.user.email))
     ) {
       //TODO change any to appropiate interface
       props.submitNewUser(
