@@ -2,13 +2,14 @@
   height: 10rem;
   width: 15rem;
   border-radius: 5px;
-  background-color: rgb(255, 157, 166);
+  background-color: #ccff90;
   color: rgb(40, 40, 40);
   padding: 1rem;
   margin: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: flex-end;
   transition: transform 0.25s;
 }
 
@@ -32,6 +33,7 @@
   height: 50px;
   width: 50px;
   object-fit: cover;
+  border: solid 2px #f7f9fb;
 }
 
 .tile__profilePic_plusSign {
