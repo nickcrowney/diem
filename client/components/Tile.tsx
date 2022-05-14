@@ -2,7 +2,6 @@ import React from 'react';
 import Image from 'next/image';
 import plus from '../public/images/plus.png';
 import styles from './Tile.module.css';
-import { shuffle } from 'lodash';
 
 const Tile: React.FunctionComponent = ({ allDiems, diem, setCurrentDiem }) => {
   const divClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
