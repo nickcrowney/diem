@@ -72,7 +72,9 @@ const submitNewDiem = async (
     },
   });
   const data = await response.json();
+
   console.log(data, "DATA");
+
   return data;
   // setDiem(data);
 };
@@ -198,6 +200,7 @@ const modifyDiem = async (title: String, id: Number) => {
   console.log(data);
 };
 
+
 // const options = {
 //   method: 'GET',
 //   headers: {
@@ -213,6 +216,7 @@ const modifyDiem = async (title: String, id: Number) => {
 //   .then((response) => response.json())
 //   .then((response) => console.log(response))
 //   .catch((err) => console.error(err));
+
 
 export default {
   getUsers,
