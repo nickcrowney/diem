@@ -27,10 +27,16 @@ function PopNewDiem() {
         })}
         className={styles.form}
       >
-
-        <input {...register('title')} placeholder="Diem Name..." className="py-2 px-4 rounded"/>
-        <input {...register('city')} placeholder="Enter city..." />
-
+        <input
+          {...register('title')}
+          placeholder="Diem Name..."
+          className="py-2 px-4 rounded"
+        />
+        <input
+          {...register('city')}
+          placeholder="Enter city..."
+          className="py-2 px-4 rounded"
+        />
 
         <input
           type="date"
