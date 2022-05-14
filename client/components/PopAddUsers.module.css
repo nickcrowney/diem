@@ -1,0 +1,10 @@
+.addUser {
+  border-radius: 5px;
+  margin: 1rem;
+  display: flex;
+  /* align-items: center; */
+}
+
+.addUser button {
+  margin-left: 0.5em;
+}
