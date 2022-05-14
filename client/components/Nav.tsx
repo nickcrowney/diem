@@ -1,25 +1,23 @@
-import React, { useEffect } from 'react';
-import styles from './Nav.module.css';
-import Image from 'next/image';
-import more from '../public/images/more.png';
-import menu from '../public/images/menu.png';
-import PopNewDiem from './PopNewDiem';
-import usersHook from '../services/testHook';
-import hooks from '../services/ApiServices';
-import mypic from '../public/images/daniil-lobachev-XAo09LtQiAQ-unsplash.jpg';
+import React, { useEffect } from "react";
+import styles from "./Nav.module.css";
+import Image from "next/image";
+import more from "../public/images/more.png";
+import menu from "../public/images/menu.png";
+import PopNewDiem from "./PopNewDiem";
+import usersHook from "../services/testHook";
+import hooks from "../services/ApiServices";
+import mypic from "../public/images/daniil-lobachev-XAo09LtQiAQ-unsplash.jpg";
 
-
-const Nav = ({ users, setUsers, toggleNewDiemPop }) => {
- 
+const Nav = ({ users, setUsers, toggleNewDiemPop, loginData }) => {
   function handleClick() {
     toggleNewDiemPop();
   }
   //console.log(users[0], '0th user');
   const mainUser = users.filter((el) => {
-    return el.id === 1;
+    return el.email === loginData.email;
   });
 
-
+  console.log("PROPS HERE", loginData);
 
   return (
     <div className={styles.navContainer}>
