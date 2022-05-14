@@ -3,7 +3,7 @@
   align-items: center;
   background-color: rgb(248, 248, 248);
   height: 10vh;
-  margin-bottom: 4vh;
+  margin-bottom: 5vh;
   box-shadow: 0 2px 10px -1px #3333;
 }
 
@@ -15,13 +15,7 @@
 }
 
 .navBar button {
-  /* opacity: 1; */
   margin: 1rem;
-  transition: opacity 0.15s;
-}
-
-.navBar button:hover {
-  opacity: 0.5;
 }
 
 .nav__end {
@@ -34,8 +28,6 @@
   border-radius: 50%;
   overflow: hidden;
   margin: 1rem;
-  /* align-self: center; */
-  /* justify-content: flex-end; */
   height: 50px;
   width: 50px;
   object-fit: cover;

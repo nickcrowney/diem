@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
-import Image from 'next/image';
-
-import styles from './Diem.module.css';
 import DiemInfoBar from './DiemInfoBar';
 import AddNewEvent from './AddNewEvent';
 import PopAddUsers from './PopAddUsers';
-import AddNewEventTest from './AddNewEventTest';
 import PopRemoveUsers from './PopRemoveUsers';
+import DiemColorPicker from './DiemColorPicker';
+import AddNewEventTest from './AddNewEventTest';
+import styles from './Diem.module.css';
 
 const Diem: React.FunctionComponent = ({
   mainDiem,
@@ -22,56 +21,21 @@ const Diem: React.FunctionComponent = ({
     <>
       <div className={styles.diem}>
         <DiemInfoBar currentDiem={currentDiem} />
-        {/* <h1 contenteditable="true"> I am editable by the user </h1> */}
-        {/* <div className={styles.diem__infobar}>
-          <div className={styles.tile__info}>
-            <h1>{event}</h1>
-            <span className={styles.diem_date_first}>{date.slice(0, 4)}</span>
-            <span className={styles.diem_date_second}>{date.slice(4)}</span>
-          </div>
-          <Image src={chat} height="35" width="45" />
-          <Image src={calendar} height="20" width="40" />
-        </div>
-        <div>
-          <div className={styles.diem__users}>
-            <button type="button">
-              <Image src={more} height="40" width="40" />
-            </button>
-            <div className={styles.diem__profilePics_container}>
-              {currentDiem &&
-                currentDiem.users &&
-                currentDiem.users.map((el) => {
-                  return (
-                    <div
-                      key={el.id}
-                      className={styles.diem__profilePic}
-                      // onMouseEnter={showText()}
-                      // onMouseLeave={hideText()}
-                    >
-                      <Image
-                        src={el.userPhoto}
-                        height="50"
-                        width="50"
-                        alt="Picture of the author"
-                      />
-                    </div>
-                  );
-                })}
-            </div>
-          </div>
+
+        <div className={styles.addRemoveUsers}>
+
           <PopAddUsers
             users={users}
             currentDiem={currentDiem}
             setCurrentDiem={setCurrentDiem}
           />
-        </div> */}
-        <div>
           <PopRemoveUsers
             users={users}
             currentDiem={currentDiem}
             setCurrentDiem={setCurrentDiem}
           />
         </div>
+        <DiemColorPicker />
         <div>
           {currentDiem &&
             currentDiem.users &&
@@ -79,6 +43,7 @@ const Diem: React.FunctionComponent = ({
               return <div>{el.name}</div>;
             })}
         </div>
+
         <div className={styles.diem__events}>
           <AddNewEvent currentDiem={currentDiem} />
 
