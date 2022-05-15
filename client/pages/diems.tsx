@@ -30,22 +30,27 @@ const Diems: NextPage = (props) => {
     // socket.emit("currentlyOnline", loginInfo.email);
   });
 
-  //When we recieve the message array from backend, set the updated state of history
-  socket.on("updatedMessages", (message) => {
-    setHistory((prev) => [...prev, message]);
-  });
+  // //When we recieve the message array from backend, set the updated state of history
+  // socket.on("updatedMessages", (message) => {
+  //   setHistory((prev) => [...prev, message]);
+  // });
 
-  //When we recieve current online user update, we set state of current online users
-  socket.on("onlineUsers", (onlineUserIds) => {
-    setOnlineUsers(onlineUserIds);
-  });
+  // //When we recieve current online user update, we set state of current online users
+  // socket.on("onlineUsers", (onlineUserIds) => {
+  //   setOnlineUsers(onlineUserIds);
+  // });
 
   // //Function being passed to the tile component
   async function connectionToSocketRoom(diem: any) {
     console.log("CONNECTION FUNCTION TRIGGERED", diem);
+    socket.on("connect", (arg) => {
+      console.log("connected to Sockets on front end");
+      // socket.emit("currentlyOnline", loginInfo.email);
+    });
+
     //This will change the current chat room to the maindiem's chatroom
-    socket.emit("leavingRoom"); //Leave the current roomsocket.
-    socket.emit("joiningRoom", diem.id); //Join the new room
+    // socket.emit("leavingRoom"); //Leave the current roomsocket.
+    // socket.emit("joiningRoom", diem.id); //Join the new room
   }
 
   // socket.emit("joiningRoom", diem.id); //Send to backend socket to inform it to join room with correct diemId.

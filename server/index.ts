@@ -27,7 +27,7 @@ let onlineUserIds: String[] = [];
 // let isOnline = false;
 
 io.on("connection", (socket: Socket) => {
-  ////console.log("socket connected on backend")
+  console.log("socket connected on backend");
   //console.log(socket.rooms);
 
   //Recieving online status

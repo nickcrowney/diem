@@ -17,6 +17,7 @@ const Tile: React.FunctionComponent = ({
   func,
 }) => {
   const divClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
+    const socket = io("http://localhost:4000");
     setCurrentDiem(async (prev) => {
       console.log(diem);
       await func(diem);
