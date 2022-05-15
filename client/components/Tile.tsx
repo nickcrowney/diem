@@ -15,16 +15,23 @@ const Tile: React.FunctionComponent = ({
   diem,
   setCurrentDiem,
   func,
+  soc,
 }) => {
   const divClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
-    const socket = io("http://localhost:4000");
-    setCurrentDiem(async (prev) => {
-      console.log(diem);
-      await func(diem);
+    //const socket = io("http://localhost:4000");
 
-      return diem;
-    });
-    console.log("State has changed");
+    setCurrentDiem(diem);
+    // soc.emit("HELP", 2);
+    // soc.emit("changingRooms", diem.id);
+    // console.log("Changing Rooms");
+
+    // // setCurrentDiem(async (prev) => {
+    // //   console.log(diem);
+    // //   await func(diem);
+
+    // //   return diem;
+    // // });
+    // console.log("State has changed");
   };
 
   const pics = [mypic, mypic2, mypic2, mypic3, mypic3];

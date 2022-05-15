@@ -31,9 +31,9 @@ io.on("connection", (socket: Socket) => {
   //console.log(socket.rooms);
 
   //Recieving online status
-  socket.on("currentlyOnline", (loginInfo) => {
-    onlineUserIds.push(loginInfo);
-    console.log(`${loginInfo} is currently online`);
+  socket.on("currentlyOnline", (loginInf) => {
+    onlineUserIds.push(loginInf);
+    console.log(`${loginInf} is currently online`);
     socket.emit("onlineUsers", onlineUserIds); //Send back array of online users
   });
 
@@ -55,8 +55,8 @@ io.on("connection", (socket: Socket) => {
     console.log(`Leaving room with diemId ${socket.rooms}`);
   });
 
-  socket.on("joiningRoom", (roomId) => {
-    socket.join(roomId);
+  socket.on("joiningRoom", (roomId: String) => {
+    //socket.join(String(roomId));
     console.log(
       `User with socketid: ${socket.id}joined room with diemId: ${roomId}`
     );
