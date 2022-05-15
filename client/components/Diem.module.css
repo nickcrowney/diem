@@ -1,6 +1,6 @@
 .diem {
   border-radius: 5px;
-  background-color: rgb(255, 157, 166);
+  background-color: #ccff90;
   padding: 2rem;
   margin: 1rem;
   height: 100%;
@@ -49,4 +49,17 @@
   flex-direction: row;
   align-items: flex-end;
   justify-content: flex-end;
+}
+
+.addRemoveUsers {
+  display: flex;
+
+.diem_date_first {
+  font-size: xx-large;
+  font-weight: bolder;
+}
+  
+.diem_date_second {
+  font-size: large;
+  /* font-weight: ; */
 }

@@ -23,23 +23,3 @@
 #submit {
   justify-self: end;
 }
-
-/* $colors: (
-  red: #db2828,
-  orange: #f2711c,
-  yellow: #fbbd08,
-  olive: #b5cc18,
-  purple: #a333c8,
-  pink: #e03997
-);
-
-input[type="radio"] {
-  display: none;
-  &:checked + label {
-    @each $name, $value in $colors {
-      .#{$name} {
-        border: 2px solid darken($value, 25%);
-      }
-    } // !@each
-  } // !&:checked + label
-} */
