@@ -14,10 +14,6 @@ import { SocketContext } from "../contexts/Socket";
 const Tile: React.FunctionComponent = ({ allDiems, diem, setCurrentDiem }) => {
   const socket = useContext(SocketContext);
 
-  const newFunc = useCallback(() => {
-    socket.emit("currentlyOnline", "borisjohnson@gmail.com");
-  }, []);
-
   const divClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
     setCurrentDiem(diem);
     console.log("CLICK EVENT FOR DIEM CHANGE");

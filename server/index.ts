@@ -26,47 +26,44 @@ function bootstrap() {
 bootstrap();
 
 let onlineUserIds: String[] = [];
+let currentRoom = "room";
+let currentUser = "user";
 // let isOnline = false;
 
 io.on("connection", (socket: Socket) => {
   console.log("socket connected on backend");
-  //console.log(socket.rooms);
 
   //Recieving online status
   socket.on("currentlyOnline", (loginInf) => {
     onlineUserIds.push(loginInf);
+    currentUser = loginInf;
 
     console.log(`${loginInf} is currently online`);
     socket.emit("onlineUsers", onlineUserIds); //Send back array of online users
   });
 
   //new chat
-  socket.on("message", (messages) => {
+  socket.on("message", (message) => {
     //emit the array of full chat history here
-    socket.emit("updatedMessages", messages);
+    socket.emit("updatedMessages", message);
   });
 
   socket.on("leavingRoom", () => {
-    //console.log("leaving the room!!!");
-    //Exit current room
-
-    // if (socket.rooms) {
-    //   socket.leave(socket.rooms);
-    //   console.log(socket.rooms);
-    // }
-
-    console.log(`Leaving room with diemId ${socket.rooms}`);
+    //DONE
+    socket.leave(currentRoom);
+    console.log(`Leaving room with diemId ${currentRoom}`);
   });
 
-  socket.on("joiningRoom", (roomId: String) => {
+  socket.on("joiningRoom", (roomId) => {
     socket.join(String(roomId));
+    currentRoom = roomId;
     console.log(
       `User with socketid: ${socket.id}joined room with diemId: ${roomId}`
     );
   });
 
   socket.on("disconnect", (loginInfo) => {
-    onlineUserIds = onlineUserIds.filter((el) => el !== loginInfo);
+    onlineUserIds = onlineUserIds.filter((el) => el !== currentUser);
     socket.emit("onlineUsers", onlineUserIds);
   });
 });

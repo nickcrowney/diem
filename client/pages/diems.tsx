@@ -22,64 +22,26 @@ const Diems: NextPage = (props) => {
   const [history, setHistory] = useState([]);
   const [currentDiem, setCurrentDiem] = useState({
     title: "Select Diem",
-    id: 1,
+    id: 2, //TODO make this default to the id of the first diem in the list
   });
 
-  // const socket = useContext(SocketContext);
+  const socket = useContext(SocketContext);
 
-  // socket.on("connect", (arg) => {
-  //   console.log("connected to Sockets on front end");
-  //   // console.log("USER INFOSESEESE", loginInfo);
-  //   //socket.emit("currentlyOnline", loginInfo.email)  //TODO Figure out why context doesn't work here
-  //   socket.emit("currentlyOnline", "casey@littlerockfarm.com");
-  //   socket.emit("joiningRoom", String(currentDiem.id)); //Default user to the top chatroom
-  // });
-
-  // // const func = useCallback(() => {
-  // //   socket.emit("currentlyOnline", "casey@littlerockfarm.com");
-  // // }, []);
-
-  // //When we recieve the message array from backend, set the updated state of history
-  // socket.on("updatedMessages", (message) => {
-  //   //Move this to Tile component
-  //   setHistory((prev) => [...prev, message]);
-  // });
+  socket.on("connect", (arg) => {
+    console.log("connected to Sockets on front end");
+    //socket.emit("currentlyOnline", loginInfo.email)  //TODO Figure out why context doesn't work here
+    socket.emit("currentlyOnline", "email@email.com");
+    socket.emit("joiningRoom", String(currentDiem.id)); //Default user to the top chatroom
+  });
 
   // //When we recieve current online user update, we set state of current online users
-  // socket.on("onlineUsers", (onlineIds) => {
-  //   setOnlineUsers((prev) => onlineIds);
-  //   console.log("Updated Online Users ", onlineIds);
-  // });
-
-  // // // //Function being passed to the tile component
-  // // async function connectionToSocketRoom(diem: any) {
-  // //   console.log("CONNECTION FUNCTION TRIGGERED", diem);
-  // //   socket.on("connect", (arg) => {
-  // //     console.log("connected to Sockets on front end");
-  // //     // socket.emit("currentlyOnline", loginInfo.email);
-  // //   });
-
-  // //This will change the current chat room to the maindiem's chatroom
-  // // socket.emit("leavingRoom"); //Leave the current roomsocket.
-  // // socket.emit("joiningRoom", diem.id); //Join the new room
-  // //}
-
-  // // socket.emit("joiningRoom", diem.id); //Send to backend socket to inform it to join room with correct diemId.
-  // // console.log(`Connected to room with diemId ${diem.id}`);
-
-  // async function submitMessageSocket(message: any) {
-  //   socket.emit("message", message);
-  // }
+  socket.on("onlineUsers", (onlineIds) => {
+    setOnlineUsers((prev) => onlineIds);
+    console.log("Updated Online Users ", onlineIds);
+  });
 
   useEffect(() => {}, [currentDiem]);
   const [users, setUsers] = useState([]);
-  //console.log(currentDiem, "RENDER DAMNIT");
-
-  // if (state) {
-  //   console.warn("Testing context", state);
-  //   console.log("Inside if");
-  //   console.log(state.userInfo);
-  // }
 
   useEffect(() => {}, [data]);
   useEffect(() => {
