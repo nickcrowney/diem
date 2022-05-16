@@ -7,31 +7,22 @@ import plus from "../public/images/plus.png";
 import styles from "./Tile.module.css";
 import { shuffle } from "lodash";
 import { Socket } from "socket.io-client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext, useCallback } from "react";
 import io from "socket.io-client";
+import { SocketContext } from "../contexts/Socket";
 
-const Tile: React.FunctionComponent = ({
-  allDiems,
-  diem,
-  setCurrentDiem,
-  func,
-  soc,
-}) => {
+const Tile: React.FunctionComponent = ({ allDiems, diem, setCurrentDiem }) => {
+  const socket = useContext(SocketContext);
+
+  const newFunc = useCallback(() => {
+    socket.emit("currentlyOnline", "borisjohnson@gmail.com");
+  }, []);
+
   const divClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
-    //const socket = io("http://localhost:4000");
-
     setCurrentDiem(diem);
-    // soc.emit("HELP", 2);
-    // soc.emit("changingRooms", diem.id);
-    // console.log("Changing Rooms");
-
-    // // setCurrentDiem(async (prev) => {
-    // //   console.log(diem);
-    // //   await func(diem);
-
-    // //   return diem;
-    // // });
-    // console.log("State has changed");
+    console.log("CLICK EVENT FOR DIEM CHANGE");
+    socket.emit("leavingRoom");
+    socket.emit("joiningRoom", String(diem.id));
   };
 
   const pics = [mypic, mypic2, mypic2, mypic3, mypic3];
