@@ -14,6 +14,7 @@ const Tile: React.FunctionComponent = ({
   diem,
   setCurrentDiem,
   setAllDiems,
+  backgroundColor,
 }) => {
 
   const socket = useContext(SocketContext);
@@ -74,7 +75,11 @@ const Tile: React.FunctionComponent = ({
   return (
 
     <>
-      <div className={styles.tile} onClick={divClickedHandler}>
+      <div
+        className={styles.tile}
+        style={{ 'background-color': diem.color }}
+        onClick={divClickedHandler}
+      >
         <div>
           <div onClick={clickDeleteDiem}>X</div>
           <div className={styles.tile__info}>

@@ -26,7 +26,6 @@ const Diem: React.FunctionComponent = ({
     <>
       <div className={styles.diem} style={backgroundColor}>
         <DiemInfoBar currentDiem={currentDiem} />
-        <button onClick={changeColor}>CLICK</button>
 
         <div className={styles.addRemoveUsers}>
           <PopAddUsers
@@ -43,6 +42,7 @@ const Diem: React.FunctionComponent = ({
         <DiemColorPicker
           backgroundColor={backgroundColor}
           setBackgroundColor={setBackgroundColor}
+          currentDiem={currentDiem}
         />
         <GoogleMap />
 
@@ -50,7 +50,7 @@ const Diem: React.FunctionComponent = ({
           {currentDiem &&
             currentDiem.users &&
             currentDiem.users.map((el) => {
-              return <div>{el.name}</div>;
+              return el && <div>{el.name}</div>;
             })}
         </div>
 

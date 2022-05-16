@@ -24,6 +24,7 @@ const Diems: NextPage = (props) => {
   const [data, setData] = useState('');
   const [mainDiem, setDiem] = useState('');
   const [allDiems, setAllDiems] = useState([]);
+  const [allEvents, setAllEvents] = useState([]);
   const [backgroundColor, setBackgroundColor] = useState({
     'background-color': '#fabd04',
   });
@@ -74,14 +75,21 @@ const Diems: NextPage = (props) => {
           return new Date(el.date) >= new Date(currentDate);
         });
         setAllDiems(resFuture);
+        setAllEvents(
+          resFuture.map((el) => {
+            console.log(el.events, 'EVENTITOS');
+            return el.events;
+          })
+        );
         setCurrentDiem(resFuture[0]);
+        console.log(resFuture[0], 'RES FUTURE 0');
+        console.log(resFuture[0].color, 'RES FUTURE COLOR');
+
+        setBackgroundColor({ 'background-color': resFuture[0].color });
       })
       .catch((error) => console.log(error));
   }, []);
-  const changeColor = () => {
-    setBackgroundColor({ 'background-color': 'black' });
-  };
-
+  allEvents.length && console.log(allEvents, 'AAAALLLLLLL');
   return (
     <div>
       <Nav
@@ -92,7 +100,6 @@ const Diems: NextPage = (props) => {
       />
 
       <main className={styles.container}>
-        <button onClick={changeColor}>CLICK</button>
         <div className={styles.tiles}>
           <PopNewDiem setAllDiems={setAllDiems} />
 

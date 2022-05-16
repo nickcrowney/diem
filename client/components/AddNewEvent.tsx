@@ -15,10 +15,17 @@ const AddNewEvent = ({ currentDiem, setCurrentDiem }) => {
 
   const [data, setData] = useState('Add new event');
   const [eventText, setEventText] = useState('Add new event');
+  currentDiem && console.log(currentDiem.events, 'CURRENT EVENTS');
 
   const submittedEvent = (event) => {
     console.log(event, 'SUBMITTED EVENT');
     props.submitNewEvent(event, currentDiem.id, '', '');
+    setCurrentDiem((prev) => {
+      prev.events = [
+        ...prev.events,
+        { title: event, metaDiemId: currentDiem.id },
+      ];
+    });
   };
   const openOptions = () => {
     console.log('options open');

@@ -23,20 +23,6 @@ function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
   const { register, handleSubmit, reset } = useForm();
   const [selectedOptions, setSelectedOptions] = useState([]);
 
-  const handleChange = (options) => {
-    setSelectedOptions((prev) => {
-      const modObj = options.map((obj) => {
-        return {
-          id: obj.value,
-          name: obj.label,
-          userPhoto: obj.userPhoto,
-        };
-      });
-      prev = [...prev, ...modObj];
-      return prev;
-    });
-  };
-
   const availableUsers = users.filter((user) => {
     if (currentDiem && currentDiem.users) {
       return !currentDiem.users.some((el) => el.id == user.id);
@@ -49,10 +35,36 @@ function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
     userPhoto: el.userPhoto,
   }));
 
-  const submitHandler = (formData, event) => {
-    selectedOptions.forEach((el) => {
-      props.updateDiemUser(currentDiem.id, el.id);
+  const handleChange = (options) => {
+    console.log(options, 'OPTIONS');
+
+    setSelectedOptions((prev) => {
+      // const modObj = options.map((obj) => {
+      //   return {
+      //     id: obj.value,
+      //     name: obj.label,
+      //     userPhoto: obj.userPhoto,
+      //   };
+      // });
+      // prev = [...prev, ...modObj];
+      // return prev;
+      const option = options[options.length - 1];
+      const modObj = option && {
+        id: option.value,
+        name: option.label,
+        userPhoto: option.userPhoto,
+      };
+      prev = [...prev, modObj];
+      console.log(prev, 'PREV HERE');
+      return prev;
     });
+  };
+
+  const submitHandler = (formData, event) => {
+    selectedOptions &&
+      selectedOptions.forEach((el) => {
+        el && props.updateDiemUser(currentDiem.id, el.id);
+      });
     setCurrentDiem((prev) => {
       const obj = { ...prev };
 
