@@ -67,6 +67,7 @@ const submitNewUser = async (name: String, email: String, picture: String) => {
 //POST new diem
 const submitNewDiem = async (
   title: String,
+  color: String,
   date: String,
   city: String,
   user: Number

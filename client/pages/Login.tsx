@@ -21,17 +21,17 @@ const Login = () => {
     const response = await signInWithPopup(firebaseAuth, provider);
     setLoginInfo(response.user);
     //If user exists in database, we don't re-POST them to db
-    if (
-      state.length === 0 ||
-      (state && state.some((el): any => el.email !== response.user.email))
-    ) {
-      //TODO change any to appropiate interface
-      props.submitNewUser(
-        response.user.displayName,
-        response.user.email,
-        response.user.photoURL
-      );
-    }
+    // if (
+    //   state.length === 0 ||
+    //   (state && state.some((el): any => el.email !== response.user.email))
+    // ) {
+    //TODO change any to appropiate interface
+    props.submitNewUser(
+      response.user.displayName,
+      response.user.email,
+      response.user.photoURL
+    );
+    //}
 
     if (response.user.emailVerified) {
       router.replace("/diems", loginInfo);

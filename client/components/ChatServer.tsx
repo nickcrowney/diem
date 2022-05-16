@@ -5,7 +5,7 @@ import updateDiemChatHistory from "../services/ApiServices";
 import Message from "./Message";
 
 const ChatServer: React.FunctionComponent = (props) => {
-  const socket = io("http://localhost:4000");
+  //const socket = io("http://localhost:4000");
   //RENDER a list of messages
   // const chatHis = props.chatHistory;
   const mockData = [

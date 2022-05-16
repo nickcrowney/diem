@@ -18,8 +18,6 @@ const Nav = ({ users, setUsers, toggleNewDiemPop, loginData }) => {
     return el.id === 1;
   });
 
-  console.log("PROPS HERE", loginData);
-
   return (
     <div className={styles.navContainer}>
       <div className={styles.navBar}>

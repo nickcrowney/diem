@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component } from "react";
 import dayjs from "dayjs";
 import Popup from "reactjs-popup";
@@ -9,6 +10,19 @@ import Image from "next/image";
 
 import minus from "../public/images/minus.png";
 import Select from "react-select";
+=======
+import React, { Component } from 'react';
+import dayjs from 'dayjs';
+import Popup from 'reactjs-popup';
+import { useForm, Controller } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+import styles from './PopAddUsers.module.css';
+import props from '../services/ApiServices';
+import Image from 'next/image';
+
+import minus from '../public/images/minus.png';
+import Select from 'react-select';
+>>>>>>> 41acc10c4db2479a52073540afecf1af7abc12e1
 
 function PopRemoveUsers({ users, currentDiem, setCurrentDiem }) {
   const { register, handleSubmit, reset } = useForm();
