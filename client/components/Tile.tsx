@@ -7,15 +7,6 @@ import { Socket } from "socket.io-client";
 import { useEffect, useState, useContext, useCallback } from "react";
 import io from "socket.io-client";
 import { SocketContext } from "../contexts/Socket";
-<<<<<<< HEAD
-=======
-import React from "react";
-import Image from "next/image";
-import plus from "../public/images/plus.png";
-import styles from "./Tile.module.css";
-
-
->>>>>>> 19bd82ebde6d469138af486145fb4724a50b74ec
 const Tile: React.FunctionComponent = ({ allDiems, diem, setCurrentDiem }) => {
   const socket = useContext(SocketContext);
 
@@ -62,7 +53,6 @@ const Tile: React.FunctionComponent = ({ allDiems, diem, setCurrentDiem }) => {
   const event = diem.title;
 
   return (
-
     <div className={styles.tile} onClick={divClickedHandler}>
       <div className={styles.tile__info}>
         <span className={styles.diem_date_first}>{date.slice(0, 4)}</span>

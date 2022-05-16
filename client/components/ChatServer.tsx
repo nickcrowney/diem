@@ -1,71 +1,83 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import io from "socket.io-client";
 import getDiems from "../services/ApiServices";
 import updateDiemChatHistory from "../services/ApiServices";
 import Message from "./Message";
+import { SocketContext } from "../contexts/Socket";
+import { LoginContext } from "../contexts/Context";
+import styles from "./ChatServer.module.css";
 
 const ChatServer: React.FunctionComponent = (props) => {
-  const socket = io("http://localhost:4000");
-  //RENDER a list of messages
-  // const chatHis = props.chatHistory;
+  const [history, setHistory] = useState([]); //currentdiemchat history
+  const socket = useContext(SocketContext);
+  const { loginInfo } = useContext(LoginContext);
+
+  const Form = () => {
+    const [mes, setMes] = React.useState({
+      content: "empty",
+      author: loginInfo.email,
+      timestamp: Date.now(),
+    });
+  };
+  //TODO setHistory(props.diem.chatHistory)
+
+  //Recieve an updated message
+  socket.on("updatedMessages", (message) => {
+    setHistory((prev) => [...prev, message]);
+  });
+
+  useEffect(() => {}, [history]);
+
   const mockData = [
     { content: "This is a message", author: 1, timestamp: "Friday" },
     { content: "A second message", author: 1, timestamp: "Wednesday" },
     { content: "Yet another message", author: 2, timestamp: "Sunday" },
   ];
 
-  const [current, setCurrent] = useState();
-
-  const [history, setHistory] = useState();
-
-  // socket.on("connect", (cb) => {
-  //   socket.emit("joiningRoom", 1); //Send to backend socket to inform it to join room with correct diemId.
-  //   console.log("Connected to room 1");
-  // });
-  // socket.emit("joinroom", 1); //Send to backend socket to inform it to join room with correct diemId.
-  // useEffect(() => {
-  //   console.log("CHANGED", current);
-  //   socket.emit("joiningRoom", current);
-  // }, [current]);
-
-  // useEffect(() => {
-  //   socket.on("updateMessages", (messages) => {
-  //     //When we recieve the updated message history
-  //     setHistory((prev) => messages);
-  //     console.log(messages);
-  //     chatHistory: messages; //Set the most updated chat history to chatHistory of the diem
-  //     console.log(messages);
-  //   });
-  // }, [history]);
-
-  //Fetch a chathistory from api services
-
-  //OnClick if message is not empty push message content
-  // function handleSubmit(author: Number, content: String, timestamp: String) {
-  //   //Emit the most recent message user sends
-  //   socket.emit("newMessage", {
-  //     //Emit the new message to backend
-  //     author: Number,
-  //     content: String,
-  //     timestamp: String,
-  //   });
-
-  //   //Set user's local history NOT NEEDED
-  //   //setHistory((prev) => [...prev, { author: Number, content: String, timestamp: String}]);
-
-  //   //PATCH request to update the chatHistory of current diem
-
-  //   updateDiemChatHistory(props.diemId, [
-  //     ...history,
-  //     { author, content, timestamp },
-  //   ]);
-  // }
-
-  //Render a list with all chat history for that diem
-  //Text input field with submit button
+  function handleSubmitMessage(
+    content: String,
+    author: String,
+    timestamp: String
+  ) {
+    updateDiemChatHistory(content, author, timestamp);
+    socket.emit("message", { content, author, timestamp });
+  }
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-white relative"></div>
+    // <div>
+    //   <div className="justify-center items-center bg-white relative">
+    //     <div className={styles.message_container}>
+    //       {mockData.map((el) => {
+    //         return <Message message={el} />;
+    //       })}
+    //     </div>
+    //   </div>
+    //   <div className="w-screen h-screen flex justify-center items-center bg-white relative"></div>
+    // </div>
+    <div className={styles.form_contianer}>
+      <div className={styles.message_container}>
+        {mockData.map((el) => {
+          return <Message message={el} />;
+        })}
+      </div>
+      <div className={styles.form_container}>
+        <form id="loginForm" name="loginForm" className={styles.form}>
+          <label htmlFor="userLogin">login</label>
+          <input
+            type="text"
+            id="userLogin"
+            name="userLogin"
+            className="py-2 px-4 rounded"
+          />
+
+          <input
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          />
+        </form>
+      </div>
+    </div>
   );
 };
+
 export default ChatServer;
