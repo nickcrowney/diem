@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-import React, { Component } from "react";
-import dayjs from "dayjs";
-import Popup from "reactjs-popup";
-import { useForm, Controller } from "react-hook-form";
-import { useEffect, useState } from "react";
-import styles from "./PopNewDiem.module.css";
-import props from "../services/ApiServices";
-import Image from "next/image";
-import plus from "../public/images/more.png";
-import Select from "react-select";
-=======
 import React, { Component } from 'react';
 import dayjs from 'dayjs';
 import Popup from 'reactjs-popup';
@@ -20,7 +8,6 @@ import props from '../services/ApiServices';
 import Image from 'next/image';
 import plus from '../public/images/more.png';
 import Select from 'react-select';
->>>>>>> main
 
 const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 const currentUser = 1;
