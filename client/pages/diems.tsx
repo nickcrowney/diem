@@ -24,12 +24,14 @@ const Diems: NextPage = (props) => {
   const [data, setData] = useState('');
   const [mainDiem, setDiem] = useState('');
   const [allDiems, setAllDiems] = useState([]);
-  const [backgroundColor, setBackgroundColor] = useState('#fabd04');
+  const [backgroundColor, setBackgroundColor] = useState({
+    'background-color': '#fabd04',
+  });
   const [history, setHistory] = useState([]);
 
   const [currentDiem, setCurrentDiem] = useState({
-    title: 'Select Diem',
-    id: 2, //TODO make this default to the id of the first diem in the list
+    id: 1,
+    title: 'Add new diem',
   });
 
   const socket = useContext(SocketContext);
@@ -51,6 +53,7 @@ const Diems: NextPage = (props) => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {}, [data]);
+  useEffect(() => {}, [backgroundColor]);
   useEffect(() => {
     hooks
       .getUsers()
@@ -68,32 +71,36 @@ const Diems: NextPage = (props) => {
       .getDiems()
       .then((res) => {
         const resFuture = res.filter((el) => {
-          return new Date(el.date) > new Date(currentDate);
+          return new Date(el.date) >= new Date(currentDate);
         });
         setAllDiems(resFuture);
         setCurrentDiem(resFuture[0]);
       })
       .catch((error) => console.log(error));
   }, []);
+  const changeColor = () => {
+    setBackgroundColor({ 'background-color': 'black' });
+  };
 
   return (
     <div>
-      {
-        <Nav
-          loginData={loginInfo}
-          users={users}
-          setUsers={setUsers}
-          toggleNewDiemPop={setNewDiemPop}
-        />
-      }
+      <Nav
+        loginData={loginInfo}
+        users={users}
+        setUsers={setUsers}
+        toggleNewDiemPop={setNewDiemPop}
+      />
+
       <main className={styles.container}>
+        <button onClick={changeColor}>CLICK</button>
         <div className={styles.tiles}>
-          <PopNewDiem />
+          <PopNewDiem setAllDiems={setAllDiems} />
 
           {allDiems.map((el) => {
             return (
               <div key={el.id}>
                 <Tile
+                  setDiem={setDiem}
                   mainDiem={mainDiem}
                   allDiems={allDiems}
                   setAllDiems={setAllDiems}
@@ -113,6 +120,7 @@ const Diems: NextPage = (props) => {
             setCurrentDiem={setCurrentDiem}
             users={users}
             backgroundColor={backgroundColor}
+            setBackgroundColor={setBackgroundColor}
           />
         </div>
       </main>

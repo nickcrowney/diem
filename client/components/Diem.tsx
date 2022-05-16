@@ -7,8 +7,7 @@ import DiemColorPicker from './DiemColorPicker';
 import GoogleMap from './GoogleMap';
 import AddNewEventTest from './AddNewEventTest';
 import styles from './Diem.module.css';
-
-
+import DisplayEvents from './DisplayEvents';
 
 const Diem: React.FunctionComponent = ({
   mainDiem,
@@ -16,14 +15,18 @@ const Diem: React.FunctionComponent = ({
   setCurrentDiem,
   users,
   backgroundColor,
+  setBackgroundColor,
 }) => {
   useEffect(() => {}, [currentDiem]);
-  const event = currentDiem && currentDiem.title;
-
+  // const event = currentDiem && currentDiem.title;
+  const changeColor = () => {
+    setBackgroundColor({ 'background-color': 'black' });
+  };
   return (
     <>
-      <div className={styles.diem} style={{ backgroundColor: backgroundColor }}>
+      <div className={styles.diem} style={backgroundColor}>
         <DiemInfoBar currentDiem={currentDiem} />
+        <button onClick={changeColor}>CLICK</button>
 
         <div className={styles.addRemoveUsers}>
           <PopAddUsers
@@ -37,7 +40,10 @@ const Diem: React.FunctionComponent = ({
             setCurrentDiem={setCurrentDiem}
           />
         </div>
-        <DiemColorPicker />
+        <DiemColorPicker
+          backgroundColor={backgroundColor}
+          setBackgroundColor={setBackgroundColor}
+        />
         <GoogleMap />
 
         <div>
@@ -49,23 +55,28 @@ const Diem: React.FunctionComponent = ({
         </div>
 
         <div className={styles.diem__events}>
-          <AddNewEvent currentDiem={currentDiem} />
+          <AddNewEvent
+            currentDiem={currentDiem}
+            setCurrentDiem={setCurrentDiem}
+          />
 
           <div>
-            {currentDiem &&
+            {currentDiem && <DisplayEvents currentDiem={currentDiem} />}
+
+            {/* {currentDiem &&
               currentDiem.events &&
               currentDiem.events.map((el) => {
                 return (
                   <ul key={el.id}>
                     <div>
                       {el.title}
-                      {el.location ? " at " : ""}{" "}
-                      {el.location ? el.location + ". " : ""}
-                      {el.time ? `Start time: ${el.time}` : ""}
+                      {el.location ? ' at ' : ''}{' '}
+                      {el.location ? el.location + '. ' : ''}
+                      {el.time ? `Start time: ${el.time}` : ''}
                     </div>
                   </ul>
                 );
-              })}
+              })} */}
           </div>
         </div>
       </div>

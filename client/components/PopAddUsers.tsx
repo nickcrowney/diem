@@ -60,7 +60,7 @@ function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
       return (prev = obj);
     });
     setSelectedOptions([]);
-    reset({ label: "", value: "" });
+    reset({ label: '', value: '' });
   };
 
   return (
