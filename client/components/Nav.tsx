@@ -14,7 +14,11 @@ const Nav = ({ users, setUsers, toggleNewDiemPop, loginData }) => {
   }
   //console.log(users[0], '0th user');
   const mainUser = users.filter((el) => {
+<<<<<<< HEAD
+    //return el.email === loginData.email;
+=======
     // return el.email === loginData.email;
+>>>>>>> main
     return el.id === 1;
   });
 

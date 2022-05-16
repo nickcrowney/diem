@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+import React, { Component } from "react";
+import dayjs from "dayjs";
+import Popup from "reactjs-popup";
+import { useForm, Controller } from "react-hook-form";
+import { useEffect, useState } from "react";
+import styles from "./PopNewDiem.module.css";
+import props from "../services/ApiServices";
+import Image from "next/image";
+import plus from "../public/images/more.png";
+import Select from "react-select";
+=======
 import React, { Component } from 'react';
 import dayjs from 'dayjs';
 import Popup from 'reactjs-popup';
@@ -9,6 +21,7 @@ import Image from 'next/image';
 
 import minus from '../public/images/minus.png';
 import Select from 'react-select';
+>>>>>>> main
 
 function PopRemoveUsers({ users, currentDiem, setCurrentDiem }) {
   const { register, handleSubmit, reset } = useForm();
@@ -48,7 +61,7 @@ function PopRemoveUsers({ users, currentDiem, setCurrentDiem }) {
       const obj = { ...prev };
 
       const user = obj.users.filter((el) => {
-        console.log(el, 'ELLLLLL');
+        console.log(el, "ELLLLLL");
         return !selectedOptions.some((elem) => {
           if (elem.id === el.id) return true;
           else return false;
@@ -56,10 +69,14 @@ function PopRemoveUsers({ users, currentDiem, setCurrentDiem }) {
       });
 
       obj.users = user;
+<<<<<<< HEAD
+      console.log(obj, "OBJ USERSZZZ");
+=======
+>>>>>>> main
       setSelectedOptions([]);
       return obj;
     });
-    reset({ label: '', value: '' });
+    reset({ label: "", value: "" });
   };
 
   return (
