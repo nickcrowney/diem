@@ -14,7 +14,7 @@ const AddNewEvent = ({ currentDiem, setCurrentDiem }) => {
   const { register, handleSubmit, reset } = useForm();
 
   const [data, setData] = useState('Add new event');
-  const [eventText, setEventText] = useState('Add new event');
+  const [eventText, setEventText] = useState('Add new event here...');
   currentDiem && console.log(currentDiem.events, 'CURRENT EVENTS');
 
   const submittedEvent = (event) => {
@@ -25,6 +25,9 @@ const AddNewEvent = ({ currentDiem, setCurrentDiem }) => {
         ...prev.events,
         { title: event, metaDiemId: currentDiem.id },
       ];
+      console.log(prev, 'UPDATED HERE');
+
+      return prev;
     });
   };
   const openOptions = () => {
@@ -37,16 +40,20 @@ const AddNewEvent = ({ currentDiem, setCurrentDiem }) => {
         // onInput={(e) => console.log(e.currentTarget.textContent, 'CHECK HERE')}
         onKeyPress={(e) => {
           if (e.key === 'Enter') {
-            setEventText('Add new');
+            setEventText('');
+            // setEventText('Add new');
             submittedEvent(e.currentTarget.textContent);
           }
-          if (e.key === '/') openOptions();
+          // if (e.key === '/') openOptions();
         }}
         placeholder={'New event'}
+        onClick={() => {
+          setEventText('');
+        }}
       >
         {eventText}
       </div>
-      <Popup
+      {/* <Popup
         className={styles.plusdiem}
         trigger={<Image src={plus} height="40" width="40" />}
         position="right top"
@@ -96,7 +103,7 @@ const AddNewEvent = ({ currentDiem, setCurrentDiem }) => {
             <input type="submit" />
           </form>
         </div>
-      </Popup>
+      </Popup> */}
     </div>
   );
 };

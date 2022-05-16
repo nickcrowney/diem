@@ -1,4 +1,3 @@
-
 import { Socket } from 'socket.io-client';
 import { useEffect, useState, useContext, useCallback } from 'react';
 import io from 'socket.io-client';
@@ -8,6 +7,7 @@ import Image from 'next/image';
 import plus from '../public/images/plus.png';
 import styles from './Tile.module.css';
 import hooks from '../services/ApiServices';
+import deleteBin from '../public/deleteBin.svg';
 
 const Tile: React.FunctionComponent = ({
   allDiems,
@@ -16,7 +16,6 @@ const Tile: React.FunctionComponent = ({
   setAllDiems,
   backgroundColor,
 }) => {
-
   const socket = useContext(SocketContext);
 
   const divClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -24,7 +23,6 @@ const Tile: React.FunctionComponent = ({
     console.log('CLICK EVENT FOR DIEM CHANGE');
     socket.emit('leavingRoom');
     socket.emit('joiningRoom', String(diem.id));
-
   };
   const clickDeleteDiem = () => {
     console.log('deleted');
@@ -73,7 +71,6 @@ const Tile: React.FunctionComponent = ({
   const event = diem.title;
 
   return (
-
     <>
       <div
         className={styles.tile}
@@ -81,7 +78,9 @@ const Tile: React.FunctionComponent = ({
         onClick={divClickedHandler}
       >
         <div>
-          <div onClick={clickDeleteDiem}>X</div>
+          <div onClick={clickDeleteDiem} className={styles.deleteDiem}>
+            <Image src={deleteBin} height="20" width="20" />
+          </div>
           <div className={styles.tile__info}>
             <span className={styles.diem_date_first}>{date.slice(0, 4)}</span>
             <span className={styles.diem_date_second}>{date.slice(4)}</span>
