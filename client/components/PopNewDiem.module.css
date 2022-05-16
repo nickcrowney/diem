@@ -2,7 +2,7 @@
   width: 15rem;
   border-radius: 5px;
   background-color: #d7affb;
-  padding: 1rem;
+  padding: 0 1rem;
   margin: 1rem;
   display: flex;
   flex-direction: column;
@@ -15,50 +15,16 @@
 }
 
 .newdiem input {
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
 
 .colorPicker {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1rem;
 }
 
 .colors {
-  border-radius: 50%;
-  overflow: hidden;
   height: 30px;
   width: 30px;
-  object-fit: cover;
   border: solid 2px #f7f9fb;
-}
-
-#red:hover {
-  opacity: 1;
-  border: #f28b82 solid 1px;
-}
-
-#orange:hover {
-  opacity: 1;
-  border: #fabd04 solid 1px;
-}
-
-#yellow:hover {
-  opacity: 1;
-  border: #fff476 solid 1px;
-}
-
-#green:hover {
-  opacity: 1;
-  border: #ccff90 solid 1px;
-}
-
-#blue:hover {
-  opacity: 1;
-  border: #a7ffeb solid 1px;
-}
-
-#purple:hover {
-  opacity: 1;
-  border: #d7affb solid 1px;
 }
