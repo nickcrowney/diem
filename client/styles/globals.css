@@ -19,3 +19,11 @@ a {
 * {
   box-sizing: border-box;
 }
+
+button {
+  transition: opacity 0.18s ease-in-out;
+}
+
+button:hover {
+  opacity: 0.3;
+}

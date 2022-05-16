@@ -1,10 +1,10 @@
-import { response } from "express";
-import React, { useState } from "react";
-import { Message } from "react-hook-form";
+import { response } from 'express';
+import React, { useState } from 'react';
+import { Message } from 'react-hook-form';
 
 //GET request for all users
 const getUsers = async () => {
-  const response = await fetch("http://localhost:4000/users");
+  const response = await fetch('http://localhost:4000/users');
   const data = await response.json();
   return data;
   // setUsers(data);
@@ -12,15 +12,22 @@ const getUsers = async () => {
 
 //GET request for all diems
 const getDiems = async () => {
-  const response = await fetch("http://localhost:4000/diems");
+  const response = await fetch('http://localhost:4000/diems');
   const data = await response.json();
+  console.log(data, 'DATA');
+
+  data.sort(function (a, b) {
+    // Turn your strings into dates, and then subtract them
+    // to get a value that is either negative, positive, or zero.
+    return new Date(a.date) - new Date(b.date);
+  });
   return data;
   // setDiems(data);
 };
 
 //GET request for all events
 const getEvents = async () => {
-  const response = await fetch("http://localhost:4000/events");
+  const response = await fetch('http://localhost:4000/events');
   const data = await response.json();
   return data;
   //setEvents(data);
@@ -44,11 +51,11 @@ const getDiemById = async (id: Number) => {
 
 //POST new user
 const submitNewUser = async (name: String, email: String, picture: String) => {
-  const response = await fetch("http://localhost:4000/user", {
-    method: "POST",
+  const response = await fetch('http://localhost:4000/user', {
+    method: 'POST',
     body: JSON.stringify({ name, email, picture }),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
   const data = await response.json();
@@ -64,16 +71,16 @@ const submitNewDiem = async (
   city: String,
   user: Number
 ) => {
-  const response = await fetch("http://localhost:4000/diem", {
-    method: "POST",
+  const response = await fetch('http://localhost:4000/diem', {
+    method: 'POST',
     body: JSON.stringify({ title, date, city, user }),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
   const data = await response.json();
 
-  console.log(data, "DATA");
+  console.log(data, 'DATA');
 
   return data;
   // setDiem(data);
@@ -82,7 +89,7 @@ const submitNewDiem = async (
 //DELETE user
 const deleteUser = async (id: Number) => {
   const response = await fetch(`http://localhost:4000/user/${id}`, {
-    method: "DELETE",
+    method: 'DELETE',
   });
   const data = await response.json();
   return data;
@@ -92,7 +99,7 @@ const deleteUser = async (id: Number) => {
 //DELETE diem
 const deleteDiem = async (id: Number) => {
   const response = await fetch(`http://localhost:4000/diem/${id}`, {
-    method: "DELETE",
+    method: 'DELETE',
   });
   const data = await response.json();
   return data;
@@ -102,7 +109,7 @@ const deleteDiem = async (id: Number) => {
 //DELETE event
 const deleteEvent = async (id: Number) => {
   const response = await fetch(`http://localhost:4000/event/${id}`, {
-    method: "DELETE",
+    method: 'DELETE',
   });
   const data = await response.json();
   return data;
@@ -115,12 +122,12 @@ const submitNewEvent = async (
   location: String,
   time: String
 ) => {
-  const response = await fetch("http://localhost:4000/event", {
-    method: "POST",
+  const response = await fetch('http://localhost:4000/event', {
+    method: 'POST',
 
     body: JSON.stringify({ title, id, location, time }),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
   const data = await response.json();
@@ -129,12 +136,12 @@ const submitNewEvent = async (
 };
 
 const updateDiemUser = async (diemId: Number, userId: Number) => {
-  const response = await fetch("http://localhost:4000/diem", {
-    method: "PATCH",
+  const response = await fetch('http://localhost:4000/diem', {
+    method: 'PATCH',
 
     body: JSON.stringify({ diemId, userId }),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
   const data = await response.json();
@@ -142,12 +149,12 @@ const updateDiemUser = async (diemId: Number, userId: Number) => {
 };
 
 const removeDiemUser = async (diemId: Number, userId: Number) => {
-  const response = await fetch("http://localhost:4000/user/removeDiemUser", {
-    method: "PATCH",
+  const response = await fetch('http://localhost:4000/user/removeDiemUser', {
+    method: 'PATCH',
 
     body: JSON.stringify({ diemId, userId }),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
   const data = await response.json();
@@ -160,12 +167,12 @@ const updateDiemChatHistory = async (
   diemId: Number,
   chatHistory: Message[]
 ) => {
-  const response = await fetch("http://localhost: 4000/diem", {
-    method: "PATCH",
+  const response = await fetch('http://localhost: 4000/diem', {
+    method: 'PATCH',
 
     body: JSON.stringify({ diemId, chatHistory }),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
   const data = await response.json();
@@ -188,18 +195,17 @@ const updateDiemChatHistory = async (
 // );
 
 const modifyDiem = async (title: String, id: Number) => {
-  const response = await fetch("http://localhost:4000/event", {
-    method: "PATCH",
+  const response = await fetch('http://localhost:4000/event', {
+    method: 'PATCH',
     body: JSON.stringify({ title, id }),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
   const data = await response.json();
   return data;
   console.log(data);
 };
-
 
 // const options = {
 //   method: 'GET',
@@ -216,7 +222,6 @@ const modifyDiem = async (title: String, id: Number) => {
 //   .then((response) => response.json())
 //   .then((response) => console.log(response))
 //   .catch((err) => console.error(err));
-
 
 export default {
   getUsers,

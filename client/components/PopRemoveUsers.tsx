@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component } from "react";
 import dayjs from "dayjs";
 import Popup from "reactjs-popup";
@@ -8,6 +9,19 @@ import props from "../services/ApiServices";
 import Image from "next/image";
 import plus from "../public/images/more.png";
 import Select from "react-select";
+=======
+import React, { Component } from 'react';
+import dayjs from 'dayjs';
+import Popup from 'reactjs-popup';
+import { useForm, Controller } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+import styles from './PopAddUsers.module.css';
+import props from '../services/ApiServices';
+import Image from 'next/image';
+
+import minus from '../public/images/minus.png';
+import Select from 'react-select';
+>>>>>>> main
 
 function PopRemoveUsers({ users, currentDiem, setCurrentDiem }) {
   const { register, handleSubmit, reset } = useForm();
@@ -55,7 +69,10 @@ function PopRemoveUsers({ users, currentDiem, setCurrentDiem }) {
       });
 
       obj.users = user;
+<<<<<<< HEAD
       console.log(obj, "OBJ USERSZZZ");
+=======
+>>>>>>> main
       setSelectedOptions([]);
       return obj;
     });
@@ -64,17 +81,18 @@ function PopRemoveUsers({ users, currentDiem, setCurrentDiem }) {
 
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
-      <div className={styles.newdiem}>
+      <div className={styles.addUser}>
         <Select
           options={options}
           isMulti
-          placeholder=" Remove people..."
+          placeholder="Remove..."
           closeMenuOnScroll
           closeMenuOnSelect={true}
           onChange={handleChange}
         />
-
-        <button type="submit">Submit</button>
+        <button type="submit">
+          <Image src={minus} height="35" width="35" />
+        </button>
       </div>
     </form>
   );

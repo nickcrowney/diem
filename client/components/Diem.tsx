@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect } from "react";
 import Image from "next/image";
 
@@ -13,6 +14,17 @@ import AddNewEvent from "./AddNewEvent";
 import PopAddUsers from "./PopAddUsers";
 import AddNewEventTest from "./AddNewEventTest";
 import PopRemoveUsers from "./PopRemoveUsers";
+=======
+import React, { useEffect } from 'react';
+import DiemInfoBar from './DiemInfoBar';
+import AddNewEvent from './AddNewEvent';
+import PopAddUsers from './PopAddUsers';
+import PopRemoveUsers from './PopRemoveUsers';
+import DiemColorPicker from './DiemColorPicker';
+import AddNewEventTest from './AddNewEventTest';
+import styles from './Diem.module.css';
+
+>>>>>>> main
 const Diem: React.FunctionComponent = ({
   mainDiem,
   currentDiem,
@@ -20,13 +32,18 @@ const Diem: React.FunctionComponent = ({
   users,
 }) => {
   useEffect(() => {}, [currentDiem]);
+<<<<<<< HEAD
   const pics = [mypic, mypic2, mypic3];
   const date = currentDiem && currentDiem.date;
+=======
+
+>>>>>>> main
   const event = currentDiem && currentDiem.title;
 
   return (
     <>
       <div className={styles.diem}>
+<<<<<<< HEAD
         <div className={styles.diem__infobar}>
           <div className={styles.tile__info}>
             <h1>{event}</h1>
@@ -62,19 +79,24 @@ const Diem: React.FunctionComponent = ({
                 })}
             </div>
           </div>
+=======
+        <DiemInfoBar currentDiem={currentDiem} />
+
+        <div className={styles.addRemoveUsers}>
+
+>>>>>>> main
           <PopAddUsers
             users={users}
             currentDiem={currentDiem}
             setCurrentDiem={setCurrentDiem}
           />
-        </div>
-        <div>
           <PopRemoveUsers
             users={users}
             currentDiem={currentDiem}
             setCurrentDiem={setCurrentDiem}
           />
         </div>
+        <DiemColorPicker />
         <div>
           {currentDiem &&
             currentDiem.users &&
@@ -82,8 +104,10 @@ const Diem: React.FunctionComponent = ({
               return <div>{el.name}</div>;
             })}
         </div>
+
         <div className={styles.diem__events}>
           <AddNewEvent currentDiem={currentDiem} />
+
           <div>
             {currentDiem &&
               currentDiem.events &&

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component } from "react";
 import dayjs from "dayjs";
 import Popup from "reactjs-popup";
@@ -8,6 +9,18 @@ import props from "../services/ApiServices";
 import Image from "next/image";
 import plus from "../public/images/more.png";
 import Select from "react-select";
+=======
+import React, { Component } from 'react';
+import dayjs from 'dayjs';
+import Popup from 'reactjs-popup';
+import { useForm, Controller } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+import styles from './PopAddUsers.module.css';
+import props from '../services/ApiServices';
+import Image from 'next/image';
+import plus from '../public/images/more.png';
+import Select from 'react-select';
+>>>>>>> main
 
 const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 const currentUser = 1;
@@ -59,17 +72,18 @@ function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
 
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
-      <div className={styles.newdiem}>
+      <div className={styles.addUser}>
         <Select
           options={options}
           isMulti
-          placeholder=" Add people..."
+          placeholder="Add..."
           closeMenuOnScroll
           closeMenuOnSelect={true}
           onChange={handleChange}
         />
-
-        <button type="submit">Submit</button>
+        <button type="submit">
+          <Image src={plus} height="35" width="35" />
+        </button>
       </div>
     </form>
   );
