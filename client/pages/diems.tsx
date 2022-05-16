@@ -12,10 +12,8 @@ import { useLoginContext } from "../contexts/Context";
 import io from "socket.io-client";
 
 const currentDate = dayjs().toISOString().slice(0, 10); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
-console.log(currentDate, "CURRENT DATE");
+//console.log(currentDate, "CURRENT DATE");
 const Diems: NextPage = (props) => {
-  const socket = io("http://localhost:4000");
-
   const [onlineStatus, setOnlineStatus] = useState(false);
   const [onlineUsers, setOnlineUsers] = useState([]); //Grab onlineStatus emits from other users and use this to render online
   const { loginInfo, setLoginInfo } = useLoginContext();
