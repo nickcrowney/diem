@@ -1,10 +1,3 @@
-import React from "react";
-import Image from "next/image";
-import mypic from "../public/images/amir-seilsepour-Pc0ToyoR5Xo-unsplash.jpg";
-import mypic2 from "../public/images/art-hauntington-jzY0KRJopEI-unsplash.jpg";
-import mypic3 from "../public/images/christian-buehner-6YQmQgcQ0VA-unsplash.jpg";
-import plus from "../public/images/plus.png";
-import styles from "./Tile.module.css";
 import { shuffle } from "lodash";
 import { Socket } from "socket.io-client";
 import { useEffect, useState, useContext, useCallback } from "react";

@@ -18,6 +18,8 @@ const Nav = ({ users, setUsers, toggleNewDiemPop, loginData }) => {
     return el.id === 1;
   });
 
+  
+
   console.log("PROPS HERE", loginData);
 
   return (

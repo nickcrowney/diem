@@ -4,11 +4,12 @@ import Tile from "../components/Tile";
 import Diem from "../components/Diem";
 import PopNewDiem from "../components/PopNewDiem";
 import styles from "../styles/Home.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import dayjs from "dayjs";
 import hooks from "../services/ApiServices";
 import { async } from "@firebase/util";
 import { useLoginContext } from "../contexts/Context";
+import { SocketContext } from "../contexts/Socket";
 import io from "socket.io-client";
 
 const currentDate = dayjs().toISOString().slice(0, 10); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');

@@ -21,6 +21,7 @@ model Diem {
   // author      User @relation(fields:[authorId], references: [id])
   // authorId    Int
   city   String?
+  color  String?
   //Message Message[]
 }
 
