@@ -65,6 +65,7 @@ io.on("connection", (socket: Socket) => {
   socket.on("disconnect", (loginInfo) => {
     onlineUserIds = onlineUserIds.filter((el) => el !== currentUser);
     socket.emit("onlineUsers", onlineUserIds);
+    console.log(currentUser + " has disconnected");
   });
 });
 

@@ -9,6 +9,8 @@ import styles from "./DiemInfoBar.module.css";
 const DiemInfoBar: React.FunctionComponent = ({ currentDiem }) => {
   useEffect(() => {}, [currentDiem]);
 
+  console.log(currentDiem);
+
   function dateFixer(calendarDate) {
     const options = {
       // weekday: 'long',
@@ -53,7 +55,8 @@ const DiemInfoBar: React.FunctionComponent = ({ currentDiem }) => {
           <div className={styles.diemInfoBar__profilePic_plusSign}>
             <Image src={plus} alt="Picture of the author" />
           </div>
-          {currentDiem.users &&
+          {currentDiem &&
+            currentDiem.users &&
             currentDiem.users.map((el) => {
               return (
                 <div key={el.id} className={styles.diemInfoBar__profilePic}>
