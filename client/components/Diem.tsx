@@ -17,11 +17,12 @@ const Diem: React.FunctionComponent = ({
   backgroundColor,
   setBackgroundColor,
 }) => {
-  useEffect(() => {}, [currentDiem]);
+  useEffect(() => {
+    currentDiem &&
+      setBackgroundColor({ 'background-color': currentDiem.color });
+  }, [currentDiem]);
   // const event = currentDiem && currentDiem.title;
-  const changeColor = () => {
-    setBackgroundColor({ 'background-color': 'black' });
-  };
+
   return (
     <>
       <div className={styles.diem} style={backgroundColor}>
@@ -46,13 +47,13 @@ const Diem: React.FunctionComponent = ({
         />
         <GoogleMap />
 
-        <div>
+        {/* <div>
           {currentDiem &&
             currentDiem.users &&
             currentDiem.users.map((el) => {
               return el && <div>{el.name}</div>;
             })}
-        </div>
+        </div> */}
 
         <div className={styles.diem__events}>
           <AddNewEvent

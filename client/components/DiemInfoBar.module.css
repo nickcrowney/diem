@@ -41,3 +41,8 @@
   display: flex;
   align-items: flex-end;
 }
+
+.diemInfoBar__title {
+  font-size: 5vh;
+  font-weight: bolder;
+}

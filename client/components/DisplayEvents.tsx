@@ -2,6 +2,8 @@ import React, { FC, useEffect, useState } from 'react';
 import { ReactSortable } from 'react-sortablejs';
 import styles from '../styles/Home.module.css';
 import hooks from '../services/ApiServices';
+import deleteBin from '../public/deleteBin.svg';
+import Image from 'next/image';
 
 interface ItemType {
   id: number;
@@ -26,6 +28,7 @@ function DisplayEvents({ currentDiem }) {
     console.log(currentDiem.events, 'MAPPABLE');
     currentDiem.events && setState(currentDiem.events);
   }, [currentDiem.events]);
+  useEffect(() => {}, [currentDiem]);
 
   const clickedEvent = (item) => {
     console.log('clicked event');
@@ -62,7 +65,9 @@ function DisplayEvents({ currentDiem }) {
                   {item.title}
                   {''}
                 </div>
-                <div onClick={removeEvent(item.id)}>x</div>
+                <div onClick={removeEvent(item.id)}>
+                  <Image src={deleteBin} height="20" width="20" />
+                </div>
               </div>
             </>
           ))}

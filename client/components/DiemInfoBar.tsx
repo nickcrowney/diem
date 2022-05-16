@@ -45,7 +45,9 @@ const DiemInfoBar: React.FunctionComponent = ({ currentDiem }) => {
   return (
     <div className={styles.diemInfoBar}>
       <div>
-        <h1>{currentDiem && currentDiem.title}</h1>
+        <div className={styles.diemInfoBar__title}>
+          {currentDiem && currentDiem.title}
+        </div>
         <h2>{date}</h2>
       </div>
       <div className={styles.diemInfoBar__picsAndButtons}>
@@ -58,7 +60,7 @@ const DiemInfoBar: React.FunctionComponent = ({ currentDiem }) => {
                 return (
                   <div key={el.id} className={styles.diemInfoBar__profilePic}>
                     <Image
-                      src={el.userPhoto}
+                      src={el && el.userPhoto}
                       height="50"
                       width="50"
                       alt="Picture of the author"
