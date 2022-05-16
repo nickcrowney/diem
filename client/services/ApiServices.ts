@@ -195,10 +195,10 @@ const updateDiemChatHistory = async (
 //   </div>
 // );
 
-const modifyDiem = async (title: String, id: Number) => {
-  const response = await fetch('http://localhost:4000/event', {
+const modifyDiem = async (id: Number, color: String) => {
+  const response = await fetch('http://localhost:4000/diemColor', {
     method: 'PATCH',
-    body: JSON.stringify({ title, id }),
+    body: JSON.stringify({ id, color }),
     headers: {
       'Content-Type': 'application/json',
     },
@@ -237,7 +237,7 @@ export default {
   deleteEvent,
   deleteUser,
   updateDiemUser,
-
+  modifyDiem,
   removeDiemUser,
 
   updateDiemChatHistory,
