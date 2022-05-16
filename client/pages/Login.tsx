@@ -19,12 +19,6 @@ const Login = () => {
 
   const signIn = async () => {
     const response = await signInWithPopup(firebaseAuth, provider);
-<<<<<<< HEAD
-
-=======
-    console.log(state, "STATE HERE");
-    console.log(response);
->>>>>>> main
     setLoginInfo(response.user);
     //If user exists in database, we don't re-POST them to db
     if (

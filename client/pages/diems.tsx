@@ -4,18 +4,17 @@ import Tile from "../components/Tile";
 import Diem from "../components/Diem";
 import PopNewDiem from "../components/PopNewDiem";
 import styles from "../styles/Home.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import dayjs from "dayjs";
 import hooks from "../services/ApiServices";
 import { async } from "@firebase/util";
 import { useLoginContext } from "../contexts/Context";
 import io from "socket.io-client";
+import { SocketContext } from "../contexts/Socket";
 
 const currentDate = dayjs().toISOString().slice(0, 10); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 console.log(currentDate, "CURRENT DATE");
 const Diems: NextPage = (props) => {
-  const socket = io("http://localhost:4000");
-
   const [onlineStatus, setOnlineStatus] = useState(false);
   const [onlineUsers, setOnlineUsers] = useState([]); //Grab onlineStatus emits from other users and use this to render online
   const { loginInfo, setLoginInfo } = useLoginContext();

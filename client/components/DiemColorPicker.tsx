@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './DiemColorPicker.module.css';
+import React from "react";
+import styles from "./DiemColorPicker.module.css";
 
 const DiemColorPicker = () => {
   return (
@@ -7,7 +7,7 @@ const DiemColorPicker = () => {
       <div
         className={styles.DiemColorPicker__Colors}
         id={styles.red}
-        onClick={console.log('rere')}
+        onClick={console.log("rere")}
       ></div>
       <div className={styles.DiemColorPicker__Colors} id={styles.orange}></div>
       <div className={styles.DiemColorPicker__Colors} id={styles.yellow}></div>

@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
-import Image from 'next/image';
-import calendar from '../public/images/calendar.png';
-import chat from '../public/images/chat.png';
-import prosAndCons from '../public/images/pros-and-cons.png';
-import plus from '../public/images/plus.png';
-import styles from './DiemInfoBar.module.css';
+import { useEffect } from "react";
+import Image from "next/image";
+import calendar from "../public/images/calendar.png";
+import chat from "../public/images/chat.png";
+import prosAndCons from "../public/images/pros-and-cons.png";
+import plus from "../public/images/plus.png";
+import styles from "./DiemInfoBar.module.css";
 
 const DiemInfoBar: React.FunctionComponent = ({ currentDiem }) => {
   useEffect(() => {}, [currentDiem]);
@@ -13,29 +13,29 @@ const DiemInfoBar: React.FunctionComponent = ({ currentDiem }) => {
     const options = {
       // weekday: 'long',
       // year: 'numeric',
-      day: 'numeric',
-      month: 'long',
+      day: "numeric",
+      month: "long",
     };
     const currentDate = new Date(calendarDate).toLocaleDateString(
-      'en-GB',
+      "en-GB",
       options
     );
-    const firstWhite = currentDate.indexOf(' ');
+    const firstWhite = currentDate.indexOf(" ");
     const firstBit = currentDate.slice(0, firstWhite);
     const secondBit = currentDate.slice(firstWhite);
     const nth = function (d) {
       const dString = String(d);
       const last = +dString.slice(-2);
-      if (last > 3 && last < 21) return 'th';
+      if (last > 3 && last < 21) return "th";
       switch (last % 10) {
         case 1:
-          return 'st';
+          return "st";
         case 2:
-          return 'nd';
+          return "nd";
         case 3:
-          return 'rd';
+          return "rd";
         default:
-          return 'th';
+          return "th";
       }
     };
     const finishedDate = firstBit + nth(firstBit) + secondBit;
@@ -45,7 +45,7 @@ const DiemInfoBar: React.FunctionComponent = ({ currentDiem }) => {
   return (
     <div className={styles.diemInfoBar}>
       <div>
-        <h1>{currentDiem.title}</h1>
+        {/* <h1>{currentDiem.title}</h1> */}
         <h2>{date}</h2>
       </div>
       <div className={styles.diemInfoBar__picsAndButtons}>
