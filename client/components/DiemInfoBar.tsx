@@ -83,5 +83,4 @@ const DiemInfoBar: React.FunctionComponent = ({ currentDiem }) => {
     </div>
   );
 };
-
 export default DiemInfoBar;

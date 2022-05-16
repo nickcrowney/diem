@@ -1,4 +1,4 @@
-import { shuffle } from 'lodash';
+
 import { Socket } from 'socket.io-client';
 import { useEffect, useState, useContext, useCallback } from 'react';
 import io from 'socket.io-client';
@@ -15,6 +15,7 @@ const Tile: React.FunctionComponent = ({
   setCurrentDiem,
   setAllDiems,
 }) => {
+
   const socket = useContext(SocketContext);
 
   const divClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -22,6 +23,7 @@ const Tile: React.FunctionComponent = ({
     console.log('CLICK EVENT FOR DIEM CHANGE');
     socket.emit('leavingRoom');
     socket.emit('joiningRoom', String(diem.id));
+
   };
   const clickDeleteDiem = () => {
     console.log('deleted');
@@ -70,6 +72,7 @@ const Tile: React.FunctionComponent = ({
   const event = diem.title;
 
   return (
+
     <>
       <div className={styles.tile} onClick={divClickedHandler}>
         <div>

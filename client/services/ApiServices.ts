@@ -70,10 +70,10 @@ const submitNewDiem = async (
   date: String,
   city: String,
   user: Number,
-  color: String
+  color: String,
 ) => {
-  const response = await fetch('http://localhost:4000/diem', {
-    method: 'POST',
+  const response = await fetch("http://localhost:4000/diem", {
+    method: "POST",
     body: JSON.stringify({ title, date, city, user, color }),
     headers: {
       'Content-Type': 'application/json',
