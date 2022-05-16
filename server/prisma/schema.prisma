@@ -10,42 +10,34 @@ datasource db {
   url      = "postgresql://alastairfletcher:postgres@localhost:5432/DiemDb?schema=public"
 }
 
-// model User {
-//   id       Int    @id @default(autoincrement())
-//   username String @unique
-//   password String
-//   cars     Car[]
-// }
-
-// model Car {
-//   id     Int    @id @default(autoincrement())
-//   mod    String
-//   year   Int
-//   user   User   @relation(fields: [userId], references: [id])
-//   userId Int
-// }
-
-////////////////// Diem Code /////////////////
-
 model Diem {
   id     Int     @id @default(autoincrement())
-  title  String  @db.VarChar(50)
+  title  String  @db.VarChar(30)
   events Event[]
   users  User[]  @relation(references: [id])
   date   String? //@default(now()) @db.Date
-  city  String?
+  //chatHistory Message[] //TODO relation
   // created    DateTime  @default(now())
   // author      User @relation(fields:[authorId], references: [id])
   // authorId    Int
+  city   String?
+  color  String?
+  //Message Message[]
+}
 
+//TODO
+model Message {
+  id      Int    @id @default(autoincrement())
+  author  Int
+  content String
+  //Diem    Diem?  @relation(fields: [diemId], references: [id])
+  diemId  Int?
 }
 
 model User {
   id          Int      @id @default(autoincrement())
   name        String   @db.VarChar(50)
-  //password  String  @default("password") @db.VarChar(25)
   diems       Diem[]
-  //profile   Profile?
   status      String?  @db.VarChar(255)
   userPhoto   String?
   email       String?
@@ -81,7 +73,6 @@ model Event {
   location   String?
   mapLink    String?
 }
-
 
 // model User {
 //   id       Int          @id @default(autoincrement())

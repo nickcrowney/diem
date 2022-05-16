@@ -2,13 +2,14 @@
   height: 10rem;
   width: 15rem;
   border-radius: 5px;
-  background-color: rgb(255, 157, 166);
+  background-color: #ccff90;
   color: rgb(40, 40, 40);
   padding: 1rem;
   margin: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: flex-end;
   transition: transform 0.25s;
 }
 
@@ -32,7 +33,11 @@
   height: 46px;
   width: 46px;
   object-fit: cover;
+<<<<<<< HEAD
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
+=======
+  border: solid 2px #f7f9fb;
+>>>>>>> 41acc10c4db2479a52073540afecf1af7abc12e1
 }
 
 .tile__profilePic_plusSign {
@@ -44,10 +49,23 @@
   object-fit: cover;
   z-index: 10;
   align-self: center;
+<<<<<<< HEAD
   border: solid #f7f9fb 2px;
+=======
+  border: solid 2px #f7f9fb;
+>>>>>>> 41acc10c4db2479a52073540afecf1af7abc12e1
 }
 
 .tile h1 {
   font-size: 18px;
   font-weight: 800;
+}
+
+.diem_date_first {
+  font-size: xx-large;
+  font-weight: bolder;
+}
+.diem_date_second {
+  font-size: x-large;
+  /* font-weight: ; */
 }

@@ -14,6 +14,13 @@ const getUsers = async () => {
 const getDiems = async () => {
   const response = await fetch("http://localhost:4000/diems");
   const data = await response.json();
+  console.log(data, "DATA");
+
+  data.sort(function (a, b) {
+    // Turn your strings into dates, and then subtract them
+    // to get a value that is either negative, positive, or zero.
+    return new Date(a.date) - new Date(b.date);
+  });
   return data;
   // setDiems(data);
 };
@@ -60,6 +67,7 @@ const submitNewUser = async (name: String, email: String, picture: String) => {
 //POST new diem
 const submitNewDiem = async (
   title: String,
+  color: String,
   date: String,
   city: String,
   user: Number
@@ -200,7 +208,6 @@ const modifyDiem = async (title: String, id: Number) => {
   console.log(data);
 };
 
-
 // const options = {
 //   method: 'GET',
 //   headers: {
@@ -216,7 +223,6 @@ const modifyDiem = async (title: String, id: Number) => {
 //   .then((response) => response.json())
 //   .then((response) => console.log(response))
 //   .catch((err) => console.error(err));
-
 
 export default {
   getUsers,

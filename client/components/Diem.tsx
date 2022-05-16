@@ -1,6 +1,13 @@
-import React, { useEffect } from 'react';
-import Image from 'next/image';
+import React, { useEffect } from "react";
+import DiemInfoBar from "./DiemInfoBar";
+import AddNewEvent from "./AddNewEvent";
+import PopAddUsers from "./PopAddUsers";
+import PopRemoveUsers from "./PopRemoveUsers";
+import DiemColorPicker from "./DiemColorPicker";
+import AddNewEventTest from "./AddNewEventTest";
+import styles from "./Diem.module.css";
 
+<<<<<<< HEAD
 import more from '../public/images/more.png';
 
 import styles from './Diem.module.css';
@@ -10,6 +17,8 @@ import PopAddUsers from './PopAddUsers';
 import AddNewEventTest from './AddNewEventTest';
 import PopRemoveUsers from './PopRemoveUsers';
 
+=======
+>>>>>>> 41acc10c4db2479a52073540afecf1af7abc12e1
 const Diem: React.FunctionComponent = ({
   mainDiem,
   currentDiem,
@@ -17,12 +26,17 @@ const Diem: React.FunctionComponent = ({
   users,
 }) => {
   useEffect(() => {}, [currentDiem]);
+<<<<<<< HEAD
   const date = currentDiem.date;
   const event = currentDiem.title;
+=======
+  const event = currentDiem && currentDiem.title;
+>>>>>>> 41acc10c4db2479a52073540afecf1af7abc12e1
 
   return (
     <>
       <div className={styles.diem}>
+<<<<<<< HEAD
         <DiemInfoBar
           mainDiem={mainDiem}
           currentDiem={currentDiem}
@@ -63,37 +77,45 @@ const Diem: React.FunctionComponent = ({
                 })}
             </div>
           </div>
+=======
+        <DiemInfoBar currentDiem={currentDiem} />
+
+        <div className={styles.addRemoveUsers}>
+>>>>>>> 41acc10c4db2479a52073540afecf1af7abc12e1
           <PopAddUsers
             users={users}
             currentDiem={currentDiem}
             setCurrentDiem={setCurrentDiem}
           />
-        </div>
-        <div>
           <PopRemoveUsers
             users={users}
             currentDiem={currentDiem}
             setCurrentDiem={setCurrentDiem}
           />
         </div>
+        <DiemColorPicker />
         <div>
-          {currentDiem.users &&
+          {currentDiem &&
+            currentDiem.users &&
             currentDiem.users.map((el) => {
               return <div>{el.name}</div>;
             })}
         </div>
+
         <div className={styles.diem__events}>
           <AddNewEvent currentDiem={currentDiem} />
+
           <div>
-            {currentDiem.events &&
+            {currentDiem &&
+              currentDiem.events &&
               currentDiem.events.map((el) => {
                 return (
                   <ul key={el.id}>
                     <div>
                       {el.title}
-                      {el.location ? ' at ' : ''}{' '}
-                      {el.location ? el.location + '. ' : ''}
-                      {el.time ? `Start time: ${el.time}` : ''}
+                      {el.location ? " at " : ""}{" "}
+                      {el.location ? el.location + ". " : ""}
+                      {el.time ? `Start time: ${el.time}` : ""}
                     </div>
                   </ul>
                 );

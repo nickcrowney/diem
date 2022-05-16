@@ -11,8 +11,6 @@ const Login = () => {
   const firebaseAuth = getAuth(firebaseApp);
   const provider = new GoogleAuthProvider();
 
-  const [loginDat, setLoginDat] = useState([]);
-
   const router = useRouter();
 
   const { loginInfo, setLoginInfo } = useLoginContext();
@@ -21,6 +19,7 @@ const Login = () => {
 
   const signIn = async () => {
     const response = await signInWithPopup(firebaseAuth, provider);
+<<<<<<< HEAD
 
     console.log('response', response);
     setLoginInfo(response.user);
@@ -42,6 +41,22 @@ const Login = () => {
     );
     //};
     //return <Link href="/diems" />;
+=======
+    setLoginInfo(response.user);
+    //If user exists in database, we don't re-POST them to db
+    // if (
+    //   state.length === 0 ||
+    //   (state && state.some((el): any => el.email !== response.user.email))
+    // ) {
+    //TODO change any to appropiate interface
+    props.submitNewUser(
+      response.user.displayName,
+      response.user.email,
+      response.user.photoURL
+    );
+    //}
+
+>>>>>>> 41acc10c4db2479a52073540afecf1af7abc12e1
     if (response.user.emailVerified) {
       router.replace('/diems', loginInfo);
     }

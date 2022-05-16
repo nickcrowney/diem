@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import Popup from 'reactjs-popup';
 import { useForm, Controller } from 'react-hook-form';
 import { useEffect, useState } from 'react';
-import styles from './PopNewDiem.module.css';
+import styles from './PopAddUsers.module.css';
 import props from '../services/ApiServices';
 import Image from 'next/image';
 import plus from '../public/images/more.png';
@@ -32,7 +32,7 @@ function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
   };
 
   const availableUsers = users.filter((user) => {
-    if (currentDiem.users) {
+    if (currentDiem && currentDiem.users) {
       return !currentDiem.users.some((el) => el.id == user.id);
     }
   });
@@ -54,22 +54,23 @@ function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
       return (prev = obj);
     });
     setSelectedOptions([]);
-    reset({ label: '', value: '' });
+    reset({ label: "", value: "" });
   };
 
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
-      <div className={styles.newdiem}>
+      <div className={styles.addUser}>
         <Select
           options={options}
           isMulti
-          placeholder=" Add people..."
+          placeholder="Add..."
           closeMenuOnScroll
           closeMenuOnSelect={true}
           onChange={handleChange}
         />
-
-        <button type="submit">Submit</button>
+        <button type="submit">
+          <Image src={plus} height="35" width="35" />
+        </button>
       </div>
     </form>
   );

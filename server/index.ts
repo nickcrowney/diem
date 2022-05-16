@@ -10,11 +10,13 @@ import { emit } from "process";
 
 const app = Express();
 const httpServer = http.createServer(app);
-const io = new Server(httpServer);
+const io = new Server(httpServer, {
+  cors: {
+    origin: "*",
+  },
+});
 
 app.use(cors()).use(morgan("short")).use(Express.json()).use(router);
-
-//.use(router)
 
 function bootstrap() {
   httpServer.listen(4000, () => {
@@ -23,39 +25,46 @@ function bootstrap() {
 }
 bootstrap();
 
-let chatHistory: String[] = [];
-// let onlineUserIds: Number[] = [];
+let onlineUserIds: String[] = [];
+let currentRoom = "room";
+let currentUser = "user";
 // let isOnline = false;
 
-//TODO impliment chat server logic in here
 io.on("connection", (socket: Socket) => {
-  socket.on("Message", (message) => {
-    //Recieve a message from a user, put this in chat history array, and ship back to all participant's of
-    chatHistory = [...chatHistory, message];
-    socket.emit("updatedChat", chatHistory);
+  console.log("socket connected on backend");
+
+  //Recieving online status
+  socket.on("currentlyOnline", (loginInf) => {
+    onlineUserIds.push(loginInf);
+    currentUser = loginInf;
+
+    console.log(`${loginInf} is currently online`);
+    socket.emit("onlineUsers", onlineUserIds); //Send back array of online users
   });
-  // socket.on("leavingroom" (cb) => {
-  //   if(socket.rooms) {
-  //     socket.leave(socket.rooms)
-  //   }
-  // })
-  socket.on("joinroom", (roomId) => {
-    socket.join(roomId);
+
+  //new chat
+  socket.on("message", (message) => {
+    //emit the array of full chat history here
+    socket.emit("updatedMessages", message);
+  });
+
+  socket.on("leavingRoom", () => {
+    //DONE
+    socket.leave(currentRoom);
+    console.log(`Leaving room with diemId ${currentRoom}`);
+  });
+
+  socket.on("joiningRoom", (roomId) => {
+    socket.join(String(roomId));
+    currentRoom = roomId;
     console.log(
       `User with socketid: ${socket.id}joined room with diemId: ${roomId}`
     );
-    socket.emit(`joined room with diem id ${roomId}`);
-    socket.on("Message", (message) => {
-      //Recieve a message from a user, put this in chat history array, and ship back to all participant's of
-      chatHistory = [...chatHistory, message];
-      socket.emit("updatedChat", chatHistory);
-    });
   });
-  socket.on("disconnect", (arg) => {
-    console.log("disconnecting now", socket.id);
-    //onlineUsers = [...onlineUserIds.filter((el) s=> el !== socket.id)];
-    // isOnline = false
-    // socket.emit("currentlyOnline" isOnline);
+
+  socket.on("disconnect", (loginInfo) => {
+    onlineUserIds = onlineUserIds.filter((el) => el !== currentUser);
+    socket.emit("onlineUsers", onlineUserIds);
   });
 });
 
