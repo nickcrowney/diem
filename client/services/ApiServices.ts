@@ -69,8 +69,8 @@ const submitNewDiem = async (
   title: String,
   date: String,
   city: String,
-  color: String,
-  user: Number
+  user: Number,
+  color: String
 ) => {
   const response = await fetch("http://localhost:4000/diem", {
     method: "POST",

@@ -4,6 +4,7 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import LoginForm from "../components/LoginForm";
 import testHook from "../services/testHook";
+import ChatServer from "../components/ChatServer";
 
 const Home: NextPage = () => {
   const { state } = testHook();
@@ -17,7 +18,8 @@ const Home: NextPage = () => {
       </Head>
       <div></div>
       <main className={styles.main}>
-        <LoginForm />
+        {/* <LoginForm /> */}
+        <ChatServer />
       </main>
     </div>
   );

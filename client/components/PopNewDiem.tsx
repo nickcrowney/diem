@@ -11,7 +11,7 @@ import plus from '../public/images/more.png';
 const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 const currentUser = 1;
 
-function PopNewDiem() {
+function PopNewDiem({ setAllDiems }) {
   const { register, handleSubmit, reset } = useForm();
   const [data, setData] = useState('Add new diem');
   const getColor = (e) => {
@@ -28,7 +28,32 @@ function PopNewDiem() {
           console.log(dateLong, 'date long');
           console.log(data.date, 'DATE');
           console.log(data.city, 'City');
-          props.submitNewDiem(data.title, data.date, data.city, currentUser);
+          console.log(data.color, 'Color');
+
+          props.submitNewDiem(
+            data.title,
+            data.date,
+            data.city,
+            currentUser,
+            data.color
+          );
+            'blue'
+          );
+          setAllDiems((prev) => {
+            prev = [
+              ...prev,
+              {
+                title: data.title,
+                date: data.date,
+                city: data.city,
+                user: currentUser,
+              },
+            ];
+            prev.sort(function (a, b) {
+              return new Date(a.date) - new Date(b.date);
+            });
+            return prev;
+          });
           reset({ title: '', city: '', date: '' });
         })}
         className={styles.form}
@@ -43,7 +68,6 @@ function PopNewDiem() {
           placeholder="Enter city..."
           className="py-2 px-4 rounded"
         />
-
         <input
           type="date"
           className="py-2 px-4 rounded border-none"
@@ -51,52 +75,57 @@ function PopNewDiem() {
           name="date"
           {...register('date', { required: true })}
         />
-
         <div className={styles.colorPicker}>
-          <button
-            type="submit"
+          <input
+            {...register('color')}
+            type="radio"
+            className={styles.colors}
+            name="color"
+            id="red"
+            value="#f28b82"
             style={{ backgroundColor: '#f28b82' }}
+          />
+          <input
+            {...register('color')}
+            type="radio"
             className={styles.colors}
-            id={styles.red}
-            onClick={getColor}
-          ></button>
-          <button
-            type="submit"
+            id="orange"
+            value="#fabd04"
             style={{ backgroundColor: '#fabd04' }}
+          />
+          <input
+            {...register('color')}
+            type="radio"
             className={styles.colors}
-            id={styles.orange}
-            onClick={getColor}
-          ></button>
-          <button
-            type="submit"
+            id="yellow"
+            value="#fff476"
             style={{ backgroundColor: '#fff476' }}
+          />
+          <input
+            {...register('color')}
+            type="radio"
             className={styles.colors}
-            id={styles.yellow}
-            onClick={getColor}
-          ></button>
-          <button
-            type="submit"
+            id="green"
+            value="#ccff90"
             style={{ backgroundColor: '#ccff90' }}
+          />
+          <input
+            {...register('color')}
+            type="radio"
             className={styles.colors}
-            id={styles.green}
-            onClick={getColor}
-          ></button>
-          <button
-            type="submit"
+            id="blue"
+            value="#a7ffeb"
             style={{ backgroundColor: '#a7ffeb' }}
+          />
+          <input
+            {...register('color')}
+            type="radio"
             className={styles.colors}
-            id={styles.blue}
-            onClick={getColor}
-          ></button>
-          <button
-            type="submit"
+            id="purple"
+            value="purple"
             style={{ backgroundColor: '#d7affb' }}
-            className={styles.colors}
-            id={styles.purple}
-            onClick={getColor}
-          ></button>
+          />
         </div>
-
         <input
           id="submit"
           type="submit"

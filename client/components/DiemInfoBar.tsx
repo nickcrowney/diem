@@ -47,7 +47,11 @@ const DiemInfoBar: React.FunctionComponent = ({ currentDiem }) => {
   return (
     <div className={styles.diemInfoBar}>
       <div>
+<<<<<<< HEAD
         {/* <h1>{currentDiem.title}</h1> */}
+=======
+        <h1>{currentDiem && currentDiem.title}</h1>
+>>>>>>> ef2bc30d6d9943483c3d1698d55a34d477154677
         <h2>{date}</h2>
       </div>
       <div className={styles.diemInfoBar__picsAndButtons}>
@@ -55,6 +59,7 @@ const DiemInfoBar: React.FunctionComponent = ({ currentDiem }) => {
           <div className={styles.diemInfoBar__profilePic_plusSign}>
             <Image src={plus} alt="Picture of the author" />
           </div>
+<<<<<<< HEAD
           {currentDiem &&
             currentDiem.users &&
             currentDiem.users.map((el) => {
@@ -69,6 +74,22 @@ const DiemInfoBar: React.FunctionComponent = ({ currentDiem }) => {
                 </div>
               );
             })}
+=======
+          {currentDiem && currentDiem.users // always truthy
+            ? currentDiem.users.map((el) => {
+                return (
+                  <div key={el.id} className={styles.diemInfoBar__profilePic}>
+                    <Image
+                      src={el.userPhoto}
+                      height="50"
+                      width="50"
+                      alt="Picture of the author"
+                    />
+                  </div>
+                );
+              })
+            : ''}
+>>>>>>> ef2bc30d6d9943483c3d1698d55a34d477154677
         </div>
         <div className={styles.diemInfoBar__buttons}>
           <button type="button">
@@ -85,5 +106,4 @@ const DiemInfoBar: React.FunctionComponent = ({ currentDiem }) => {
     </div>
   );
 };
-
 export default DiemInfoBar;

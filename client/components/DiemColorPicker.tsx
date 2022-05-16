@@ -2,21 +2,30 @@ import React from "react";
 import { colors } from "react-select/dist/declarations/src/theme";
 import styles from "./DiemColorPicker.module.css";
 
-const DiemColorPicker = (setBackgroundColor, backgroundColor) => {
-  const getColor = (e) => {
-    e.preventDefault();
+const DiemColorPicker = (backgroundColor, setBackgroundColor) => {
+  const getColor = () => {
+    console.log(backgroundColor);
+    // e.preventDefault();
+    setBackgroundColor({ 'background-color': '#f28b82' });
     // setBackgroundColor((prev) => {
     //   return e.currentTarget.style.backgroundColor;
     // });
-    console.log(backgroundColor);
     // console.log(e.currentTarget.style.backgroundColor);
   };
-
+  const changeColor = () => {
+    setBackgroundColor({ 'background-color': 'black' });
+  };
   return (
     <div className={styles.DiemColorPicker__ColorPicker}>
+      <button onClick={changeColor}>CLICK</button>
+
       <button
         type="submit"
+<<<<<<< HEAD
         style={{ backgroundColor: "#f28b82" }}
+=======
+        style={{ 'background-color': '#f28b82' }}
+>>>>>>> ef2bc30d6d9943483c3d1698d55a34d477154677
         className={styles.DiemColorPicker__Colors}
         id={styles.red}
         onClick={getColor}
