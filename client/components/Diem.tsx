@@ -1,24 +1,28 @@
-import React, { useEffect } from "react";
-import DiemInfoBar from "./DiemInfoBar";
-import AddNewEvent from "./AddNewEvent";
-import PopAddUsers from "./PopAddUsers";
-import PopRemoveUsers from "./PopRemoveUsers";
-import DiemColorPicker from "./DiemColorPicker";
-import AddNewEventTest from "./AddNewEventTest";
-import styles from "./Diem.module.css";
+import React, { useEffect } from 'react';
+import DiemInfoBar from './DiemInfoBar';
+import AddNewEvent from './AddNewEvent';
+import PopAddUsers from './PopAddUsers';
+import PopRemoveUsers from './PopRemoveUsers';
+import DiemColorPicker from './DiemColorPicker';
+import GoogleMap from './GoogleMap';
+import AddNewEventTest from './AddNewEventTest';
+import styles from './Diem.module.css';
+
+
 
 const Diem: React.FunctionComponent = ({
   mainDiem,
   currentDiem,
   setCurrentDiem,
   users,
+  backgroundColor,
 }) => {
   useEffect(() => {}, [currentDiem]);
   const event = currentDiem && currentDiem.title;
 
   return (
     <>
-      <div className={styles.diem}>
+      <div className={styles.diem} style={{ backgroundColor: backgroundColor }}>
         <DiemInfoBar currentDiem={currentDiem} />
 
         <div className={styles.addRemoveUsers}>
@@ -34,6 +38,8 @@ const Diem: React.FunctionComponent = ({
           />
         </div>
         <DiemColorPicker />
+        <GoogleMap />
+
         <div>
           {currentDiem &&
             currentDiem.users &&

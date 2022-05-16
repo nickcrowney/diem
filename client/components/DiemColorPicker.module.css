@@ -2,6 +2,7 @@
   display: flex;
   /* flex-direction: column; */
   justify-content: flex-end;
+  margin-right: 15px;
 }
 
 .DiemColorPicker__Colors {
@@ -14,26 +15,32 @@
   border: solid 2px #f7f9fb;
 }
 
-#red {
-  background-color: #f28b82;
+#red:hover {
+  opacity: 1;
+  border: #f28b82 solid 1px;
 }
 
-#orange {
-  background-color: #fabd04;
+#orange:hover {
+  opacity: 1;
+  border: #fabd04 solid 1px;
 }
 
-#yellow {
-  background-color: #fff476;
+#yellow:hover {
+  opacity: 1;
+  border: #fff476 solid 1px;
 }
 
-#green {
-  background-color: #ccff90;
+#green:hover {
+  opacity: 1;
+  border: #ccff90 solid 1px;
 }
 
-#blue {
-  background-color: #a7ffeb;
+#blue:hover {
+  opacity: 1;
+  border: #a7ffeb solid 1px;
 }
 
-#purple {
-  background-color: #d7affb;
+#purple:hover {
+  opacity: 1;
+  border: #d7affb solid 1px;
 }

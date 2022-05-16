@@ -11,6 +11,13 @@ import minus from '../public/images/minus.png';
 import Select from 'react-select';
 
 function PopRemoveUsers({ users, currentDiem, setCurrentDiem }) {
+  const customStyles = {
+    container: (provided) => ({
+      ...provided,
+      width: '300px',
+    }),
+  };
+
   const { register, handleSubmit, reset } = useForm();
   const [selectedOptions, setSelectedOptions] = useState([]);
 
@@ -66,6 +73,7 @@ function PopRemoveUsers({ users, currentDiem, setCurrentDiem }) {
     <form onSubmit={handleSubmit(submitHandler)}>
       <div className={styles.addUser}>
         <Select
+          styles={customStyles}
           options={options}
           isMulti
           placeholder="Remove..."

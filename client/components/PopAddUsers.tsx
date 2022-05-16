@@ -13,8 +13,14 @@ const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ')
 const currentUser = 1;
 
 function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
-  const { register, handleSubmit, reset } = useForm();
+  const customStyles = {
+    container: (provided) => ({
+      ...provided,
+      width: '300px',
+    }),
+  };
 
+  const { register, handleSubmit, reset } = useForm();
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   const handleChange = (options) => {
@@ -61,6 +67,7 @@ function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
     <form onSubmit={handleSubmit(submitHandler)}>
       <div className={styles.addUser}>
         <Select
+          styles={customStyles}
           options={options}
           isMulti
           placeholder="Add..."
