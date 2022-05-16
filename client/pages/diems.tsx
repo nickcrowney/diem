@@ -13,8 +13,11 @@ import { SocketContext } from "../contexts/Socket";
 import io from "socket.io-client";
 
 const currentDate = dayjs().toISOString().slice(0, 10); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
-//console.log(currentDate, "CURRENT DATE");
+
+console.log(currentDate, 'CURRENT DATE');
+
 const Diems: NextPage = (props) => {
+
   const [onlineStatus, setOnlineStatus] = useState(false);
   const [onlineUsers, setOnlineUsers] = useState([]); //Grab onlineStatus emits from other users and use this to render online
   const { loginInfo, setLoginInfo } = useLoginContext();
@@ -22,7 +25,9 @@ const Diems: NextPage = (props) => {
   const [data, setData] = useState("");
   const [mainDiem, setDiem] = useState("");
   const [allDiems, setAllDiems] = useState([]);
+  const [backgroundColor, setBackgroundColor] = useState('#fabd04');
   const [history, setHistory] = useState([]);
+
   const [currentDiem, setCurrentDiem] = useState({
     title: "Select Diem",
     id: 2, //TODO make this default to the id of the first diem in the list
@@ -90,12 +95,12 @@ const Diems: NextPage = (props) => {
             return (
               <div key={el.id}>
                 <Tile
-                  setDiem={setDiem}
                   mainDiem={mainDiem}
                   allDiems={allDiems}
                   setAllDiems={setAllDiems}
                   diem={el}
                   setCurrentDiem={setCurrentDiem}
+                  backgroundColor={backgroundColor}
                 />
               </div>
             );
@@ -108,6 +113,7 @@ const Diems: NextPage = (props) => {
             currentDiem={currentDiem}
             setCurrentDiem={setCurrentDiem}
             users={users}
+            backgroundColor={backgroundColor}
           />
         </div>
       </main>

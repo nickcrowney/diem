@@ -8,6 +8,7 @@ import Image from "next/image";
 import plus from "../public/images/plus.png";
 import styles from "./Tile.module.css";
 
+
 const Tile: React.FunctionComponent = ({ allDiems, diem, setCurrentDiem }) => {
   const socket = useContext(SocketContext);
 
@@ -54,6 +55,7 @@ const Tile: React.FunctionComponent = ({ allDiems, diem, setCurrentDiem }) => {
   const event = diem.title;
 
   return (
+
     <div className={styles.tile} onClick={divClickedHandler}>
       <div className={styles.tile__info}>
         <span className={styles.diem_date_first}>{date.slice(0, 4)}</span>
