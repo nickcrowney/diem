@@ -9,19 +9,11 @@ import dayjs from "dayjs";
 import hooks from "../services/ApiServices";
 import { async } from "@firebase/util";
 import { useLoginContext } from "../contexts/Context";
-<<<<<<< HEAD
-import io from "socket.io-client";
-import { SocketContext } from "../contexts/Socket";
-
-const currentDate = dayjs().toISOString().slice(0, 10); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
-console.log(currentDate, "CURRENT DATE");
-=======
 import { SocketContext } from "../contexts/Socket";
 import io from "socket.io-client";
 
 const currentDate = dayjs().toISOString().slice(0, 10); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 //console.log(currentDate, "CURRENT DATE");
->>>>>>> 41acc10c4db2479a52073540afecf1af7abc12e1
 const Diems: NextPage = (props) => {
   const [onlineStatus, setOnlineStatus] = useState(false);
   const [onlineUsers, setOnlineUsers] = useState([]); //Grab onlineStatus emits from other users and use this to render online
