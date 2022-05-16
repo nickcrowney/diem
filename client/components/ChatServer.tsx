@@ -5,7 +5,7 @@ import updateDiemChatHistory from "../services/ApiServices";
 import Message from "./Message";
 
 const ChatServer: React.FunctionComponent = (props) => {
-  //const socket = io("http://localhost:4000");
+  const socket = io("http://localhost:4000");
   //RENDER a list of messages
   // const chatHis = props.chatHistory;
   const mockData = [
@@ -65,41 +65,7 @@ const ChatServer: React.FunctionComponent = (props) => {
   //Text input field with submit button
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-white relative">
-      {/* {mockData.map((el) => {
-        return <Message message={el} />;
-      })} */}
-      <button
-        onClick={() => {
-          socket.emit("leavingRoom");
-          setCurrent(1);
-          // socket.emit("joiningRoom", 1);
-        }}
-      >
-        1
-      </button>
-
-      <button
-        onClick={() => {
-          socket.emit("leavingRoom");
-          setCurrent(2);
-          //socket.emit("joiningRoom", 2);
-        }}
-      >
-        2
-      </button>
-
-      <button
-        onClick={() => {
-          console.log("Button 3");
-          socket.emit("leavingRoom");
-          setCurrent(3);
-          // socket.emit("joiningRoom", 3);
-        }}
-      >
-        3
-      </button>
-    </div>
+    <div className="w-screen h-screen flex justify-center items-center bg-white relative"></div>
   );
 };
 export default ChatServer;

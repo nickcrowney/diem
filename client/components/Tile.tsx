@@ -1,24 +1,12 @@
-<<<<<<< HEAD
 import React from "react";
 import Image from "next/image";
 import plus from "../public/images/plus.png";
 import styles from "./Tile.module.css";
-=======
 import { shuffle } from "lodash";
 import { Socket } from "socket.io-client";
->>>>>>> 41acc10c4db2479a52073540afecf1af7abc12e1
 import { useEffect, useState, useContext, useCallback } from "react";
-import { Socket } from "socket.io-client";
 import io from "socket.io-client";
 import { SocketContext } from "../contexts/Socket";
-<<<<<<< HEAD
-=======
-import React from "react";
-import Image from "next/image";
-import plus from "../public/images/plus.png";
-import styles from "./Tile.module.css";
-
->>>>>>> 41acc10c4db2479a52073540afecf1af7abc12e1
 const Tile: React.FunctionComponent = ({ allDiems, diem, setCurrentDiem }) => {
   const socket = useContext(SocketContext);
 
