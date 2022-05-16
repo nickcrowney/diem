@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { FcGoogle } from 'react-icons/fc';
-import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
-import { firebaseApp } from '../firebase-config';
-import props from '../services/ApiServices';
-import usersHook from '../services/testHook';
-import { useLoginContext } from '../contexts/Context';
-import { useRouter } from 'next/router';
+import React, { useEffect, useState } from "react";
+import { FcGoogle } from "react-icons/fc";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { firebaseApp } from "../firebase-config";
+import props from "../services/ApiServices";
+import usersHook from "../services/testHook";
+import { useLoginContext } from "../contexts/Context";
+import { useRouter } from "next/router";
 
 const Login = () => {
   const firebaseAuth = getAuth(firebaseApp);
   const provider = new GoogleAuthProvider();
-
-  const [loginDat, setLoginDat] = useState([]);
 
   const router = useRouter();
 
@@ -21,27 +19,22 @@ const Login = () => {
 
   const signIn = async () => {
     const response = await signInWithPopup(firebaseAuth, provider);
-    console.log(state, 'STATE HERE');
-    console.log(response);
     setLoginInfo(response.user);
-
-    //setLoginDat([response.user]);
-
     //If user exists in database, we don't re-POST them to db
-    if (
-      state.length === 0 ||
-      (state && state.some((el): any => el.email !== response.user.email))
-    ) {
-      //TODO change any to appropiate interface
-      props.submitNewUser(
-        response.user.displayName,
-        response.user.email,
-        response.user.photoURL
-      );
-    }
-    //return <Link href="/diems" />;
+    // if (
+    //   state.length === 0 ||
+    //   (state && state.some((el): any => el.email !== response.user.email))
+    // ) {
+    //TODO change any to appropiate interface
+    props.submitNewUser(
+      response.user.displayName,
+      response.user.email,
+      response.user.photoURL
+    );
+    //}
+
     if (response.user.emailVerified) {
-      router.replace('/diems', loginInfo);
+      router.replace("/diems", loginInfo);
     }
     //TODO Throw invalid login error here
   };

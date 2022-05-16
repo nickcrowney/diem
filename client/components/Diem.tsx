@@ -8,6 +8,8 @@ import GoogleMap from './GoogleMap';
 import AddNewEventTest from './AddNewEventTest';
 import styles from './Diem.module.css';
 
+
+
 const Diem: React.FunctionComponent = ({
   mainDiem,
   currentDiem,
@@ -16,7 +18,6 @@ const Diem: React.FunctionComponent = ({
   backgroundColor,
 }) => {
   useEffect(() => {}, [currentDiem]);
-
   const event = currentDiem && currentDiem.title;
 
   return (
@@ -58,9 +59,9 @@ const Diem: React.FunctionComponent = ({
                   <ul key={el.id}>
                     <div>
                       {el.title}
-                      {el.location ? ' at ' : ''}{' '}
-                      {el.location ? el.location + '. ' : ''}
-                      {el.time ? `Start time: ${el.time}` : ''}
+                      {el.location ? " at " : ""}{" "}
+                      {el.location ? el.location + ". " : ""}
+                      {el.time ? `Start time: ${el.time}` : ""}
                     </div>
                   </ul>
                 );
