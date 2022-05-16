@@ -11,7 +11,7 @@ import plus from '../public/images/more.png';
 const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 const currentUser = 1;
 
-function PopNewDiem() {
+function PopNewDiem({ setAllDiems }) {
   const { register, handleSubmit, reset } = useForm();
   const [data, setData] = useState('Add new diem');
   const getColor = (e) => {
@@ -28,7 +28,28 @@ function PopNewDiem() {
           console.log(dateLong, 'date long');
           console.log(data.date, 'DATE');
           console.log(data.city, 'City');
-          props.submitNewDiem(data.title, data.date, data.city, currentUser);
+          props.submitNewDiem(
+            data.title,
+            data.date,
+            data.city,
+            currentUser,
+            'blue'
+          );
+          setAllDiems((prev) => {
+            prev = [
+              ...prev,
+              {
+                title: data.title,
+                date: data.date,
+                city: data.city,
+                user: currentUser,
+              },
+            ];
+            prev.sort(function (a, b) {
+              return new Date(a.date) - new Date(b.date);
+            });
+            return prev;
+          });
           reset({ title: '', city: '', date: '' });
         })}
         className={styles.form}
