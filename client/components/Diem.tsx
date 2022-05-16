@@ -4,6 +4,7 @@ import AddNewEvent from './AddNewEvent';
 import PopAddUsers from './PopAddUsers';
 import PopRemoveUsers from './PopRemoveUsers';
 import DiemColorPicker from './DiemColorPicker';
+import GoogleMap from './GoogleMap';
 import AddNewEventTest from './AddNewEventTest';
 import styles from './Diem.module.css';
 
@@ -12,6 +13,7 @@ const Diem: React.FunctionComponent = ({
   currentDiem,
   setCurrentDiem,
   users,
+  backgroundColor,
 }) => {
   useEffect(() => {}, [currentDiem]);
 
@@ -19,11 +21,10 @@ const Diem: React.FunctionComponent = ({
 
   return (
     <>
-      <div className={styles.diem}>
+      <div className={styles.diem} style={{ backgroundColor: backgroundColor }}>
         <DiemInfoBar currentDiem={currentDiem} />
 
         <div className={styles.addRemoveUsers}>
-
           <PopAddUsers
             users={users}
             currentDiem={currentDiem}
@@ -36,6 +37,8 @@ const Diem: React.FunctionComponent = ({
           />
         </div>
         <DiemColorPicker />
+        <GoogleMap />
+
         <div>
           {currentDiem &&
             currentDiem.users &&

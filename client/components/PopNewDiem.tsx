@@ -14,6 +14,10 @@ const currentUser = 1;
 function PopNewDiem() {
   const { register, handleSubmit, reset } = useForm();
   const [data, setData] = useState('Add new diem');
+  const getColor = (e) => {
+    e.preventDefault();
+    console.log(e.currentTarget.style.backgroundColor);
+  };
 
   return (
     <div className={styles.newdiem}>
@@ -47,6 +51,51 @@ function PopNewDiem() {
           name="date"
           {...register('date', { required: true })}
         />
+
+        <div className={styles.colorPicker}>
+          <button
+            type="submit"
+            style={{ backgroundColor: '#f28b82' }}
+            className={styles.colors}
+            id={styles.red}
+            onClick={getColor}
+          ></button>
+          <button
+            type="submit"
+            style={{ backgroundColor: '#fabd04' }}
+            className={styles.colors}
+            id={styles.orange}
+            onClick={getColor}
+          ></button>
+          <button
+            type="submit"
+            style={{ backgroundColor: '#fff476' }}
+            className={styles.colors}
+            id={styles.yellow}
+            onClick={getColor}
+          ></button>
+          <button
+            type="submit"
+            style={{ backgroundColor: '#ccff90' }}
+            className={styles.colors}
+            id={styles.green}
+            onClick={getColor}
+          ></button>
+          <button
+            type="submit"
+            style={{ backgroundColor: '#a7ffeb' }}
+            className={styles.colors}
+            id={styles.blue}
+            onClick={getColor}
+          ></button>
+          <button
+            type="submit"
+            style={{ backgroundColor: '#d7affb' }}
+            className={styles.colors}
+            id={styles.purple}
+            onClick={getColor}
+          ></button>
+        </div>
 
         <input
           id="submit"

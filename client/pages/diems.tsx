@@ -13,9 +13,9 @@ import io from 'socket.io-client';
 
 const currentDate = dayjs().toISOString().slice(0, 10); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 console.log(currentDate, 'CURRENT DATE');
+
 const Diems: NextPage = (props) => {
   const socket = io('http://localhost:4000');
-
   const [onlineStatus, setOnlineStatus] = useState(false);
   const [onlineUsers, setOnlineUsers] = useState([]); //Grab onlineStatus emits from other users and use this to render online
   const { loginInfo, setLoginInfo } = useLoginContext();
@@ -24,54 +24,17 @@ const Diems: NextPage = (props) => {
   const [mainDiem, setDiem] = useState('');
   const [allDiems, setAllDiems] = useState([]);
 
+  const [backgroundColor, setBackgroundColor] = useState('#fabd04');
+
   console.log(loginInfo, 'LOGIN INFO');
 
   //IF a user's socket id belongs to a user whose email state exists in context, emit to other users that that user is online
-
   let socId = '00000000';
   const [history, setHistory] = useState();
-
   const [currentDiem, setCurrentDiem] = useState({
     id: 1,
     title: 'Add New Diem',
   });
-
-  // socket.on("connect", (arg) => {
-  //   ////MAIN SOCKET CONNECTION
-  //   //On connection set onlineStatus to true
-  //   socId = socket.id;
-  //   console.log("connected to Sockets on front end");
-  //   setOnlineStatus(true);
-
-  //   socket.emit("online", onlineStatus);
-  // });
-
-  // useEffect(() => {
-  //   //This will change the current chat room to the maindiem's chatroom
-  //   socket.emit("leavingroom");
-
-  //   socket.emit("joinroom", currentDiem.id); //Send to backend socket to inform it to join room with correct diemId.
-  //   console.log(`Connected to room with diemId ${currentDiem.id}`);
-  // }, [currentDiem]);
-
-  // socket.on("updateMessages", (messages) => {
-  //   //When we recieve the updated message history from backend
-  //   setHistory((prev) => messages);
-  //   console.log(messages);
-  //   //chatHistory: messages; //Set the most updated chat history to chatHistory of the diem
-  //   // console.log(messages);
-  // });
-
-  // socket.on("onlineUsers", (onlineUserIds) => {
-  //   ///SEE IF USER IS ONLINE not used right now
-  //   //When we recieve the online users
-  //   console.log(onlineUserIds);
-  //   setOnlineUsers(onlineUserIds);
-  // });
-
-  // socket.on("disconnect" () => {
-  //   console.log(`User has disconnected`)
-  // });
 
   useEffect(() => {}, [currentDiem]);
   const [users, setUsers] = useState([]);
@@ -127,12 +90,12 @@ const Diems: NextPage = (props) => {
             return (
               <div key={el.id}>
                 <Tile
-                  setDiem={setDiem}
                   mainDiem={mainDiem}
                   allDiems={allDiems}
                   setAllDiems={setAllDiems}
                   diem={el}
                   setCurrentDiem={setCurrentDiem}
+                  backgroundColor={backgroundColor}
                 />
               </div>
             );
@@ -145,6 +108,7 @@ const Diems: NextPage = (props) => {
             currentDiem={currentDiem}
             setCurrentDiem={setCurrentDiem}
             users={users}
+            backgroundColor={backgroundColor}
           />
         </div>
       </main>
