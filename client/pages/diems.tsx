@@ -123,14 +123,16 @@ const Diems: NextPage = (props) => {
         </div>
 
         <div className={styles.diem}>
-          <Diem
-            mainDiem={mainDiem}
-            currentDiem={currentDiem}
-            setCurrentDiem={setCurrentDiem}
-            users={users}
-            backgroundColor={backgroundColor}
-            setBackgroundColor={setBackgroundColor}
-          />
+          {currentDiem && (
+            <Diem
+              mainDiem={mainDiem}
+              currentDiem={currentDiem}
+              setCurrentDiem={setCurrentDiem}
+              users={users}
+              backgroundColor={backgroundColor}
+              setBackgroundColor={setBackgroundColor}
+            />
+          )}
         </div>
       </main>
     </div>

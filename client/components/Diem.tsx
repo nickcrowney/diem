@@ -20,13 +20,15 @@ const Diem: React.FunctionComponent = ({
 }) => {
   const [addRemoveUser, setAddRemoveUser] = useState(false);
   useEffect(() => {}, [currentDiem]);
-  const date = currentDiem.date;
-  const event = currentDiem && currentDiem.title;
+  // const date = currentDiem.date;
+  // const event = currentDiem && currentDiem.title;
 
   const [state, setState] = useState<ItemType[]>([]);
   useEffect(() => {
     currentDiem &&
-      setBackgroundColor({ 'background-color': currentDiem.color });
+      setBackgroundColor({
+        'background-color': currentDiem && currentDiem.color,
+      });
   }, [currentDiem]);
 
   return (

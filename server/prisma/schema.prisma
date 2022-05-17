@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://alastairfletcher:postgres@localhost:5432/DiemDb2?schema=public"
+  url      = env("DATABASE_URL")
 }
 
 model Diem {
@@ -31,7 +31,7 @@ model Message {
   author    Int
   content   String
   //Diem    Diem?  @relation(fields: [diemId], references: [id])
-  diemId    Int?
+  metaDiemId    Int?
   timestamp String
   metaDiem  Diem?  @relation(fields: [metaDiemId], references: [id])
 }
