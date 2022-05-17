@@ -53,7 +53,7 @@ const AddNewEvent = ({ currentDiem, setCurrentDiem }) => {
       >
         {eventText}
       </div>
-      {/* <Popup
+      <Popup
         className={styles.plusdiem}
         trigger={<Image src={plus} height="40" width="40" />}
         position="right top"
@@ -92,7 +92,7 @@ const AddNewEvent = ({ currentDiem, setCurrentDiem }) => {
               );
               reset({ title: '', location: '', time: '' });
 
-              // setData(JSON.stringify(data));
+              setData(JSON.stringify(data));
             })}
             className={styles.input}
           >
@@ -103,7 +103,7 @@ const AddNewEvent = ({ currentDiem, setCurrentDiem }) => {
             <input type="submit" />
           </form>
         </div>
-      </Popup> */}
+      </Popup>
     </div>
   );
 };

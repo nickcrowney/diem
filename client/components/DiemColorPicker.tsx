@@ -1,6 +1,25 @@
+<<<<<<< HEAD
 import React from "react";
 import { colors } from "react-select/dist/declarations/src/theme";
 import styles from "./DiemColorPicker.module.css";
+=======
+import React from 'react';
+import { colors } from 'react-select/dist/declarations/src/theme';
+import styles from './DiemColorPicker.module.css';
+import hooks from '../services/ApiServices';
+
+const DiemColorPicker = ({
+  setBackgroundColor,
+  backgroundColor,
+  currentDiem,
+}) => {
+  const getColor = (color) => {
+    console.log(backgroundColor);
+    // e.preventDefault();
+    setBackgroundColor({ 'background-color': color });
+    console.log('Loop?');
+    hooks.modifyDiemColor(currentDiem.id, color);
+>>>>>>> 3d2971830c849e78d62199bfd4cc7dd17a86a2ee
 
 const DiemColorPicker = (setBackgroundColor, backgroundColor) => {
   const getColor = (e) => {
