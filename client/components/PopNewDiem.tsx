@@ -20,45 +20,56 @@ function PopNewDiem({ setAllDiems }) {
   };
 
   return (
-    <>
-      <div className={styles.newdiem}>
-        <form
-          onSubmit={handleSubmit((data) => {
-            const dateLong = new Date(data.date);
-            console.log(data.title, 'TITLE');
-            console.log(dateLong, 'date long');
-            console.log(data.date, 'DATE');
-            console.log(data.city, 'City');
-            console.log(data.color, 'Color');
+    <div className={styles.newdiem}>
+      <form
+        onSubmit={handleSubmit((data) => {
+          const dateLong = new Date(data.date);
+          console.log(data.title, 'TITLE');
+          console.log(dateLong, 'date long');
+          console.log(data.date, 'DATE');
+          console.log(data.city, 'City');
+          console.log(data.color, 'Color');
+          props.submitNewDiem(
+            data.title,
+            data.date,
+            data.city,
+            currentUser,
+            data.color
+          );
+          ('blue');
 
-            props.submitNewDiem(
-              data.title,
-              data.date,
-              data.city,
-              currentUser,
-              data.color
-            );
-
-            setAllDiems((prev) => {
-              prev = [
-                ...prev,
-                {
-                  title: data.title,
-                  date: data.date,
-                  city: data.city,
-                  user: currentUser,
-                  color: data.color,
-                },
-              ];
-              prev.sort(function (a, b) {
-                return new Date(a.date) - new Date(b.date);
-              });
-              return prev;
+          setAllDiems((prev) => {
+            prev = [
+              ...prev,
+              {
+                title: data.title,
+                date: data.date,
+                city: data.city,
+                user: currentUser,
+              },
+            ];
+            prev.sort(function (a, b) {
+              return new Date(a.date) - new Date(b.date);
             });
-            reset({ title: '', city: '', date: '' });
-          })}
-          className={styles.form}
-        >
+            return prev;
+          });
+          reset({ title: '', city: '', date: '' });
+        })}
+        className={styles.form}
+      >
+        <input
+          {...register('title')}
+          placeholder="Diem Name..."
+          className="py-2 px-4 rounded"
+        />
+        <input
+          type="date"
+          className="py-2 px-4 rounded border-none"
+          min={currentDate}
+          name="date"
+          {...register('date', { required: true })}
+        />
+        <div className={styles.colorPicker}>
           <input
             {...register('title')}
             placeholder="Diem Name..."

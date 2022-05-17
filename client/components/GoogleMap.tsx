@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const GoogleMap = () => {
+  const [mapPin, setMapPin] = useState('');
+
   const queryMap = (e) => {
+    e.preventDefault();
     const query = e.target.query.value;
-    console.log(query);
+    setMapPin(query);
   };
 
   return (
     <>
       <form onSubmit={queryMap}>
-        <input type="text" name="query" id="" />
+        <input type="text" name="query" id="query" />
         <button>search</button>
       </form>
       <iframe
@@ -19,7 +22,7 @@ const GoogleMap = () => {
         loading="lazy"
         allowFullScreen
         referrerPolicy="no-referrer-when-downgrade"
-        src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBsNI21BHJIIKWSngJbtch5hnqfnLlTP6o&q=sagrada`}
+        src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBsNI21BHJIIKWSngJbtch5hnqfnLlTP6o&q=${mapPin}`}
       ></iframe>
     </>
   );

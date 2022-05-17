@@ -1,10 +1,10 @@
+import { useEffect, useState, useContext } from 'react';
 import type { NextPage } from 'next';
 import Nav from '../components/Nav';
 import Tile from '../components/Tile';
 import Diem from '../components/Diem';
 import PopNewDiem from '../components/PopNewDiem';
 import styles from '../styles/Home.module.css';
-import { useEffect, useState, useContext } from 'react';
 import dayjs from 'dayjs';
 import hooks from '../services/ApiServices';
 import { async } from '@firebase/util';
@@ -14,7 +14,7 @@ import io from 'socket.io-client';
 
 const currentDate = dayjs().toISOString().slice(0, 10); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 
-console.log(currentDate, 'CURRENT DATE');
+// console.log(currentDate, 'CURRENT DATE');
 
 const Diems: NextPage = (props) => {
   const [onlineStatus, setOnlineStatus] = useState(false);
@@ -96,12 +96,13 @@ const Diems: NextPage = (props) => {
         loginData={loginInfo}
         users={users}
         setUsers={setUsers}
-        toggleNewDiemPop={setNewDiemPop}
+        setNewDiemPop={setNewDiemPop}
       />
 
       <main className={styles.container}>
+        {/* <button onClick={changeColor}>CLICK</button> */}
         <div className={styles.tiles}>
-          <PopNewDiem setAllDiems={setAllDiems} />
+          {/* {newDiemPop && <PopNewDiem setAllDiems={setAllDiems} />} */}
 
           {allDiems.map((el) => {
             return (
