@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import DiemInfoBar from './DiemInfoBar';
 import AddNewEvent from './AddNewEvent';
 import PopAddUsers from './PopAddUsers';
@@ -17,6 +17,7 @@ const Diem: React.FunctionComponent = ({
   backgroundColor,
   setBackgroundColor,
 }) => {
+  const [state, setState] = useState<ItemType[]>([]);
   useEffect(() => {
     currentDiem &&
       setBackgroundColor({ 'background-color': currentDiem.color });
@@ -59,10 +60,18 @@ const Diem: React.FunctionComponent = ({
           <AddNewEvent
             currentDiem={currentDiem}
             setCurrentDiem={setCurrentDiem}
+            state={state}
+            setState={setState}
           />
 
           <div>
-            {currentDiem && <DisplayEvents currentDiem={currentDiem} />}
+            {currentDiem && (
+              <DisplayEvents
+                currentDiem={currentDiem}
+                state={state}
+                setState={setState}
+              />
+            )}
 
             {/* {currentDiem &&
               currentDiem.events &&

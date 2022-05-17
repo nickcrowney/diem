@@ -9,20 +9,9 @@ interface ItemType {
   id: number;
   name: string;
 }
-function DisplayEvents({ currentDiem }) {
+function DisplayEvents({ currentDiem, state, setState }) {
   console.log(currentDiem.events, 'EVENTSSSS');
-  const [state, setState] = useState<ItemType[]>([
-    // currentDiem.events
-    //   [
-    // { id: 1, name: 'pre-drinks' },
-    // { id: 2, name: 'match time' },
-    // { id: 3, name: 'consolation drink' },
-    // ]
-    // currentDiem.events
-    //   [
-    //
-    // ]
-  ]);
+  // const [state, setState] = useState<ItemType[]>([]);
 
   useEffect(() => {
     console.log(currentDiem.events, 'MAPPABLE');
@@ -61,11 +50,11 @@ function DisplayEvents({ currentDiem }) {
           {state.map((item) => (
             <>
               <div className={styles.events}>
-                <div key={item.id} onClick={clickedEvent(item)}>
+                <div key={item.id} onClick={() => clickedEvent(item)}>
                   {item.title}
                   {''}
                 </div>
-                <div onClick={removeEvent(item.id)}>
+                <div onClick={() => removeEvent(item.id)}>
                   <Image src={deleteBin} height="20" width="20" />
                 </div>
               </div>

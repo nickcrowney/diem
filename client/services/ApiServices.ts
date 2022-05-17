@@ -70,10 +70,10 @@ const submitNewDiem = async (
   date: String,
   city: String,
   user: Number,
-  color: String,
+  color: String
 ) => {
-  const response = await fetch("http://localhost:4000/diem", {
-    method: "POST",
+  const response = await fetch('http://localhost:4000/diem', {
+    method: 'POST',
     body: JSON.stringify({ title, date, city, user, color }),
     headers: {
       'Content-Type': 'application/json',
@@ -195,7 +195,7 @@ const updateDiemChatHistory = async (
 //   </div>
 // );
 
-const modifyDiem = async (id: Number, color: String) => {
+const modifyDiemColor = async (id: Number, color: String) => {
   const response = await fetch('http://localhost:4000/diemColor', {
     method: 'PATCH',
     body: JSON.stringify({ id, color }),
@@ -237,7 +237,7 @@ export default {
   deleteEvent,
   deleteUser,
   updateDiemUser,
-  modifyDiem,
+  modifyDiemColor,
   removeDiemUser,
 
   updateDiemChatHistory,
