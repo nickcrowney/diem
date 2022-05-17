@@ -163,35 +163,25 @@ const removeDiemUser = async (diemId: Number, userId: Number) => {
   //console.log(data);
 };
 
-const updateDiemChatHistory = async (
-  diemId: Number,
-  chatHistory: Message[]
+const modifyDiemChatHistory = async (
+  message: String,
+  id: Number,
+  author: String,
+  time: String
 ) => {
-  const response = await fetch("http://localhost: 4000/diem", {
-    method: "PATCH",
-    body: JSON.stringify({ diemId, chatHistory }),
+  const response = await fetch("http://localhost:4000/message", {
+    method: "POST",
+    body: JSON.stringify({ message, id, author, time }),
     headers: {
       "Content-Type": "application/json",
     },
   });
-  const data = await response.json();
-  console.log(data);
-  return data;
-};
+  console.log("YALALALALA");
 
-//TODO add patches for user, diem, and events
-// return (
-//   <div
-//     className="w-screen h-screen bg-slate-100 flex justify-center items-center "
-//     onClick={() => getUsers}
-//   >
-//     Test
-//     {/* {users.length &&
-//       users.map((el) => {
-//         return <div>{el.name}</div>;
-//       })} */}
-//   </div>
-// );
+  const data = await response.json();
+  return data;
+  console.log(data);
+};
 
 const modifyDiemColor = async (id: Number, color: String) => {
   const response = await fetch("http://localhost:4000/diemColor", {
@@ -237,7 +227,7 @@ export default {
   updateDiemUser,
   modifyDiemColor,
   removeDiemUser,
-  updateDiemChatHistory,
+  modifyDiemChatHistory,
 };
 
 //export default ApiServices;
