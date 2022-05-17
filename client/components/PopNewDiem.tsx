@@ -106,7 +106,7 @@ function PopNewDiem({ setAllDiems, allDiems }) {
             type="radio"
             className={styles.colors}
             id="purple"
-            value="purple"
+            value="#d7affb"
             style={{ backgroundColor: '#d7affb' }}
           />
         </div>

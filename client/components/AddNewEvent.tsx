@@ -52,7 +52,7 @@ const AddNewEvent = ({ currentDiem, setCurrentDiem, state, setState }) => {
             {...register('eventName')}
             placeholder="Add event here..."
             className={styles.addEventInput}
-            style={{ backgroundColor: currentDiem.color }}
+            style={{ backgroundColor: currentDiem && currentDiem.color }}
             // contentEditable="true"
             // onInput={(e) => {
             //   setEventInput(e.currentTarget.textContent);

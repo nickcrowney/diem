@@ -1,48 +1,31 @@
-import React, { FC, useEffect, useState } from "react";
-import { ReactSortable } from "react-sortablejs";
-import styles from "../styles/Home.module.css";
-import hooks from "../services/ApiServices";
-import deleteBin from "../public/deleteBin.svg";
-import Image from "next/image";
+import React, { FC, useEffect, useState } from 'react';
+import { ReactSortable } from 'react-sortablejs';
+import styles from '../styles/Home.module.css';
+import hooks from '../services/ApiServices';
+import deleteBin from '../public/deleteBin.svg';
+import Image from 'next/image';
 
 interface ItemType {
   id: number;
   name: string;
 }
-<<<<<<< HEAD
-function DisplayEvents({ currentDiem }) {
-  console.log(currentDiem.events, "EVENTSSSS");
-  const [state, setState] = useState<ItemType[]>([
-    // currentDiem.events
-    //   [
-    // { id: 1, name: 'pre-drinks' },
-    // { id: 2, name: 'match time' },
-    // { id: 3, name: 'consolation drink' },
-    // ]
-    // currentDiem.events
-    //   [
-    //
-    // ]
-  ]);
-=======
 function DisplayEvents({ currentDiem, state, setState }) {
   console.log(currentDiem.events, 'EVENTSSSS');
   // const [state, setState] = useState<ItemType[]>([]);
->>>>>>> a94eb8c8150b5bf8accefaae2903b2bfc7ca0a4b
 
   useEffect(() => {
-    console.log(currentDiem.events, "MAPPABLE");
+    console.log(currentDiem.events, 'MAPPABLE');
     currentDiem.events && setState(currentDiem.events);
   }, [currentDiem.events]);
   useEffect(() => {}, [currentDiem]);
 
   const clickedEvent = (item) => {
-    console.log("clicked event");
-    console.log(item.title, "title event");
-    console.log(item.id, "event ID");
+    console.log('clicked event');
+    console.log(item.title, 'title event');
+    console.log(item.id, 'event ID');
   };
   const removeEvent = (id) => {
-    console.log("remove event");
+    console.log('remove event');
     // hooks.deleteEvent(id);
   };
   return (
@@ -69,7 +52,7 @@ function DisplayEvents({ currentDiem, state, setState }) {
               <div className={styles.events}>
                 <div key={item.id} onClick={() => clickedEvent(item)}>
                   {item.title}
-                  {""}
+                  {''}
                 </div>
                 <div onClick={() => removeEvent(item.id)}>
                   <Image src={deleteBin} height="20" width="20" />
@@ -79,7 +62,7 @@ function DisplayEvents({ currentDiem, state, setState }) {
           ))}
         </ReactSortable>
       ) : (
-        "Currently no events"
+        'Currently no events'
       )}
     </>
   );

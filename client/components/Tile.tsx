@@ -1,65 +1,69 @@
-import { Socket } from "socket.io-client";
-import { useEffect, useState, useContext, useCallback } from "react";
-import io from "socket.io-client";
-import { SocketContext } from "../contexts/Socket";
-import React from "react";
-import Image from "next/image";
-import plus from "../public/images/plus.png";
-import styles from "./Tile.module.css";
-import hooks from "../services/ApiServices";
+import { Socket } from 'socket.io-client';
+import { useEffect, useState, useContext, useCallback } from 'react';
+import io from 'socket.io-client';
+import { SocketContext } from '../contexts/Socket';
+import React from 'react';
+import Image from 'next/image';
+import plus from '../public/images/plus.png';
+import styles from './Tile.module.css';
+import hooks from '../services/ApiServices';
+import deleteBin from '../public/deleteBin.svg';
 
 const Tile: React.FunctionComponent = ({
   allDiems,
   diem,
   setCurrentDiem,
   setAllDiems,
+  backgroundColor,
 }) => {
   const socket = useContext(SocketContext);
 
   const divClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
     setCurrentDiem(diem);
-    console.log("CLICK EVENT FOR DIEM CHANGE");
-    socket.emit("leavingRoom");
-    socket.emit("joiningRoom", String(diem.id));
+    console.log('CLICK EVENT FOR DIEM CHANGE');
+    socket.emit('leavingRoom');
+    socket.emit('joiningRoom', String(diem.id));
   };
   const clickDeleteDiem = () => {
-    console.log("deleted");
+    console.log('deleted');
     diem.events &&
       diem.events.forEach((el) => {
-        console.log(el.id, "ELLL");
+        console.log(el.id, 'ELLL');
         hooks.deleteEvent(el.id);
       });
     hooks.deleteDiem(diem.id);
     setAllDiems((prev) => (prev = prev.filter((el) => el.id !== diem.id)));
+    console.log(allDiems[0], 'FIRST DIEM');
+    setCurrentDiem(allDiems[0]);
   };
 
   function dateFixer(calendarDate) {
     const options = {
       // weekday: 'long',
       // year: 'numeric',
-      day: "numeric",
-      month: "long",
+      day: 'numeric',
+      month: 'long',
     };
     const currentDate = new Date(calendarDate).toLocaleDateString(
-      "en-GB",
+      'en-GB',
       options
     );
-    const firstWhite = currentDate.indexOf(" ");
+    const firstWhite = currentDate.indexOf(' ');
     const firstBit = currentDate.slice(0, firstWhite);
     const secondBit = currentDate.slice(firstWhite);
     const nth = function (d) {
       const dString = String(d);
       const last = +dString.slice(-2);
-      if (last > 3 && last < 21) return "th";
+      if (last > 3 && last < 21) return 'th';
       switch (last % 10) {
         case 1:
-          return "st";
+          return 'st';
         case 2:
-          return "nd";
+          return 'nd';
         case 3:
-          return "rd";
+          return 'rd';
         default:
-          return "th";
+          return 'th';
       }
     };
     const finishedDate = firstBit + nth(firstBit) + secondBit;
@@ -70,9 +74,15 @@ const Tile: React.FunctionComponent = ({
 
   return (
     <>
-      <div className={styles.tile} onClick={divClickedHandler}>
+      <div
+        className={styles.tile}
+        style={{ 'background-color': diem.color }}
+        onClick={divClickedHandler}
+      >
         <div>
-          <div onClick={clickDeleteDiem}>X</div>
+          <div onClick={clickDeleteDiem} className={styles.deleteDiem}>
+            <Image src={deleteBin} height="20" width="20" />
+          </div>
           <div className={styles.tile__info}>
             <span className={styles.diem_date_first}>{date.slice(0, 4)}</span>
             <span className={styles.diem_date_second}>{date.slice(4)}</span>

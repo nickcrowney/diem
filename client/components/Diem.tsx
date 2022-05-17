@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-import React, { useEffect } from "react";
-import DiemInfoBar from "./DiemInfoBar";
-import AddNewEvent from "./AddNewEvent";
-import PopAddUsers from "./PopAddUsers";
-import PopRemoveUsers from "./PopRemoveUsers";
-import DiemColorPicker from "./DiemColorPicker";
-import GoogleMap from "./GoogleMap";
-import AddNewEventTest from "./AddNewEventTest";
-import styles from "./Diem.module.css";
-import DisplayEvents from "./DisplayEvents";
-=======
 import React, { useEffect, useState } from 'react';
 import DiemInfoBar from './DiemInfoBar';
 import AddNewEvent from './AddNewEvent';
@@ -21,7 +9,6 @@ import AddNewEventTest from './AddNewEventTest';
 import styles from './Diem.module.css';
 import DisplayEvents from './DisplayEvents';
 import more from '../public/images/more.png';
->>>>>>> a94eb8c8150b5bf8accefaae2903b2bfc7ca0a4b
 
 const Diem: React.FunctionComponent = ({
   mainDiem,
@@ -33,19 +20,17 @@ const Diem: React.FunctionComponent = ({
 }) => {
   const [addRemoveUser, setAddRemoveUser] = useState(false);
   useEffect(() => {}, [currentDiem]);
-  const date = currentDiem.date;
-  const event = currentDiem && currentDiem.title;
+  // const date = currentDiem.date;
+  // const event = currentDiem && currentDiem.title;
 
   const [state, setState] = useState<ItemType[]>([]);
   useEffect(() => {
     currentDiem &&
-      setBackgroundColor({ "background-color": currentDiem.color });
+      setBackgroundColor({
+        'background-color': currentDiem && currentDiem.color,
+      });
   }, [currentDiem]);
-<<<<<<< HEAD
-  // const event = currentDiem && currentDiem.title;
-=======
 
->>>>>>> a94eb8c8150b5bf8accefaae2903b2bfc7ca0a4b
   return (
     <>
       <div className={styles.diem} style={backgroundColor}>

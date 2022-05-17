@@ -18,11 +18,12 @@
   flex-direction: row;
   padding: 2px;
   margin: 4px;
-  border: black;
+  /* border: black; */
   justify-content: space-between; /* border-width: 5px; */
   border-style: solid;
   border-radius: 7px;
   width: 30vw;
+  font-size: large;
 }
 
 .addEvent {

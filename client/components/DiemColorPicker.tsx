@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import { colors } from "react-select/dist/declarations/src/theme";
-import styles from "./DiemColorPicker.module.css";
-=======
 import React from 'react';
 import { colors } from 'react-select/dist/declarations/src/theme';
 import styles from './DiemColorPicker.module.css';
@@ -19,15 +14,10 @@ const DiemColorPicker = ({
     setBackgroundColor({ 'background-color': color });
     console.log('Loop?');
     hooks.modifyDiemColor(currentDiem.id, color);
->>>>>>> 3d2971830c849e78d62199bfd4cc7dd17a86a2ee
 
-const DiemColorPicker = (setBackgroundColor, backgroundColor) => {
-  const getColor = (e) => {
-    e.preventDefault();
     // setBackgroundColor((prev) => {
     //   return e.currentTarget.style.backgroundColor;
     // });
-    console.log(backgroundColor);
     // console.log(e.currentTarget.style.backgroundColor);
   };
 
@@ -35,53 +25,38 @@ const DiemColorPicker = (setBackgroundColor, backgroundColor) => {
     <div className={styles.DiemColorPicker__ColorPicker}>
       <button
         type="submit"
-<<<<<<< HEAD
-        style={{ backgroundColor: "#f28b82" }}
-=======
         style={{ backgroundColor: '#f28b82' }}
->>>>>>> a94eb8c8150b5bf8accefaae2903b2bfc7ca0a4b
         className={styles.DiemColorPicker__Colors}
         id={styles.red}
-        onClick={getColor}
+        onClick={() => getColor('#f28b82')}
       ></button>
       <button
         type="submit"
-        style={{ backgroundColor: "#fabd04" }}
+        style={{ backgroundColor: '#fabd04' }}
         className={styles.DiemColorPicker__Colors}
         id={styles.orange}
-        onClick={getColor}
+        onClick={() => getColor('#fabd04')}
       ></button>
       <button
         type="submit"
-        style={{ backgroundColor: "#fff476" }}
+        style={{ backgroundColor: '#fff476' }}
         className={styles.DiemColorPicker__Colors}
         id={styles.yellow}
-        onClick={getColor}
+        onClick={() => getColor('#fff476')}
       ></button>
       <button
         type="submit"
-        style={{ backgroundColor: "#ccff90" }}
+        style={{ backgroundColor: '#ccff90' }}
         className={styles.DiemColorPicker__Colors}
         id={styles.green}
-        onClick={getColor}
+        onClick={() => getColor('#ccff90')}
       ></button>
       <button
         type="submit"
-<<<<<<< HEAD
-        style={{ backgroundColor: "#a7ffeb" }}
-        className={styles.DiemColorPicker__Colors}
-        id={styles.blue}
-        onClick={getColor}
-      ></button>
-      <button
-        type="submit"
-        style={{ backgroundColor: "#d7affb" }}
-=======
         style={{ backgroundColor: '#d7affb' }}
->>>>>>> a94eb8c8150b5bf8accefaae2903b2bfc7ca0a4b
         className={styles.DiemColorPicker__Colors}
         id={styles.purple}
-        onClick={getColor}
+        onClick={() => getColor('#d7affb')}
       ></button>
     </div>
   );
