@@ -1,26 +1,27 @@
 .newdiem {
-  width: 15rem;
   border-radius: 5px;
-  background-color: #d7affb;
-  padding: 0 1rem;
-  margin: 1rem;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-direction: row;
 }
 
 .form {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .newdiem input {
-  margin: 1rem 0;
+  margin: 1rem 1rem;
+}
+.newdiem input[type='radio'] {
+  margin: 1rem 0.25em;
+}
+.newdiem input[type='text'] {
+  border: solid 2px red;
 }
 
 .colorPicker {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
 }
 
 .colors {
