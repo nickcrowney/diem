@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import DiemInfoBar from './DiemInfoBar';
-import AddNewEvent from './AddNewEvent';
-import PopAddUsers from './PopAddUsers';
-import PopRemoveUsers from './PopRemoveUsers';
-import DiemColorPicker from './DiemColorPicker';
-import GoogleMap from './GoogleMap';
-import AddNewEventTest from './AddNewEventTest';
-import styles from './Diem.module.css';
-import DisplayEvents from './DisplayEvents';
-import more from '../public/images/more.png';
+import React, { useEffect, useState } from "react";
+import DiemInfoBar from "./DiemInfoBar";
+import AddNewEvent from "./AddNewEvent";
+import PopAddUsers from "./PopAddUsers";
+import PopRemoveUsers from "./PopRemoveUsers";
+import DiemColorPicker from "./DiemColorPicker";
+import GoogleMap from "./GoogleMap";
+import AddNewEventTest from "./AddNewEventTest";
+import styles from "./Diem.module.css";
+import DisplayEvents from "./DisplayEvents";
+import more from "../public/images/more.png";
 
 const Diem: React.FunctionComponent = ({
   mainDiem,
@@ -27,7 +27,7 @@ const Diem: React.FunctionComponent = ({
   useEffect(() => {
     currentDiem &&
       setBackgroundColor({
-        'background-color': currentDiem && currentDiem.color,
+        "background-color": currentDiem && currentDiem.color,
       });
   }, [currentDiem]);
 
