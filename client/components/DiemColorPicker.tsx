@@ -6,7 +6,7 @@ const DiemColorPicker = (backgroundColor, setBackgroundColor) => {
   const getColor = () => {
     console.log(backgroundColor);
     // e.preventDefault();
-    setBackgroundColor({ 'background-color': '#f28b82' });
+    // setBackgroundColor({ 'background-color': '#f28b82' });
     // setBackgroundColor((prev) => {
     //   return e.currentTarget.style.backgroundColor;
     // });
@@ -17,7 +17,7 @@ const DiemColorPicker = (backgroundColor, setBackgroundColor) => {
   };
   return (
     <div className={styles.DiemColorPicker__ColorPicker}>
-      <button onClick={changeColor}>CLICK</button>
+      {/* <button onClick={changeColor}>CLICK</button> */}
 
       <button
         type="submit"
@@ -45,13 +45,6 @@ const DiemColorPicker = (backgroundColor, setBackgroundColor) => {
         style={{ backgroundColor: '#ccff90' }}
         className={styles.DiemColorPicker__Colors}
         id={styles.green}
-        onClick={getColor}
-      ></button>
-      <button
-        type="submit"
-        style={{ backgroundColor: '#a7ffeb' }}
-        className={styles.DiemColorPicker__Colors}
-        id={styles.blue}
         onClick={getColor}
       ></button>
       <button
