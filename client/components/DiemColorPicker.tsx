@@ -1,5 +1,4 @@
 import React from 'react';
-import { colors } from 'react-select/dist/declarations/src/theme';
 import styles from './DiemColorPicker.module.css';
 import hooks from '../services/ApiServices';
 
@@ -9,16 +8,8 @@ const DiemColorPicker = ({
   currentDiem,
 }) => {
   const getColor = (color) => {
-    console.log(backgroundColor);
-    // e.preventDefault();
     setBackgroundColor({ 'background-color': color });
-    console.log('Loop?');
     hooks.modifyDiemColor(currentDiem.id, color);
-
-    // setBackgroundColor((prev) => {
-    //   return e.currentTarget.style.backgroundColor;
-    // });
-    // console.log(e.currentTarget.style.backgroundColor);
   };
 
   return (

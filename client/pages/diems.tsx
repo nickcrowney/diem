@@ -3,21 +3,15 @@ import type { NextPage } from 'next';
 import Nav from '../components/Nav';
 import Tile from '../components/Tile';
 import Diem from '../components/Diem';
-import PopNewDiem from '../components/PopNewDiem';
 import styles from '../styles/Home.module.css';
 import dayjs from 'dayjs';
 import hooks from '../services/ApiServices';
-import { async } from '@firebase/util';
 import { useLoginContext } from '../contexts/Context';
 import { SocketContext } from '../contexts/Socket';
-import io from 'socket.io-client';
 
-const currentDate = dayjs().toISOString().slice(0, 10); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
-
-// console.log(currentDate, 'CURRENT DATE');
+const currentDate = dayjs().toISOString().slice(0, 10);
 
 const Diems: NextPage = (props) => {
-  const [onlineStatus, setOnlineStatus] = useState(false);
   const [onlineUsers, setOnlineUsers] = useState([]); //Grab onlineStatus emits from other users and use this to render online
   const { loginInfo, setLoginInfo } = useLoginContext();
   const [newDiemPop, setNewDiemPop] = useState(false);
@@ -28,7 +22,6 @@ const Diems: NextPage = (props) => {
   const [backgroundColor, setBackgroundColor] = useState({
     'background-color': '#fabd04',
   });
-  const [history, setHistory] = useState([]);
 
   const [currentDiem, setCurrentDiem] = useState({
     id: 1,
@@ -62,11 +55,6 @@ const Diems: NextPage = (props) => {
       .catch((error) => console.log(error));
   }, []);
 
-  // (res.sort(function (a, b) {
-  //   // Turn your strings into dates, and then subtract them
-  //   // to get a value that is either negative, positive, or zero.
-  //   return new Date(a.date) - new Date(b.date);
-  // }))()
   useEffect(() => {
     hooks
       .getDiems()
@@ -77,19 +65,14 @@ const Diems: NextPage = (props) => {
         setAllDiems(resFuture);
         setAllEvents(
           resFuture.map((el) => {
-            console.log(el.events, 'EVENTITOS');
             return el.events;
           })
         );
         setCurrentDiem(resFuture[0]);
-        console.log(resFuture[0], 'RES FUTURE 0');
-        console.log(resFuture[0].color, 'RES FUTURE COLOR');
-
         setBackgroundColor({ 'background-color': resFuture[0].color });
       })
       .catch((error) => console.log(error));
   }, []);
-  allEvents.length && console.log(allEvents, 'AAAALLLLLLL');
   return (
     <div>
       <Nav
@@ -103,7 +86,6 @@ const Diems: NextPage = (props) => {
       />
 
       <main className={styles.container}>
-        {/* <button onClick={changeColor}>CLICK</button> */}
         <div className={styles.tiles}>
           {allDiems.map((el) => {
             return (
