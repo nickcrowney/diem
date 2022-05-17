@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import dayjs from 'dayjs';
-import Popup from 'reactjs-popup';
-import { useForm, Controller } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import React from 'react';
+
+import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 import styles from './PopAddUsers.module.css';
 import props from '../services/ApiServices';
 import Image from 'next/image';
@@ -55,7 +54,6 @@ function PopRemoveUsers({ users, currentDiem, setCurrentDiem }) {
       const obj = { ...prev };
 
       const user = obj.users.filter((el) => {
-        console.log(el, 'ELLLLLL');
         return !selectedOptions.some((elem) => {
           if (elem.id === el.id) return true;
           else return false;
@@ -82,7 +80,7 @@ function PopRemoveUsers({ users, currentDiem, setCurrentDiem }) {
           onChange={handleChange}
         />
         <button type="submit">
-          <Image src={minus} height="35" width="35" />
+          <Image src={minus} height="35" width="35" alt="submit-image" />
         </button>
       </div>
     </form>

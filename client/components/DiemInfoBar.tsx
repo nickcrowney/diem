@@ -20,10 +20,15 @@ const DiemInfoBar: React.FunctionComponent = ({
 
   function dateFixer(calendarDate) {
     const options = {
+<<<<<<< HEAD
       // weekday: 'long',
       // year: 'numeric',
       day: "numeric",
       month: "long",
+=======
+      day: 'numeric',
+      month: 'long',
+>>>>>>> 032076549a3c5fe5ae9e81a54739e281709916db
     };
     const currentDate = new Date(calendarDate).toLocaleDateString(
       "en-GB",
@@ -82,10 +87,10 @@ const DiemInfoBar: React.FunctionComponent = ({
         </div>
         <div className={styles.diemInfoBar__buttons}>
           <button type="button">
-            <Image src={calendar} height="40" width="40" />
+            <Image src={calendar} height="40" width="40" alt="calendar-image" />
           </button>
           <button type="button">
-            <Image src={chat} height="40" width="40" />
+            <Image src={chat} height="40" width="40" alt="chat-image" />
           </button>
           <button type="button">
             <Image
@@ -93,6 +98,7 @@ const DiemInfoBar: React.FunctionComponent = ({
               height="40"
               width="40"
               onClick={handleClick}
+              alt="pros-cons-image"
             />
           </button>
         </div>

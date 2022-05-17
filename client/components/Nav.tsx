@@ -21,10 +21,20 @@ const Nav = ({
       return !prev;
     });
   }
+<<<<<<< HEAD
   //console.log(users[0], '0th user');
   const mainUser = users.filter((el) => {
     return el.email === loginData.email;
   });
+=======
+  const mainUser = users[0];
+  console.log(mainUser, 'MAIN');
+  // const mainUser = users.filter((el) => {
+  //   return el.email === loginData.email;
+  //   TODO;
+  //   // return el.id === 1;
+  // });
+>>>>>>> 032076549a3c5fe5ae9e81a54739e281709916db
 
   console.log("PROPS HERE", loginData);
 
@@ -35,7 +45,17 @@ const Nav = ({
           <button type="button" onClick={handleClick}>
             <Image src={more} height="40" width="40" />
           </button>
+<<<<<<< HEAD
           {newDiemPop && <PopNewDiem setAllDiems={setAllDiems} />}
+=======
+          {newDiemPop && (
+            <PopNewDiem
+              allDiems={allDiems}
+              setAllDiems={setAllDiems}
+              users={users}
+            />
+          )}
+>>>>>>> 032076549a3c5fe5ae9e81a54739e281709916db
         </div>
 
         <div className={styles.nav__end}>
@@ -45,9 +65,8 @@ const Nav = ({
           <div className={styles.nav__profilePic}>
             {mainUser && (
               <Image
-                src={mainUser[0]?.userPhoto ?? mypic}
+                src={mainUser?.userPhoto ?? mypic}
                 alt="Picture of the author"
-                // layout='fill'
                 height="50"
                 width="50"
               />
