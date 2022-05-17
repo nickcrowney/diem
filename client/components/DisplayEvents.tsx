@@ -1,16 +1,9 @@
-<<<<<<< HEAD
 import React, { FC, useEffect, useState } from "react";
 import { ReactSortable } from "react-sortablejs";
 import styles from "../styles/Home.module.css";
 import hooks from "../services/ApiServices";
-=======
-import React, { FC, useEffect, useState } from 'react';
-import { ReactSortable } from 'react-sortablejs';
-import styles from '../styles/Home.module.css';
-import hooks from '../services/ApiServices';
-import deleteBin from '../public/deleteBin.svg';
-import Image from 'next/image';
->>>>>>> ee310b1905c4a44dafeb572c1858effea4278f67
+import deleteBin from "../public/deleteBin.svg";
+import Image from "next/image";
 
 interface ItemType {
   id: number;

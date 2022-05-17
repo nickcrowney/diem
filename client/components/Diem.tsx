@@ -19,16 +19,9 @@ const Diem: React.FunctionComponent = ({
 }) => {
   useEffect(() => {
     currentDiem &&
-      setBackgroundColor({ 'background-color': currentDiem.color });
+      setBackgroundColor({ "background-color": currentDiem.color });
   }, [currentDiem]);
   // const event = currentDiem && currentDiem.title;
-<<<<<<< HEAD
-  const changeColor = () => {
-    setBackgroundColor({ "background-color": "black" });
-  };
-=======
-
->>>>>>> ee310b1905c4a44dafeb572c1858effea4278f67
   return (
     <>
       <div className={styles.diem} style={backgroundColor}>
