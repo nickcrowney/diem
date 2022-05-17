@@ -35,7 +35,7 @@ const Login: React.FunctionComponent = () => {
 
   return (
     <div className="w-screen h-screen flex justify-center items-center bg-white relative">
-      <div className="absolute top-0 left-0 right-0 bottom-0 bg-slate-900 bg-opacity-50"></div>
+      <div className="absolute top-0 lt-0 right-0 bottom-0 bg-slate-900 bg-opacity-50"></div>
       <div
         className="z-10 flex justify-center items-center border border-gray-300 rounded-full p-2 bg-white bg-opacity-60 cursor-pointer hover:shadow-md hover:bg-opacity-100"
         onClick={signIn}

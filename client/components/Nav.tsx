@@ -28,8 +28,11 @@ const Nav = ({
     return el.id === 1;
   });
 
+<<<<<<< HEAD
+=======
   console.log('PROPS HERE', loginData);
 
+>>>>>>> a94eb8c8150b5bf8accefaae2903b2bfc7ca0a4b
   return (
     <div className={styles.navContainer}>
       <div className={styles.navBar}>

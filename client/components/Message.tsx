@@ -1,3 +1,5 @@
+import styles from "../components/Message.module.css";
+
 const Message: React.FunctionComponent = (props) => {
   return (
     <div className="messageContainer">

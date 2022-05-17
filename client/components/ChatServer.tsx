@@ -1,105 +1,138 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import io from "socket.io-client";
-import getDiems from "../services/ApiServices";
-import updateDiemChatHistory from "../services/ApiServices";
+import getDiemById from "../services/ApiServices";
+
+import hooks from "../services/ApiServices";
 import Message from "./Message";
+import { SocketContext } from "../contexts/Socket";
+import { LoginContext } from "../contexts/Context";
+import styles from "./ChatServer.module.css";
+import e from "express";
+import { useForm } from "react-hook-form";
 
 const ChatServer: React.FunctionComponent = (props) => {
-  //const socket = io("http://localhost:4000");
-  //RENDER a list of messages
-  // const chatHis = props.chatHistory;
-  const mockData = [
-    { content: "This is a message", author: 1, timestamp: "Friday" },
-    { content: "A second message", author: 1, timestamp: "Wednesday" },
-    { content: "Yet another message", author: 2, timestamp: "Sunday" },
-  ];
+  //; //currentdiemchat history
+  const socket = useContext(SocketContext);
+  const { loginInfo } = useContext(LoginContext);
+  const { register, handleSubmit, reset } = useForm();
+  console.log(props.currentDiem.chatHistory, "CHAT HISTORY PROP");
 
-  const [current, setCurrent] = useState();
+  //On loading component, fetch chathistory from database
 
-  const [history, setHistory] = useState();
+  // const [history, setHistory] = useState([]);
 
-  // socket.on("connect", (cb) => {
-  //   socket.emit("joiningRoom", 1); //Send to backend socket to inform it to join room with correct diemId.
-  //   console.log("Connected to room 1");
+  // const [mes, setMes] = React.useState({
+  //   content: "empty",
+  //   author: loginInfo.email,
+  //   timestamp: Date.now(),
   // });
-  // socket.emit("joinroom", 1); //Send to backend socket to inform it to join room with correct diemId.
-  // useEffect(() => {
-  //   console.log("CHANGED", current);
-  //   socket.emit("joiningRoom", current);
-  // }, [current]);
 
-  // useEffect(() => {
-  //   socket.on("updateMessages", (messages) => {
-  //     //When we recieve the updated message history
-  //     setHistory((prev) => messages);
-  //     console.log(messages);
-  //     chatHistory: messages; //Set the most updated chat history to chatHistory of the diem
-  //     console.log(messages);
-  //   });
-  // }, [history]);
+  //const [history, setHistory] = useState(getDiemById(props.currentDiem.id).chatHistory); //fetch updated chat history each time we load chatServer component
 
-  //Fetch a chathistory from api services
+  const [history, setHistory] = useState(props.currentDiem.chatHistory);
 
-  //OnClick if message is not empty push message content
-  // function handleSubmit(author: Number, content: String, timestamp: String) {
-  //   //Emit the most recent message user sends
-  //   socket.emit("newMessage", {
-  //     //Emit the new message to backend
-  //     author: Number,
-  //     content: String,
-  //     timestamp: String,
-  //   });
+  //setHistory(currentDiem.chatHistory);
 
-  //   //Set user's local history NOT NEEDED
-  //   //setHistory((prev) => [...prev, { author: Number, content: String, timestamp: String}]);
+  // const mockData = [
+  //   { content: "This is a message", author: 1, timestamp: "Friday" },
+  //   { content: "A second message", author: 1, timestamp: "Wednesday" },
+  //   { content: "Yet another message", author: 2, timestamp: "Sunday" },
+  // ];
 
-  //   //PATCH request to update the chatHistory of current diem
+  // const [history, setHistory] = useState(mockData);
+  //const [history, setHistory] = useState([]);
+  //setHistory((prev) => currentDiem.chatHistory)//TODO fetch the chat history data from the currently selected diem
 
-  //   updateDiemChatHistory(props.diemId, [
-  //     ...history,
-  //     { author, content, timestamp },
-  //   ]);
+  //Recieve an updated message
+  socket.on("updatedMessages", (message) => {
+    setHistory((prev) => [...prev, message]);
+  });
+
+  useEffect(() => {}, [history]);
+
+  //console.log(history, "HISTORY");
+
+  // function handleSubmitMessage(e) {
+  //   e.preventDefault();
+  //   let time = Date.now();
+  //    //updateDiemChatHistory(e.value, loginInfo.email, time);
+  //   socket.emit("message", { e.value, loginInfo.email, time});
   // }
 
-  //Render a list with all chat history for that diem
-  //Text input field with submit button
+  function handleSubmitMessage(data: React.FormEvent<HTMLInputElement>) {
+    console.log(data, "LOGGIN E");
+    console.log(data.message, "input value");
+
+    let newMessage = {
+      message: "data.message",
+      author: "Email",
+      //author: loginInfo.email
+      timestamp: "String(Date.now())",
+    };
+
+    hooks.modifyDiemChatHistory(
+      newMessage.message,
+      3,
+
+      newMessage.author,
+      newMessage.timestamp
+    );
+
+    setHistory(
+      (prev) => [
+        ...prev,
+        { content: data.message, author: "ME", timestamp: String(Date.now()) },
+      ]
+
+      //{ content: e.value, author: loginInfo.name, timestamp: "" + Date.now() },
+
+      //{ content: e.value, author: loginInfo.name, timestamp: "" + Date.now() },  //TODO
+    );
+    reset({ message: "" });
+  }
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-white relative">
-      {/* {mockData.map((el) => {
-        return <Message message={el} />;
-      })} */}
-      <button
-        onClick={() => {
-          socket.emit("leavingRoom");
-          setCurrent(1);
-          // socket.emit("joiningRoom", 1);
-        }}
-      >
-        1
-      </button>
+    <>
+      <div className={styles.form_contianer}>
+        {history &&
+          props.currentDiem(
+            <div className={styles.message_container}>
+              {props.currentDiem.chatHistory.map((el) => {
+                return <Message el={el} />;
+              })}
+            </div>
+          )}
 
-      <button
-        onClick={() => {
-          socket.emit("leavingRoom");
-          setCurrent(2);
-          //socket.emit("joiningRoom", 2);
-        }}
-      >
-        2
-      </button>
+        <div className={styles.form_container}>
+          <form
+            id="messages"
+            name="messages"
+            className={styles.form}
+            onSubmit={() => {
+              handleSubmit((data) => {
+                console.log(data, "DATA");
+                handleSubmitMessage(data);
+              });
+            }}
+          >
+            <label htmlFor="userLogin">Message Container</label>
+            <input
+              type="text"
+              id="inputValue"
+              name="inputValue"
+              className="py-2 px-4 rounded"
+              {...register("message")}
+              placeholder="enter message"
+            />
 
-      <button
-        onClick={() => {
-          console.log("Button 3");
-          socket.emit("leavingRoom");
-          setCurrent(3);
-          // socket.emit("joiningRoom", 3);
-        }}
-      >
-        3
-      </button>
-    </div>
+            <input
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            />
+          </form>
+        </div>
+      </div>
+    </>
   );
 };
 export default ChatServer;
