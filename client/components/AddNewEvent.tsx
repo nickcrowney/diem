@@ -81,6 +81,7 @@ const AddNewEvent = ({ currentDiem, setCurrentDiem, state, setState }) => {
         </form>
         {/*
         {/* <Popup
+
         className={styles.plusdiem}
         trigger={<Image src={plus} height="40" width="40" />}
         position="right top"
@@ -129,6 +130,7 @@ const AddNewEvent = ({ currentDiem, setCurrentDiem, state, setState }) => {
 
           <input type="submit" />
           </form>
+
           </div>
         </Popup> */}
       </div>
