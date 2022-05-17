@@ -1,46 +1,5 @@
 import { useEffect } from 'react';
 import Image from 'next/image';
-<<<<<<< HEAD
-import chat from '../public/images/chat.png';
-import calendar from '../public/images/calendar.png';
-import more from '../public/images/more.png';
-import styles from './DiemInfoBar.module.css';
-
-const DiemInfoBar: React.FunctionComponent = (
-  mainDiem,
-  currentDiem,
-  setCurrentDiem,
-  users
-) => {
-  useEffect(() => {}, [currentDiem]);
-  const date = currentDiem.date;
-  const event = currentDiem.title;
-  return (
-    <>
-      <div className={styles.diem__infobar}>
-        <div className={styles.tile__info}>
-          <h1>{event}</h1>
-          <h2>{date}</h2>
-        </div>
-        <Image src={chat} height="35" width="45" />
-        <Image src={calendar} height="20" width="40" />
-      </div>
-
-      <div className={styles.diem__users}>
-        <button type="button">
-          <Image src={more} height="40" width="40" />
-        </button>
-        <div className={styles.diem__profilePics_container}>
-          {currentDiem.users &&
-            currentDiem.users.map((el) => {
-              return (
-                <div
-                  key={el.id}
-                  className={styles.diem__profilePic}
-                  // onMouseEnter={showText()}
-                  // onMouseLeave={hideText()}
-                >
-=======
 import calendar from '../public/images/calendar.png';
 import chat from '../public/images/chat.png';
 import prosAndCons from '../public/images/pros-and-cons.png';
@@ -86,7 +45,9 @@ const DiemInfoBar: React.FunctionComponent = ({ currentDiem }) => {
   return (
     <div className={styles.diemInfoBar}>
       <div>
-        <h1>{currentDiem.title}</h1>
+        <div className={styles.diemInfoBar__title}>
+          {currentDiem && currentDiem.title}
+        </div>
         <h2>{date}</h2>
       </div>
       <div className={styles.diemInfoBar__picsAndButtons}>
@@ -94,25 +55,21 @@ const DiemInfoBar: React.FunctionComponent = ({ currentDiem }) => {
           <div className={styles.diemInfoBar__profilePic_plusSign}>
             <Image src={plus} alt="Picture of the author" />
           </div>
-          {currentDiem.users &&
-            currentDiem.users.map((el) => {
-              return (
-                <div key={el.id} className={styles.diemInfoBar__profilePic}>
->>>>>>> 41acc10c4db2479a52073540afecf1af7abc12e1
-                  <Image
-                    src={el.userPhoto}
-                    height="50"
-                    width="50"
-                    alt="Picture of the author"
-                  />
-                </div>
-              );
-            })}
+          {currentDiem && currentDiem.users // always truthy
+            ? currentDiem.users.map((el) => {
+                return (
+                  <div key={el.id} className={styles.diemInfoBar__profilePic}>
+                    <Image
+                      src={el && el.userPhoto}
+                      height="50"
+                      width="50"
+                      alt="Picture of the author"
+                    />
+                  </div>
+                );
+              })
+            : ''}
         </div>
-<<<<<<< HEAD
-      </div>
-    </>
-=======
         <div className={styles.diemInfoBar__buttons}>
           <button type="button">
             <Image src={calendar} height="40" width="40" />
@@ -126,8 +83,6 @@ const DiemInfoBar: React.FunctionComponent = ({ currentDiem }) => {
         </div>
       </div>
     </div>
->>>>>>> 41acc10c4db2479a52073540afecf1af7abc12e1
   );
 };
-
 export default DiemInfoBar;

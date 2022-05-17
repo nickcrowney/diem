@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://alastairfletcher:postgres@localhost:5432/DiemDb?schema=public"
+  url      = "postgresql://alastairfletcher:postgres@localhost:5432/DiemDb2?schema=public"
 }
 
 model Diem {

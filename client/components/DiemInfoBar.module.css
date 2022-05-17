@@ -95,3 +95,8 @@
   align-items: flex-end;
 >>>>>>> 41acc10c4db2479a52073540afecf1af7abc12e1
 }
+
+.diemInfoBar__title {
+  font-size: 5vh;
+  font-weight: bolder;
+}

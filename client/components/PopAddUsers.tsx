@@ -13,23 +13,15 @@ const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ')
 const currentUser = 1;
 
 function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
-  const { register, handleSubmit, reset } = useForm();
-
-  const [selectedOptions, setSelectedOptions] = useState([]);
-
-  const handleChange = (options) => {
-    setSelectedOptions((prev) => {
-      const modObj = options.map((obj) => {
-        return {
-          id: obj.value,
-          name: obj.label,
-          userPhoto: obj.userPhoto,
-        };
-      });
-      prev = [...prev, ...modObj];
-      return prev;
-    });
+  const customStyles = {
+    container: (provided) => ({
+      ...provided,
+      width: '300px',
+    }),
   };
+
+  const { register, handleSubmit, reset } = useForm();
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
   const availableUsers = users.filter((user) => {
     if (currentDiem && currentDiem.users) {
@@ -43,10 +35,36 @@ function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
     userPhoto: el.userPhoto,
   }));
 
-  const submitHandler = (formData, event) => {
-    selectedOptions.forEach((el) => {
-      props.updateDiemUser(currentDiem.id, el.id);
+  const handleChange = (options) => {
+    console.log(options, 'OPTIONS');
+
+    setSelectedOptions((prev) => {
+      // const modObj = options.map((obj) => {
+      //   return {
+      //     id: obj.value,
+      //     name: obj.label,
+      //     userPhoto: obj.userPhoto,
+      //   };
+      // });
+      // prev = [...prev, ...modObj];
+      // return prev;
+      const option = options[options.length - 1];
+      const modObj = option && {
+        id: option.value,
+        name: option.label,
+        userPhoto: option.userPhoto,
+      };
+      prev = [...prev, modObj];
+      console.log(prev, 'PREV HERE');
+      return prev;
     });
+  };
+
+  const submitHandler = (formData, event) => {
+    selectedOptions &&
+      selectedOptions.forEach((el) => {
+        el && props.updateDiemUser(currentDiem.id, el.id);
+      });
     setCurrentDiem((prev) => {
       const obj = { ...prev };
 
@@ -54,13 +72,14 @@ function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
       return (prev = obj);
     });
     setSelectedOptions([]);
-    reset({ label: "", value: "" });
+    reset({ label: '', value: '' });
   };
 
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
       <div className={styles.addUser}>
         <Select
+          styles={customStyles}
           options={options}
           isMulti
           placeholder="Add..."

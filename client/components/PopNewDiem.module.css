@@ -1,10 +1,8 @@
 .newdiem {
-  display: none;
-  height: 16rem;
   width: 15rem;
   border-radius: 5px;
-  background-color: rgb(185, 128, 255);
-  padding: 1rem;
+  background-color: #d7affb;
+  padding: 0 1rem;
   margin: 1rem;
   display: flex;
   flex-direction: column;
@@ -17,9 +15,16 @@
 }
 
 .newdiem input {
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
 
-#submit {
-  justify-self: end;
+.colorPicker {
+  display: flex;
+  justify-content: space-between;
+}
+
+.colors {
+  height: 30px;
+  width: 30px;
+  border: solid 2px #f7f9fb;
 }
