@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import DiemInfoBar from './DiemInfoBar';
 import AddNewEvent from './AddNewEvent';
 import PopAddUsers from './PopAddUsers';
@@ -17,6 +17,7 @@ const Diem: React.FunctionComponent = ({
   backgroundColor,
   setBackgroundColor,
 }) => {
+  const [addRemoveUser, setAddRemoveUser] = useState(false);
   useEffect(() => {}, [currentDiem]);
   // const event = currentDiem && currentDiem.title;
   const changeColor = () => {
@@ -25,25 +26,27 @@ const Diem: React.FunctionComponent = ({
   return (
     <>
       <div className={styles.diem} style={backgroundColor}>
-        <DiemInfoBar currentDiem={currentDiem} />
-        <button onClick={changeColor}>CLICK</button>
-
-        <div className={styles.addRemoveUsers}>
-          <PopAddUsers
-            users={users}
-            currentDiem={currentDiem}
-            setCurrentDiem={setCurrentDiem}
-          />
-          <PopRemoveUsers
-            users={users}
-            currentDiem={currentDiem}
-            setCurrentDiem={setCurrentDiem}
-          />
-        </div>
-        <DiemColorPicker
-          backgroundColor={backgroundColor}
-          setBackgroundColor={setBackgroundColor}
+        <DiemInfoBar
+          currentDiem={currentDiem}
+          setAddRemoveUser={setAddRemoveUser}
         />
+        {/* <button onClick={changeColor}>CLICK</button> */}
+
+        {addRemoveUser && (
+          <div className={styles.addRemoveUsers}>
+            <PopAddUsers
+              users={users}
+              currentDiem={currentDiem}
+              setCurrentDiem={setCurrentDiem}
+            />
+            <PopRemoveUsers
+              users={users}
+              currentDiem={currentDiem}
+              setCurrentDiem={setCurrentDiem}
+            />
+          </div>
+        )}
+
         <GoogleMap />
 
         <div>
@@ -79,6 +82,10 @@ const Diem: React.FunctionComponent = ({
               })} */}
           </div>
         </div>
+        <DiemColorPicker
+          backgroundColor={backgroundColor}
+          setBackgroundColor={setBackgroundColor}
+        />
       </div>
     </>
   );
