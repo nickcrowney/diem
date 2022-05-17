@@ -25,7 +25,7 @@ const DiemColorPicker = ({
     <div className={styles.DiemColorPicker__ColorPicker}>
       <button
         type="submit"
-        style={{ 'background-color': '#f28b82' }}
+        style={{ backgroundColor: '#f28b82' }}
         className={styles.DiemColorPicker__Colors}
         id={styles.red}
         onClick={() => getColor('#f28b82')}
@@ -50,13 +50,6 @@ const DiemColorPicker = ({
         className={styles.DiemColorPicker__Colors}
         id={styles.green}
         onClick={() => getColor('#ccff90')}
-      ></button>
-      <button
-        type="submit"
-        style={{ backgroundColor: '#a7ffeb' }}
-        className={styles.DiemColorPicker__Colors}
-        id={styles.blue}
-        onClick={() => getColor('#a7ffeb')}
       ></button>
       <button
         type="submit"
