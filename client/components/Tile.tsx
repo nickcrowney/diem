@@ -33,6 +33,8 @@ const Tile: React.FunctionComponent = ({
       });
     hooks.deleteDiem(diem.id);
     setAllDiems((prev) => (prev = prev.filter((el) => el.id !== diem.id)));
+    console.log(allDiems[0], 'FIRST DIEM');
+    setCurrentDiem(allDiems[0]);
   };
 
   function dateFixer(calendarDate) {
