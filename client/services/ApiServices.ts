@@ -152,7 +152,6 @@ const updateDiemUser = async (diemId: Number, userId: Number) => {
 const removeDiemUser = async (diemId: Number, userId: Number) => {
   const response = await fetch("http://localhost:4000/user/removeDiemUser", {
     method: "PATCH",
-
     body: JSON.stringify({ diemId, userId }),
     headers: {
       "Content-Type": "application/json",
@@ -170,7 +169,6 @@ const updateDiemChatHistory = async (
 ) => {
   const response = await fetch("http://localhost: 4000/diem", {
     method: "PATCH",
-
     body: JSON.stringify({ diemId, chatHistory }),
     headers: {
       "Content-Type": "application/json",
@@ -237,9 +235,7 @@ export default {
   deleteEvent,
   deleteUser,
   updateDiemUser,
-
   removeDiemUser,
-
   updateDiemChatHistory,
 };
 

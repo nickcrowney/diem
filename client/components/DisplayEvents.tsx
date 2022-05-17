@@ -1,14 +1,14 @@
-import React, { FC, useEffect, useState } from 'react';
-import { ReactSortable } from 'react-sortablejs';
-import styles from '../styles/Home.module.css';
-import hooks from '../services/ApiServices';
+import React, { FC, useEffect, useState } from "react";
+import { ReactSortable } from "react-sortablejs";
+import styles from "../styles/Home.module.css";
+import hooks from "../services/ApiServices";
 
 interface ItemType {
   id: number;
   name: string;
 }
 function DisplayEvents({ currentDiem }) {
-  console.log(currentDiem.events, 'EVENTSSSS');
+  console.log(currentDiem.events, "EVENTSSSS");
   const [state, setState] = useState<ItemType[]>([
     // currentDiem.events
     //   [
@@ -23,17 +23,17 @@ function DisplayEvents({ currentDiem }) {
   ]);
 
   useEffect(() => {
-    console.log(currentDiem.events, 'MAPPABLE');
+    console.log(currentDiem.events, "MAPPABLE");
     currentDiem.events && setState(currentDiem.events);
   }, [currentDiem.events]);
 
   const clickedEvent = (item) => {
-    console.log('clicked event');
-    console.log(item.title, 'title event');
-    console.log(item.id, 'event ID');
+    console.log("clicked event");
+    console.log(item.title, "title event");
+    console.log(item.id, "event ID");
   };
   const removeEvent = (id) => {
-    console.log('remove event');
+    console.log("remove event");
     // hooks.deleteEvent(id);
   };
   return (
@@ -60,7 +60,7 @@ function DisplayEvents({ currentDiem }) {
               <div className={styles.events}>
                 <div key={item.id} onClick={clickedEvent(item)}>
                   {item.title}
-                  {''}
+                  {""}
                 </div>
                 <div onClick={removeEvent(item.id)}>x</div>
               </div>
@@ -68,7 +68,7 @@ function DisplayEvents({ currentDiem }) {
           ))}
         </ReactSortable>
       ) : (
-        'Currently no events'
+        "Currently no events"
       )}
     </>
   );

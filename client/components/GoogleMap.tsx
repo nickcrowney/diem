@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const GoogleMap = () => {
   const queryMap = (e) => {
@@ -15,7 +15,7 @@ const GoogleMap = () => {
       <iframe
         width="100%"
         height="200"
-        style={{ margin: '1em 0', borderRadius: '5px' }}
+        style={{ margin: "1em 0", borderRadius: "5px" }}
         loading="lazy"
         allowFullScreen
         referrerPolicy="no-referrer-when-downgrade"

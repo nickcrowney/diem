@@ -11,17 +11,17 @@ datasource db {
 }
 
 model Diem {
-  id     Int     @id @default(autoincrement())
-  title  String  @db.VarChar(30)
-  events Event[]
-  users  User[]  @relation(references: [id])
-  date   String? //@default(now()) @db.Date
-  //chatHistory Message[] //TODO relation
+  id          Int       @id @default(autoincrement())
+  title       String    @db.VarChar(30)
+  events      Event[]
+  users       User[]    @relation(references: [id])
+  date        String? //@default(now()) @db.Date
+  chatHistory Message[] //TODO relation
   // created    DateTime  @default(now())
   // author      User @relation(fields:[authorId], references: [id])
   // authorId    Int
-  city   String?
-  color  String?
+  city        String?
+  color       String?
   //Message Message[]
 }
 
@@ -32,6 +32,7 @@ model Message {
   content String
   //Diem    Diem?  @relation(fields: [diemId], references: [id])
   diemId  Int?
+  Diem    Diem?  @relation(fields: [diemId], references: [id])
 }
 
 model User {
