@@ -1,10 +1,10 @@
-import { User, Diem, Event } from ".prisma/client";
-import { PrismaClient } from "@prisma/client";
-import { time } from "console";
+import { User, Diem, Event } from '.prisma/client';
+import { PrismaClient } from '@prisma/client';
+import { time } from 'console';
 //import { profile } from "console";
-import Express, { Request, Response } from "express";
-import { colors } from "react-select/dist/declarations/src/theme";
-import { diems } from "../data/data";
+import Express, { Request, Response } from 'express';
+import { colors } from 'react-select/dist/declarations/src/theme';
+import { diems } from '../data/data';
 const prisma = new PrismaClient();
 
 export async function getUsers(req: Request, res: Response) {
@@ -71,9 +71,9 @@ export async function createDiem(req: Request, res: Response) {
       },
     },
   });
-  console.log("NEW DIEM");
-  console.log(title, "title");
-  console.log(city, "city");
+  console.log('NEW DIEM');
+  console.log(title, 'title');
+  console.log(city, 'city');
   res.json(diem);
 }
 
@@ -261,6 +261,18 @@ export async function updateDiemDate(req: Request, res: Response) {
     },
     data: {
       date: date,
+    },
+  });
+  res.json(updatedDiem);
+}
+export async function updateDiemColor(req: Request, res: Response) {
+  const { id, color } = req.body;
+  const updatedDiem = await prisma.diem.update({
+    where: {
+      id: id,
+    },
+    data: {
+      color: color,
     },
   });
   res.json(updatedDiem);

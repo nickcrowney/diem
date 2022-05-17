@@ -18,6 +18,7 @@ import {
   deleteEvent,
   createEvent,
   removeDiemUser,
+  updateDiemColor,
 } from './controllers/controller';
 
 export const router = Router();
@@ -35,6 +36,8 @@ router.post('/event', createEvent);
 
 router.patch('/user', updateUser);
 router.patch('/diem', updateDiem);
+router.patch('/diemColor', updateDiemColor);
+
 router.patch('/user/updateDiems', updateUserDiems);
 router.patch('/user/removeDiemUser', removeDiemUser);
 //router.patch("/user/updateProfile", updateUserProfile);

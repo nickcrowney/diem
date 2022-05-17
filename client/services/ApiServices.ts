@@ -193,10 +193,17 @@ const updateDiemChatHistory = async (
 //   </div>
 // );
 
+<<<<<<< HEAD
 const modifyDiem = async (title: String, id: Number) => {
   const response = await fetch("http://localhost:4000/event", {
     method: "PATCH",
     body: JSON.stringify({ title, id }),
+=======
+const modifyDiem = async (id: Number, color: String) => {
+  const response = await fetch('http://localhost:4000/diemColor', {
+    method: 'PATCH',
+    body: JSON.stringify({ id, color }),
+>>>>>>> ee310b1905c4a44dafeb572c1858effea4278f67
     headers: {
       "Content-Type": "application/json",
     },
@@ -235,6 +242,10 @@ export default {
   deleteEvent,
   deleteUser,
   updateDiemUser,
+<<<<<<< HEAD
+=======
+  modifyDiem,
+>>>>>>> ee310b1905c4a44dafeb572c1858effea4278f67
   removeDiemUser,
   updateDiemChatHistory,
 };
