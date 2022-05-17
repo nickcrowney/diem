@@ -13,7 +13,7 @@ const DiemColorPicker = ({
     // e.preventDefault();
     setBackgroundColor({ 'background-color': color });
     console.log('Loop?');
-    hooks.modifyDiem(currentDiem.id, color);
+    hooks.modifyDiemColor(currentDiem.id, color);
 
     // setBackgroundColor((prev) => {
     //   return e.currentTarget.style.backgroundColor;

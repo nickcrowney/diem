@@ -23,6 +23,7 @@ const Diem: React.FunctionComponent = ({
   const date = currentDiem.date;
   const event = currentDiem && currentDiem.title;
 
+  const [state, setState] = useState<ItemType[]>([]);
   useEffect(() => {
     currentDiem &&
       setBackgroundColor({ 'background-color': currentDiem.color });
@@ -58,9 +59,32 @@ const Diem: React.FunctionComponent = ({
           <AddNewEvent
             currentDiem={currentDiem}
             setCurrentDiem={setCurrentDiem}
+            state={state}
+            setState={setState}
           />
           <div>
-            {currentDiem && <DisplayEvents currentDiem={currentDiem} />}
+            {currentDiem && (
+              <DisplayEvents
+                currentDiem={currentDiem}
+                state={state}
+                setState={setState}
+              />
+            )}
+
+            {/* {currentDiem &&
+              currentDiem.events &&
+              currentDiem.events.map((el) => {
+                return (
+                  <ul key={el.id}>
+                    <div>
+                      {el.title}
+                      {el.location ? ' at ' : ''}{' '}
+                      {el.location ? el.location + '. ' : ''}
+                      {el.time ? `Start time: ${el.time}` : ''}
+                    </div>
+                  </ul>
+                );
+              })} */}
           </div>
         </div>
         <DiemColorPicker
