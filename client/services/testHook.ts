@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 const usersHook = () => {
   const [state, setState] = useState();
   useEffect(() => {
-    fetch("http://localhost:4000/users")
+    fetch('http://localhost:4000/users')
       .then((res) => res.json())
       .then((res) => setState(res));
   }, []);

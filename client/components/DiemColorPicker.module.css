@@ -1,6 +1,5 @@
 .DiemColorPicker__ColorPicker {
   display: flex;
-  /* flex-direction: column; */
   justify-content: flex-end;
   margin: 1em 0;
   margin-right: 15px;

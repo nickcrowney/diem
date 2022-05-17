@@ -1,10 +1,7 @@
-import { Socket } from 'socket.io-client';
-import { useEffect, useState, useContext, useCallback } from 'react';
-import io from 'socket.io-client';
+import { useContext } from 'react';
 import { SocketContext } from '../contexts/Socket';
 import React from 'react';
 import Image from 'next/image';
-import plus from '../public/images/plus.png';
 import styles from './Tile.module.css';
 import hooks from '../services/ApiServices';
 import deleteBin from '../public/deleteBin.svg';
@@ -19,28 +16,25 @@ const Tile: React.FunctionComponent = ({
   const socket = useContext(SocketContext);
 
   const divClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
+    // console.log(diem, 'IIIIIIIIdd Diem');
     setCurrentDiem(diem);
-    console.log('CLICK EVENT FOR DIEM CHANGE');
     socket.emit('leavingRoom');
     socket.emit('joiningRoom', String(diem.id));
   };
   const clickDeleteDiem = () => {
-    console.log('deleted');
     diem.events &&
       diem.events.forEach((el) => {
-        console.log(el.id, 'ELLL');
         hooks.deleteEvent(el.id);
       });
-    hooks.deleteDiem(diem.id);
-    setAllDiems((prev) => (prev = prev.filter((el) => el.id !== diem.id)));
+    diem.id && hooks.deleteDiem(diem.id);
+    diem.id &&
+      setAllDiems((prev) => (prev = prev.filter((el) => el.id !== diem.id)));
     console.log(allDiems[0], 'FIRST DIEM');
-    setCurrentDiem(allDiems[0]);
+    diem.id && setCurrentDiem(allDiems[0]);
   };
 
   function dateFixer(calendarDate) {
     const options = {
-      // weekday: 'long',
-      // year: 'numeric',
       day: 'numeric',
       month: 'long',
     };
@@ -81,7 +75,12 @@ const Tile: React.FunctionComponent = ({
       >
         <div>
           <div onClick={clickDeleteDiem} className={styles.deleteDiem}>
-            <Image src={deleteBin} height="20" width="20" />
+            <Image
+              src={deleteBin}
+              height="20"
+              width="20"
+              alt="delete-bin-image"
+            />
           </div>
           <div className={styles.tile__info}>
             <span className={styles.diem_date_first}>{date.slice(0, 4)}</span>

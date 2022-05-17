@@ -1,46 +1,27 @@
 import React from 'react';
 import dayjs from 'dayjs';
-import Popup from 'reactjs-popup';
 import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
 import styles from './PopNewDiem.module.css';
 import props from '../services/ApiServices';
-import Image from 'next/image';
-import plus from '../public/images/more.png';
 
 const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
-const currentUser = 1;
 
-function PopNewDiem({ setAllDiems, allDiems }) {
+function PopNewDiem({ setAllDiems, allDiems, users }) {
+  const currentUser = users[0].id;
   const { register, handleSubmit, reset } = useForm();
-
-  const [data, setData] = useState('Add new diem');
 
   return (
     <div className={styles.newdiem}>
       <form
         className={styles.form}
         onSubmit={handleSubmit((data) => {
-          const dateLong = new Date(data.date);
-          console.log(data.title, 'TITLE');
-          console.log(dateLong, 'date long');
-          console.log(data.date, 'DATE');
-          console.log(data.city, 'City');
-          console.log(data.color, 'Color');
-          props.submitNewDiem(
-            data.title,
-            data.date,
-            data.city,
-            currentUser,
-            data.color
-          );
+          props.submitNewDiem(data.title, data.date, currentUser, data.color);
           setAllDiems((prev) => {
             prev = [
               ...prev,
               {
                 title: data.title,
                 date: data.date,
-                city: data.city,
                 user: currentUser,
                 color: data.color,
               },

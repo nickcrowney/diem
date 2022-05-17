@@ -1,16 +1,12 @@
-import React, { Component } from "react";
-import dayjs from "dayjs";
-import Popup from "reactjs-popup";
-import { useForm, Controller } from "react-hook-form";
-import { useEffect, useState } from "react";
-import styles from "./PopAddUsers.module.css";
-import props from "../services/ApiServices";
-import Image from "next/image";
-import plus from "../public/images/more.png";
-import Select from "react-select";
+import React, { Component } from 'react';
 
-const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
-const currentUser = 1;
+import { useForm, Controller } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+import styles from './PopAddUsers.module.css';
+import props from '../services/ApiServices';
+import Image from 'next/image';
+import plus from '../public/images/more.png';
+import Select from 'react-select';
 
 function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
   const customStyles = {
@@ -39,15 +35,6 @@ function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
     console.log(options, 'OPTIONS');
 
     setSelectedOptions((prev) => {
-      // const modObj = options.map((obj) => {
-      //   return {
-      //     id: obj.value,
-      //     name: obj.label,
-      //     userPhoto: obj.userPhoto,
-      //   };
-      // });
-      // prev = [...prev, ...modObj];
-      // return prev;
       const option = options[options.length - 1];
       const modObj = option && {
         id: option.value,

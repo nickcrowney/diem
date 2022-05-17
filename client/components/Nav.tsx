@@ -22,11 +22,13 @@ const Nav = ({
       return !prev;
     });
   }
-  //console.log(users[0], '0th user');
-  const mainUser = users.filter((el) => {
-    // return el.email === loginData.email;
-    return el.id === 1;
-  });
+  const mainUser = users[0];
+  console.log(mainUser, 'MAIN');
+  // const mainUser = users.filter((el) => {
+  //   return el.email === loginData.email;
+  //   TODO;
+  //   // return el.id === 1;
+  // });
 
   return (
     <div className={styles.navContainer}>
@@ -36,7 +38,11 @@ const Nav = ({
             <Image src={more} height="40" width="40" />
           </button>
           {newDiemPop && (
-            <PopNewDiem allDiems={allDiems} setAllDiems={setAllDiems} />
+            <PopNewDiem
+              allDiems={allDiems}
+              setAllDiems={setAllDiems}
+              users={users}
+            />
           )}
         </div>
 
@@ -47,9 +53,8 @@ const Nav = ({
           <div className={styles.nav__profilePic}>
             {mainUser && (
               <Image
-                src={mainUser[0]?.userPhoto ?? mypic}
+                src={mainUser?.userPhoto ?? mypic}
                 alt="Picture of the author"
-                // layout='fill'
                 height="50"
                 width="50"
               />
