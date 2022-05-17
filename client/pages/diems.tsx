@@ -98,6 +98,8 @@ const Diems: NextPage = (props) => {
         setUsers={setUsers}
         setNewDiemPop={setNewDiemPop}
         newDiemPop={newDiemPop}
+        allDiems={allDiems}
+        setAllDiems={setAllDiems}
       />
 
       <main className={styles.container}>

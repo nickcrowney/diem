@@ -11,7 +11,7 @@ import plus from '../public/images/more.png';
 const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 const currentUser = 1;
 
-function PopNewDiem({ setAllDiems }) {
+function PopNewDiem({ setAllDiems, allDiems }) {
   const { register, handleSubmit, reset } = useForm();
 
   const [data, setData] = useState('Add new diem');
@@ -42,6 +42,7 @@ function PopNewDiem({ setAllDiems }) {
                 date: data.date,
                 city: data.city,
                 user: currentUser,
+                color: data.color,
               },
             ];
             prev.sort(function (a, b) {
