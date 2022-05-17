@@ -97,13 +97,12 @@ const Diems: NextPage = (props) => {
         users={users}
         setUsers={setUsers}
         setNewDiemPop={setNewDiemPop}
+        newDiemPop={newDiemPop}
       />
 
       <main className={styles.container}>
         {/* <button onClick={changeColor}>CLICK</button> */}
         <div className={styles.tiles}>
-          {/* {newDiemPop && <PopNewDiem setAllDiems={setAllDiems} />} */}
-
           {allDiems.map((el) => {
             return (
               <div key={el.id}>

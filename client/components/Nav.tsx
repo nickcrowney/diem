@@ -8,7 +8,14 @@ import usersHook from '../services/testHook';
 import hooks from '../services/ApiServices';
 import mypic from '../public/images/daniil-lobachev-XAo09LtQiAQ-unsplash.jpg';
 
-const Nav = ({ users, setUsers, setNewDiemPop, loginData }) => {
+const Nav = ({
+  users,
+  setUsers,
+  newDiemPop,
+  setNewDiemPop,
+  setAllDiems,
+  loginData,
+}) => {
   function handleClick() {
     setNewDiemPop((prev) => {
       return !prev;
@@ -29,6 +36,7 @@ const Nav = ({ users, setUsers, setNewDiemPop, loginData }) => {
           <button type="button" onClick={handleClick}>
             <Image src={more} height="40" width="40" />
           </button>
+          {newDiemPop && <PopNewDiem setAllDiems={setAllDiems} />}
         </div>
 
         <div className={styles.nav__end}>
