@@ -30,9 +30,9 @@
 .tile__profilePic {
   border-radius: 50%;
   overflow: hidden;
-  margin-right: -15px;
-  height: 50px;
-  width: 50px;
+  margin-right: -12px;
+  height: 46px;
+  width: 46px;
   object-fit: cover;
   border: solid 2px #f7f9fb;
 }

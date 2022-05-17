@@ -1,16 +1,25 @@
-import React, { useEffect } from "react";
-import styles from "./Nav.module.css";
-import Image from "next/image";
-import more from "../public/images/more.png";
-import menu from "../public/images/menu.png";
-import PopNewDiem from "./PopNewDiem";
-import usersHook from "../services/testHook";
-import hooks from "../services/ApiServices";
-import mypic from "../public/images/daniil-lobachev-XAo09LtQiAQ-unsplash.jpg";
+import React, { useEffect } from 'react';
+import styles from './Nav.module.css';
+import Image from 'next/image';
+import more from '../public/images/more.png';
+import menu from '../public/images/menu.png';
+import PopNewDiem from './PopNewDiem';
+import usersHook from '../services/testHook';
+import hooks from '../services/ApiServices';
+import mypic from '../public/images/daniil-lobachev-XAo09LtQiAQ-unsplash.jpg';
 
-const Nav = ({ users, setUsers, toggleNewDiemPop, loginData }) => {
+const Nav = ({
+  users,
+  setUsers,
+  newDiemPop,
+  setNewDiemPop,
+  setAllDiems,
+  loginData,
+}) => {
   function handleClick() {
-    toggleNewDiemPop();
+    setNewDiemPop((prev) => {
+      return !prev;
+    });
   }
   //console.log(users[0], '0th user');
   const mainUser = users.filter((el) => {
@@ -18,6 +27,11 @@ const Nav = ({ users, setUsers, toggleNewDiemPop, loginData }) => {
     return el.id === 1;
   });
 
+<<<<<<< HEAD
+=======
+  console.log('PROPS HERE', loginData);
+
+>>>>>>> a94eb8c8150b5bf8accefaae2903b2bfc7ca0a4b
   return (
     <div className={styles.navContainer}>
       <div className={styles.navBar}>
@@ -25,6 +39,7 @@ const Nav = ({ users, setUsers, toggleNewDiemPop, loginData }) => {
           <button type="button" onClick={handleClick}>
             <Image src={more} height="40" width="40" />
           </button>
+          {newDiemPop && <PopNewDiem setAllDiems={setAllDiems} />}
         </div>
 
         <div className={styles.nav__end}>

@@ -1,21 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { FcGoogle } from "react-icons/fc";
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-import { firebaseApp } from "../firebase-config";
-import props from "../services/ApiServices";
-import usersHook from "../services/testHook";
-import { useLoginContext } from "../contexts/Context";
-import { useRouter } from "next/router";
+import React, { useEffect, useState } from 'react';
+import { FcGoogle } from 'react-icons/fc';
+import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
+import { firebaseApp } from '../firebase-config';
+import props from '../services/ApiServices';
+import usersHook from '../services/testHook';
+import { useLoginContext } from '../contexts/Context';
+import { useRouter } from 'next/router';
 
 const Login = () => {
   const firebaseAuth = getAuth(firebaseApp);
   const provider = new GoogleAuthProvider();
-
   const router = useRouter();
-
   const { loginInfo, setLoginInfo } = useLoginContext();
-
-  const { state } = usersHook(); //All our users
+  // const { state } = usersHook(); //All our users
 
   const signIn = async () => {
     const response = await signInWithPopup(firebaseAuth, provider);
@@ -34,7 +31,7 @@ const Login = () => {
     //}
 
     if (response.user.emailVerified) {
-      router.replace("/diems", loginInfo);
+      router.replace('/diems', loginInfo);
     }
     //TODO Throw invalid login error here
   };

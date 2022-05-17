@@ -6,10 +6,21 @@ import prosAndCons from "../public/images/pros-and-cons.png";
 import plus from "../public/images/plus.png";
 import styles from "./DiemInfoBar.module.css";
 
-const DiemInfoBar: React.FunctionComponent = ({ currentDiem }) => {
+const DiemInfoBar: React.FunctionComponent = ({
+  currentDiem,
+  setAddRemoveUser,
+}) => {
   useEffect(() => {}, [currentDiem]);
 
+<<<<<<< HEAD
   console.log(currentDiem);
+=======
+  function handleClick() {
+    setAddRemoveUser((prev) => {
+      return !prev;
+    });
+  }
+>>>>>>> a94eb8c8150b5bf8accefaae2903b2bfc7ca0a4b
 
   function dateFixer(calendarDate) {
     const options = {
@@ -44,6 +55,7 @@ const DiemInfoBar: React.FunctionComponent = ({ currentDiem }) => {
     return finishedDate;
   }
   const date = dateFixer(currentDiem && currentDiem.date);
+
   return (
     <div className={styles.diemInfoBar}>
       <div>
@@ -80,7 +92,12 @@ const DiemInfoBar: React.FunctionComponent = ({ currentDiem }) => {
             <Image src={chat} height="40" width="40" />
           </button>
           <button type="button">
-            <Image src={prosAndCons} height="40" width="40" />
+            <Image
+              src={prosAndCons}
+              height="40"
+              width="40"
+              onClick={handleClick}
+            />
           </button>
         </div>
       </div>

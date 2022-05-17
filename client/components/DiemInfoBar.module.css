@@ -2,13 +2,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 3em;
+  margin-bottom: 1em;
 }
 
 .diemInfoBar__profilePics_container {
   display: flex;
   justify-content: flex-end;
-  margin-right: 2rem;
+  margin-right: 1rem;
 }
 
 .diemInfoBar__profilePic {
@@ -34,7 +34,7 @@
 }
 
 .diemInfoBar__buttons button {
-  margin-left: 1.5rem;
+  margin-left: 1rem;
 }
 
 .diemInfoBar__picsAndButtons {
