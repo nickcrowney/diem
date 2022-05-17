@@ -1,5 +1,4 @@
 import styles from "../components/Message.module.css";
-cd;
 
 const Message: React.FunctionComponent = (props) => {
   return (
