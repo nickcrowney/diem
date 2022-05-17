@@ -29,7 +29,6 @@ function PopNewDiem({ setAllDiems }) {
           console.log(data.date, 'DATE');
           console.log(data.city, 'City');
           console.log(data.color, 'Color');
-
           props.submitNewDiem(
             data.title,
             data.date,
@@ -37,8 +36,8 @@ function PopNewDiem({ setAllDiems }) {
             currentUser,
             data.color
           );
-            'blue'
-          );
+          ('blue');
+
           setAllDiems((prev) => {
             prev = [
               ...prev,
@@ -61,11 +60,6 @@ function PopNewDiem({ setAllDiems }) {
         <input
           {...register('title')}
           placeholder="Diem Name..."
-          className="py-2 px-4 rounded"
-        />
-        <input
-          {...register('city')}
-          placeholder="Enter city..."
           className="py-2 px-4 rounded"
         />
         <input
@@ -109,14 +103,7 @@ function PopNewDiem({ setAllDiems }) {
             value="#ccff90"
             style={{ backgroundColor: '#ccff90' }}
           />
-          <input
-            {...register('color')}
-            type="radio"
-            className={styles.colors}
-            id="blue"
-            value="#a7ffeb"
-            style={{ backgroundColor: '#a7ffeb' }}
-          />
+
           <input
             {...register('color')}
             type="radio"
