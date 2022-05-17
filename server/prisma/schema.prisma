@@ -27,12 +27,13 @@ model Diem {
 
 //TODO
 model Message {
-  id      Int    @id @default(autoincrement())
-  author  Int
-  content String
+  id        Int    @id @default(autoincrement())
+  author    Int
+  content   String
   //Diem    Diem?  @relation(fields: [diemId], references: [id])
-  diemId  Int?
-  Diem    Diem?  @relation(fields: [diemId], references: [id])
+  diemId    Int?
+  timestamp String
+  metaDiem  Diem?  @relation(fields: [metaDiemId], references: [id])
 }
 
 model User {
