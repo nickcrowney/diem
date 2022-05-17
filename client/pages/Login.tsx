@@ -10,38 +10,12 @@ import { useRouter } from 'next/router';
 const Login = () => {
   const firebaseAuth = getAuth(firebaseApp);
   const provider = new GoogleAuthProvider();
-
   const router = useRouter();
-
   const { loginInfo, setLoginInfo } = useLoginContext();
-
   // const { state } = usersHook(); //All our users
 
   const signIn = async () => {
     const response = await signInWithPopup(firebaseAuth, provider);
-<<<<<<< HEAD
-
-    console.log('response', response);
-    setLoginInfo(response.user);
-    console.log(response);
-    //setLoginDat([response.user]);
-
-    //If user exists in database, we don't re-POST them to db
-    // if (
-
-    //   state !== "undefined" &&
-
-    //   state.some((el): any => el.email !== response.user.email)
-    // ) {
-    //TODO change any to appropiate interface
-    props.submitNewUser(
-      response.user.displayName,
-      response.user.email,
-      response.user.photoURL
-    );
-    //};
-    //return <Link href="/diems" />;
-=======
     setLoginInfo(response.user);
     //If user exists in database, we don't re-POST them to db
     // if (
@@ -56,7 +30,6 @@ const Login = () => {
     );
     //}
 
->>>>>>> 41acc10c4db2479a52073540afecf1af7abc12e1
     if (response.user.emailVerified) {
       router.replace('/diems', loginInfo);
     }
