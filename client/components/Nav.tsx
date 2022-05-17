@@ -13,6 +13,7 @@ const Nav = ({
   setUsers,
   newDiemPop,
   setNewDiemPop,
+  allDiems,
   setAllDiems,
   loginData,
 }) => {
@@ -36,7 +37,9 @@ const Nav = ({
           <button type="button" onClick={handleClick}>
             <Image src={more} height="40" width="40" />
           </button>
-          {newDiemPop && <PopNewDiem setAllDiems={setAllDiems} />}
+          {newDiemPop && (
+            <PopNewDiem allDiems={allDiems} setAllDiems={setAllDiems} />
+          )}
         </div>
 
         <div className={styles.nav__end}>
