@@ -1,56 +1,3 @@
-<<<<<<< HEAD
-.diem {
-  border-radius: 5px;
-  background-color: rgb(255, 157, 166);
-  padding: 2rem;
-  margin: 1rem;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  /* justify-content: space-between; */
-}
-
-.diem__infobar {
-  display: flex;
-  flex-direction: row;
-  /* justify-content: space-between; */
-}
-
-.diem__profilePics_container {
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 0.75rem;
-}
-
-.diem__profilePic {
-  border-radius: 50%;
-  overflow: hidden;
-  margin-right: -14px;
-  height: 50px;
-  width: 50px;
-  object-fit: cover;
-}
-
-.diem__date {
-  font-weight: 700;
-}
-
-.diem h1 {
-  font-size: 24px;
-  font-weight: 700;
-}
-
-.diem__events {
-  padding-top: 20px;
-}
-
-.diem__users {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  justify-content: flex-end;
-=======
 .diemInfoBar {
   display: flex;
   justify-content: space-between;
@@ -93,7 +40,6 @@
 .diemInfoBar__picsAndButtons {
   display: flex;
   align-items: flex-end;
->>>>>>> 41acc10c4db2479a52073540afecf1af7abc12e1
 }
 
 .diemInfoBar__title {
