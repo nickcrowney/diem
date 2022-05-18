@@ -48,7 +48,7 @@ const ChatServer: React.FunctionComponent = ({ curDiem }) => {
     { content: "Yet another message", author: 2, timestamp: "Sunday" },
   ];
 
-  const [history, setHistory] = useState(mockData);
+  //const [history, setHistory] = useState(mockData);
 
   useEffect(() => {}, [history]);
 
@@ -67,24 +67,22 @@ const ChatServer: React.FunctionComponent = ({ curDiem }) => {
     );
 
     setHistory((prev) => {
-      if (prev === null) {
-        return [
-          {
-            content: data.message,
-            author: loginInfo.email,
-            timestamp: Date.now(),
-          },
-        ];
-      } else {
-        return [
-          ...prev,
-          {
-            content: data.message,
-            author: loginInfo.email,
-            timestamp: Date.now(),
-          },
-        ];
-      }
+      prev
+        ? [
+            ...prev,
+            {
+              content: data.message,
+              author: loginInfo.email,
+              timestamp: Date.now(),
+            },
+          ]
+        : [
+            {
+              content: data.message,
+              author: loginInfo.email,
+              timestamp: Date.now(),
+            },
+          ];
     });
     reset({ message: "" });
   }
@@ -92,7 +90,7 @@ const ChatServer: React.FunctionComponent = ({ curDiem }) => {
   return (
     <>
       <div className={styles.form_contianer}>
-        {defaultFetch && history && (
+        {history && (
           <div className={styles.message_container}>
             {history.map((el) => {
               return <Message el={el} />;
