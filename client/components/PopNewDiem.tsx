@@ -1,36 +1,48 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import dayjs from 'dayjs';
 import { useForm } from 'react-hook-form';
 import styles from './PopNewDiem.module.css';
-import props from '../services/ApiServices';
+import hooks from '../services/ApiServices';
 
-const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+const yesterday = dayjs().add(-1, 'day').toISOString();
 
 function PopNewDiem({ setAllDiems, allDiems, users }) {
   const currentUser = users[0].id;
   const { register, handleSubmit, reset } = useForm();
-
+  useEffect(() => {}, [allDiems]);
   return (
     <div className={styles.newdiem}>
       <form
         className={styles.form}
         onSubmit={handleSubmit((data) => {
-          props.submitNewDiem(data.title, data.date, currentUser, data.color);
-          setAllDiems((prev) => {
-            prev = [
-              ...prev,
-              {
-                title: data.title,
-                date: data.date,
-                user: currentUser,
-                color: data.color,
-              },
-            ];
-            prev.sort(function (a, b) {
-              return new Date(a.date) - new Date(b.date);
+          hooks
+            .submitNewDiem(data.title, data.date, currentUser, data.color)
+            .then((res) => {
+              // console.log(res, 'RES');
+
+              setAllDiems((prev) => {
+                const copied = [
+                  ...prev,
+                  {
+                    id: res.id,
+                    title: res.title,
+                    date: res.date,
+                    user: currentUser,
+                    color: res.color,
+                    events: [],
+                  },
+                ];
+                // const copied = [...copy]; //Ask Guillem and watch him get angry
+
+                copied.sort(function (a, b) {
+                  return new Date(a.date) - new Date(b.date);
+                });
+                return copied;
+              });
+            })
+            .catch((e) => {
+              console.log('error when creating diem', e);
             });
-            return prev;
-          });
           reset({ title: '', city: '', date: '' });
         })}
       >
@@ -43,9 +55,8 @@ function PopNewDiem({ setAllDiems, allDiems, users }) {
         <input
           type="date"
           className="py-2 px-4 rounded border-none"
-          min={currentDate}
           name="date"
-          {...register('date', { required: true })}
+          {...register('date', { required: true, min: yesterday })}
         />
 
         <div className={styles.colorPicker}>

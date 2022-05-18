@@ -23,7 +23,7 @@ const Nav = ({
     });
   }
   const mainUser = users[0];
-  console.log(mainUser, 'MAIN');
+  // console.log(mainUser, 'MAIN');
   // const mainUser = users.filter((el) => {
   //   return el.email === loginData.email;
   //   TODO;

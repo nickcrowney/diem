@@ -27,6 +27,10 @@ const Diems: NextPage = (props) => {
     id: 1,
     title: 'Add new diem',
   });
+  const [trap, setTrap] = useState('');
+  useEffect(() => {
+    console.log('RERENDER');
+  }, [trap]);
 
   const socket = useContext(SocketContext);
 
@@ -34,13 +38,13 @@ const Diems: NextPage = (props) => {
     console.log('connected to Sockets on front end');
     //socket.emit("currentlyOnline", loginInfo.email)  //TODO Figure out why context doesn't work here
     socket.emit('currentlyOnline', 'email@email.com');
-    socket.emit('joiningRoom', String(currentDiem.id)); //Default user to the top chatroom
+    socket.emit('joiningRoom', String(currentDiem && currentDiem.id)); //Default user to the top chatroom
   });
 
   // //When we recieve current online user update, we set state of current online users
   socket.on('onlineUsers', (onlineIds) => {
     setOnlineUsers((prev) => onlineIds);
-    console.log('Updated Online Users ', onlineIds);
+    // console.log('Updated Online Users ', onlineIds);
   });
 
   useEffect(() => {}, [currentDiem]);
@@ -68,6 +72,8 @@ const Diems: NextPage = (props) => {
             return el.events;
           })
         );
+        console.log('RENDER ONCE DIEM');
+
         setCurrentDiem(resFuture[0]);
         setBackgroundColor({ 'background-color': resFuture[0].color });
       })
@@ -98,6 +104,7 @@ const Diems: NextPage = (props) => {
                   diem={el}
                   setCurrentDiem={setCurrentDiem}
                   backgroundColor={backgroundColor}
+                  setTrap={setTrap}
                 />
               </div>
             );
@@ -109,10 +116,13 @@ const Diems: NextPage = (props) => {
             <Diem
               mainDiem={mainDiem}
               currentDiem={currentDiem}
+              setTrap={setTrap}
               setCurrentDiem={setCurrentDiem}
               users={users}
               backgroundColor={backgroundColor}
               setBackgroundColor={setBackgroundColor}
+              allDiems={allDiems}
+              setAllDiems={setAllDiems}
             />
           )}
         </div>

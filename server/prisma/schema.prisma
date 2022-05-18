@@ -20,7 +20,7 @@ model Diem {
   // created    DateTime  @default(now())
   // author      User @relation(fields:[authorId], references: [id])
   // authorId    Int
-  city        String?
+  map        String?
   color       String?
   //Message Message[]
 }
