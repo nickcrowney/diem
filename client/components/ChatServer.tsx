@@ -10,8 +10,6 @@ import styles from "./ChatServer.module.css";
 import { useForm } from "react-hook-form";
 
 const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
-  //; //currentdiemchat history
-
   const socket = useContext(SocketContext);
   const { loginInfo } = useContext(LoginContext);
   const { register, handleSubmit, reset } = useForm();
@@ -22,25 +20,13 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
 
   useEffect(() => {
     // let result = getHistory();
-    let res = hooks
-      .getDiemById(currentDiem.id)
-      .then((res) => res.json())
-      .then((res) => setHistory(res.chatHistory));
-    console.log(res);
-    // setHistory(res);
-
-    //setHistory();
+    if (currentDiem.chatHistory) {
+      let res = hooks
+        .getDiemById(currentDiem.id)
+        .then((res) => res.json())
+        .then((res) => setHistory((prev) => res.chatHistory));
+    }
   }, []);
-
-  //const [history, setHistory] = useState(defaultFetch);
-
-  //console.log(defaultFetch, "FETCHS");
-
-  //WHAT THE CODE SHOULD BE
-  /////////////////////////////////
-  // const [history, setHistory] = useState(
-  //   hooks.getDiemById(curDiem.id).chatHistory
-  // );
 
   socket.on("updatedMessages", (message) => {
     setHistory((prev) =>
@@ -50,23 +36,11 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
     );
   });
 
-  // useEffect(() => {}, [history]);
-
-  //////////////////////////////////
-
-  //const [history, setHistory] = useState(props.currentDiem.chatHistory);  //Fetch each time we load the component anew
-
-  //setHistory(currentDiem.chatHistory);
-
-  const mockData = [
-    { content: "This is a message", author: 1, timestamp: "Friday" },
-    { content: "A second message", author: 1, timestamp: "Wednesday" },
-    { content: "Yet another message", author: 2, timestamp: "Sunday" },
-  ];
-
-  //const [history, setHistory] = useState(mockData);
-
-  // useEffect(() => {}, [history]);
+  // const mockData = [
+  //   { content: "This is a message", author: 1, timestamp: "Friday" },
+  //   { content: "A second message", author: 1, timestamp: "Wednesday" },
+  //   { content: "Yet another message", author: 2, timestamp: "Sunday" },
+  // ];
 
   function handleSubmitMessage(data: React.FormEvent<HTMLInputElement>) {
     hooks.modifyDiemChatHistory(

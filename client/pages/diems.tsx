@@ -21,6 +21,7 @@ const Diems: NextPage = (props) => {
   const [mainDiem, setDiem] = useState("");
   const [allDiems, setAllDiems] = useState([]);
   const [allEvents, setAllEvents] = useState([]);
+  const socket = useContext(SocketContext);
   const [backgroundColor, setBackgroundColor] = useState({
     "background-color": "#fabd04",
   });
@@ -29,8 +30,6 @@ const Diems: NextPage = (props) => {
     id: 1,
     title: "Add new diem",
   });
-
-  const socket = useContext(SocketContext);
 
   socket.on("connect", (arg) => {
     console.log("connected to Sockets on front end");

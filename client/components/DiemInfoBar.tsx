@@ -1,15 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import Image from "next/image";
 import calendar from "../public/images/calendar.png";
 import chat from "../public/images/chat.png";
 import prosAndCons from "../public/images/pros-and-cons.png";
 import plus from "../public/images/plus.png";
 import styles from "./DiemInfoBar.module.css";
+import { SocketContext } from "../contexts/Socket";
 
 const DiemInfoBar: React.FunctionComponent = ({
   currentDiem,
   setAddRemoveUser,
 }) => {
+  const socket = useContext(SocketContext);
   useEffect(() => {}, [currentDiem]);
 
   function handleClick() {

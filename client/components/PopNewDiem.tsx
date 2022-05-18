@@ -24,6 +24,7 @@ function PopNewDiem({ setAllDiems, allDiems, users }) {
                 date: data.date,
                 user: currentUser,
                 color: data.color,
+                chatHistory: [],
               },
             ];
             prev.sort(function (a, b) {

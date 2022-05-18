@@ -69,9 +69,9 @@ const Diem: React.FunctionComponent = ({
           currentDiem={currentDiem}
         />
       </div>
-      <div>
-        <ChatServer currentDiem={currentDiem} />
-      </div>
+      {/* <div>
+        <ChatServer currentDiem={currentDiem} /> //TESTING HERE
+      </div> */}
     </>
   );
 };

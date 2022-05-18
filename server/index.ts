@@ -45,7 +45,8 @@ io.on("connection", (socket: Socket) => {
   //new chat
   socket.on("message", (message) => {
     //emit the array of full chat history here
-    socket.emit("updatedMessages", message);
+    //socket.emit("updatedMessages", message);
+    socket.to(currentRoom).emit("updatedMessages", message);
   });
 
   socket.on("leavingRoom", () => {
