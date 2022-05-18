@@ -1,14 +1,14 @@
-import React, { useEffect, useContext } from "react";
-import styles from "./Nav.module.css";
-import Image from "next/image";
-import more from "../public/images/more.png";
-import menu from "../public/images/menu.png";
-import PopNewDiem from "./PopNewDiem";
-import usersHook from "../services/testHook";
-import hooks from "../services/ApiServices";
-import mypic from "../public/images/daniil-lobachev-XAo09LtQiAQ-unsplash.jpg";
+import React, { useEffect, useContext } from 'react';
+import styles from './Nav.module.css';
+import Image from 'next/image';
+import more from '../public/images/more.png';
+import menu from '../public/images/menu.png';
+import PopNewDiem from './PopNewDiem';
+import usersHook from '../services/testHook';
+import hooks from '../services/ApiServices';
+import mypic from '../public/images/daniil-lobachev-XAo09LtQiAQ-unsplash.jpg';
 
-import useLoginContext from "../contexts/Context";
+import useLoginContext from '../contexts/Context';
 
 const Nav = ({
   users,
@@ -23,10 +23,10 @@ const Nav = ({
       return !prev;
     });
   }
-  
-  const { loginInfo, setLoginInfo } = useLoginContext();
 
-  console.log("PROPS HERE", loginInfo);
+  // const { loginInfo, setLoginInfo } = useLoginContext();
+
+  // console.log('PROPS HERE', loginInfo);
 
   return (
     <div className={styles.navContainer}>
@@ -49,14 +49,15 @@ const Nav = ({
             <Image src={menu} height="32" width="32" />
           </button>
           <div className={styles.nav__profilePic}>
-            {loginInfo && (
-              <Image
-                src={loginInfo?.photoURL ?? mypic}
-                alt="Picture of the author"
-                height="50"
-                width="50"
-              />
-            )}
+            {/* {loginInfo && ( */}
+            <Image
+              // src={loginInfo?.photoURL ?? mypic}
+              src={users[0]?.userPhoto ?? mypic}
+              alt="Picture of the author"
+              height="50"
+              width="50"
+            />
+            {/* )} */}
           </div>
         </div>
       </div>
