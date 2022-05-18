@@ -22,14 +22,16 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
   // currentDiem &&
   useEffect(() => {
     console.warn(currentDiem.id);
-    fetch(`http://localhost:4000/diem/byId/${currentDiem.id}`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        console.warn(res);
-        setHistory((prev) => res.chatHistory);
-      });
+
+    currentDiem.chatHistory &&
+      fetch(`http://localhost:4000/diem/byId/${currentDiem.id}`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((res) => {
+          console.warn(res);
+          setHistory((prev) => res.chatHistory);
+        });
   }, []);
 
   socket.on("updatedMessages", (message) => {

@@ -42,8 +42,11 @@ const Diems: NextPage = (props) => {
 
   // //When we recieve current online user update, we set state of current online users
   socket.on("onlineUsers", (onlineIds) => {
-    setOnlineUsers((prev) => onlineIds);
-    console.log("Updated Online Users ", onlineIds);
+    let userIds = onlineIds.filter(
+      (val, ind) => onlineIds.indexOf(val) === ind
+    );
+    setOnlineUsers((prev) => userIds);
+    console.log("Updated Online Users ", userIds);
   });
 
   useEffect(() => {
