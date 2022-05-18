@@ -42,7 +42,6 @@ function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
         userPhoto: option.userPhoto,
       };
       prev = [...prev, modObj];
-      console.log(prev, 'PREV HERE');
       return prev;
     });
   };
