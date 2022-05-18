@@ -34,7 +34,6 @@ const Diems: NextPage = (props) => {
 
   socket.on("connect", (arg) => {
     console.log("connected to Sockets on front end");
-    //socket.emit("currentlyOnline", loginInfo.email)
     socket.emit("currentlyOnline", loginInfo.email);
     socket.emit("joiningRoom", String(currentDiem.id)); //Default user to the top chatroom
   });
