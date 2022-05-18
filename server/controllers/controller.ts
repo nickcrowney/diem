@@ -1,10 +1,10 @@
-import { User, Diem, Event } from ".prisma/client";
-import { PrismaClient } from "@prisma/client";
-import { time } from "console";
+import { User, Diem, Event } from '.prisma/client';
+import { PrismaClient } from '@prisma/client';
+import { time } from 'console';
 //import { profile } from "console";
-import Express, { Request, Response } from "express";
-import { colors } from "react-select/dist/declarations/src/theme";
-import { diems } from "../data/data";
+import Express, { Request, Response } from 'express';
+import { colors } from 'react-select/dist/declarations/src/theme';
+import { diems } from '../data/data';
 const prisma = new PrismaClient();
 
 export async function getUsers(req: Request, res: Response) {
@@ -63,7 +63,6 @@ export async function createDiem(req: Request, res: Response) {
     data: {
       title: title, //Only title is required to create diem
       date: date,
-      city: city,
       color: color,
       users: {
         connect: {
@@ -72,9 +71,9 @@ export async function createDiem(req: Request, res: Response) {
       },
     },
   });
-  console.log("NEW DIEM");
-  console.log(title, "title");
-  console.log(city, "city");
+  console.log('NEW DIEM');
+  console.log(title, 'title');
+  console.log(city, 'city');
   res.json(diem);
 }
 

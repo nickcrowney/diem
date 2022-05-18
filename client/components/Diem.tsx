@@ -76,6 +76,16 @@ const Diem: React.FunctionComponent = ({
             currentDiem={currentDiem}
             setCurrentDiem={setCurrentDiem}
           />
+          <div>
+            {currentDiem && (
+              <DisplayEvents
+                setCurrentDiem={setCurrentDiem}
+                currentDiem={currentDiem}
+                state={state}
+                setState={setState}
+              />
+            )}
+          </div>
         </div>
       )}
 
@@ -93,6 +103,7 @@ const Diem: React.FunctionComponent = ({
           {currentDiem && (
             <DisplayEvents
               currentDiem={currentDiem}
+              setCurrentDiem={setCurrentDiem}
               state={state}
               setState={setState}
             />
