@@ -43,7 +43,6 @@ const Diem: React.FunctionComponent = ({
       setAllDiems(
         (prev) => (prev = prev.filter((el) => el.id !== currentDiem.id))
       );
-    // console.log(allDiems[0], 'FIRST DIEM');
     if (currentDiem.length) setCurrentDiem(allDiems[0]); // maybe not using
     else {
       setCurrentDiem(undefined);

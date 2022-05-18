@@ -10,26 +10,14 @@ interface ItemType {
   name: string;
 }
 function DisplayEvents({ currentDiem, state, setState }) {
-  // useEffect(() => {
-  //   // currentDiem.events && setState(currentDiem.events);
-  // }, [currentDiem.events]);
   useEffect(() => {
     setState(currentDiem.events);
   }, [currentDiem]);
-  useEffect(() => {
-    // console.log('State changed');
-    // console.log(currentDiem.events, 'state changed events'); //doubles here
-    // console.log(state, 'state');
-  }, [state]);
+  useEffect(() => {}, [state]);
 
-  const clickedEvent = (item) => {
-    // console.log('clicked event');
-    // console.log(item.title, 'title event');
-    // console.log(item.id, 'event ID');
-  };
+  const clickedEvent = (item) => {};
   const removeEvent = (id) => {
     console.log('remove event');
-    // hooks.deleteEvent(id);
   };
   return (
     <>

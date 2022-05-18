@@ -17,9 +17,6 @@ const Tile: React.FunctionComponent = ({
   const socket = useContext(SocketContext);
 
   const divClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
-    // console.log(diem, 'DIEEEMMM');
-    // console.log(diem, 'IIIIIIIIdd Diem');
-
     setCurrentDiem(diem);
 
     socket.emit('leavingRoom');
@@ -33,7 +30,6 @@ const Tile: React.FunctionComponent = ({
     diem.id && hooks.deleteDiem(diem.id);
     diem.id &&
       setAllDiems((prev) => (prev = prev.filter((el) => el.id !== diem.id)));
-    // console.log(allDiems[0], 'FIRST DIEM');
     if (diem.length) setCurrentDiem(allDiems[0]);
     else {
       setCurrentDiem(undefined);
@@ -81,32 +77,6 @@ const Tile: React.FunctionComponent = ({
         onClick={divClickedHandler}
       >
         <div>
-          {/* <Popup
-            trigger={
-              <button>
-                <Image
-                  src={deleteBin}
-                  height="20"
-                  width="20"
-                  alt="delete-bin-image"
-                />
-              </button>
-            }
-            position="right center"
-          >
-            <div
-              style={{
-                backgroundColor: 'whitesmoke',
-                padding: '5px',
-                borderRadius: '5px',
-                fontSize: 'large',
-              }}
-            >
-              <button onClick={clickDeleteDiem} className={styles.deleteDiem}>
-                Delete
-              </button>
-            </div>
-          </Popup> */}
           <div className={styles.tile__info}>
             <span className={styles.diem_date_first}>{date.slice(0, 4)}</span>
             <span className={styles.diem_date_second}>{date.slice(4)}</span>

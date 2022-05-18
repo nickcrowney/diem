@@ -18,8 +18,6 @@ function PopNewDiem({ setAllDiems, allDiems, users }) {
           hooks
             .submitNewDiem(data.title, data.date, currentUser, data.color)
             .then((res) => {
-              // console.log(res, 'RES');
-
               setAllDiems((prev) => {
                 const copied = [
                   ...prev,
@@ -32,7 +30,6 @@ function PopNewDiem({ setAllDiems, allDiems, users }) {
                     events: [],
                   },
                 ];
-                // const copied = [...copy]; //Ask Guillem and watch him get angry
 
                 copied.sort(function (a, b) {
                   return new Date(a.date) - new Date(b.date);

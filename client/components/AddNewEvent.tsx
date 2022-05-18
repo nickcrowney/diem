@@ -18,53 +18,13 @@ const AddNewEvent = ({
 
   useEffect(() => {}, [currentDiem]);
   const submittedEvent = (event) => {
-    // // currentDiem &&
-    // //   setState((prev) => {
-    // //     const copy = [
-    // //       ...prev,
-    // //       {
-    // //         title: event.eventName,
-    // //         metaDiemId: currentDiem.id,
-    // //         // createdAt: Number(Date.now().toString().slice(0, 10)),
-    // //       },
-    // //     ];
-    // //     console.log(copy, 'COPY after');
-    // //     setCurrentDiem((prev) => {
-    // //       // { ...currentDiem, events: copy } WHY WONT WORK
-
-    // //       // console.log(prev, 'WHAT');
-    // //       // return prev;
-    // //       prev.events = copy;
-    // //       return prev;
-    // //     });
-
-    // //     return copy;
-    // //   });
-
-    // console.log(currentDiem.events, 'DIEM EVENTS');
-    // console.log(event.eventName, 'event name');
-    // console.log(currentDiem.id, 'diem id');
-
-    // state && setCurrentDiem(state);
-    //   (prev) => {
-    //   console.log('RENDER ONCE');
-    //   const copied = prev;
-    //   prev.events = [
-    //     ...prev.events,
-    //     { title: event.eventName, metaDiemId: currentDiem.id },
-    //   ];
-    //   return copied;
-    // }
-    // );
     setButtonDisplay('none');
     reset({ eventName: '' });
-    console.log(currentDiem, 'CURRENT DIEM EVENT SUBMIT');
 
     currentDiem &&
       hooks
         .submitNewEvent(event.eventName, currentDiem.id, '', '')
         .then((res) => {
-          console.log(res, 'RESRES');
           setState((prev) => {
             const copy = [
               ...prev,
@@ -75,7 +35,6 @@ const AddNewEvent = ({
                 // createdAt: Number(Date.now().toString().slice(0, 10)),
               },
             ];
-            console.log(copy, 'COPY after');
             setCurrentDiem((prev) => {
               // { ...currentDiem, events: copy } WHY WONT WORK
 
