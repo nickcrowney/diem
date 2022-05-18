@@ -14,7 +14,6 @@ const currentDate = dayjs().toISOString().slice(0, 10);
 
 const Diems: NextPage = (props) => {
   const [onlineUsers, setOnlineUsers] = useState([]); //Grab onlineStatus emits from other users and use this to render online
-  //const { loginInfo, setLoginInfo } = useLoginContext();
   const { loginInfo } = useContext(LoginContext);
   const [newDiemPop, setNewDiemPop] = useState(false);
   const [data, setData] = useState("");
@@ -27,7 +26,7 @@ const Diems: NextPage = (props) => {
   });
 
   const [currentDiem, setCurrentDiem] = useState({
-    id: 1,
+    id: 3,
     title: "Add new diem",
   });
   const [trap, setTrap] = useState("");
@@ -47,7 +46,9 @@ const Diems: NextPage = (props) => {
     console.log("Updated Online Users ", onlineIds);
   });
 
-  useEffect(() => {}, [currentDiem]);
+  useEffect(() => {
+    console.warn("hi");
+  }, [currentDiem]);
   const [users, setUsers] = useState([]);
 
   useEffect(() => {}, [data]);

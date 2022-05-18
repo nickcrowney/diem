@@ -13,19 +13,23 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
   const socket = useContext(SocketContext);
   const { loginInfo } = useContext(LoginContext);
   const { register, handleSubmit, reset } = useForm();
+  console.log(currentDiem, "CURRENTDIEM");
 
   //TODO Fetch the diem with curDiem.id and populate the starting state of
   //history
   const [history, setHistory] = useState([]);
 
+  // currentDiem &&
   useEffect(() => {
-    // let result = getHistory();
-    if (currentDiem.chatHistory) {
-      let res = hooks
-        .getDiemById(currentDiem.id)
-        .then((res) => res.json())
-        .then((res) => setHistory((prev) => res.chatHistory));
-    }
+    console.warn(currentDiem.id);
+    fetch(`http://localhost:4000/diem/byId/${currentDiem.id}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        console.warn(res);
+        setHistory((prev) => res.chatHistory);
+      });
   }, []);
 
   socket.on("updatedMessages", (message) => {
@@ -56,7 +60,6 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
       author: loginInfo.email,
       timestamp: String(Date.now()),
     };
-
     socket.emit("message", mes);
   }
 
@@ -91,7 +94,6 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
                 {...register("message")}
                 placeholder="enter message"
               />
-
               <input
                 type="submit"
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
