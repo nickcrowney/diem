@@ -126,12 +126,10 @@ const ChatServer: React.FunctionComponent = ({ curDiem }) => {
             id="message"
             name="message"
             className={styles.form}
-            onSubmit={() => {
-              handleSubmit((data) => {
-                console.log(data, "DATA");
-                handleSubmitMessage(data);
-              });
-            }}
+            onSubmit={handleSubmit((data) => {
+              console.log(data, "DATA");
+              handleSubmitMessage(data);
+            })}
           >
             <label htmlFor="userLogin">Message Container</label>
             <input

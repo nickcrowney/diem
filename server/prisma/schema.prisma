@@ -28,7 +28,7 @@ model Diem {
 //TODO
 model Message {
   id         Int    @id @default(autoincrement())
-  author     Int
+  author     String
   content    String
   //Diem    Diem?  @relation(fields: [diemId], references: [id])
   metaDiemId Int?

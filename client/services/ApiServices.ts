@@ -167,6 +167,7 @@ const modifyDiemChatHistory = async (
   author: String,
   time: String
 ) => {
+  console.log({ message, id, author, time }, "THE MESSAGE");
   const response = await fetch("http://localhost:4000/message", {
     method: "POST",
     body: JSON.stringify({ message, id, author, time }),
@@ -174,7 +175,6 @@ const modifyDiemChatHistory = async (
       "Content-Type": "application/json",
     },
   });
-  console.log("YALALALALA");
 
   const data = await response.json();
   return data;

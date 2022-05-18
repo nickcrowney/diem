@@ -1,10 +1,10 @@
-import { User, Diem, Event } from '.prisma/client';
-import { PrismaClient } from '@prisma/client';
-import { time } from 'console';
+import { User, Diem, Event } from ".prisma/client";
+import { PrismaClient } from "@prisma/client";
+import { time } from "console";
 //import { profile } from "console";
-import Express, { Request, Response } from 'express';
-import { colors } from 'react-select/dist/declarations/src/theme';
-import { diems } from '../data/data';
+import Express, { Request, Response } from "express";
+import { colors } from "react-select/dist/declarations/src/theme";
+import { diems } from "../data/data";
 const prisma = new PrismaClient();
 
 export async function getUsers(req: Request, res: Response) {
@@ -21,6 +21,7 @@ export async function getDiems(req: Request, res: Response) {
     include: {
       users: true,
       events: true,
+      chatHistory: true,
     },
   });
   res.json(diems);
@@ -57,11 +58,12 @@ export async function createUser(req: Request, res: Response) {
 }
 
 export async function createDiem(req: Request, res: Response) {
-  const { title, date, user, color } = req.body;
+  const { title, date, city, user, color } = req.body;
   const diem = await prisma.diem.create({
     data: {
       title: title, //Only title is required to create diem
       date: date,
+      city: city,
       color: color,
       users: {
         connect: {
@@ -70,8 +72,9 @@ export async function createDiem(req: Request, res: Response) {
       },
     },
   });
-  console.log('NEW DIEM');
-  console.log(title, 'title');
+  console.log("NEW DIEM");
+  console.log(title, "title");
+  console.log(city, "city");
   res.json(diem);
 }
 
@@ -109,18 +112,6 @@ export async function createMessage(req: Request, res: Response) {
   });
   res.json(mes);
 }
-
-// export async function createProfile(req: Request, res: Response) {
-//   const { email, picture, user} = req.body;
-//   const profile = await prisma.profile.create({
-//     data: {
-//       email: email, //Only title is required to create diem
-//       userPhoto: picture,
-//       user:
-//     },
-//   });
-//   res.json(profile);
-// }
 
 export async function getUserById(req: Request, res: Response) {
   const id = req.params.id;
