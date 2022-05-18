@@ -97,33 +97,34 @@ const ChatServer: React.FunctionComponent = ({ curDiem }) => {
             })}
           </div>
         )}
+        {curDiem && (
+          <div className={styles.form_container}>
+            <form
+              id="message"
+              name="message"
+              className={styles.form}
+              onSubmit={handleSubmit((data) => {
+                console.log(data, "DATA");
+                handleSubmitMessage(data);
+              })}
+            >
+              <label htmlFor="userLogin">Message Container</label>
+              <input
+                type="text"
+                id="inputValue"
+                name="inputValue"
+                className="py-2 px-4 rounded"
+                {...register("message")}
+                placeholder="enter message"
+              />
 
-        <div className={styles.form_container}>
-          <form
-            id="message"
-            name="message"
-            className={styles.form}
-            onSubmit={handleSubmit((data) => {
-              console.log(data, "DATA");
-              handleSubmitMessage(data);
-            })}
-          >
-            <label htmlFor="userLogin">Message Container</label>
-            <input
-              type="text"
-              id="inputValue"
-              name="inputValue"
-              className="py-2 px-4 rounded"
-              {...register("message")}
-              placeholder="enter message"
-            />
-
-            <input
-              type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            />
-          </form>
-        </div>
+              <input
+                type="submit"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              />
+            </form>
+          </div>
+        )}
       </div>
     </>
   );
