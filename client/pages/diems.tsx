@@ -7,13 +7,15 @@ import styles from "../styles/Home.module.css";
 import dayjs from "dayjs";
 import hooks from "../services/ApiServices";
 import { useLoginContext } from "../contexts/Context";
+import { LoginContext } from "../contexts/Context";
 import { SocketContext } from "../contexts/Socket";
 
 const currentDate = dayjs().toISOString().slice(0, 10);
 
 const Diems: NextPage = (props) => {
   const [onlineUsers, setOnlineUsers] = useState([]); //Grab onlineStatus emits from other users and use this to render online
-  const { loginInfo, setLoginInfo } = useLoginContext();
+  //const { loginInfo, setLoginInfo } = useLoginContext();
+  const { loginInfo } = useContext(LoginContext);
   const [newDiemPop, setNewDiemPop] = useState(false);
   const [data, setData] = useState("");
   const [mainDiem, setDiem] = useState("");
@@ -32,8 +34,8 @@ const Diems: NextPage = (props) => {
 
   socket.on("connect", (arg) => {
     console.log("connected to Sockets on front end");
-    //socket.emit("currentlyOnline", loginInfo.email)  //TODO Figure out why context doesn't work here
-    socket.emit("currentlyOnline", "email@email.com");
+    //socket.emit("currentlyOnline", loginInfo.email)
+    socket.emit("currentlyOnline", loginInfo.email);
     socket.emit("joiningRoom", String(currentDiem.id)); //Default user to the top chatroom
   });
 

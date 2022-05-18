@@ -16,17 +16,18 @@ const ChatServer: React.FunctionComponent = ({ curDiem }) => {
   const { loginInfo } = useContext(LoginContext);
   const { register, handleSubmit, reset } = useForm();
 
+  //TODO Fetch the diem with curDiem.id and populate the starting state of
+  //history
+
   //WHAT THE CODE SHOULD BE
   /////////////////////////////////
-  console.log(curDiem, "CURDIEM");
-  console.log("LOGIN INFO HERE", loginInfo);
   // const [history, setHistory] = useState(
   //   hooks.getDiemById(curDiem.id).chatHistory
   // );
 
-  // socket.on("updatedMessages", (message) => {
-  //   setHistory((prev) => [...prev, message]);
-  // });
+  socket.on("updatedMessages", (message) => {
+    setHistory((prev) => [...prev, message]);
+  });
 
   // useEffect(() => {}, [history]);
 
@@ -76,24 +77,12 @@ const ChatServer: React.FunctionComponent = ({ curDiem }) => {
 
   useEffect(() => {}, [history]);
 
-  //console.log(history, "HISTORY");
-
-  // function handleSubmitMessage(e) {
-  //   e.preventDefault();
-  //   let time = Date.now();
-  //    //updateDiemChatHistory(e.value, loginInfo.email, time);
-  //   socket.emit("message", { e.value, loginInfo.email, time});
-  // }
-
   function handleSubmitMessage(data: React.FormEvent<HTMLInputElement>) {
     let newMessage = {
       message: data.message,
-      // author: "Email",
       author: loginInfo.email,
       timestamp: String(Date.now()),
     };
-
-    console.log(newMessage, "NEWMESSAGE");
 
     hooks.modifyDiemChatHistory(
       newMessage.message,
@@ -105,7 +94,6 @@ const ChatServer: React.FunctionComponent = ({ curDiem }) => {
     setHistory((prev) => [
       ...prev,
       { content: data.message, author: loginInfo.email, timestamp: Date.now() },
-      //{ content: data.message, author: String(loginInfo.email), String(Date.now())}
     ]);
     reset({ message: "" });
   }
