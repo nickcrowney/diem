@@ -14,6 +14,9 @@ function DisplayEvents({ currentDiem, setCurrentDiem, state, setState }) {
   useEffect(() => {
     setState(currentDiem.events);
   }, [currentDiem]);
+  useEffect(() => {
+    setState(currentDiem.events);
+  }, [currentDiem.events]);
   useEffect(() => {}, [state]);
 
   const clickedEvent = (item) => {};
@@ -35,12 +38,6 @@ function DisplayEvents({ currentDiem, setCurrentDiem, state, setState }) {
                         {item.title}
                         {''}
                       </div>
-                      {/* <Image
-                        src={deleteBin}
-                        height="20"
-                        width="20"
-                        alt="delete-bin-image"
-                      /> */}
                     </button>
                   }
                   position="right top"
@@ -55,10 +52,17 @@ function DisplayEvents({ currentDiem, setCurrentDiem, state, setState }) {
                       fontSize: 'large',
                     }}
                   >
+                    <div>Location:</div>
+                    <div>Time:</div>
                     <button
                       onClick={() => {
                         setCurrentDiem((prev) => {
                           const copy = prev;
+                          copy.events = prev.events.filter(
+                            (events) => events.id !== item.id
+                          );
+                          setState(copy.events);
+
                           return copy;
                         });
                         hooks.deleteEvent(item.id);
