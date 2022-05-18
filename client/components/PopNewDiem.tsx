@@ -1,47 +1,38 @@
+import React from "react";
+import dayjs from "dayjs";
+import { useForm } from "react-hook-form";
+import styles from "./PopNewDiem.module.css";
+import props from "../services/ApiServices";
 
-import React, { useEffect } from 'react';
-import dayjs from 'dayjs';
-import { useForm } from 'react-hook-form';
-import styles from './PopNewDiem.module.css';
-import hooks from '../services/ApiServices';
-
-const yesterday = dayjs().add(-1, 'day').toISOString();
+const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 
 function PopNewDiem({ setAllDiems, allDiems, users }) {
   const currentUser = users[0].id;
   const { register, handleSubmit, reset } = useForm();
-  useEffect(() => {}, [allDiems]);
+
   return (
     <div className={styles.newdiem}>
       <form
         className={styles.form}
         onSubmit={handleSubmit((data) => {
-          hooks
-            .submitNewDiem(data.title, data.date, currentUser, data.color)
-            .then((res) => {
-              setAllDiems((prev) => {
-                const copied = [
-                  ...prev,
-                  {
-                    id: res.id,
-                    title: res.title,
-                    date: res.date,
-                    user: currentUser,
-                    color: res.color,
-                    events: [],
-                  },
-                ];
-
-                copied.sort(function (a, b) {
-                  return new Date(a.date) - new Date(b.date);
-                });
-                return copied;
-              });
-            })
-            .catch((e) => {
-              console.log('error when creating diem', e);
+          props.submitNewDiem(data.title, data.date, currentUser, data.color);
+          setAllDiems((prev) => {
+            prev = [
+              ...prev,
+              {
+                title: data.title,
+                date: data.date,
+                user: currentUser,
+                color: data.color,
+                chatHistory: [],
+              },
+            ];
+            prev.sort(function (a, b) {
+              return new Date(a.date) - new Date(b.date);
             });
-          reset({ title: '', city: '', date: '' });
+            return prev;
+          });
+          reset({ title: "", city: "", date: "" });
         })}
       >
         <input
@@ -53,9 +44,9 @@ function PopNewDiem({ setAllDiems, allDiems, users }) {
         <input
           type="date"
           className="py-2 px-4 rounded border-none"
+          min={currentDate}
           name="date"
-
-          {...register('date', { required: true, min: yesterday })}
+          {...register("date", { required: true })}
         />
 
         <div className={styles.colorPicker}>

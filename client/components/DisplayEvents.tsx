@@ -15,11 +15,9 @@ function DisplayEvents({ currentDiem, state, setState }) {
   }, [currentDiem]);
   useEffect(() => {}, [state]);
 
-
   const clickedEvent = (item) => {};
   const removeEvent = (id) => {
-    console.log('remove event');
-
+    console.log("remove event");
   };
   return (
     <>

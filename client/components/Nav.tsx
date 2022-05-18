@@ -23,7 +23,7 @@ const Nav = ({
       return !prev;
     });
   }
-  
+
   const { loginInfo, setLoginInfo } = useLoginContext();
 
   console.log("PROPS HERE", loginInfo);

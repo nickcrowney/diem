@@ -58,7 +58,7 @@ const Diem: React.FunctionComponent = ({
   };
 
   return (
-    <div className={styles.diem} style={backgroundColor}>
+    <div className={styles.diem} >
       <DiemInfoBar
         currentDiem={currentDiem}
         setAddRemoveUser={setAddRemoveUser}
