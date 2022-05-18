@@ -11,22 +11,19 @@ interface ItemType {
 }
 function DisplayEvents({ currentDiem, state, setState }) {
   useEffect(() => {
-    currentDiem.events && setState(currentDiem.events);
-  }, [currentDiem.events]);
-  useEffect(() => {}, [currentDiem]);
+    setState(currentDiem.events);
+  }, [currentDiem]);
+  useEffect(() => {}, [state]);
 
-  const clickedEvent = (item) => {
-    console.log("clicked event");
-    console.log(item.title, "title event");
-    console.log(item.id, "event ID");
-  };
+
+  const clickedEvent = (item) => {};
   const removeEvent = (id) => {
-    console.log("remove event");
-    // hooks.deleteEvent(id);
+    console.log('remove event');
+
   };
   return (
     <>
-      {currentDiem.events && state.length ? (
+      {state && currentDiem.events ? (
         <ReactSortable list={state} setList={setState}>
           {state.map((item) => (
             <>

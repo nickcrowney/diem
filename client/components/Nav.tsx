@@ -23,15 +23,8 @@ const Nav = ({
       return !prev;
     });
   }
+  
   const { loginInfo, setLoginInfo } = useLoginContext();
-  //const loginData = useContext(LoginContext);
-  // const mainUser = users[0];
-  // console.log(mainUser, "MAIN");
-  // const mainUser = users.filter((el) => {
-  //   return el.email === loginData.email;
-  //   TODO;
-  //   // return el.id === 1;
-  // });
 
   console.log("PROPS HERE", loginInfo);
 

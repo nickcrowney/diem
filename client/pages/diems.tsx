@@ -30,6 +30,10 @@ const Diems: NextPage = (props) => {
     id: 1,
     title: "Add new diem",
   });
+  const [trap, setTrap] = useState('');
+  useEffect(() => {
+    console.log('RERENDER');
+  }, [trap]);
 
   socket.on("connect", (arg) => {
     console.log("connected to Sockets on front end");
@@ -68,6 +72,8 @@ const Diems: NextPage = (props) => {
             return el.events;
           })
         );
+        console.log('RENDER ONCE DIEM');
+
         setCurrentDiem(resFuture[0]);
         setBackgroundColor({ "background-color": resFuture[0].color });
       })
@@ -98,6 +104,7 @@ const Diems: NextPage = (props) => {
                   diem={el}
                   setCurrentDiem={setCurrentDiem}
                   backgroundColor={backgroundColor}
+                  setTrap={setTrap}
                 />
               </div>
             );
@@ -109,10 +116,13 @@ const Diems: NextPage = (props) => {
             <Diem
               mainDiem={mainDiem}
               currentDiem={currentDiem}
+              setTrap={setTrap}
               setCurrentDiem={setCurrentDiem}
               users={users}
               backgroundColor={backgroundColor}
               setBackgroundColor={setBackgroundColor}
+              allDiems={allDiems}
+              setAllDiems={setAllDiems}
             />
           )}
         </div>
