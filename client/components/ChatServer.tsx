@@ -86,22 +86,14 @@ const ChatServer: React.FunctionComponent = ({ curDiem }) => {
   // }
 
   function handleSubmitMessage(data: React.FormEvent<HTMLInputElement>) {
-    console.log(data, "LOGGIN E");
-    console.log(data.message, "input value");
-
     let newMessage = {
       message: data.message,
       // author: "Email",
       author: loginInfo.email,
-      timestamp: Date.now(),
+      timestamp: String(Date.now()),
     };
 
-    console.log(
-      newMessage.message,
-      curDiem.id,
-      newMessage.author,
-      newMessage.timestamp
-    );
+    console.log(newMessage, "NEWMESSAGE");
 
     hooks.modifyDiemChatHistory(
       newMessage.message,
