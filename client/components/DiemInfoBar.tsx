@@ -1,11 +1,11 @@
-import { useEffect, useContext } from "react";
-import Image from "next/image";
-import calendar from "../public/images/calendar.png";
-import chat from "../public/images/chat.png";
-import prosAndCons from "../public/images/pros-and-cons.png";
-import plus from "../public/images/plus.png";
-import styles from "./DiemInfoBar.module.css";
-import { SocketContext } from "../contexts/Socket";
+import { useEffect, useContext } from 'react';
+import Image from 'next/image';
+import calendar from '../public/images/calendar.png';
+import chat from '../public/images/chat.png';
+import prosAndCons from '../public/images/pros-and-cons.png';
+import plus from '../public/images/plus.png';
+import styles from './DiemInfoBar.module.css';
+import { SocketContext } from '../contexts/Socket';
 
 const DiemInfoBar: React.FunctionComponent = ({
   onlineUsers,
@@ -23,29 +23,29 @@ const DiemInfoBar: React.FunctionComponent = ({
 
   function dateFixer(calendarDate) {
     const options = {
-      day: "numeric",
-      month: "long",
+      day: 'numeric',
+      month: 'long',
     };
     const currentDate = new Date(calendarDate).toLocaleDateString(
-      "en-GB",
+      'en-GB',
       options
     );
-    const firstWhite = currentDate.indexOf(" ");
+    const firstWhite = currentDate.indexOf(' ');
     const firstBit = currentDate.slice(0, firstWhite);
     const secondBit = currentDate.slice(firstWhite);
     const nth = function (d) {
       const dString = String(d);
       const last = +dString.slice(-2);
-      if (last > 3 && last < 21) return "th";
+      if (last > 3 && last < 21) return 'th';
       switch (last % 10) {
         case 1:
-          return "st";
+          return 'st';
         case 2:
-          return "nd";
+          return 'nd';
         case 3:
-          return "rd";
+          return 'rd';
         default:
-          return "th";
+          return 'th';
       }
     };
     const finishedDate = firstBit + nth(firstBit) + secondBit;
@@ -63,9 +63,12 @@ const DiemInfoBar: React.FunctionComponent = ({
       </div>
       <div className={styles.diemInfoBar__picsAndButtons}>
         <div className={styles.diemInfoBar__profilePics_container}>
-          <div className={styles.diemInfoBar__profilePic_plusSign}>
-            <Image src={plus} alt="Picture of the author" />
-          </div>
+          {currentDiem.users && (
+            <div className={styles.diemInfoBar__profilePic_plusSign}>
+              <Image src={plus} alt="more than eight users" />
+            </div>
+          )}
+
           {currentDiem && currentDiem.users // always truthy
             ? currentDiem.users.map((el) => {
                 return (
@@ -79,15 +82,9 @@ const DiemInfoBar: React.FunctionComponent = ({
                   </div>
                 );
               })
-            : ""}
+            : ''}
         </div>
         <div className={styles.diemInfoBar__buttons}>
-          <button type="button">
-            <Image src={calendar} height="40" width="40" alt="calendar-image" />
-          </button>
-          <button type="button">
-            <Image src={chat} height="40" width="40" alt="chat-image" />
-          </button>
           <button type="button">
             <Image
               src={prosAndCons}
