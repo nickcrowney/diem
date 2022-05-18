@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import DiemInfoBar from "./DiemInfoBar";
 import AddNewEvent from "./AddNewEvent";
@@ -6,21 +5,9 @@ import PopAddUsers from "./PopAddUsers";
 import PopRemoveUsers from "./PopRemoveUsers";
 import DiemColorPicker from "./DiemColorPicker";
 import GoogleMap from "./GoogleMap";
-import AddNewEventTest from "./AddNewEventTest";
 import styles from "./Diem.module.css";
 import DisplayEvents from "./DisplayEvents";
-import more from "../public/images/more.png";
-=======
-import React, { useEffect, useState } from 'react';
-import DiemInfoBar from './DiemInfoBar';
-import AddNewEvent from './AddNewEvent';
-import PopAddUsers from './PopAddUsers';
-import PopRemoveUsers from './PopRemoveUsers';
-import DiemColorPicker from './DiemColorPicker';
-import GoogleMap from './GoogleMap';
-import styles from './Diem.module.css';
-import DisplayEvents from './DisplayEvents';
->>>>>>> 032076549a3c5fe5ae9e81a54739e281709916db
+import ChatServer from "./ChatServer";
 
 const Diem: React.FunctionComponent = ({
   currentDiem,
@@ -81,6 +68,9 @@ const Diem: React.FunctionComponent = ({
           setBackgroundColor={setBackgroundColor}
           currentDiem={currentDiem}
         />
+      </div>
+      <div>
+        <ChatServer curDiem={currentDiem} />
       </div>
     </>
   );

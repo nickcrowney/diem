@@ -1,33 +1,16 @@
-<<<<<<< HEAD
-import React, { FC, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { ReactSortable } from "react-sortablejs";
 import styles from "../styles/Home.module.css";
 import hooks from "../services/ApiServices";
 import deleteBin from "../public/deleteBin.svg";
 import Image from "next/image";
-=======
-import React, { useEffect } from 'react';
-import { ReactSortable } from 'react-sortablejs';
-import styles from '../styles/Home.module.css';
-import hooks from '../services/ApiServices';
-import deleteBin from '../public/deleteBin.svg';
-import Image from 'next/image';
->>>>>>> 032076549a3c5fe5ae9e81a54739e281709916db
 
 interface ItemType {
   id: number;
   name: string;
 }
 function DisplayEvents({ currentDiem, state, setState }) {
-<<<<<<< HEAD
-  console.log(currentDiem.events, "EVENTSSSS");
-  // const [state, setState] = useState<ItemType[]>([]);
-
   useEffect(() => {
-    console.log(currentDiem.events, "MAPPABLE");
-=======
-  useEffect(() => {
->>>>>>> 032076549a3c5fe5ae9e81a54739e281709916db
     currentDiem.events && setState(currentDiem.events);
   }, [currentDiem.events]);
   useEffect(() => {}, [currentDiem]);

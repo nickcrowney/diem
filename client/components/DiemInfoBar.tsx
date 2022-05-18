@@ -20,15 +20,8 @@ const DiemInfoBar: React.FunctionComponent = ({
 
   function dateFixer(calendarDate) {
     const options = {
-<<<<<<< HEAD
-      // weekday: 'long',
-      // year: 'numeric',
       day: "numeric",
       month: "long",
-=======
-      day: 'numeric',
-      month: 'long',
->>>>>>> 032076549a3c5fe5ae9e81a54739e281709916db
     };
     const currentDate = new Date(calendarDate).toLocaleDateString(
       "en-GB",

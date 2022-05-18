@@ -14,6 +14,7 @@ const Nav = ({
   newDiemPop,
   setNewDiemPop,
   setAllDiems,
+  allDiems,
   loginData,
 }) => {
   function handleClick() {
@@ -21,20 +22,13 @@ const Nav = ({
       return !prev;
     });
   }
-<<<<<<< HEAD
-  //console.log(users[0], '0th user');
-  const mainUser = users.filter((el) => {
-    return el.email === loginData.email;
-  });
-=======
   const mainUser = users[0];
-  console.log(mainUser, 'MAIN');
+  console.log(mainUser, "MAIN");
   // const mainUser = users.filter((el) => {
   //   return el.email === loginData.email;
   //   TODO;
   //   // return el.id === 1;
   // });
->>>>>>> 032076549a3c5fe5ae9e81a54739e281709916db
 
   console.log("PROPS HERE", loginData);
 
@@ -45,9 +39,6 @@ const Nav = ({
           <button type="button" onClick={handleClick}>
             <Image src={more} height="40" width="40" />
           </button>
-<<<<<<< HEAD
-          {newDiemPop && <PopNewDiem setAllDiems={setAllDiems} />}
-=======
           {newDiemPop && (
             <PopNewDiem
               allDiems={allDiems}
@@ -55,7 +46,6 @@ const Nav = ({
               users={users}
             />
           )}
->>>>>>> 032076549a3c5fe5ae9e81a54739e281709916db
         </div>
 
         <div className={styles.nav__end}>

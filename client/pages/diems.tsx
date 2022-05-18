@@ -1,29 +1,13 @@
-<<<<<<< HEAD
 import { useEffect, useState, useContext } from "react";
 import type { NextPage } from "next";
 import Nav from "../components/Nav";
 import Tile from "../components/Tile";
 import Diem from "../components/Diem";
-import PopNewDiem from "../components/PopNewDiem";
 import styles from "../styles/Home.module.css";
 import dayjs from "dayjs";
 import hooks from "../services/ApiServices";
-import { async } from "@firebase/util";
 import { useLoginContext } from "../contexts/Context";
 import { SocketContext } from "../contexts/Socket";
-import io from "socket.io-client";
-=======
-import { useEffect, useState, useContext } from 'react';
-import type { NextPage } from 'next';
-import Nav from '../components/Nav';
-import Tile from '../components/Tile';
-import Diem from '../components/Diem';
-import styles from '../styles/Home.module.css';
-import dayjs from 'dayjs';
-import hooks from '../services/ApiServices';
-import { useLoginContext } from '../contexts/Context';
-import { SocketContext } from '../contexts/Socket';
->>>>>>> 032076549a3c5fe5ae9e81a54739e281709916db
 
 const currentDate = dayjs().toISOString().slice(0, 10);
 
@@ -81,29 +65,14 @@ const Diems: NextPage = (props) => {
         setAllDiems(resFuture);
         setAllEvents(
           resFuture.map((el) => {
-<<<<<<< HEAD
-            console.log(el.events, "EVENTITOS");
-=======
->>>>>>> 032076549a3c5fe5ae9e81a54739e281709916db
             return el.events;
           })
         );
         setCurrentDiem(resFuture[0]);
-<<<<<<< HEAD
-        console.log(resFuture[0], "RES FUTURE 0");
-        console.log(resFuture[0].color, "RES FUTURE COLOR");
-
         setBackgroundColor({ "background-color": resFuture[0].color });
       })
       .catch((error) => console.log(error));
   }, []);
-  allEvents.length && console.log(allEvents, "AAAALLLLLLL");
-=======
-        setBackgroundColor({ 'background-color': resFuture[0].color });
-      })
-      .catch((error) => console.log(error));
-  }, []);
->>>>>>> 032076549a3c5fe5ae9e81a54739e281709916db
   return (
     <div>
       <Nav

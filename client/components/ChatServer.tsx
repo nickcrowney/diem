@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import io from "socket.io-client";
-import getDiemById from "../services/ApiServices";
+import props from "../services/ApiServices";
 
 import hooks from "../services/ApiServices";
 import Message from "./Message";
@@ -10,12 +10,28 @@ import styles from "./ChatServer.module.css";
 import e from "express";
 import { useForm } from "react-hook-form";
 
-const ChatServer: React.FunctionComponent = (props) => {
+const ChatServer: React.FunctionComponent = ({ curDiem }) => {
   //; //currentdiemchat history
   const socket = useContext(SocketContext);
   const { loginInfo } = useContext(LoginContext);
   const { register, handleSubmit, reset } = useForm();
-  console.log(props.currentDiem.chatHistory, "CHAT HISTORY PROP");
+
+  const diems = hooks.getDiems();
+
+  //WHAT THE CODE SHOULD BE
+
+  /////////////////////////////////
+  // const [history, setHistory] = useState(hooks.getDiemById(curDiem.id));
+
+  // socket.on("updatedMessages", (message) => {
+  //   setHistory((prev) => [...prev, message]);
+  // });
+
+  // useEffect(() => {}, [history]);
+
+  //////////////////////////////////
+
+  //console.log(curDiem.chatHistory, "CHAT HISTORY PROP");
 
   //On loading component, fetch chathistory from database
 
@@ -27,26 +43,35 @@ const ChatServer: React.FunctionComponent = (props) => {
   //   timestamp: Date.now(),
   // });
 
-  //const [history, setHistory] = useState(getDiemById(props.currentDiem.id).chatHistory); //fetch updated chat history each time we load chatServer component
+  // console.log(curDiem, "CURRENT DEIM"); //WONT NEED THIS
 
-  const [history, setHistory] = useState(props.currentDiem.chatHistory);
+  // console.log("CHATHISTORY");
+  // console.log(hooks.getDiemById(2).chatHistory, "CHATHISTORY");
+
+  // const currentId = curDiem.id;
+
+  // const [history, setHistory] = useState(hooks.getDiemById(currentId)); //fetch updated chat history each time we load chatServer component
+
+  // console.log(history, "Hist");
+
+  //const [history, setHistory] = useState(props.currentDiem.chatHistory);  //Fetch each time we load the component anew
 
   //setHistory(currentDiem.chatHistory);
 
-  // const mockData = [
-  //   { content: "This is a message", author: 1, timestamp: "Friday" },
-  //   { content: "A second message", author: 1, timestamp: "Wednesday" },
-  //   { content: "Yet another message", author: 2, timestamp: "Sunday" },
-  // ];
+  const mockData = [
+    { content: "This is a message", author: 1, timestamp: "Friday" },
+    { content: "A second message", author: 1, timestamp: "Wednesday" },
+    { content: "Yet another message", author: 2, timestamp: "Sunday" },
+  ];
 
-  // const [history, setHistory] = useState(mockData);
+  const [history, setHistory] = useState(mockData);
   //const [history, setHistory] = useState([]);
   //setHistory((prev) => currentDiem.chatHistory)//TODO fetch the chat history data from the currently selected diem
 
   //Recieve an updated message
-  socket.on("updatedMessages", (message) => {
-    setHistory((prev) => [...prev, message]);
-  });
+  // socket.on("updatedMessages", (message) => {
+  //   setHistory((prev) => [...prev, message]);
+  // });
 
   useEffect(() => {}, [history]);
 
@@ -72,41 +97,34 @@ const ChatServer: React.FunctionComponent = (props) => {
 
     hooks.modifyDiemChatHistory(
       newMessage.message,
-      3,
-
+      1,
       newMessage.author,
       newMessage.timestamp
     );
 
-    setHistory(
-      (prev) => [
-        ...prev,
-        { content: data.message, author: "ME", timestamp: String(Date.now()) },
-      ]
-
-      //{ content: e.value, author: loginInfo.name, timestamp: "" + Date.now() },
-
-      //{ content: e.value, author: loginInfo.name, timestamp: "" + Date.now() },  //TODO
-    );
+    setHistory((prev) => [
+      ...prev,
+      { content: "MESSAGE", author: "ME", timestamp: "FRIDAYS" },
+      //{ content: data.message, author: loginInfo.email, String(Date.now())}
+    ]);
     reset({ message: "" });
   }
 
   return (
     <>
       <div className={styles.form_contianer}>
-        {history &&
-          props.currentDiem(
-            <div className={styles.message_container}>
-              {props.currentDiem.chatHistory.map((el) => {
-                return <Message el={el} />;
-              })}
-            </div>
-          )}
+        {history && (
+          <div className={styles.message_container}>
+            {history.map((el) => {
+              return <Message el={el} />;
+            })}
+          </div>
+        )}
 
         <div className={styles.form_container}>
           <form
-            id="messages"
-            name="messages"
+            id="message"
+            name="message"
             className={styles.form}
             onSubmit={() => {
               handleSubmit((data) => {
