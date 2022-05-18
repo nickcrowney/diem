@@ -13,7 +13,6 @@ import DisplayEvents from './DisplayEvents';
 import hooks from '../services/ApiServices';
 import deleteBin from '../public/deleteBin.svg';
 import Popup from 'reactjs-popup';
-import Image from 'next/image';
 
 const Diem: React.FunctionComponent = ({
   currentDiem,
