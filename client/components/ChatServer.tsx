@@ -1,7 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import io from "socket.io-client";
-import props from "../services/ApiServices";
-
 import hooks from "../services/ApiServices";
 import Message from "./Message";
 import { SocketContext } from "../contexts/Socket";
@@ -41,12 +38,6 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
       )
     );
   });
-
-  // const mockData = [
-  //   { content: "This is a message", author: 1, timestamp: "Friday" },
-  //   { content: "A second message", author: 1, timestamp: "Wednesday" },
-  //   { content: "Yet another message", author: 2, timestamp: "Sunday" },
-  // ];
 
   function handleSubmitMessage(data: React.FormEvent<HTMLInputElement>) {
     hooks.modifyDiemChatHistory(

@@ -26,7 +26,7 @@ const Diems: NextPage = (props) => {
   });
 
   const [currentDiem, setCurrentDiem] = useState({
-    id: 3,
+    id: 1,
     title: "Add new diem",
   });
   const [trap, setTrap] = useState("");
