@@ -8,8 +8,8 @@ const DiemColorPicker = ({
   currentDiem,
 }) => {
   const getColor = (color) => {
-    setBackgroundColor({ 'background-color': color });
-    hooks.modifyDiemColor(currentDiem.id, color);
+    currentDiem.id && setBackgroundColor({ 'background-color': color });
+    currentDiem.id && hooks.modifyDiemColor(currentDiem.id, color);
   };
 
   return (

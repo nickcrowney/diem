@@ -116,22 +116,28 @@ const deleteEvent = async (id: Number) => {
 };
 
 const submitNewEvent = async (
+  // look into using .then here
   title: String,
   id: Number,
   location: String,
   time: String
+  // createdAt: Number
 ) => {
-  const response = await fetch('http://localhost:4000/event', {
-    method: 'POST',
+  try {
+    const response = await fetch('http://localhost:4000/event', {
+      method: 'POST',
 
-    body: JSON.stringify({ title, id, location, time }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  const data = await response.json();
-  return data;
-  console.log(data);
+      body: JSON.stringify({ title, id, location, time }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    console.log(data, 'SUBMITTED NEW EVENT');
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const updateDiemUser = async (diemId: Number, userId: Number) => {

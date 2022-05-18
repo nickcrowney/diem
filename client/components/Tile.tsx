@@ -5,6 +5,7 @@ import Image from 'next/image';
 import styles from './Tile.module.css';
 import hooks from '../services/ApiServices';
 import deleteBin from '../public/deleteBin.svg';
+import Popup from 'reactjs-popup';
 
 const Tile: React.FunctionComponent = ({
   allDiems,
@@ -16,8 +17,11 @@ const Tile: React.FunctionComponent = ({
   const socket = useContext(SocketContext);
 
   const divClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
+    // console.log(diem, 'DIEEEMMM');
     // console.log(diem, 'IIIIIIIIdd Diem');
+
     setCurrentDiem(diem);
+
     socket.emit('leavingRoom');
     socket.emit('joiningRoom', String(diem.id));
   };
@@ -29,8 +33,11 @@ const Tile: React.FunctionComponent = ({
     diem.id && hooks.deleteDiem(diem.id);
     diem.id &&
       setAllDiems((prev) => (prev = prev.filter((el) => el.id !== diem.id)));
-    console.log(allDiems[0], 'FIRST DIEM');
-    diem.id && setCurrentDiem(allDiems[0]);
+    // console.log(allDiems[0], 'FIRST DIEM');
+    if (diem.length) setCurrentDiem(allDiems[0]);
+    else {
+      setCurrentDiem(undefined);
+    }
   };
 
   function dateFixer(calendarDate) {
@@ -74,14 +81,32 @@ const Tile: React.FunctionComponent = ({
         onClick={divClickedHandler}
       >
         <div>
-          <div onClick={clickDeleteDiem} className={styles.deleteDiem}>
-            <Image
-              src={deleteBin}
-              height="20"
-              width="20"
-              alt="delete-bin-image"
-            />
-          </div>
+          {/* <Popup
+            trigger={
+              <button>
+                <Image
+                  src={deleteBin}
+                  height="20"
+                  width="20"
+                  alt="delete-bin-image"
+                />
+              </button>
+            }
+            position="right center"
+          >
+            <div
+              style={{
+                backgroundColor: 'whitesmoke',
+                padding: '5px',
+                borderRadius: '5px',
+                fontSize: 'large',
+              }}
+            >
+              <button onClick={clickDeleteDiem} className={styles.deleteDiem}>
+                Delete
+              </button>
+            </div>
+          </Popup> */}
           <div className={styles.tile__info}>
             <span className={styles.diem_date_first}>{date.slice(0, 4)}</span>
             <span className={styles.diem_date_second}>{date.slice(4)}</span>
