@@ -51,7 +51,7 @@ const DiemInfoBar: React.FunctionComponent = ({
     return finishedDate;
   }
   const date = dateFixer(currentDiem && currentDiem.date);
-
+  let count = 0;
   return (
     <div className={styles.diemInfoBar}>
       <div>
@@ -62,14 +62,17 @@ const DiemInfoBar: React.FunctionComponent = ({
       </div>
       <div className={styles.diemInfoBar__picsAndButtons}>
         <div className={styles.diemInfoBar__profilePics_container}>
-          {currentDiem.users && (
+          {currentDiem.users && currentDiem.users.length >= 4 ? (
             <div className={styles.diemInfoBar__profilePic_plusSign}>
               <Image src={plus} alt="more than eight users" />
             </div>
+          ) : (
+            ''
           )}
 
-          {currentDiem && currentDiem.users // always truthy
-            ? currentDiem.users.map((el) => {
+          {currentDiem.users &&
+            currentDiem.users.map((el) => {
+              if (count < 4)
                 return (
                   <div key={el.id} className={styles.diemInfoBar__profilePic}>
                     <Image
@@ -78,10 +81,10 @@ const DiemInfoBar: React.FunctionComponent = ({
                       width="50"
                       alt="Picture of the author"
                     />
+                    {count++}
                   </div>
                 );
-              })
-            : ''}
+            })}
         </div>
         <div className={styles.diemInfoBar__buttons}>
           <button type="button">
