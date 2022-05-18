@@ -1,3 +1,4 @@
+
 import { useContext } from 'react';
 import { SocketContext } from '../contexts/Socket';
 import React from 'react';
@@ -18,9 +19,9 @@ const Tile: React.FunctionComponent = ({
 
   const divClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
     setCurrentDiem(diem);
-
     socket.emit('leavingRoom');
     socket.emit('joiningRoom', String(diem.id));
+
   };
   const clickDeleteDiem = () => {
     diem.events &&
@@ -38,29 +39,29 @@ const Tile: React.FunctionComponent = ({
 
   function dateFixer(calendarDate) {
     const options = {
-      day: 'numeric',
-      month: 'long',
+      day: "numeric",
+      month: "long",
     };
     const currentDate = new Date(calendarDate).toLocaleDateString(
-      'en-GB',
+      "en-GB",
       options
     );
-    const firstWhite = currentDate.indexOf(' ');
+    const firstWhite = currentDate.indexOf(" ");
     const firstBit = currentDate.slice(0, firstWhite);
     const secondBit = currentDate.slice(firstWhite);
     const nth = function (d) {
       const dString = String(d);
       const last = +dString.slice(-2);
-      if (last > 3 && last < 21) return 'th';
+      if (last > 3 && last < 21) return "th";
       switch (last % 10) {
         case 1:
-          return 'st';
+          return "st";
         case 2:
-          return 'nd';
+          return "nd";
         case 3:
-          return 'rd';
+          return "rd";
         default:
-          return 'th';
+          return "th";
       }
     };
     const finishedDate = firstBit + nth(firstBit) + secondBit;
@@ -73,7 +74,7 @@ const Tile: React.FunctionComponent = ({
     <>
       <div
         className={styles.tile}
-        style={{ 'background-color': diem.color }}
+        style={{ "background-color": diem.color }}
         onClick={divClickedHandler}
       >
         <div>

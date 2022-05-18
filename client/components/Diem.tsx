@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import DiemInfoBar from './DiemInfoBar';
 import AddNewEvent from './AddNewEvent';
@@ -28,7 +29,7 @@ const Diem: React.FunctionComponent = ({
   useEffect(() => {
     currentDiem &&
       setBackgroundColor({
-        'background-color': currentDiem && currentDiem.color,
+        "background-color": currentDiem && currentDiem.color,
       });
   }, [currentDiem]);
 
@@ -126,6 +127,9 @@ const Diem: React.FunctionComponent = ({
           currentDiem={currentDiem}
         />
       </div>
+      {/* <div>
+        <ChatServer currentDiem={currentDiem} /> //TESTING HERE
+      </div> */}
     </>
   );
 };

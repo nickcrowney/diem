@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const GoogleMap = () => {
-  const [mapPin, setMapPin] = useState('');
+  const [mapPin, setMapPin] = useState("");
   const [showMap, setShowMap] = useState(false);
   const [showMapSearch, setShowMapSearch] = useState(true);
   const queryMap = (e) => {
@@ -35,7 +35,7 @@ const GoogleMap = () => {
         <iframe
           width="100%"
           height="200"
-          style={{ margin: '1em 0', borderRadius: '5px' }}
+          style={{ margin: "1em 0", borderRadius: "5px" }}
           loading="lazy"
           allowFullScreen
           referrerPolicy="no-referrer-when-downgrade"

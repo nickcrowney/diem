@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { FcGoogle } from 'react-icons/fc';
-import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
-import { firebaseApp } from '../firebase-config';
-import props from '../services/ApiServices';
-import usersHook from '../services/testHook';
-import { useLoginContext } from '../contexts/Context';
-import { useRouter } from 'next/router';
+import React, { useEffect, useState } from "react";
+import { FcGoogle } from "react-icons/fc";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { firebaseApp } from "../firebase-config";
+import props from "../services/ApiServices";
+import usersHook from "../services/testHook";
+import { useLoginContext } from "../contexts/Context";
+import { useRouter } from "next/router";
 
 const Login = () => {
   const firebaseAuth = getAuth(firebaseApp);
@@ -24,15 +24,15 @@ const Login = () => {
     await setLoggedUsers(state);
     const response = await signInWithPopup(firebaseAuth, provider);
     setLoginInfo(response.user);
-    await console.log(state, 'STATE BEFORE');
-    await console.log(loggedUsers, 'STATE BEFORE');
+    await console.log(state, "STATE BEFORE");
+    await console.log(loggedUsers, "STATE BEFORE");
 
     if (
       state.length === 0 ||
       (state && state.some((el): any => el.email !== response.user.email))
     ) {
       //TODO change any to appropiate interface
-      console.log(state, ' STATE');
+      console.log(state, " STATE");
       props.submitNewUser(
         response.user.displayName,
         response.user.email,
@@ -41,7 +41,7 @@ const Login = () => {
     }
 
     if (response.user.emailVerified) {
-      router.replace('/diems', loginInfo);
+      router.replace("/diems");
     }
     //TODO Throw invalid login error here
   };

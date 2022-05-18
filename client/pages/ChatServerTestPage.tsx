@@ -1,4 +1,4 @@
-import ChatServer from '../components/ChatServer';
+import ChatServer from "../components/ChatServer";
 
 const ChatServerTestPage: NextPage = () => {
   return <ChatServer />;

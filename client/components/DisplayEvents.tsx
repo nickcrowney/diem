@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { ReactSortable } from 'react-sortablejs';
-import styles from '../styles/Home.module.css';
-import hooks from '../services/ApiServices';
-import deleteBin from '../public/deleteBin.svg';
-import Image from 'next/image';
+import React, { useEffect } from "react";
+import { ReactSortable } from "react-sortablejs";
+import styles from "../styles/Home.module.css";
+import hooks from "../services/ApiServices";
+import deleteBin from "../public/deleteBin.svg";
+import Image from "next/image";
 
 interface ItemType {
   id: number;
@@ -15,9 +15,11 @@ function DisplayEvents({ currentDiem, state, setState }) {
   }, [currentDiem]);
   useEffect(() => {}, [state]);
 
+
   const clickedEvent = (item) => {};
   const removeEvent = (id) => {
     console.log('remove event');
+
   };
   return (
     <>
@@ -28,7 +30,7 @@ function DisplayEvents({ currentDiem, state, setState }) {
               <div className={styles.events}>
                 <div key={item.id} onClick={() => clickedEvent(item)}>
                   {item.title}
-                  {''}
+                  {""}
                 </div>
                 <div onClick={() => removeEvent(item.id)}>
                   <Image src={deleteBin} height="20" width="20" />
@@ -38,7 +40,7 @@ function DisplayEvents({ currentDiem, state, setState }) {
           ))}
         </ReactSortable>
       ) : (
-        'Currently no events'
+        "Currently no events"
       )}
     </>
   );
