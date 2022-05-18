@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import { ReactSortable } from 'react-sortablejs';
-import styles from '../styles/Home.module.css';
-import hooks from '../services/ApiServices';
-import deleteBin from '../public/deleteBin.svg';
-import Image from 'next/image';
-import Popup from 'reactjs-popup';
+import React, { useEffect } from "react";
+import { ReactSortable } from "react-sortablejs";
+import styles from "../styles/Home.module.css";
+import hooks from "../services/ApiServices";
+import deleteBin from "../public/deleteBin.svg";
+import Image from "next/image";
+import Popup from "reactjs-popup";
 
 interface ItemType {
   id: number;
@@ -18,11 +18,7 @@ function DisplayEvents({ currentDiem, setCurrentDiem, state, setState }) {
 
   const clickedEvent = (item) => {};
   const removeEvent = (id) => {
-<<<<<<< HEAD
     console.log("remove event");
-=======
-    console.log('remove event');
->>>>>>> d4839f015f882463a5c9a4583e74c77e2d522cbc
   };
 
   return (
@@ -37,7 +33,7 @@ function DisplayEvents({ currentDiem, setCurrentDiem, state, setState }) {
                     <button>
                       <div key={item.id} onClick={() => clickedEvent(item)}>
                         {item.title}
-                        {''}
+                        {""}
                       </div>
                       {/* <Image
                         src={deleteBin}
@@ -51,12 +47,12 @@ function DisplayEvents({ currentDiem, setCurrentDiem, state, setState }) {
                 >
                   <div
                     style={{
-                      height: '40vh',
-                      width: '40vw',
-                      backgroundColor: '#f7f9fb',
-                      padding: '5px',
-                      borderRadius: '20px',
-                      fontSize: 'large',
+                      height: "40vh",
+                      width: "40vw",
+                      backgroundColor: "#f7f9fb",
+                      padding: "5px",
+                      borderRadius: "20px",
+                      fontSize: "large",
                     }}
                   >
                     <button
@@ -83,7 +79,7 @@ function DisplayEvents({ currentDiem, setCurrentDiem, state, setState }) {
           ))}
         </ReactSortable>
       ) : (
-        'Currently no events'
+        "Currently no events"
       )}
     </>
   );
