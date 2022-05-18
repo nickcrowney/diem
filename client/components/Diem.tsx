@@ -70,7 +70,7 @@ const Diem: React.FunctionComponent = ({
         />
       </div>
       <div>
-        <ChatServer curDiem={currentDiem} />
+        <ChatServer currentDiem={currentDiem} />
       </div>
     </>
   );

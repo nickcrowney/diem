@@ -41,10 +41,11 @@ const getUserById = async (id: Number) => {
 };
 
 //GET user by id
-const getDiemById = async (id: Number) => {
-  const response = await fetch(`http://localhost:4000/diem/byId/${id}`);
-  const data = await response.json();
-  return data;
+const getDiemById = (id: Number) => {
+  return fetch(`http://localhost:4000/diem/byId/${id}`);
+  // const data = await response.json();
+  // console.log(data);
+  // return data;
   //setDiem(data);
 };
 

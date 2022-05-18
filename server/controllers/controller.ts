@@ -129,6 +129,11 @@ export async function getDiemById(req: Request, res: Response) {
     where: {
       id: Number(id),
     },
+    include: {
+      users: true,
+      events: true,
+      chatHistory: true,
+    },
   });
   res.json(diem);
 }

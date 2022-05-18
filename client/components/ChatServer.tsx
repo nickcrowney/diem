@@ -9,7 +9,7 @@ import { LoginContext } from "../contexts/Context";
 import styles from "./ChatServer.module.css";
 import { useForm } from "react-hook-form";
 
-const ChatServer: React.FunctionComponent = ({ curDiem }) => {
+const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
   //; //currentdiemchat history
 
   const socket = useContext(SocketContext);
@@ -18,11 +18,23 @@ const ChatServer: React.FunctionComponent = ({ curDiem }) => {
 
   //TODO Fetch the diem with curDiem.id and populate the starting state of
   //history
-  const defaultFetch = hooks.getDiemById(curDiem.id).chatHistory;
+  const [history, setHistory] = useState([]);
 
-  const [history, setHistory] = useState(defaultFetch);
+  useEffect(() => {
+    // let result = getHistory();
+    let res = hooks
+      .getDiemById(currentDiem.id)
+      .then((res) => res.json())
+      .then((res) => setHistory(res.chatHistory));
+    console.log(res);
+    // setHistory(res);
 
-  console.log(defaultFetch, "FETCHS");
+    //setHistory();
+  }, []);
+
+  //const [history, setHistory] = useState(defaultFetch);
+
+  //console.log(defaultFetch, "FETCHS");
 
   //WHAT THE CODE SHOULD BE
   /////////////////////////////////
@@ -31,7 +43,11 @@ const ChatServer: React.FunctionComponent = ({ curDiem }) => {
   // );
 
   socket.on("updatedMessages", (message) => {
-    setHistory((prev) => [...prev, message]);
+    setHistory((prev) =>
+      [...prev, message].filter(
+        (val, ind) => [...prev, message].indexOf(val) === ind
+      )
+    );
   });
 
   // useEffect(() => {}, [history]);
@@ -50,54 +66,38 @@ const ChatServer: React.FunctionComponent = ({ curDiem }) => {
 
   //const [history, setHistory] = useState(mockData);
 
-  useEffect(() => {}, [history]);
+  // useEffect(() => {}, [history]);
 
   function handleSubmitMessage(data: React.FormEvent<HTMLInputElement>) {
-    let newMessage = {
-      message: data.message,
+    hooks.modifyDiemChatHistory(
+      data.message,
+      currentDiem.id,
+      loginInfo.email,
+      String(Date.now())
+    );
+    reset({ message: "" });
+
+    let mes = {
+      content: data.message,
       author: loginInfo.email,
       timestamp: String(Date.now()),
     };
 
-    hooks.modifyDiemChatHistory(
-      newMessage.message,
-      curDiem.id,
-      newMessage.author,
-      newMessage.timestamp
-    );
-
-    setHistory((prev) => {
-      prev
-        ? [
-            ...prev,
-            {
-              content: data.message,
-              author: loginInfo.email,
-              timestamp: Date.now(),
-            },
-          ]
-        : [
-            {
-              content: data.message,
-              author: loginInfo.email,
-              timestamp: Date.now(),
-            },
-          ];
-    });
-    reset({ message: "" });
+    socket.emit("message", mes);
   }
 
   return (
     <>
       <div className={styles.form_contianer}>
-        {history && (
+        {history.length && (
           <div className={styles.message_container}>
-            {history.map((el) => {
-              return <Message el={el} />;
-            })}
+            {history &&
+              history.map((el) => {
+                return <Message el={el} />;
+              })}
           </div>
         )}
-        {curDiem && (
+        {currentDiem && (
           <div className={styles.form_container}>
             <form
               id="message"
