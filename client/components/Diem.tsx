@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import DiemInfoBar from './DiemInfoBar';
+import Image from 'next/image';
 import AddNewEvent from './AddNewEvent';
+import DiemInfoBar from './DiemInfoBar';
 import PopAddUsers from './PopAddUsers';
 import PopRemoveUsers from './PopRemoveUsers';
 import DiemColorPicker from './DiemColorPicker';
+import calendar from '../public/images/calendar.png';
+import chat from '../public/images/chat.png';
 import GoogleMap from './GoogleMap';
 import styles from './Diem.module.css';
 import DisplayEvents from './DisplayEvents';
@@ -16,6 +19,7 @@ const Diem: React.FunctionComponent = ({
   setBackgroundColor,
 }) => {
   const [addRemoveUser, setAddRemoveUser] = useState(false);
+
   useEffect(() => {}, [currentDiem]);
 
   const [state, setState] = useState<ItemType[]>([]);
@@ -25,42 +29,62 @@ const Diem: React.FunctionComponent = ({
         'background-color': currentDiem && currentDiem.color,
       });
   }, [currentDiem]);
+
+  function addToCalendar() {
+    console.log(currentDiem.date, currentDiem.title);
+  }
+
   return (
-    <>
-      <div className={styles.diem} style={backgroundColor}>
-        <DiemInfoBar
-          currentDiem={currentDiem}
-          setAddRemoveUser={setAddRemoveUser}
-        />
+    <div className={styles.diem} style={backgroundColor}>
+      <DiemInfoBar
+        currentDiem={currentDiem}
+        setAddRemoveUser={setAddRemoveUser}
+      />
 
-        {addRemoveUser && (
-          <div className={styles.addRemoveUsers}>
-            <PopAddUsers
-              users={users}
+      {addRemoveUser && (
+        <div className={styles.addRemoveUsers}>
+          <PopAddUsers
+            users={users}
+            currentDiem={currentDiem}
+            setCurrentDiem={setCurrentDiem}
+          />
+          <PopRemoveUsers
+            users={users}
+            currentDiem={currentDiem}
+            setCurrentDiem={setCurrentDiem}
+          />
+        </div>
+      )}
+
+      <GoogleMap />
+
+      <div className={styles.diem__events}>
+        <AddNewEvent currentDiem={currentDiem} setState={setState} />
+        <div>
+          {currentDiem && (
+            <DisplayEvents
               currentDiem={currentDiem}
-              setCurrentDiem={setCurrentDiem}
+              state={state}
+              setState={setState}
             />
-            <PopRemoveUsers
-              users={users}
-              currentDiem={currentDiem}
-              setCurrentDiem={setCurrentDiem}
+          )}
+        </div>
+      </div>
+
+      <div className={styles.diemBottom}>
+        <div className={styles.diemBottom__buttons}>
+          <button type="button">
+            <Image
+              src={calendar}
+              height="40"
+              width="40"
+              alt="calendar-image"
+              onClick={addToCalendar}
             />
-          </div>
-        )}
-
-        <GoogleMap />
-
-        <div className={styles.diem__events}>
-          <AddNewEvent currentDiem={currentDiem} setState={setState} />
-          <div>
-            {currentDiem && (
-              <DisplayEvents
-                currentDiem={currentDiem}
-                state={state}
-                setState={setState}
-              />
-            )}
-          </div>
+          </button>
+          <button type="button">
+            <Image src={chat} height="40" width="40" alt="chat-image" />
+          </button>
         </div>
         <DiemColorPicker
           backgroundColor={backgroundColor}
@@ -68,7 +92,7 @@ const Diem: React.FunctionComponent = ({
           currentDiem={currentDiem}
         />
       </div>
-    </>
+    </div>
   );
 };
 

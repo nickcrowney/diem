@@ -1,6 +1,7 @@
 .diem {
   border-radius: 5px;
   padding: 1rem 2rem;
+  padding-bottom: 2rem;
   margin: 1rem;
   display: flex;
   flex-direction: column;
@@ -47,6 +48,7 @@
 
 .addRemoveUsers {
   display: flex;
+  justify-content: space-between;
 }
 
 .diem_date_first {
@@ -56,4 +58,23 @@
 
 .diem_date_second {
   font-size: large;
+}
+
+.diemInfoBar__buttons button {
+  margin-left: 1rem;
+}
+
+.diemBottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.diemBottom__buttons {
+  margin-top: 1em;
+}
+
+.diemBottom__buttons button {
+  margin-right: 1em;
 }
