@@ -62,7 +62,7 @@ const DiemInfoBar: React.FunctionComponent = ({
       </div>
       <div className={styles.diemInfoBar__picsAndButtons}>
         <div className={styles.diemInfoBar__profilePics_container}>
-          {currentDiem.users && currentDiem.users.length >= 4 ? (
+          {currentDiem.users && currentDiem.users.length >= 8 ? (
             <div className={styles.diemInfoBar__profilePic_plusSign}>
               <Image src={plus} alt="more than eight users" />
             </div>
@@ -72,7 +72,7 @@ const DiemInfoBar: React.FunctionComponent = ({
 
           {currentDiem.users &&
             currentDiem.users.map((el) => {
-              if (count < 4)
+              if (count < 8)
                 return (
                   <div key={el.id} className={styles.diemInfoBar__profilePic}>
                     <Image
