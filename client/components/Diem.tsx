@@ -1,19 +1,20 @@
-
-import React, { useEffect, useState } from 'react';
-import DiemInfoBar from './DiemInfoBar';
-import AddNewEvent from './AddNewEvent';
-import PopAddUsers from './PopAddUsers';
-import PopRemoveUsers from './PopRemoveUsers';
-import DiemColorPicker from './DiemColorPicker';
-import GoogleMap from './GoogleMap';
-import styles from './Diem.module.css';
-import DisplayEvents from './DisplayEvents';
-import hooks from '../services/ApiServices';
-import deleteBin from '../public/deleteBin.svg';
-import Popup from 'reactjs-popup';
-import Image from 'next/image';
+import React, { useEffect, useState } from "react";
+import DiemInfoBar from "./DiemInfoBar";
+import AddNewEvent from "./AddNewEvent";
+import PopAddUsers from "./PopAddUsers";
+import PopRemoveUsers from "./PopRemoveUsers";
+import DiemColorPicker from "./DiemColorPicker";
+import GoogleMap from "./GoogleMap";
+import styles from "./Diem.module.css";
+import DisplayEvents from "./DisplayEvents";
+import hooks from "../services/ApiServices";
+import deleteBin from "../public/deleteBin.svg";
+import Popup from "reactjs-popup";
+import Image from "next/image";
+import ChatServer from "./ChatServer";
 
 const Diem: React.FunctionComponent = ({
+  onlineUsers,
   currentDiem,
   setCurrentDiem,
   users,
@@ -36,7 +37,7 @@ const Diem: React.FunctionComponent = ({
   const clickDeleteDiem = () => {
     currentDiem.events &&
       currentDiem.events.forEach((el) => {
-        console.log(el.id, 'ID OF EL');
+        console.log(el.id, "ID OF EL");
         hooks.deleteEvent(el.id);
       });
     currentDiem.id && hooks.deleteDiem(currentDiem.id);
@@ -54,6 +55,7 @@ const Diem: React.FunctionComponent = ({
     <>
       <div className={styles.diem} style={backgroundColor}>
         <DiemInfoBar
+          onlineUsers={onlineUsers}
           currentDiem={currentDiem}
           setAddRemoveUser={setAddRemoveUser}
         />
@@ -109,10 +111,10 @@ const Diem: React.FunctionComponent = ({
           >
             <div
               style={{
-                backgroundColor: 'whitesmoke',
-                padding: '5px',
-                borderRadius: '5px',
-                fontSize: 'large',
+                backgroundColor: "whitesmoke",
+                padding: "5px",
+                borderRadius: "5px",
+                fontSize: "large",
               }}
             >
               <button onClick={clickDeleteDiem} className={styles.deleteDiem}>
@@ -127,9 +129,9 @@ const Diem: React.FunctionComponent = ({
           currentDiem={currentDiem}
         />
       </div>
-      {/* <div>
-        <ChatServer currentDiem={currentDiem} /> //TESTING HERE
-      </div> */}
+      <div>
+        <ChatServer currentDiem={currentDiem} />
+      </div>
     </>
   );
 };

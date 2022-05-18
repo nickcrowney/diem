@@ -8,6 +8,7 @@ import styles from "./DiemInfoBar.module.css";
 import { SocketContext } from "../contexts/Socket";
 
 const DiemInfoBar: React.FunctionComponent = ({
+  onlineUsers,
   currentDiem,
   setAddRemoveUser,
 }) => {
