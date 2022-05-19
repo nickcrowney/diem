@@ -22,6 +22,8 @@ const Diem: React.FunctionComponent = ({
   setBackgroundColor,
   allDiems,
   setAllDiems,
+  refresh,
+  setRefresh,
 }) => {
   const [addRemoveUser, setAddRemoveUser] = useState(false);
 
@@ -59,7 +61,11 @@ const Diem: React.FunctionComponent = ({
     <div className={styles.diem} style={backgroundColor}>
       <DiemInfoBar
         currentDiem={currentDiem}
+        setCurrentDiem={setCurrentDiem}
         setAddRemoveUser={setAddRemoveUser}
+        setAllDiems={setAllDiems}
+        refresh={refresh}
+        setRefresh={setRefresh}
       />
 
       {addRemoveUser && (
@@ -87,7 +93,7 @@ const Diem: React.FunctionComponent = ({
         </div>
       )}
 
-      <GoogleMap />
+      <GoogleMap currentDiem={currentDiem} />
 
       <div className={styles.diem__events}>
         <AddNewEvent
@@ -104,6 +110,7 @@ const Diem: React.FunctionComponent = ({
               setCurrentDiem={setCurrentDiem}
               state={state}
               setState={setState}
+              setAllDiems={setAllDiems}
             />
           )}
         </div>
@@ -155,6 +162,7 @@ const Diem: React.FunctionComponent = ({
             backgroundColor={backgroundColor}
             setBackgroundColor={setBackgroundColor}
             currentDiem={currentDiem}
+            setAllDiems={setAllDiems}
           />
         </div>
       </div>
