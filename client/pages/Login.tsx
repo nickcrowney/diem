@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { FcGoogle } from "react-icons/fc";
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-import { firebaseApp } from "../firebase-config";
-import props from "../services/ApiServices";
-import usersHook from "../services/testHook";
-import { useLoginContext } from "../contexts/Context";
-import { useRouter } from "next/router";
+import React, { useEffect, useState } from 'react';
+import { FcGoogle } from 'react-icons/fc';
+import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
+import { firebaseApp } from '../firebase-config';
+import props from '../services/ApiServices';
+import usersHook from '../services/testHook';
+import { useLoginContext } from '../contexts/Context';
+import { useRouter } from 'next/router';
+import styles from '../components/Login.module.css';
 
 const Login = () => {
   const firebaseAuth = getAuth(firebaseApp);
@@ -24,15 +25,15 @@ const Login = () => {
     await setLoggedUsers(state);
     const response = await signInWithPopup(firebaseAuth, provider);
     setLoginInfo(response.user);
-    await console.log(state, "STATE BEFORE");
-    await console.log(loggedUsers, "STATE BEFORE");
+    await console.log(state, 'STATE BEFORE');
+    await console.log(loggedUsers, 'STATE BEFORE');
 
     if (
       state.length === 0 ||
       (state && state.some((el): any => el.email !== response.user.email))
     ) {
       //TODO change any to appropiate interface
-      console.log(state, " STATE");
+      console.log(state, ' STATE');
       props.submitNewUser(
         response.user.displayName,
         response.user.email,
@@ -41,26 +42,35 @@ const Login = () => {
     }
 
     if (response.user.emailVerified) {
-      router.replace("/diems");
+      router.replace('/diems');
     }
     //TODO Throw invalid login error here
   };
 
   return (
-    <>
+    <div className={styles.mainContainer}>
+      <div className={styles.groupCircles}>
+        <div className={styles.circle} id={styles.red}></div>
+        <div className={styles.circle} id={styles.orange}></div>
+        <div className={styles.circle} id={styles.yellow}></div>
+        <div className={styles.circle} id={styles.green}></div>
+        <div className={styles.circle} id={styles.purple}></div>
+      </div>
+      <div className={styles.typewriter}>
+        <h1>Diem</h1>
+      </div>
       {state && (
-        <div className="w-screen h-screen flex justify-center items-center bg-white relative">
-          <div className="absolute top-0 left-0 right-0 bottom-0 bg-slate-900 bg-opacity-50"></div>
+        <div className="flex justify-center items-center">
           <div
-            className="z-10 flex justify-center items-center border border-gray-300 rounded-full p-2 bg-white bg-opacity-60 cursor-pointer hover:shadow-md hover:bg-opacity-100"
+            className="w-2/6 flex justify-center items-center border border-gray-300 rounded-full p-4 bg-white cursor-pointer hover:shadow-md"
             onClick={signIn}
           >
-            <FcGoogle fontSize={30} />
-            <p className="text-lg font-semibold ml-4">Sign in with Google</p>
+            <FcGoogle fontSize={40} />
+            <p className="text-lg font-semibold ml-4">Sign in</p>
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

@@ -24,9 +24,8 @@ const Nav = ({
     });
   }
 
-  // const { loginInfo, setLoginInfo } = useLoginContext();
-
-  // console.log('PROPS HERE', loginInfo);
+  const { loginInfo, setLoginInfo } = useLoginContext();
+  console.log('PROPS HERE', loginInfo);
 
   return (
     <div className={styles.navContainer}>
