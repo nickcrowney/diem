@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useContext } from "react";
 import hooks from "../services/ApiServices";
 import Message from "./Message";
@@ -6,13 +7,13 @@ import { LoginContext } from "../contexts/Context";
 import styles from "./ChatServer.module.css";
 import { useForm } from "react-hook-form";
 
+
 const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
   const socket = useContext(SocketContext);
   const { loginInfo } = useContext(LoginContext);
   const { register, handleSubmit, reset } = useForm();
 
   const [history, setHistory] = useState([]);
-
   useEffect(() => {
     console.warn(currentDiem.id);
     currentDiem &&
@@ -26,8 +27,7 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
           setHistory((prev) => res.chatHistory);
         });
   }, []);
-
-  socket.on("updatedMessages", (message) => {
+  socket.on('updatedMessages', (message) => {
     setHistory((prev) =>
       [...prev, message].filter(
         (val, ind) => [...prev, message].indexOf(val) === ind
@@ -43,18 +43,17 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
       String(Date.now()),
       loginInfo.displayName
     );
-    reset({ message: "" });
-
+    reset({ message: '' });
     let mes = {
       content: data.message,
       author: loginInfo.email,
       timestamp: String(Date.now()),
       name: loginInfo.displayName,
     };
-    socket.emit("message", mes);
+    socket.emit('message', mes);
+
     setHistory((prev) => [...prev, mes]);
   }
-
   return (
     <>
       <div className={styles.main_container}>
@@ -76,7 +75,7 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
                 name="message"
                 className={styles.form}
                 onSubmit={handleSubmit((data) => {
-                  console.log(data, "DATA");
+
                   handleSubmitMessage(data);
                 })}
               >
@@ -86,7 +85,9 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
                   id="inputValue"
                   name="inputValue"
                   className="py-2 px-4 rounded"
-                  {...register("message")}
+
+                  {...register('message')}
+
                   placeholder="enter message"
                 />
                 <input

@@ -11,12 +11,14 @@ import hooks from '../services/ApiServices';
 import Popup from 'reactjs-popup';
 import dayjs from 'dayjs';
 import { useForm } from 'react-hook-form';
+import deleteBin from '../public/deleteBin.svg';
 
 const DiemInfoBar: React.FunctionComponent = ({
   onlineUsers,
   currentDiem,
   setCurrentDiem,
   setAddRemoveUser,
+  allDiems,
   setAllDiems,
   refresh,
   setRefresh,
@@ -32,6 +34,22 @@ const DiemInfoBar: React.FunctionComponent = ({
       return !prev;
     });
   }
+  const clickDeleteDiem = () => {
+    currentDiem.events &&
+      currentDiem.events.forEach((el) => {
+        console.log(el.id, 'ID OF EL');
+        hooks.deleteEvent(el.id);
+      });
+    currentDiem.id && hooks.deleteDiem(currentDiem.id);
+    currentDiem.id &&
+      setAllDiems(
+        (prev) => (prev = prev.filter((el) => el.id !== currentDiem.id))
+      );
+    if (currentDiem.length) setCurrentDiem(allDiems[0]); // maybe not using
+    else {
+      setCurrentDiem(undefined);
+    }
+  };
 
   function dateFixer(calendarDate) {
     const options = {
@@ -168,6 +186,34 @@ const DiemInfoBar: React.FunctionComponent = ({
               alt="pros-cons-image"
             />
           </button>
+        </div>
+        <div>
+          <Popup
+            trigger={
+              <button>
+                <Image
+                  src={deleteBin}
+                  height="42"
+                  width="42"
+                  alt="delete-bin-image"
+                />
+              </button>
+            }
+            position="right center"
+          >
+            <div
+              style={{
+                backgroundColor: 'whitesmoke',
+                padding: '5px',
+                borderRadius: '5px',
+                fontSize: 'large',
+              }}
+            >
+              <button onClick={clickDeleteDiem} className={styles.deleteDiem}>
+                Delete
+              </button>
+            </div>
+          </Popup>
         </div>
       </div>
     </div>

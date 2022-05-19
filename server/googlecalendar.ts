@@ -8,22 +8,17 @@ const PRIVATEKEY = process.env.PRIVATEKEY;
 const SCOPES = 'https://www.googleapis.com/auth/calendar';
 const calendar = google.calendar({ version: 'v3' });
 
-const auth = new google.auth.JWT(
-  CLIENTEMAIL,
-  null,
-  PRIVATEKEY,
-  SCOPES
-);
+const auth = new google.auth.JWT(CLIENTEMAIL, null, PRIVATEKEY, SCOPES);
 
 const insertEvent = async (event: any) => {
   let event2 = {
-    'summary': event.title,
-    'start': {
-      'date': event.date,
+    summary: event.title,
+    start: {
+      date: event.date,
     },
-    'end': {
-      'date': event.date,
-    }
+    end: {
+      date: event.date,
+    },
   };
   try {
     let response = await calendar.events.insert({
@@ -42,4 +37,4 @@ const insertEvent = async (event: any) => {
   }
 };
 
-export default insertEvent
+export default insertEvent;
