@@ -21,6 +21,7 @@ import {
   updateDiemColor,
   createMessage,
 } from "./controllers/controller";
+import insertEvent from './googlecalendar'
 
 export const router = Router();
 
@@ -35,6 +36,16 @@ router.post("/user", createUser);
 router.post("/diem", createDiem);
 router.post("/event", createEvent);
 router.post("/message", createMessage);
+
+router.post("/calendar", (req, res) => {
+  console.log(req.body)
+  insertEvent(req.body).then((res: any) => {
+    console.log(res);
+  })
+    .catch((err: any) => {
+      console.log(err);
+    });
+})
 
 router.patch("/user", updateUser);
 router.patch("/diem", updateDiem);

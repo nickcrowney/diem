@@ -7,6 +7,7 @@ import PopRemoveUsers from './PopRemoveUsers';
 import DiemColorPicker from './DiemColorPicker';
 import calendar from '../public/images/calendar.png';
 import chat from '../public/images/chat.png';
+import world from '../public/images/world.png';
 import GoogleMap from './GoogleMap';
 import styles from './Diem.module.css';
 import DisplayEvents from './DisplayEvents';
@@ -24,6 +25,21 @@ const Diem: React.FunctionComponent = ({
   setAllDiems,
 }) => {
   const [addRemoveUser, setAddRemoveUser] = useState(false);
+  const [addMap, setMap] = useState(false);
+  const [showMapSearch, setShowMapSearch] = useState(false);
+  const [mapPin, setMapPin] = useState('');
+  const [showMap, setShowMap] = useState(false);
+  // const [showMapSearch, setShowMapSearch] = useState(true);
+  const queryMap = (e) => {
+    e.preventDefault();
+    setMapPin(e.target.query.value);
+    setShowMap((prev) => {
+      return !prev;
+    });
+    setShowMapSearch((prev) => {
+      return !prev;
+    });
+  };
 
   useEffect(() => {}, [currentDiem]);
 
@@ -37,7 +53,21 @@ const Diem: React.FunctionComponent = ({
 
   function addToCalendar() {
     console.log(currentDiem.date, currentDiem.title);
+    hooks.postCalendar(currentDiem.date, currentDiem.title);
   }
+
+  function handleShowMap() {
+    setShowMapSearch((prev) => {
+      return !prev;
+    });
+  }
+
+  function addMapFunction() {
+    setMap((prev) => {
+      return !prev;
+    });
+  }
+
   const clickDeleteDiem = () => {
     currentDiem.events &&
       currentDiem.events.forEach((el) => {
@@ -76,9 +106,7 @@ const Diem: React.FunctionComponent = ({
           />
         </div>
       )}
-
-      <GoogleMap />
-
+      {showMap && <GoogleMap mapPin={mapPin} />}
       <div className={styles.diem__events}>
         <AddNewEvent
           currentDiem={currentDiem}
@@ -111,8 +139,30 @@ const Diem: React.FunctionComponent = ({
             <button type="button">
               <Image src={chat} height="40" width="40" alt="chat-image" />
             </button>
+            <button type="button">
+              <Image
+                src={world}
+                height="40"
+                width="40"
+                alt="chat-image"
+                onClick={handleShowMap}
+              />
+            </button>
+            {showMapSearch && (
+              <form onSubmit={queryMap}>
+                <input
+                  type="text"
+                  name="query"
+                  id="query"
+                  className="py-2 px-4 rounded border-none mr-4"
+                />
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  GO!
+                </button>
+              </form>
+            )}
           </div>
-          <div>
+          {/* <div>
             <Popup
               trigger={
                 <button>
@@ -139,7 +189,7 @@ const Diem: React.FunctionComponent = ({
                 </button>
               </div>
             </Popup>
-          </div>
+          </div> */}
           <DiemColorPicker
             backgroundColor={backgroundColor}
             setBackgroundColor={setBackgroundColor}
