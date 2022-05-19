@@ -7,7 +7,6 @@ import PopNewDiem from "./PopNewDiem";
 import usersHook from "../services/testHook";
 import hooks from "../services/ApiServices";
 import mypic from "../public/images/daniil-lobachev-XAo09LtQiAQ-unsplash.jpg";
-
 import useLoginContext from "../contexts/Context";
 
 const Nav = ({

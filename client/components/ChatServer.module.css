@@ -16,3 +16,9 @@
 .message_container {
   flex-direction: row;
 }
+
+.main_container {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  padding: 10px;
+}

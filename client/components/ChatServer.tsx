@@ -14,14 +14,14 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
 
   //TODO Fetch the diem with curDiem.id and populate the starting state of
   //history
+
   const [history, setHistory] = useState([]);
 
   // currentDiem &&
   useEffect(() => {
     console.warn(currentDiem.id);
-
     currentDiem.chatHistory &&
-      fetch(`http://localhost:4000/diem/byId/${currentDiem.id}`)
+      fetch(`http://localhost:4000/diem/byId/${1}`)
         .then((res) => {
           return res.json();
         })
@@ -58,42 +58,44 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
 
   return (
     <>
-      <div className={styles.form_contianer}>
-        {history.length && (
-          <div className={styles.message_container}>
-            {history &&
-              history.map((el) => {
-                return <Message el={el} />;
-              })}
-          </div>
-        )}
-        {currentDiem && (
-          <div className={styles.form_container}>
-            <form
-              id="message"
-              name="message"
-              className={styles.form}
-              onSubmit={handleSubmit((data) => {
-                console.log(data, "DATA");
-                handleSubmitMessage(data);
-              })}
-            >
-              <label htmlFor="userLogin">Message Container</label>
-              <input
-                type="text"
-                id="inputValue"
-                name="inputValue"
-                className="py-2 px-4 rounded"
-                {...register("message")}
-                placeholder="enter message"
-              />
-              <input
-                type="submit"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              />
-            </form>
-          </div>
-        )}
+      <div className={styles.main_container}>
+        <div className={styles.form_contianer}>
+          {history.length && (
+            <div className={styles.message_container}>
+              {history &&
+                history.map((el) => {
+                  return <Message el={el} />;
+                })}
+            </div>
+          )}
+          {currentDiem && (
+            <div className={styles.form_container}>
+              <form
+                id="message"
+                name="message"
+                className={styles.form}
+                onSubmit={handleSubmit((data) => {
+                  console.log(data, "DATA");
+                  handleSubmitMessage(data);
+                })}
+              >
+                {/* <label htmlFor="userLogin">Message Container</label> */}
+                <input
+                  type="text"
+                  id="inputValue"
+                  name="inputValue"
+                  className="py-2 px-4 rounded"
+                  {...register("message")}
+                  placeholder="enter message"
+                />
+                <input
+                  type="submit"
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                />
+              </form>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

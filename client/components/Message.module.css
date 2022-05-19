@@ -1,0 +1,11 @@
+.message_container {
+  margin: 15px;
+  background-color: blue;
+  padding: 10px;
+  /* border-radius: 5px; */
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-top-left-radius: 15px;
+  color: whitesmoke;
+  width: 40vw;
+}

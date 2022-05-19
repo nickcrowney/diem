@@ -125,16 +125,16 @@ const submitNewEvent = async (
   // createdAt: Number
 ) => {
   try {
-    const response = await fetch('http://localhost:4000/event', {
-      method: 'POST',
+    const response = await fetch("http://localhost:4000/event", {
+      method: "POST",
 
       body: JSON.stringify({ title, id, location, time }),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
     const data = await response.json();
-    console.log(data, 'SUBMITTED NEW EVENT');
+    console.log(data, "SUBMITTED NEW EVENT");
     return data;
   } catch (error) {
     console.log(error);

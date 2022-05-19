@@ -36,7 +36,7 @@ io.on("connection", (socket: Socket) => {
   //Recieving online status
   socket.on("currentlyOnline", (loginInf) => {
     onlineUserIds.push(loginInf);
-    onlineUserIds.filter((val, ind) => onlineUserIds.indexOf(val) === ind);
+    // onlineUserIds.filter((val, ind) => onlineUserIds.indexOf(val) === ind);
     socket.emit("onlineUsers", onlineUserIds);
     currentUser = loginInf;
 

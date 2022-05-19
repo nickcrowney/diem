@@ -14,6 +14,7 @@ const DiemInfoBar: React.FunctionComponent = ({
 }) => {
   const socket = useContext(SocketContext);
   useEffect(() => {}, [currentDiem]);
+  console.log("ONLINE USERS", onlineUsers);
 
   function handleClick() {
     setAddRemoveUser((prev) => {
@@ -68,9 +69,9 @@ const DiemInfoBar: React.FunctionComponent = ({
               <Image src={plus} alt="more than eight users" />
             </div>
           )}
-
           {currentDiem && currentDiem.users // always truthy
             ? currentDiem.users.map((el) => {
+                //Online user logic goes here
                 return (
                   <div key={el.id} className={styles.diemInfoBar__profilePic}>
                     <Image
