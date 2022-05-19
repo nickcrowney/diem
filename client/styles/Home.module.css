@@ -1,17 +1,20 @@
 .container {
+  position: relative;
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  top: 12vh;
 }
 
 .tiles {
-  width: 25%;
+  width: 20%;
 }
 
 .diem {
-  width: 75%;
+  width: 80%;
 }
+
 .events {
   /* color: red; */
   display: flex;

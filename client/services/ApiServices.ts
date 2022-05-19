@@ -2,6 +2,19 @@ import { response } from 'express';
 import React, { useState } from 'react';
 import { Message } from 'react-hook-form';
 
+// calendar
+const postCalendar = async (date, title) => {
+  const response = await fetch("http://localhost:4000/calendar", {
+    method: "POST",
+    body: JSON.stringify({ date, title }),
+    headers: {
+      "Content-Type": "application/json",
+    }
+  })
+  const data = await response.json();
+  return data;
+};
+
 //GET request for all users
 const getUsers = async () => {
   const response = await fetch('http://localhost:4000/users');
@@ -302,6 +315,7 @@ export default {
   modifyDiemDate,
   removeDiemUser,
   modifyDiemChatHistory,
+  postCalendar,
   modifyOrderedEvents,
   modifyDiemMap,
 };
