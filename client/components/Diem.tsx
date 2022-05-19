@@ -125,9 +125,9 @@ const Diem: React.FunctionComponent = ({
         </div>
       )}
 
-      {displayMap && <GoogleMap mapPin={mapPin} />}
 
-      <GoogleMap currentDiem={currentDiem} />
+      <GoogleMap currentDiem={currentDiem} setAllDiems={setAllDiems} />
+
 
 
       <div className={styles.diem__events}>

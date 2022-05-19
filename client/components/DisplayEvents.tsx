@@ -69,15 +69,6 @@ function DisplayEvents({
                           {item.title}
                           {''}
                         </div>
-                        {item.photo && (
-                          <img
-                            src={item.photo}
-                            width="200"
-                            height="100"
-                            className={styles.event_items}
-                            alt="event-image"
-                          ></img>
-                        )}
                       </div>
                     </button>
                   }
@@ -96,6 +87,14 @@ function DisplayEvents({
                     <div className={styles.addRemoveUsers}>
                       {item.location && <div>Location: {item.location}</div>}
                       {item.time && <div>Time: {item.time}</div>}
+                      {item.photo && (
+                        <img
+                          src={item.photo}
+                          width="200"
+                          height="100"
+                          className={styles.event_items}
+                        ></img>
+                      )}
                     </div>
                     <div>
                       {mapPin && (
@@ -143,10 +142,11 @@ function DisplayEvents({
                                 data.photo || item.photo
                               )
 
-                              .then((res) => {
+                              .then((data) => {
                                 setAllDiems((diems) => {
                                   const copy = diems;
                                   const mapped = copy.map((diem) => {
+                                    console.log(item.id, 'ID');
                                     if (diem.id === item.id && data.title) {
                                       diem.title = data.title;
                                       console.log(data.title);
@@ -165,7 +165,7 @@ function DisplayEvents({
                                     }
                                     console.log(diem, 'DIEM HERE');
                                     // (
-                                    //     return diem;
+                                    return diem;
                                   });
                                   console.log(mapped, 'MAPPED HERE');
 
