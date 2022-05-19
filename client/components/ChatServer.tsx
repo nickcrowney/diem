@@ -10,14 +10,9 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
   const socket = useContext(SocketContext);
   const { loginInfo } = useContext(LoginContext);
   const { register, handleSubmit, reset } = useForm();
-  console.log(currentDiem, "CURRENTDIEM");
-
-  //TODO Fetch the diem with curDiem.id and populate the starting state of
-  //history
 
   const [history, setHistory] = useState([]);
 
-  // currentDiem &&
   useEffect(() => {
     console.warn(currentDiem.id);
     currentDiem &&
@@ -63,15 +58,17 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
   return (
     <>
       <div className={styles.main_container}>
-        <div className={styles.form_contianer}>
-          {history.length && (
-            <div className={styles.message_container}>
-              {history &&
-                history.map((el) => {
-                  return <Message el={el} />;
-                })}
-            </div>
-          )}
+        <div className={styles.form_container}>
+          <div className={styles.scroll_container}>
+            {history.length && (
+              <div className={styles.message_container}>
+                {history &&
+                  history.map((el) => {
+                    return <Message el={el} id="right" />;
+                  })}
+              </div>
+            )}
+          </div>
           {currentDiem && (
             <div className={styles.form_container}>
               <form

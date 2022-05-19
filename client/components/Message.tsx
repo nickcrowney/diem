@@ -1,6 +1,7 @@
 import styles from "../components/Message.module.css";
 import hooks from "../services/ApiServices";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { LoginContext } from "../contexts/Context";
 
 // const usersHook = () => {
 // const [state, setState] = useState();
@@ -14,12 +15,26 @@ import { useEffect, useState } from "react";
 // return { state };
 
 const Message: React.FunctionComponent = (props) => {
+  const { loginInfo } = useContext(LoginContext);
   return (
-    <div className={styles.message_container}>
-      <div>{props.el.content}</div>
-      <div>{props.el.name}</div>
-      <div>{Number(props.el.timestamp)}</div>
-    </div>
+    <>
+      {loginInfo && loginInfo.email === props.el.author && (
+        <div className={styles.message_container_right}>
+          <>
+            <div className={styles.content_right}>{props.el.content}</div>
+            <div className={styles.name_right}>{props.el.name}</div>
+          </>
+        </div>
+      )}
+      {loginInfo && loginInfo.email !== props.el.author && (
+        <>
+          <div className={styles.message_container_left}>
+            <div className={styles.content_left}>{props.el.content}</div>
+            <div className={styles.name_left}>{props.el.name}</div>
+          </div>
+        </>
+      )}
+    </>
   );
 };
 
