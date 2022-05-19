@@ -27,11 +27,19 @@
 
 .name_left {
   justify-content: center;
+  font-size: 10px;
+  padding-top: 7px;
+  margin-left: 5px;
+  font-weight: bold;
 }
 
 .name_right {
   /* //align-self: flex-end; */
   justify-content: right;
+  font-size: 10px;
+  padding-top: 7px;
+  margin-right: 5px;
+  font-weight: bold;
 }
 
 .content_left {

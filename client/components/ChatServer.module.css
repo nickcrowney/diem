@@ -6,6 +6,7 @@
   overflow: scroll;
   max-height: 400px;
   align-items: flex-end;
+  scroll-behavior: auto;
 }
 
 .form {
