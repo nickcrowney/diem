@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import hooks from '../services/ApiServices';
 
-const GoogleMap = () => {
-  const [mapPin, setMapPin] = useState("");
+const GoogleMap = (currentDiem) => {
+  const [mapPin, setMapPin] = useState('');
   const [showMap, setShowMap] = useState(false);
   const [showMapSearch, setShowMapSearch] = useState(true);
   const queryMap = (e) => {
     e.preventDefault();
     setMapPin(e.target.query.value);
+    // currentDiem.id && hooks.modifyDiemMap(currentDiem.id, e.target.query.value);
     setShowMap((prev) => {
       return !prev;
     });
@@ -35,7 +37,7 @@ const GoogleMap = () => {
         <iframe
           width="100%"
           height="200"
-          style={{ margin: "1em 0", borderRadius: "5px" }}
+          style={{ margin: '1em 0', borderRadius: '5px' }}
           loading="lazy"
           allowFullScreen
           referrerPolicy="no-referrer-when-downgrade"

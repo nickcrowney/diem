@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router } from 'express';
 import {
   getUsers,
   getUserById,
@@ -12,6 +12,7 @@ import {
   deleteDiem,
   updateDiemEvents,
   updateDiemTitle,
+  updateDiemDate,
   updateDiemUsers,
   updateUserDiems,
   getEvents,
@@ -20,33 +21,40 @@ import {
   removeDiemUser,
   updateDiemColor,
   createMessage,
-} from "./controllers/controller";
+  updateEventLocation,
+  updateDiemMap,
+} from './controllers/controller';
 
 export const router = Router();
 
-router.get("/users", getUsers);
-router.get("/user/byId/:id", getUserById);
-router.get("/diems", getDiems);
-router.get("/diem/byId/:id", getDiemById);
+router.get('/users', getUsers);
+router.get('/user/byId/:id', getUserById);
+router.get('/diems', getDiems);
+router.get('/diem/byId/:id', getDiemById);
 //router.get("/profiles", getProfiles);
-router.get("/events", getEvents);
+router.get('/events', getEvents);
 
-router.post("/user", createUser);
-router.post("/diem", createDiem);
-router.post("/event", createEvent);
-router.post("/message", createMessage);
+router.post('/user', createUser);
+router.post('/diem', createDiem);
+router.post('/event', createEvent);
+router.post('/message', createMessage);
 
-router.patch("/user", updateUser);
-router.patch("/diem", updateDiem);
-router.patch("/diemColor", updateDiemColor);
+router.patch('/user', updateUser);
+router.patch('/diem', updateDiem);
+router.patch('/diemColor', updateDiemColor);
+router.patch('/diemTitle', updateDiemTitle);
+router.patch('/diemDate', updateDiemDate);
+router.patch('/diemMap', updateDiemMap);
 
-router.patch("/user/updateDiems", updateUserDiems);
-router.patch("/user/removeDiemUser", removeDiemUser);
+router.patch('/eventLocation', updateEventLocation);
+
+router.patch('/user/updateDiems', updateUserDiems);
+router.patch('/user/removeDiemUser', removeDiemUser);
 //router.patch("/user/updateProfile", updateUserProfile);
-router.patch("/diem/updateEvents", updateDiemEvents);
-router.patch("/diem/updateUsers", updateDiemUsers);
-router.patch("/diem/updateTitle", updateDiemTitle);
+router.patch('/diem/updateEvents', updateDiemEvents);
+router.patch('/diem/updateUsers', updateDiemUsers);
+router.patch('/diem/updateTitle', updateDiemTitle);
 
-router.delete("/user/:id", deleteUser);
-router.delete("/diem/:id", deleteDiem);
-router.delete("/event/:id", deleteEvent);
+router.delete('/user/:id', deleteUser);
+router.delete('/diem/:id', deleteDiem);
+router.delete('/event/:id', deleteEvent);

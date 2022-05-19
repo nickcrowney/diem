@@ -34,6 +34,7 @@ model Message {
   metaDiemId Int?
   timestamp  String
   metaDiem   Diem?  @relation(fields: [metaDiemId], references: [id])
+
 }
 
 model User {

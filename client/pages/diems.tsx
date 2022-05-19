@@ -21,6 +21,7 @@ const Diems: NextPage = (props) => {
   const [mainDiem, setDiem] = useState('');
   const [allDiems, setAllDiems] = useState([]);
   const [allEvents, setAllEvents] = useState([]);
+  const [refresh, setRefresh] = useState(0);
   const socket = useContext(SocketContext);
   const [backgroundColor, setBackgroundColor] = useState({
     'background-color': '#fabd04',
@@ -48,6 +49,8 @@ const Diems: NextPage = (props) => {
   });
 
   useEffect(() => {}, [currentDiem]);
+  useEffect(() => {}, [allDiems]);
+
   const [users, setUsers] = useState([]);
 
   useEffect(() => {}, [data]);
@@ -78,7 +81,8 @@ const Diems: NextPage = (props) => {
         setBackgroundColor({ 'background-color': resFuture[0].color });
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [refresh]);
+
   return (
     <div>
       <Nav
@@ -93,22 +97,25 @@ const Diems: NextPage = (props) => {
 
       <main className={styles.container}>
         <div className={styles.tiles}>
-          {allDiems.map((el) => {
-            return (
-              <div key={el.id}>
-                <Tile
-                  setDiem={setDiem}
-                  mainDiem={mainDiem}
-                  allDiems={allDiems}
-                  setAllDiems={setAllDiems}
-                  diem={el}
-                  setCurrentDiem={setCurrentDiem}
-                  backgroundColor={backgroundColor}
-                  setTrap={setTrap}
-                />
-              </div>
-            );
-          })}
+          {allDiems &&
+            allDiems.map((el) => {
+              return (
+                el && (
+                  <div key={el.id}>
+                    <Tile
+                      setDiem={setDiem}
+                      mainDiem={mainDiem}
+                      allDiems={allDiems}
+                      setAllDiems={setAllDiems}
+                      diem={el}
+                      setCurrentDiem={setCurrentDiem}
+                      backgroundColor={backgroundColor}
+                      setTrap={setTrap}
+                    />
+                  </div>
+                )
+              );
+            })}
         </div>
 
         <div className={styles.diem}>
@@ -123,6 +130,8 @@ const Diems: NextPage = (props) => {
               setBackgroundColor={setBackgroundColor}
               allDiems={allDiems}
               setAllDiems={setAllDiems}
+              refresh={refresh}
+              setRefresh={setRefresh}
             />
           )}
         </div>
