@@ -28,12 +28,24 @@ const Diem: React.FunctionComponent = ({
   const [addMap, setMap] = useState(false);
   const [showMapSearch, setShowMapSearch] = useState(false);
   const [mapPin, setMapPin] = useState('');
-  const [showMap, setShowMap] = useState(false);
-  // const [showMapSearch, setShowMapSearch] = useState(true);
+  const [displayMap, setDisplayMap] = useState(false);
+
+  //====== add diem to Google calendar
+  function addToCalendar() {
+    console.log(currentDiem.date, currentDiem.title);
+    hooks.postCalendar(currentDiem.date, currentDiem.title);
+  }
+  //====== reveal map search box
+  function showMapSearchBox() {
+    setShowMapSearch((prev) => {
+      return !prev;
+    });
+  }
+  //====== search and display map
   const queryMap = (e) => {
     e.preventDefault();
     setMapPin(e.target.query.value);
-    setShowMap((prev) => {
+    setDisplayMap((prev) => {
       return !prev;
     });
     setShowMapSearch((prev) => {
@@ -44,23 +56,13 @@ const Diem: React.FunctionComponent = ({
   useEffect(() => {}, [currentDiem]);
 
   const [state, setState] = useState<ItemType[]>([]);
+
   useEffect(() => {
     currentDiem &&
       setBackgroundColor({
         'background-color': currentDiem && currentDiem.color,
       });
   }, [currentDiem]);
-
-  function addToCalendar() {
-    console.log(currentDiem.date, currentDiem.title);
-    hooks.postCalendar(currentDiem.date, currentDiem.title);
-  }
-
-  function handleShowMap() {
-    setShowMapSearch((prev) => {
-      return !prev;
-    });
-  }
 
   function addMapFunction() {
     setMap((prev) => {
@@ -106,7 +108,7 @@ const Diem: React.FunctionComponent = ({
           />
         </div>
       )}
-      {showMap && <GoogleMap mapPin={mapPin} />}
+      {displayMap && <GoogleMap mapPin={mapPin} />}
       <div className={styles.diem__events}>
         <AddNewEvent
           currentDiem={currentDiem}
@@ -145,7 +147,7 @@ const Diem: React.FunctionComponent = ({
                 height="40"
                 width="40"
                 alt="chat-image"
-                onClick={handleShowMap}
+                onClick={showMapSearchBox}
               />
             </button>
             {showMapSearch && (
@@ -154,6 +156,7 @@ const Diem: React.FunctionComponent = ({
                   type="text"
                   name="query"
                   id="query"
+                  placeholder="Find location..."
                   className="py-2 px-4 rounded border-none mr-4"
                 />
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
