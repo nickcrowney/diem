@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import hooks from '../services/ApiServices';
 
-const GoogleMap = (currentDiem) => {
+const GoogleMap = ({ currentDiem, setAllDiems }) => {
   const [mapPin, setMapPin] = useState('');
   const [showMap, setShowMap] = useState(false);
   const [showMapSearch, setShowMapSearch] = useState(true);
   const queryMap = (e) => {
     e.preventDefault();
     setMapPin(e.target.query.value);
-    // currentDiem.id && hooks.modifyDiemMap(currentDiem.id, e.target.query.value);
+
+    currentDiem.id && hooks.modifyDiemMap(currentDiem.id, e.target.query.value);
+    setAllDiems((diems) => {
+      const copy = diems;
+      const mapped = copy.map((diem) => {
+        diem.id === currentDiem.id ? (diem.map = e.target.query.value) : diem;
+        return diem;
+      });
+      return mapped;
+    });
     setShowMap((prev) => {
       return !prev;
     });
@@ -16,6 +25,12 @@ const GoogleMap = (currentDiem) => {
       return !prev;
     });
   };
+  useEffect(() => {
+    if (currentDiem.map) setShowMap(true);
+    if (!currentDiem.map) setShowMap(false);
+
+    currentDiem.map && setMapPin(currentDiem.map);
+  }, [currentDiem]);
 
   return (
     <>
@@ -26,6 +41,7 @@ const GoogleMap = (currentDiem) => {
             name="query"
             id="query"
             className="py-2 px-4 rounded border-none mr-4"
+            placeholder="Enter location..."
           />
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             search
