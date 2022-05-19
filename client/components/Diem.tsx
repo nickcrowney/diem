@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import AddNewEvent from './AddNewEvent';
-import DiemInfoBar from './DiemInfoBar';
-import PopAddUsers from './PopAddUsers';
-import PopRemoveUsers from './PopRemoveUsers';
-import DiemColorPicker from './DiemColorPicker';
-import calendar from '../public/images/calendar.png';
-import chat from '../public/images/chat.png';
-import world from '../public/images/world.png';
-import GoogleMap from './GoogleMap';
-import styles from './Diem.module.css';
-import DisplayEvents from './DisplayEvents';
-import hooks from '../services/ApiServices';
-import deleteBin from '../public/deleteBin.svg';
-import Popup from 'reactjs-popup';
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import AddNewEvent from "./AddNewEvent";
+import DiemInfoBar from "./DiemInfoBar";
+import PopAddUsers from "./PopAddUsers";
+import PopRemoveUsers from "./PopRemoveUsers";
+import DiemColorPicker from "./DiemColorPicker";
+import calendar from "../public/images/calendar.png";
+import chat from "../public/images/chat.png";
+import GoogleMap from "./GoogleMap";
+import styles from "./Diem.module.css";
+import DisplayEvents from "./DisplayEvents";
+import hooks from "../services/ApiServices";
+import deleteBin from "../public/deleteBin.svg";
+import Popup from "reactjs-popup";
+import ChatServer from "./ChatServer";
+
 
 const Diem: React.FunctionComponent = ({
+  onlineUsers,
   currentDiem,
   setCurrentDiem,
   users,
@@ -62,7 +64,7 @@ const Diem: React.FunctionComponent = ({
   useEffect(() => {
     currentDiem &&
       setBackgroundColor({
-        'background-color': currentDiem && currentDiem.color,
+        "background-color": currentDiem && currentDiem.color,
       });
   }, [currentDiem]);
 
@@ -75,7 +77,7 @@ const Diem: React.FunctionComponent = ({
   const clickDeleteDiem = () => {
     currentDiem.events &&
       currentDiem.events.forEach((el) => {
-        console.log(el.id, 'ID OF EL');
+        console.log(el.id, "ID OF EL");
         hooks.deleteEvent(el.id);
       });
     currentDiem.id && hooks.deleteDiem(currentDiem.id);
@@ -92,6 +94,7 @@ const Diem: React.FunctionComponent = ({
   return (
     <div className={styles.diem} style={backgroundColor}>
       <DiemInfoBar
+        onlineUsers={onlineUsers}
         currentDiem={currentDiem}
         setCurrentDiem={setCurrentDiem}
         setAddRemoveUser={setAddRemoveUser}
@@ -204,10 +207,10 @@ const Diem: React.FunctionComponent = ({
             >
               <div
                 style={{
-                  backgroundColor: 'whitesmoke',
-                  padding: '5px',
-                  borderRadius: '5px',
-                  fontSize: 'large',
+                  backgroundColor: "whitesmoke",
+                  padding: "5px",
+                  borderRadius: "5px",
+                  fontSize: "large",
                 }}
               >
                 <button onClick={clickDeleteDiem} className={styles.deleteDiem}>
@@ -223,6 +226,9 @@ const Diem: React.FunctionComponent = ({
             setAllDiems={setAllDiems}
           />
         </div>
+      </div>
+      <div>
+        <ChatServer currentDiem={currentDiem} />
       </div>
     </div>
   );

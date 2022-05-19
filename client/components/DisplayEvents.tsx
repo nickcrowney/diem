@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { ReactSortable } from 'react-sortablejs';
 import styles from '../styles/Home.module.css';
@@ -42,7 +43,7 @@ function DisplayEvents({
 
   const clickedEvent = (item) => {};
   const removeEvent = (id) => {
-    console.log('remove event');
+    console.log("remove event");
   };
   // useEffect(() => {
   //   state && state.length
@@ -76,12 +77,12 @@ function DisplayEvents({
                 >
                   <div
                     style={{
-                      height: '40vh',
-                      width: '40vw',
-                      backgroundColor: '#f7f9fb',
-                      padding: '5px',
-                      borderRadius: '20px',
-                      fontSize: 'large',
+                      height: "40vh",
+                      width: "40vw",
+                      backgroundColor: "#f7f9fb",
+                      padding: "5px",
+                      borderRadius: "20px",
+                      fontSize: "large",
                     }}
                   >
                     <div className={styles.addRemoveUsers}>
@@ -260,7 +261,7 @@ function DisplayEvents({
           ))}
         </ReactSortable>
       ) : (
-        'Currently no events'
+        "Currently no events"
       )}
     </>
   );

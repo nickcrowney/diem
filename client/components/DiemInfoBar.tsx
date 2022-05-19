@@ -1,3 +1,4 @@
+
 import { useEffect, useContext } from 'react';
 import Image from 'next/image';
 import calendar from '../public/images/calendar.png';
@@ -12,6 +13,7 @@ import dayjs from 'dayjs';
 import { useForm } from 'react-hook-form';
 
 const DiemInfoBar: React.FunctionComponent = ({
+  onlineUsers,
   currentDiem,
   setCurrentDiem,
   setAddRemoveUser,
@@ -23,6 +25,7 @@ const DiemInfoBar: React.FunctionComponent = ({
 
   const socket = useContext(SocketContext);
   useEffect(() => {}, [currentDiem]);
+  console.log("ONLINE USERS", onlineUsers);
 
   function handleClick() {
     setAddRemoveUser((prev) => {
@@ -32,29 +35,29 @@ const DiemInfoBar: React.FunctionComponent = ({
 
   function dateFixer(calendarDate) {
     const options = {
-      day: 'numeric',
-      month: 'long',
+      day: "numeric",
+      month: "long",
     };
     const currentDate = new Date(calendarDate).toLocaleDateString(
-      'en-GB',
+      "en-GB",
       options
     );
-    const firstWhite = currentDate.indexOf(' ');
+    const firstWhite = currentDate.indexOf(" ");
     const firstBit = currentDate.slice(0, firstWhite);
     const secondBit = currentDate.slice(firstWhite);
     const nth = function (d) {
       const dString = String(d);
       const last = +dString.slice(-2);
-      if (last > 3 && last < 21) return 'th';
+      if (last > 3 && last < 21) return "th";
       switch (last % 10) {
         case 1:
-          return 'st';
+          return "st";
         case 2:
-          return 'nd';
+          return "nd";
         case 3:
-          return 'rd';
+          return "rd";
         default:
-          return 'th';
+          return "th";
       }
     };
     const finishedDate = firstBit + nth(firstBit) + secondBit;
@@ -152,6 +155,7 @@ const DiemInfoBar: React.FunctionComponent = ({
                     {count++}
                   </div>
                 );
+
             })}
         </div>
         <div className={styles.diemInfoBar__buttons}>
