@@ -1,8 +1,10 @@
 .container {
+  position: relative;
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  top: 12vh;
 }
 
 .tiles {
