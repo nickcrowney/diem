@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.5.1",
+    "dotenv": "^16.0.1",
     "react-select": "^5.3.2"
   }
 }

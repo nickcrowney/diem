@@ -1,10 +1,10 @@
-import { User, Diem, Event } from ".prisma/client";
-import { PrismaClient } from "@prisma/client";
-import { time } from "console";
+import { User, Diem, Event } from '.prisma/client';
+import { PrismaClient } from '@prisma/client';
+import { time } from 'console';
 //import { profile } from "console";
-import Express, { Request, Response } from "express";
-import { colors } from "react-select/dist/declarations/src/theme";
-import { diems } from "../data/data";
+import Express, { Request, Response } from 'express';
+import { colors } from 'react-select/dist/declarations/src/theme';
+import { diems } from '../data/data';
 const prisma = new PrismaClient();
 
 export async function getUsers(req: Request, res: Response) {
@@ -63,7 +63,6 @@ export async function createDiem(req: Request, res: Response) {
     data: {
       title: title, //Only title is required to create diem
       date: date,
-      city: city,
       color: color,
       users: {
         connect: {
@@ -72,9 +71,9 @@ export async function createDiem(req: Request, res: Response) {
       },
     },
   });
-  console.log("NEW DIEM");
-  console.log(title, "title");
-  console.log(city, "city");
+  console.log('NEW DIEM');
+  console.log(title, 'title');
+  console.log(city, 'city');
   res.json(diem);
 }
 
@@ -222,18 +221,18 @@ export async function removeDiemUser(req: Request, res: Response) {
 }
 
 //Patch a diem's events (add or replace an event)
-export async function updateDiemEvents(req: Request, res: Response) {
-  const { id, events } = req.body;
-  const updatedDiem = await prisma.diem.update({
-    where: {
-      id: id,
-    },
-    data: {
-      events: events,
-    },
-  });
-  res.json(updatedDiem);
-}
+// export async function updateDiemEvents(req: Request, res: Response) {
+//   const { id, events } = req.body;
+//   const updatedDiem = await prisma.diem.update({
+//     where: {
+//       id: id,
+//     },
+//     data: {
+//       events: events,
+//     },
+//   });
+//   res.json(updatedDiem);
+// }
 
 //Patch a diem's users (add or replace a user)
 export async function updateDiemUsers(req: Request, res: Response) {
@@ -262,7 +261,46 @@ export async function updateDiemTitle(req: Request, res: Response) {
   });
   res.json(updatedDiem);
 }
+export async function updateDiemEvents(req: Request, res: Response) {
+  const { metaDiem, events } = req.body;
+  const updatedDiem = await prisma.diem.update({
+    where: {
+      id: metaDiem,
+    },
+    data: {
+      events: events,
+    },
+  });
+  res.json(updatedDiem);
+}
+export async function updateDiemMap(req: Request, res: Response) {
+  const { id, map } = req.body;
+  const updatedDiem = await prisma.diem.update({
+    where: {
+      id: id,
+    },
+    data: {
+      map: map,
+    },
+  });
+  res.json(updatedDiem);
+}
 
+export async function updateEventLocation(req: Request, res: Response) {
+  const { id, title, location, time, photo } = req.body;
+  const updatedDiem = await prisma.event.update({
+    where: {
+      id: id,
+    },
+    data: {
+      title: title,
+      location: location,
+      time: time,
+      photo: photo,
+    },
+  });
+  res.json(updatedDiem);
+}
 //Patch a diem's users (add or replace an event)
 export async function updateDiemDate(req: Request, res: Response) {
   const { id, date } = req.body;

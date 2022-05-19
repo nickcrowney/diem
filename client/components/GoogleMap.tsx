@@ -17,21 +17,6 @@ const GoogleMap = ({ mapPin }) => {
 
   return (
     <>
-      {/* {showMapSearch && (
-        // <form onSubmit={queryMap}>
-        //   <input
-        //     type="text"
-        //     name="query"
-        //     id="query"
-        //     className="py-2 px-4 rounded border-none mr-4"
-        //   />
-        //   <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        //     GO!
-        //   </button>
-        // </form>
-      )} */}
-
-      {/* {showMap && ( */}
       <iframe
         width="100%"
         height="200"
@@ -41,7 +26,6 @@ const GoogleMap = ({ mapPin }) => {
         referrerPolicy="no-referrer-when-downgrade"
         src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBsNI21BHJIIKWSngJbtch5hnqfnLlTP6o&q=${mapPin}`}
       ></iframe>
-      {/* )} */}
     </>
   );
 };

@@ -6,10 +6,20 @@ const DiemColorPicker = ({
   setBackgroundColor,
   backgroundColor,
   currentDiem,
+  setAllDiems,
 }) => {
   const getColor = (color) => {
     currentDiem.id && setBackgroundColor({ 'background-color': color });
+
     currentDiem.id && hooks.modifyDiemColor(currentDiem.id, color);
+    setAllDiems((diems) => {
+      const copy = diems;
+      const mapped = copy.map((diem) => {
+        diem.id === currentDiem.id ? (diem.color = color) : diem;
+        return diem;
+      });
+      return mapped;
+    });
   };
 
   return (

@@ -25,7 +25,6 @@ const Nav = ({
   }
 
   const { loginInfo, setLoginInfo } = useLoginContext();
-
   console.log('PROPS HERE', loginInfo);
 
   return (
@@ -49,14 +48,15 @@ const Nav = ({
             <Image src={menu} height="32" width="32" />
           </button>
           <div className={styles.nav__profilePic}>
-            {loginInfo && (
-              <Image
-                src={loginInfo?.photoURL ?? mypic}
-                alt="Picture of the author"
-                height="50"
-                width="50"
-              />
-            )}
+            {/* {loginInfo && ( */}
+            <Image
+              // src={loginInfo?.photoURL ?? mypic}
+              src={users[0]?.userPhoto ?? mypic}
+              alt="Picture of the author"
+              height="50"
+              width="50"
+            />
+            {/* )} */}
           </div>
         </div>
       </div>
