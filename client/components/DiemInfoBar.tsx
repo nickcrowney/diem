@@ -71,7 +71,7 @@ const DiemInfoBar: React.FunctionComponent = ({
           )}
           {currentDiem && currentDiem.users // always truthy
             ? currentDiem.users.map((el) => {
-                //Online user logic goes here
+                //TODO Online user logic goes here
                 return (
                   <div key={el.id} className={styles.diemInfoBar__profilePic}>
                     <Image
