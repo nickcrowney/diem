@@ -210,7 +210,7 @@ const Diem: React.FunctionComponent = ({
               </form>
             )}
           </div>
-          {/* <div>
+          <div>
             <Popup
               trigger={
                 <button>
@@ -237,7 +237,7 @@ const Diem: React.FunctionComponent = ({
                 </button>
               </div>
             </Popup>
-          </div> */}
+          </div>
           <DiemColorPicker
             backgroundColor={backgroundColor}
             setBackgroundColor={setBackgroundColor}
