@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import AddNewEvent from './AddNewEvent';
 import DiemInfoBar from './DiemInfoBar';
+import ChatServer from './ChatServer';
 import PopAddUsers from './PopAddUsers';
 import PopRemoveUsers from './PopRemoveUsers';
 import DiemColorPicker from './DiemColorPicker';
@@ -68,6 +69,7 @@ const Diem: React.FunctionComponent = ({
   useEffect(() => {}, [currentDiem]);
 
   const [state, setState] = useState<ItemType[]>([]);
+  const [showChat, setShowChat] = useState(false);
 
   useEffect(() => {
     currentDiem &&
@@ -86,22 +88,22 @@ const Diem: React.FunctionComponent = ({
     });
   }
 
-  const clickDeleteDiem = () => {
-    currentDiem.events &&
-      currentDiem.events.forEach((el) => {
-        console.log(el.id, 'ID OF EL');
-        hooks.deleteEvent(el.id);
-      });
-    currentDiem.id && hooks.deleteDiem(currentDiem.id);
-    currentDiem.id &&
-      setAllDiems(
-        (prev) => (prev = prev.filter((el) => el.id !== currentDiem.id))
-      );
-    if (currentDiem.length) setCurrentDiem(allDiems[0]); // maybe not using
-    else {
-      setCurrentDiem(undefined);
-    }
-  };
+  // const clickDeleteDiem = () => {
+  //   currentDiem.events &&
+  //     currentDiem.events.forEach((el) => {
+  //       console.log(el.id, 'ID OF EL');
+  //       hooks.deleteEvent(el.id);
+  //     });
+  //   currentDiem.id && hooks.deleteDiem(currentDiem.id);
+  //   currentDiem.id &&
+  //     setAllDiems(
+  //       (prev) => (prev = prev.filter((el) => el.id !== currentDiem.id))
+  //     );
+  //   if (currentDiem.length) setCurrentDiem(allDiems[0]); // maybe not using
+  //   else {
+  //     setCurrentDiem(undefined);
+  //   }
+  // };
 
   return (
     <div className={styles.diem} style={backgroundColor}>
@@ -109,6 +111,7 @@ const Diem: React.FunctionComponent = ({
         currentDiem={currentDiem}
         setCurrentDiem={setCurrentDiem}
         setAddRemoveUser={setAddRemoveUser}
+        allDiems={allDiems}
         setAllDiems={setAllDiems}
         refresh={refresh}
         setRefresh={setRefresh}
@@ -183,7 +186,12 @@ const Diem: React.FunctionComponent = ({
                 onClick={addToCalendar}
               />
             </button>
-            <button type="button">
+            <button
+              type="button"
+              onClick={() => {
+                setShowChat((prev) => !prev);
+              }}
+            >
               <Image src={chat} height="40" width="40" alt="chat-image" />
             </button>
             <button type="button">
@@ -195,6 +203,7 @@ const Diem: React.FunctionComponent = ({
                 onClick={showMapSearchBox}
               />
             </button>
+
             {showMapSearch && (
               <form onSubmit={queryMap}>
                 <input
@@ -210,34 +219,6 @@ const Diem: React.FunctionComponent = ({
               </form>
             )}
           </div>
-          <div>
-            <Popup
-              trigger={
-                <button>
-                  <Image
-                    src={deleteBin}
-                    height="20"
-                    width="20"
-                    alt="delete-bin-image"
-                  />
-                </button>
-              }
-              position="right center"
-            >
-              <div
-                style={{
-                  backgroundColor: 'whitesmoke',
-                  padding: '5px',
-                  borderRadius: '5px',
-                  fontSize: 'large',
-                }}
-              >
-                <button onClick={clickDeleteDiem} className={styles.deleteDiem}>
-                  Delete
-                </button>
-              </div>
-            </Popup>
-          </div>
           <DiemColorPicker
             backgroundColor={backgroundColor}
             setBackgroundColor={setBackgroundColor}
@@ -246,6 +227,11 @@ const Diem: React.FunctionComponent = ({
           />
         </div>
       </div>
+      {showChat && (
+        <div>
+          <ChatServer currentDiem={currentDiem} />
+        </div>
+      )}
     </div>
   );
 };
