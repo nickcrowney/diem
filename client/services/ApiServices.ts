@@ -172,12 +172,13 @@ const modifyDiemChatHistory = async (
   message: String,
   id: Number,
   author: String,
-  time: String
+  time: String,
+  name: String
 ) => {
-  console.log({ message, id, author, time }, "THE MESSAGE");
+  console.log({ message, id, author, time, name }, "THE MESSAGE");
   const response = await fetch("http://localhost:4000/message", {
     method: "POST",
-    body: JSON.stringify({ message, id, author, time }),
+    body: JSON.stringify({ message, id, author, time, name }),
     headers: {
       "Content-Type": "application/json",
     },

@@ -20,8 +20,9 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
   // currentDiem &&
   useEffect(() => {
     console.warn(currentDiem.id);
-    currentDiem.chatHistory &&
-      fetch(`http://localhost:4000/diem/byId/${3}`)
+    currentDiem &&
+      currentDiem.chatHistory &&
+      fetch(`http://localhost:4000/diem/byId/${currentDiem.id}`)
         .then((res) => {
           return res.json();
         })
@@ -44,14 +45,16 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
       data.message,
       currentDiem.id,
       loginInfo.email,
-      String(new Date())
+      String(Date.now()),
+      loginInfo.displayName
     );
     reset({ message: "" });
 
     let mes = {
       content: data.message,
       author: loginInfo.email,
-      timestamp: String(new Date()),
+      timestamp: String(Date.now()),
+      name: loginInfo.displayName,
     };
     socket.emit("message", mes);
     setHistory((prev) => [...prev, mes]);
