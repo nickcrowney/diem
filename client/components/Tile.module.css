@@ -1,8 +1,6 @@
 .tile {
-  height: 10rem;
-  width: 15rem;
+  height: 8rem;
   border-radius: 5px;
-  color: rgb(40, 40, 40);
   padding: 1rem;
   margin: 1rem;
   justify-content: space-between;
@@ -14,35 +12,6 @@
   cursor: pointer;
   opacity: 0.75;
   transform: scaleX(1.02);
-}
-
-.tile__profilePics_container {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 2em;
-  margin-right: 1rem;
-}
-
-.tile__profilePic {
-  border-radius: 50%;
-  overflow: hidden;
-  margin-right: -12px;
-  height: 46px;
-  width: 46px;
-  object-fit: cover;
-  border: solid 2px #f7f9fb;
-}
-
-.tile__profilePic_plusSign {
-  border-radius: 50%;
-  overflow: hidden;
-  margin-right: -5px;
-  height: 25px;
-  width: 25px;
-  object-fit: cover;
-  z-index: 10;
-  align-self: center;
-  border: solid 2px #f7f9fb;
 }
 
 .tile h1 {

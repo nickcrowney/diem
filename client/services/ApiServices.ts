@@ -1,17 +1,30 @@
-import { response } from "express";
-import React, { useState } from "react";
-import { Message } from "react-hook-form";
+import { response } from 'express';
+import React, { useState } from 'react';
+import { Message } from 'react-hook-form';
+
+// calendar
+const postCalendar = async (date, title) => {
+  const response = await fetch("http://localhost:4000/calendar", {
+    method: "POST",
+    body: JSON.stringify({ date, title }),
+    headers: {
+      "Content-Type": "application/json",
+    }
+  })
+  const data = await response.json();
+  return data;
+};
 
 //GET request for all users
 const getUsers = async () => {
-  const response = await fetch("http://localhost:4000/users");
+  const response = await fetch('http://localhost:4000/users');
   const data = await response.json();
   return data;
 };
 
 //GET request for all diems
 const getDiems = async () => {
-  const response = await fetch("http://localhost:4000/diems");
+  const response = await fetch('http://localhost:4000/diems');
   const data = await response.json();
   // console.log(data, 'DATA');
 
@@ -26,7 +39,7 @@ const getDiems = async () => {
 
 //GET request for all events
 const getEvents = async () => {
-  const response = await fetch("http://localhost:4000/events");
+  const response = await fetch('http://localhost:4000/events');
   const data = await response.json();
   return data;
   //setEvents(data);
@@ -51,11 +64,11 @@ const getDiemById = (id: Number) => {
 
 //POST new user
 const submitNewUser = async (name: String, email: String, picture: String) => {
-  const response = await fetch("http://localhost:4000/user", {
-    method: "POST",
+  const response = await fetch('http://localhost:4000/user', {
+    method: 'POST',
     body: JSON.stringify({ name, email, picture }),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
   const data = await response.json();
@@ -71,16 +84,16 @@ const submitNewDiem = async (
   user: Number,
   color: String
 ) => {
-  const response = await fetch("http://localhost:4000/diem", {
-    method: "POST",
+  const response = await fetch('http://localhost:4000/diem', {
+    method: 'POST',
     body: JSON.stringify({ title, date, user, color }),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
   const data = await response.json();
 
-  console.log(data, "DATA");
+  console.log(data, 'DATA');
 
   return data;
   // setDiem(data);
@@ -89,7 +102,7 @@ const submitNewDiem = async (
 //DELETE user
 const deleteUser = async (id: Number) => {
   const response = await fetch(`http://localhost:4000/user/${id}`, {
-    method: "DELETE",
+    method: 'DELETE',
   });
   const data = await response.json();
   return data;
@@ -99,7 +112,7 @@ const deleteUser = async (id: Number) => {
 //DELETE diem
 const deleteDiem = async (id: Number) => {
   const response = await fetch(`http://localhost:4000/diem/${id}`, {
-    method: "DELETE",
+    method: 'DELETE',
   });
   const data = await response.json();
   return data;
@@ -109,7 +122,7 @@ const deleteDiem = async (id: Number) => {
 //DELETE event
 const deleteEvent = async (id: Number) => {
   const response = await fetch(`http://localhost:4000/event/${id}`, {
-    method: "DELETE",
+    method: 'DELETE',
   });
   const data = await response.json();
   return data;
@@ -142,12 +155,12 @@ const submitNewEvent = async (
 };
 
 const updateDiemUser = async (diemId: Number, userId: Number) => {
-  const response = await fetch("http://localhost:4000/diem", {
-    method: "PATCH",
+  const response = await fetch('http://localhost:4000/diem', {
+    method: 'PATCH',
 
     body: JSON.stringify({ diemId, userId }),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
   const data = await response.json();
@@ -155,11 +168,11 @@ const updateDiemUser = async (diemId: Number, userId: Number) => {
 };
 
 const removeDiemUser = async (diemId: Number, userId: Number) => {
-  const response = await fetch("http://localhost:4000/user/removeDiemUser", {
-    method: "PATCH",
+  const response = await fetch('http://localhost:4000/user/removeDiemUser', {
+    method: 'PATCH',
     body: JSON.stringify({ diemId, userId }),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
   const data = await response.json();
@@ -175,12 +188,14 @@ const modifyDiemChatHistory = async (
   time: String,
   name: String
 ) => {
+
   console.log({ message, id, author, time, name }, "THE MESSAGE");
   const response = await fetch("http://localhost:4000/message", {
     method: "POST",
     body: JSON.stringify({ message, id, author, time, name }),
+
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
 
@@ -190,11 +205,77 @@ const modifyDiemChatHistory = async (
 };
 
 const modifyDiemColor = async (id: Number, color: String) => {
-  const response = await fetch("http://localhost:4000/diemColor", {
-    method: "PATCH",
+  const response = await fetch('http://localhost:4000/diemColor', {
+    method: 'PATCH',
     body: JSON.stringify({ id, color }),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
+    },
+  });
+  const data = await response.json();
+  return data;
+  console.log(data);
+};
+const modifyDiemTitle = async (id: Number, title: String) => {
+  const response = await fetch('http://localhost:4000/diemTitle', {
+    method: 'PATCH',
+    body: JSON.stringify({ id, title }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const data = await response.json();
+  return data;
+  console.log(data);
+};
+const modifyDiemMap = async (id: Number, map: String) => {
+  const response = await fetch('http://localhost:4000/diemMap', {
+    method: 'PATCH',
+    body: JSON.stringify({ id, map }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const data = await response.json();
+  return data;
+  console.log(data);
+};
+const modifyDiemDate = async (id: Number, date: String) => {
+  const response = await fetch('http://localhost:4000/diemDate', {
+    method: 'PATCH',
+    body: JSON.stringify({ id, date }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const data = await response.json();
+  return data;
+  console.log(data);
+};
+const modifyOrderedEvents = async (metaDiem: Number, events: any[]) => {
+  const response = await fetch('http://localhost:4000/diem/updateEvents', {
+    method: 'PATCH',
+    body: JSON.stringify({ metaDiem, events }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const data = await response.json();
+  return data;
+  console.log(data);
+};
+const modifyEvent = async (
+  id: Number,
+  title: String,
+  location: String,
+  time: String,
+  photo: String
+) => {
+  const response = await fetch('http://localhost:4000/eventLocation', {
+    method: 'PATCH',
+    body: JSON.stringify({ id, title, location, time, photo }),
+    headers: {
+      'Content-Type': 'application/json',
     },
   });
   const data = await response.json();
@@ -232,8 +313,14 @@ export default {
   deleteUser,
   updateDiemUser,
   modifyDiemColor,
+  modifyDiemTitle,
+  modifyEvent,
+  modifyDiemDate,
   removeDiemUser,
   modifyDiemChatHistory,
+  postCalendar,
+  modifyOrderedEvents,
+  modifyDiemMap,
 };
 
 //export default ApiServices;

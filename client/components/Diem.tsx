@@ -15,6 +15,7 @@ import deleteBin from "../public/deleteBin.svg";
 import Popup from "reactjs-popup";
 import ChatServer from "./ChatServer";
 
+
 const Diem: React.FunctionComponent = ({
   onlineUsers,
   currentDiem,
@@ -24,12 +25,42 @@ const Diem: React.FunctionComponent = ({
   setBackgroundColor,
   allDiems,
   setAllDiems,
+  refresh,
+  setRefresh,
 }) => {
   const [addRemoveUser, setAddRemoveUser] = useState(false);
+  const [addMap, setMap] = useState(false);
+  const [showMapSearch, setShowMapSearch] = useState(false);
+  const [mapPin, setMapPin] = useState('');
+  const [displayMap, setDisplayMap] = useState(false);
+
+  //====== add diem to Google calendar
+  function addToCalendar() {
+    console.log(currentDiem.date, currentDiem.title);
+    hooks.postCalendar(currentDiem.date, currentDiem.title);
+  }
+  //====== reveal map search box
+  function showMapSearchBox() {
+    setShowMapSearch((prev) => {
+      return !prev;
+    });
+  }
+  //====== search and display map
+  const queryMap = (e) => {
+    e.preventDefault();
+    setMapPin(e.target.query.value);
+    setDisplayMap((prev) => {
+      return !prev;
+    });
+    setShowMapSearch((prev) => {
+      return !prev;
+    });
+  };
 
   useEffect(() => {}, [currentDiem]);
 
   const [state, setState] = useState<ItemType[]>([]);
+
   useEffect(() => {
     currentDiem &&
       setBackgroundColor({
@@ -37,9 +68,12 @@ const Diem: React.FunctionComponent = ({
       });
   }, [currentDiem]);
 
-  function addToCalendar() {
-    console.log(currentDiem.date, currentDiem.title);
+  function addMapFunction() {
+    setMap((prev) => {
+      return !prev;
+    });
   }
+
   const clickDeleteDiem = () => {
     currentDiem.events &&
       currentDiem.events.forEach((el) => {
@@ -62,7 +96,11 @@ const Diem: React.FunctionComponent = ({
       <DiemInfoBar
         onlineUsers={onlineUsers}
         currentDiem={currentDiem}
+        setCurrentDiem={setCurrentDiem}
         setAddRemoveUser={setAddRemoveUser}
+        setAllDiems={setAllDiems}
+        refresh={refresh}
+        setRefresh={setRefresh}
       />
 
       {addRemoveUser && (
@@ -77,7 +115,7 @@ const Diem: React.FunctionComponent = ({
             currentDiem={currentDiem}
             setCurrentDiem={setCurrentDiem}
           />
-          <div>
+          {/* <div>
             {currentDiem && (
               <DisplayEvents
                 setCurrentDiem={setCurrentDiem}
@@ -86,11 +124,14 @@ const Diem: React.FunctionComponent = ({
                 setState={setState}
               />
             )}
-          </div>
+          </div> */}
         </div>
       )}
 
-      <GoogleMap />
+
+      <GoogleMap currentDiem={currentDiem} setAllDiems={setAllDiems} />
+
+
 
       <div className={styles.diem__events}>
         <AddNewEvent
@@ -107,6 +148,7 @@ const Diem: React.FunctionComponent = ({
               setCurrentDiem={setCurrentDiem}
               state={state}
               setState={setState}
+              setAllDiems={setAllDiems}
             />
           )}
         </div>
@@ -125,8 +167,31 @@ const Diem: React.FunctionComponent = ({
             <button type="button">
               <Image src={chat} height="40" width="40" alt="chat-image" />
             </button>
+            <button type="button">
+              <Image
+                src={world}
+                height="40"
+                width="40"
+                alt="chat-image"
+                onClick={showMapSearchBox}
+              />
+            </button>
+            {showMapSearch && (
+              <form onSubmit={queryMap}>
+                <input
+                  type="text"
+                  name="query"
+                  id="query"
+                  placeholder="Find location..."
+                  className="py-2 px-4 rounded border-none mr-4"
+                />
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  GO!
+                </button>
+              </form>
+            )}
           </div>
-          <div>
+          {/* <div>
             <Popup
               trigger={
                 <button>
@@ -153,11 +218,12 @@ const Diem: React.FunctionComponent = ({
                 </button>
               </div>
             </Popup>
-          </div>
+          </div> */}
           <DiemColorPicker
             backgroundColor={backgroundColor}
             setBackgroundColor={setBackgroundColor}
             currentDiem={currentDiem}
+            setAllDiems={setAllDiems}
           />
         </div>
       </div>

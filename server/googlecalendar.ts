@@ -1,24 +1,35 @@
 const { google } = require('googleapis');
 require('dotenv').config();
 
-const CREDENTIALS = JSON.parse(process.env.CREDENTIALS);
 const calendarId = process.env.CALENDAR_ID;
+const CLIENTEMAIL = process.env.CLIENTEMAIL;
+const PRIVATEKEY = process.env.PRIVATEKEY;
+// const CREDENTIALS = JSON.parse(process.env.CREDENTIALS)
 const SCOPES = 'https://www.googleapis.com/auth/calendar';
 const calendar = google.calendar({ version: 'v3' });
 
 const auth = new google.auth.JWT(
-  CREDENTIALS.client_email,
+  CLIENTEMAIL,
   null,
-  CREDENTIALS.private_key,
+  PRIVATEKEY,
   SCOPES
 );
 
-const insertEvent = async (event) => {
+const insertEvent = async (event: any) => {
+  let event2 = {
+    'summary': event.title,
+    'start': {
+      'date': event.date,
+    },
+    'end': {
+      'date': event.date,
+    }
+  };
   try {
     let response = await calendar.events.insert({
       auth: auth,
       calendarId: calendarId,
-      resource: event,
+      resource: event2,
     });
     if (response['status'] == 200 && response['statusText'] === 'OK') {
       return 1;
@@ -31,20 +42,4 @@ const insertEvent = async (event) => {
   }
 };
 
-let event = {
-  'summary': `Event`,
-  'start': {
-    'date': "2022-05-18",
-  },
-  'end': {
-    'date': "2022-05-18",
-  }
-};
-
-insertEvent(event)
-  .then((res) => {
-    console.log(res);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+export default insertEvent

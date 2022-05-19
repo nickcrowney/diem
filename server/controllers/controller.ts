@@ -223,18 +223,18 @@ export async function removeDiemUser(req: Request, res: Response) {
 }
 
 //Patch a diem's events (add or replace an event)
-export async function updateDiemEvents(req: Request, res: Response) {
-  const { id, events } = req.body;
-  const updatedDiem = await prisma.diem.update({
-    where: {
-      id: id,
-    },
-    data: {
-      events: events,
-    },
-  });
-  res.json(updatedDiem);
-}
+// export async function updateDiemEvents(req: Request, res: Response) {
+//   const { id, events } = req.body;
+//   const updatedDiem = await prisma.diem.update({
+//     where: {
+//       id: id,
+//     },
+//     data: {
+//       events: events,
+//     },
+//   });
+//   res.json(updatedDiem);
+// }
 
 //Patch a diem's users (add or replace a user)
 export async function updateDiemUsers(req: Request, res: Response) {
@@ -263,7 +263,46 @@ export async function updateDiemTitle(req: Request, res: Response) {
   });
   res.json(updatedDiem);
 }
+export async function updateDiemEvents(req: Request, res: Response) {
+  const { metaDiem, events } = req.body;
+  const updatedDiem = await prisma.diem.update({
+    where: {
+      id: metaDiem,
+    },
+    data: {
+      events: events,
+    },
+  });
+  res.json(updatedDiem);
+}
+export async function updateDiemMap(req: Request, res: Response) {
+  const { id, map } = req.body;
+  const updatedDiem = await prisma.diem.update({
+    where: {
+      id: id,
+    },
+    data: {
+      map: map,
+    },
+  });
+  res.json(updatedDiem);
+}
 
+export async function updateEventLocation(req: Request, res: Response) {
+  const { id, title, location, time, photo } = req.body;
+  const updatedDiem = await prisma.event.update({
+    where: {
+      id: id,
+    },
+    data: {
+      title: title,
+      location: location,
+      time: time,
+      photo: photo,
+    },
+  });
+  res.json(updatedDiem);
+}
 //Patch a diem's users (add or replace an event)
 export async function updateDiemDate(req: Request, res: Response) {
   const { id, date } = req.body;

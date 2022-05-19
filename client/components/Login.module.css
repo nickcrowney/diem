@@ -1,0 +1,43 @@
+/* .mainContainer {
+  height: 100vh;
+} */
+
+.groupCircles {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  margin-right: 75px;
+}
+
+.circle {
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: -75px;
+  height: 190px;
+  width: 190px;
+  object-fit: cover;
+  border: solid 10px #f7f9fb;
+}
+
+#red {
+  background-color: #f28b82;
+}
+#orange {
+  background-color: #fabd04;
+}
+#yellow {
+  background-color: #fff476;
+}
+#green {
+  background-color: #ccff90;
+}
+#purple {
+  background-color: #d7affb;
+}
+
+.typewriter h1 {
+  display: flex;
+  justify-content: center;
+  font-size: 16rem;
+  /* margin: 1rem 0; */
+}

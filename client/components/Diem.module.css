@@ -73,8 +73,21 @@
 
 .diemBottom__buttons {
   margin-top: 1em;
+  display: flex;
+  /* align-items: center; */
 }
 
 .diemBottom__buttons button {
   margin-right: 1em;
 }
+
+/* .mapSection {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.mapSection button {
+  margin-top: 1rem;
+  margin-right: 1rem;
+} */

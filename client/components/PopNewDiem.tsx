@@ -1,10 +1,11 @@
-import React from "react";
-import dayjs from "dayjs";
-import { useForm } from "react-hook-form";
-import styles from "./PopNewDiem.module.css";
-import props from "../services/ApiServices";
 
-const currentDate = dayjs().toISOString(); //.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+import React, { useEffect } from 'react';
+import dayjs from 'dayjs';
+import { useForm } from 'react-hook-form';
+import styles from './PopNewDiem.module.css';
+import hooks from '../services/ApiServices';
+
+const yesterday = dayjs().add(-1, 'day').toISOString();
 
 function PopNewDiem({ setAllDiems, allDiems, users }) {
   const currentUser = users[0].id;
@@ -36,8 +37,8 @@ function PopNewDiem({ setAllDiems, allDiems, users }) {
         })}
       >
         <input
-          {...register("title")}
-          placeholder="Diem Name..."
+          {...register('title')}
+          placeholder="Title..."
           className="py-2 px-4 rounded"
         />
 
@@ -46,50 +47,51 @@ function PopNewDiem({ setAllDiems, allDiems, users }) {
           className="py-2 px-4 rounded border-none"
           min={currentDate}
           name="date"
-          {...register("date", { required: true })}
+
+          {...register('date', { required: true, min: yesterday })}
         />
 
         <div className={styles.colorPicker}>
           <input
-            {...register("color")}
+            {...register('color')}
             type="radio"
             className={styles.colors}
             name="color"
             id="red"
             value="#f28b82"
-            style={{ backgroundColor: "#f28b82" }}
+            style={{ backgroundColor: '#f28b82' }}
           />
           <input
-            {...register("color")}
+            {...register('color')}
             type="radio"
             className={styles.colors}
             id="orange"
             value="#fabd04"
-            style={{ backgroundColor: "#fabd04" }}
+            style={{ backgroundColor: '#fabd04' }}
           />
           <input
-            {...register("color")}
+            {...register('color')}
             type="radio"
             className={styles.colors}
             id="yellow"
             value="#fff476"
-            style={{ backgroundColor: "#fff476" }}
+            style={{ backgroundColor: '#fff476' }}
           />
           <input
-            {...register("color")}
+            {...register('color')}
             type="radio"
             className={styles.colors}
             id="green"
             value="#ccff90"
-            style={{ backgroundColor: "#ccff90" }}
+            style={{ backgroundColor: '#ccff90' }}
           />
           <input
-            {...register("color")}
+            {...register('color')}
             type="radio"
             className={styles.colors}
             id="purple"
             value="#d7affb"
-            style={{ backgroundColor: "#d7affb" }}
+            style={{ backgroundColor: '#d7affb' }}
           />
         </div>
 

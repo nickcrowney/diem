@@ -1,17 +1,28 @@
-import { useEffect, useContext } from "react";
-import Image from "next/image";
-import calendar from "../public/images/calendar.png";
-import chat from "../public/images/chat.png";
-import prosAndCons from "../public/images/pros-and-cons.png";
-import plus from "../public/images/plus.png";
-import styles from "./DiemInfoBar.module.css";
-import { SocketContext } from "../contexts/Socket";
+
+import { useEffect, useContext } from 'react';
+import Image from 'next/image';
+import calendar from '../public/images/calendar.png';
+import chat from '../public/images/chat.png';
+import prosAndCons from '../public/images/pros-and-cons.png';
+import plus from '../public/images/plus.png';
+import styles from './DiemInfoBar.module.css';
+import { SocketContext } from '../contexts/Socket';
+import hooks from '../services/ApiServices';
+import Popup from 'reactjs-popup';
+import dayjs from 'dayjs';
+import { useForm } from 'react-hook-form';
 
 const DiemInfoBar: React.FunctionComponent = ({
   onlineUsers,
   currentDiem,
+  setCurrentDiem,
   setAddRemoveUser,
+  setAllDiems,
+  refresh,
+  setRefresh,
 }) => {
+  const { register, handleSubmit, reset } = useForm();
+
   const socket = useContext(SocketContext);
   useEffect(() => {}, [currentDiem]);
   console.log("ONLINE USERS", onlineUsers);
@@ -53,25 +64,86 @@ const DiemInfoBar: React.FunctionComponent = ({
     return finishedDate;
   }
   const date = dateFixer(currentDiem && currentDiem.date);
+  const yesterday = dayjs().add(-1, 'day').toISOString();
 
+  let count = 0;
   return (
     <div className={styles.diemInfoBar}>
       <div>
-        <div className={styles.diemInfoBar__title}>
+        <div
+          className={styles.diemInfoBar__title}
+          contentEditable={true}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              event.preventDefault();
+              // console.log(event.target.innerText, 'key pressed');
+              hooks.modifyDiemTitle(currentDiem.id, event.target.innerText);
+              setAllDiems((diems) => {
+                const copy = diems;
+                console.log(copy, 'before map copy');
+                const mapped = copy.map((diem) => {
+                  diem.id === currentDiem.id
+                    ? (diem.title = event.target.innerText)
+                    : diem;
+                  return diem;
+                });
+                console.log(mapped, 'after map copy');
+                return mapped;
+              });
+              setCurrentDiem((prev) => {
+                const copy = prev;
+                copy.title = event.target.innerText;
+                return copy;
+              });
+            }
+          }}
+        >
           {currentDiem && currentDiem.title}
         </div>
-        <h2>{date}</h2>
+        <Popup trigger={<button>{date}</button>} position="right center">
+          <form
+            onSubmit={handleSubmit((data) => {
+              hooks.modifyDiemDate(currentDiem.id, data.date);
+
+              setAllDiems((diems) => {
+                const copy = diems;
+                const mapped = copy.map((diem) => {
+                  diem.id === currentDiem.id ? (diem.date = data.date) : diem;
+                  return diem;
+                });
+                return mapped;
+              });
+              setCurrentDiem((prev) => {
+                const copy = prev;
+                copy.date = data.date;
+                return copy;
+              });
+              setRefresh((prev) => prev + 1);
+            })}
+          >
+            <input
+              type="date"
+              className="py-2 px-4 rounded border-none"
+              name="date"
+              {...register('date', { required: true, min: yesterday })}
+            />
+            <button type="submit">Submit</button>
+          </form>
+        </Popup>
       </div>
       <div className={styles.diemInfoBar__picsAndButtons}>
         <div className={styles.diemInfoBar__profilePics_container}>
-          {currentDiem.users && (
+          {currentDiem.users && currentDiem.users.length >= 8 ? (
             <div className={styles.diemInfoBar__profilePic_plusSign}>
               <Image src={plus} alt="more than eight users" />
             </div>
+          ) : (
+            ''
           )}
-          {currentDiem && currentDiem.users // always truthy
-            ? currentDiem.users.map((el) => {
-                //TODO Online user logic goes here
+
+          {currentDiem.users &&
+            currentDiem.users.map((el) => {
+              if (count < 8)
                 return (
                   <div key={el.id} className={styles.diemInfoBar__profilePic}>
                     <Image
@@ -80,10 +152,11 @@ const DiemInfoBar: React.FunctionComponent = ({
                       width="50"
                       alt="Picture of the author"
                     />
+                    {count++}
                   </div>
                 );
-              })
-            : ""}
+
+            })}
         </div>
         <div className={styles.diemInfoBar__buttons}>
           <button type="button">

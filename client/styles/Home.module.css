@@ -1,17 +1,20 @@
 .container {
+  position: relative;
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  top: 12vh;
 }
 
 .tiles {
-  width: 25%;
+  width: 20%;
 }
 
 .diem {
-  width: 75%;
+  width: 80%;
 }
+
 .events {
   /* color: red; */
   display: flex;
@@ -19,11 +22,21 @@
   padding: 2px;
   margin: 4px;
   /* border: black; */
-  justify-content: space-between; /* border-width: 5px; */
+  justify-content: flex-start; /* border-width: 5px; */
   border-style: solid;
   border-radius: 7px;
   width: 30vw;
   font-size: large;
+}
+
+.eventgroup {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.event_items {
+  font-size: 30px;
+  padding-right: 10px;
 }
 
 .addEvent {
