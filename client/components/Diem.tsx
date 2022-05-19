@@ -47,6 +47,16 @@ const Diem: React.FunctionComponent = ({
   const queryMap = (e) => {
     e.preventDefault();
     setMapPin(e.target.query.value);
+    currentDiem.id && hooks.modifyDiemMap(currentDiem.id, e.target.query.value);
+    setAllDiems((diems) => {
+      const copy = diems;
+      const mapped = copy.map((diem) => {
+        diem.id === currentDiem.id ? (diem.map = e.target.query.value) : diem;
+        return diem;
+      });
+      return mapped;
+    });
+
     setDisplayMap((prev) => {
       return !prev;
     });
@@ -64,7 +74,11 @@ const Diem: React.FunctionComponent = ({
       setBackgroundColor({
         'background-color': currentDiem && currentDiem.color,
       });
-  }, [currentDiem]);
+    if (currentDiem.map) setDisplayMap(true);
+    if (!currentDiem.map) setDisplayMap(false);
+
+    currentDiem.map && setMapPin(currentDiem.map);
+  }, [currentDiem, mapPin]);
 
   function addMapFunction() {
     setMap((prev) => {
@@ -125,10 +139,18 @@ const Diem: React.FunctionComponent = ({
         </div>
       )}
 
-
-      <GoogleMap currentDiem={currentDiem} setAllDiems={setAllDiems} />
-
-
+      {displayMap && (
+        <GoogleMap currentDiem={currentDiem} setAllDiems={setAllDiems} />
+      )}
+      {displayMap && (
+        <button
+          onClick={() => {
+            setDisplayMap(false);
+          }}
+        >
+          <Image src={deleteBin} width={20} height={20} />
+        </button>
+      )}
 
       <div className={styles.diem__events}>
         <AddNewEvent

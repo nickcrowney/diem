@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import hooks from '../services/ApiServices';
 
@@ -35,7 +34,7 @@ const GoogleMap = ({ currentDiem, setAllDiems }) => {
 
   return (
     <>
-      {showMapSearch && (
+      {/* {showMapSearch && (
         <form onSubmit={queryMap}>
           <input
             type="text"
@@ -48,7 +47,7 @@ const GoogleMap = ({ currentDiem, setAllDiems }) => {
             search
           </button>
         </form>
-      )}
+      )} */}
 
       {showMap && (
         <iframe
@@ -61,7 +60,6 @@ const GoogleMap = ({ currentDiem, setAllDiems }) => {
           src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBsNI21BHJIIKWSngJbtch5hnqfnLlTP6o&q=${mapPin}`}
         ></iframe>
       )}
-
     </>
   );
 };
