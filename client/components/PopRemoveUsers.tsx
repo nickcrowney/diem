@@ -1,19 +1,19 @@
-import React from 'react';
+import React from "react";
 
-import { useForm } from 'react-hook-form';
-import { useState } from 'react';
-import styles from './PopAddUsers.module.css';
-import props from '../services/ApiServices';
-import Image from 'next/image';
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import styles from "./PopAddUsers.module.css";
+import props from "../services/ApiServices";
+import Image from "next/image";
 
-import minus from '../public/images/minus.png';
-import Select from 'react-select';
+import minus from "../public/images/minus.png";
+import Select from "react-select";
 
 function PopRemoveUsers({ users, currentDiem, setCurrentDiem }) {
   const customStyles = {
     container: (provided) => ({
       ...provided,
-      width: '300px',
+      width: "300px",
     }),
   };
 
@@ -64,7 +64,7 @@ function PopRemoveUsers({ users, currentDiem, setCurrentDiem }) {
       setSelectedOptions([]);
       return obj;
     });
-    reset({ label: '', value: '' });
+    reset({ label: "", value: "" });
   };
 
   return (

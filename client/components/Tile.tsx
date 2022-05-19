@@ -1,12 +1,11 @@
-
-import { useContext } from 'react';
-import { SocketContext } from '../contexts/Socket';
-import React from 'react';
-import Image from 'next/image';
-import styles from './Tile.module.css';
-import hooks from '../services/ApiServices';
-import deleteBin from '../public/deleteBin.svg';
-import Popup from 'reactjs-popup';
+import { useContext } from "react";
+import { SocketContext } from "../contexts/Socket";
+import React from "react";
+import Image from "next/image";
+import styles from "./Tile.module.css";
+import hooks from "../services/ApiServices";
+import deleteBin from "../public/deleteBin.svg";
+import Popup from "reactjs-popup";
 
 const Tile: React.FunctionComponent = ({
   allDiems,
@@ -19,9 +18,8 @@ const Tile: React.FunctionComponent = ({
 
   const divClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
     setCurrentDiem(diem);
-    socket.emit('leavingRoom');
-    socket.emit('joiningRoom', String(diem.id));
-
+    socket.emit("leavingRoom");
+    socket.emit("joiningRoom", String(diem.id));
   };
   const clickDeleteDiem = () => {
     diem.events &&

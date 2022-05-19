@@ -20,20 +20,21 @@ model Diem {
   // created    DateTime  @default(now())
   // author      User @relation(fields:[authorId], references: [id])
   // authorId    Int
-  map        String?
+  map         String?
   color       String?
   //Message Message[]
 }
 
 //TODO
 model Message {
-  id         Int    @id @default(autoincrement())
+  id         Int     @id @default(autoincrement())
   author     String
   content    String
   //Diem    Diem?  @relation(fields: [diemId], references: [id])
   metaDiemId Int?
   timestamp  String
-  metaDiem   Diem?  @relation(fields: [metaDiemId], references: [id])
+  metaDiem   Diem?   @relation(fields: [metaDiemId], references: [id])
+  name       String?
 
 }
 

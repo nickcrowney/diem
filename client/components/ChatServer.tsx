@@ -1,14 +1,18 @@
-import React, { useState, useEffect, useContext } from 'react';
-import hooks from '../services/ApiServices';
-import Message from './Message';
-import { SocketContext } from '../contexts/Socket';
-import { LoginContext } from '../contexts/Context';
-import styles from './ChatServer.module.css';
-import { useForm } from 'react-hook-form';
+
+import React, { useState, useEffect, useContext } from "react";
+import hooks from "../services/ApiServices";
+import Message from "./Message";
+import { SocketContext } from "../contexts/Socket";
+import { LoginContext } from "../contexts/Context";
+import styles from "./ChatServer.module.css";
+import { useForm } from "react-hook-form";
+
+
 const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
   const socket = useContext(SocketContext);
   const { loginInfo } = useContext(LoginContext);
   const { register, handleSubmit, reset } = useForm();
+
   const [history, setHistory] = useState([]);
   useEffect(() => {
     console.warn(currentDiem.id);
@@ -30,6 +34,7 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
       )
     );
   });
+
   function handleSubmitMessage(data: React.FormEvent<HTMLInputElement>) {
     hooks.modifyDiemChatHistory(
       data.message,
@@ -46,6 +51,7 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
       name: loginInfo.displayName,
     };
     socket.emit('message', mes);
+
     setHistory((prev) => [...prev, mes]);
   }
   return (
@@ -69,7 +75,7 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
                 name="message"
                 className={styles.form}
                 onSubmit={handleSubmit((data) => {
-                  console.log(data, 'DATA');
+
                   handleSubmitMessage(data);
                 })}
               >
@@ -79,7 +85,9 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
                   id="inputValue"
                   name="inputValue"
                   className="py-2 px-4 rounded"
+
                   {...register('message')}
+
                   placeholder="enter message"
                 />
                 <input

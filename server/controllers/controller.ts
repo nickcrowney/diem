@@ -1,10 +1,11 @@
-import { User, Diem, Event } from '.prisma/client';
-import { PrismaClient } from '@prisma/client';
-import { time } from 'console';
+import { User, Diem, Event } from ".prisma/client";
+import { PrismaClient } from "@prisma/client";
+import { time } from "console";
 //import { profile } from "console";
-import Express, { Request, Response } from 'express';
-import { colors } from 'react-select/dist/declarations/src/theme';
-import { diems } from '../data/data';
+import Express, { Request, Response } from "express";
+import { colors } from "react-select/dist/declarations/src/theme";
+import { Namespace } from "socket.io";
+import { diems } from "../data/data";
 const prisma = new PrismaClient();
 
 export async function getUsers(req: Request, res: Response) {
@@ -71,9 +72,9 @@ export async function createDiem(req: Request, res: Response) {
       },
     },
   });
-  console.log('NEW DIEM');
-  console.log(title, 'title');
-  console.log(city, 'city');
+  console.log("NEW DIEM");
+  console.log(title, "title");
+  console.log(city, "city");
   res.json(diem);
 }
 
@@ -96,7 +97,7 @@ export async function createEvent(req: Request, res: Response) {
 }
 
 export async function createMessage(req: Request, res: Response) {
-  const { message, id, author, time } = req.body;
+  const { message, id, author, time, name } = req.body;
   const mes = await prisma.message.create({
     data: {
       content: message,
@@ -107,6 +108,7 @@ export async function createMessage(req: Request, res: Response) {
       },
       author: author,
       timestamp: time,
+      name: name,
     },
   });
   res.json(mes);

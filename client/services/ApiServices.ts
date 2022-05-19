@@ -138,16 +138,16 @@ const submitNewEvent = async (
   // createdAt: Number
 ) => {
   try {
-    const response = await fetch('http://localhost:4000/event', {
-      method: 'POST',
+    const response = await fetch("http://localhost:4000/event", {
+      method: "POST",
 
       body: JSON.stringify({ title, id, location, time }),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
     const data = await response.json();
-    console.log(data, 'SUBMITTED NEW EVENT');
+    console.log(data, "SUBMITTED NEW EVENT");
     return data;
   } catch (error) {
     console.log(error);
@@ -185,12 +185,15 @@ const modifyDiemChatHistory = async (
   message: String,
   id: Number,
   author: String,
-  time: String
+  time: String,
+  name: String
 ) => {
-  console.log({ message, id, author, time }, 'THE MESSAGE');
-  const response = await fetch('http://localhost:4000/message', {
-    method: 'POST',
-    body: JSON.stringify({ message, id, author, time }),
+
+  console.log({ message, id, author, time, name }, "THE MESSAGE");
+  const response = await fetch("http://localhost:4000/message", {
+    method: "POST",
+    body: JSON.stringify({ message, id, author, time, name }),
+
     headers: {
       'Content-Type': 'application/json',
     },

@@ -36,6 +36,8 @@ io.on("connection", (socket: Socket) => {
   //Recieving online status
   socket.on("currentlyOnline", (loginInf) => {
     onlineUserIds.push(loginInf);
+    // onlineUserIds.filter((val, ind) => onlineUserIds.indexOf(val) === ind);
+    socket.emit("onlineUsers", onlineUserIds);
     currentUser = loginInf;
 
     console.log(`${loginInf} is currently online`);
@@ -45,7 +47,7 @@ io.on("connection", (socket: Socket) => {
   //new chat
   socket.on("message", (message) => {
     //emit the array of full chat history here
-    //socket.emit("updatedMessages", message);
+    // socket.emit("updatedMessages", message);
     socket.to(currentRoom).emit("updatedMessages", message);
   });
 
@@ -65,7 +67,6 @@ io.on("connection", (socket: Socket) => {
 
   socket.on("disconnect", (loginInfo) => {
     onlineUserIds = onlineUserIds.filter((el) => el !== currentUser);
-    socket.emit("onlineUsers", onlineUserIds);
     console.log(currentUser + " has disconnected");
   });
 });

@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import AddNewEvent from './AddNewEvent';
-import DiemInfoBar from './DiemInfoBar';
-import ChatServer from './ChatServer';
-import PopAddUsers from './PopAddUsers';
-import PopRemoveUsers from './PopRemoveUsers';
-import DiemColorPicker from './DiemColorPicker';
-import calendar from '../public/images/calendar.png';
-import chat from '../public/images/chat.png';
-import world from '../public/images/world.png';
-import GoogleMap from './GoogleMap';
-import styles from './Diem.module.css';
-import DisplayEvents from './DisplayEvents';
-import hooks from '../services/ApiServices';
-import deleteBin from '../public/deleteBin.svg';
-import Popup from 'reactjs-popup';
+
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import AddNewEvent from "./AddNewEvent";
+import DiemInfoBar from "./DiemInfoBar";
+import PopAddUsers from "./PopAddUsers";
+import PopRemoveUsers from "./PopRemoveUsers";
+import DiemColorPicker from "./DiemColorPicker";
+import calendar from "../public/images/calendar.png";
+import chat from "../public/images/chat.png";
+import GoogleMap from "./GoogleMap";
+import styles from "./Diem.module.css";
+import DisplayEvents from "./DisplayEvents";
+import hooks from "../services/ApiServices";
+import deleteBin from "../public/deleteBin.svg";
+import Popup from "reactjs-popup";
+import ChatServer from "./ChatServer";
+
+
 
 const Diem: React.FunctionComponent = ({
+  onlineUsers,
   currentDiem,
   setCurrentDiem,
   users,
@@ -74,7 +77,7 @@ const Diem: React.FunctionComponent = ({
   useEffect(() => {
     currentDiem &&
       setBackgroundColor({
-        'background-color': currentDiem && currentDiem.color,
+        "background-color": currentDiem && currentDiem.color,
       });
     if (currentDiem.map) setDisplayMap(true);
     if (!currentDiem.map) setDisplayMap(false);
@@ -87,6 +90,7 @@ const Diem: React.FunctionComponent = ({
       return !prev;
     });
   }
+
 
   // const clickDeleteDiem = () => {
   //   currentDiem.events &&
@@ -105,9 +109,11 @@ const Diem: React.FunctionComponent = ({
   //   }
   // };
 
+
   return (
     <div className={styles.diem} style={backgroundColor}>
       <DiemInfoBar
+        onlineUsers={onlineUsers}
         currentDiem={currentDiem}
         setCurrentDiem={setCurrentDiem}
         setAddRemoveUser={setAddRemoveUser}
@@ -219,6 +225,9 @@ const Diem: React.FunctionComponent = ({
               </form>
             )}
           </div>
+
+      
+
           <DiemColorPicker
             backgroundColor={backgroundColor}
             setBackgroundColor={setBackgroundColor}
@@ -227,11 +236,13 @@ const Diem: React.FunctionComponent = ({
           />
         </div>
       </div>
+
       {showChat && (
         <div>
           <ChatServer currentDiem={currentDiem} />
         </div>
       )}
+
     </div>
   );
 };

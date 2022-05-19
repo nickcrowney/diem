@@ -14,7 +14,6 @@ const currentDate = dayjs().toISOString().slice(0, 10);
 
 const Diems: NextPage = (props) => {
   const [onlineUsers, setOnlineUsers] = useState([]); //Grab onlineStatus emits from other users and use this to render online
-  //const { loginInfo, setLoginInfo } = useLoginContext();
   const { loginInfo } = useContext(LoginContext);
   const [newDiemPop, setNewDiemPop] = useState(false);
   const [data, setData] = useState('');
@@ -31,9 +30,9 @@ const Diems: NextPage = (props) => {
     id: 1,
     title: 'Add new diem',
   });
-  const [trap, setTrap] = useState('');
+  const [trap, setTrap] = useState("");
   useEffect(() => {
-    console.log('RERENDER');
+    console.log("RERENDER");
   }, [trap]);
 
   socket.on('connect', (arg) => {
@@ -43,7 +42,9 @@ const Diems: NextPage = (props) => {
   });
 
   // //When we recieve current online user update, we set state of current online users
+
   socket.on('onlineUsers', (onlineIds) => {
+
     setOnlineUsers((prev) => onlineIds);
     console.log('Updated Online Users ', onlineIds);
   });
@@ -75,7 +76,7 @@ const Diems: NextPage = (props) => {
             return el.events;
           })
         );
-        console.log('RENDER ONCE DIEM');
+        console.log("RENDER ONCE DIEM");
 
         setCurrentDiem(resFuture[0]);
         setBackgroundColor({ 'background-color': resFuture[0].color });
@@ -121,6 +122,7 @@ const Diems: NextPage = (props) => {
         <div className={styles.diem}>
           {currentDiem && (
             <Diem
+              onlineUsers={onlineUsers}
               mainDiem={mainDiem}
               currentDiem={currentDiem}
               setTrap={setTrap}
