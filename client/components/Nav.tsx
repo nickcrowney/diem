@@ -1,14 +1,13 @@
-import React, { useEffect, useContext } from "react";
-import styles from "./Nav.module.css";
-import Image from "next/image";
-import more from "../public/images/more.png";
-import menu from "../public/images/menu.png";
-import PopNewDiem from "./PopNewDiem";
-import usersHook from "../services/testHook";
-import hooks from "../services/ApiServices";
-import mypic from "../public/images/daniil-lobachev-XAo09LtQiAQ-unsplash.jpg";
-import useLoginContext from "../contexts/Context";
-
+import React, { useEffect, useContext } from 'react';
+import styles from './Nav.module.css';
+import Image from 'next/image';
+import more from '../public/images/more.png';
+import menu from '../public/images/menu.png';
+import PopNewDiem from './PopNewDiem';
+import usersHook from '../services/testHook';
+import hooks from '../services/ApiServices';
+import mypic from '../public/images/daniil-lobachev-XAo09LtQiAQ-unsplash.jpg';
+import useLoginContext from '../contexts/Context';
 
 const Nav = ({
   users,
@@ -17,6 +16,8 @@ const Nav = ({
   setNewDiemPop,
   setAllDiems,
   allDiems,
+  // loginInfo,
+  setRefresh,
 }) => {
   function handleClick() {
     setNewDiemPop((prev) => {
@@ -24,8 +25,7 @@ const Nav = ({
     });
   }
 
-
-  const { loginInfo, setLoginInfo } = useLoginContext();
+  // const { loginInfo } = useLoginContext();
 
   return (
     <div className={styles.navContainer}>
@@ -39,6 +39,8 @@ const Nav = ({
               allDiems={allDiems}
               setAllDiems={setAllDiems}
               users={users}
+              // loginInfo={loginInfo}
+              setRefresh={setRefresh}
             />
           )}
         </div>
