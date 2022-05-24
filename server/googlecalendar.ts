@@ -4,7 +4,6 @@ require('dotenv').config();
 const calendarId = process.env.CALENDAR_ID;
 const CLIENTEMAIL = process.env.CLIENTEMAIL;
 const PRIVATEKEY = process.env.PRIVATEKEY;
-// const CREDENTIALS = JSON.parse(process.env.CREDENTIALS)
 const SCOPES = 'https://www.googleapis.com/auth/calendar';
 const calendar = google.calendar({ version: 'v3' });
 

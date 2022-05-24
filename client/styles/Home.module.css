@@ -50,3 +50,9 @@
   border-bottom: 3px;
   border: black;
 }
+.eventpopup {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+}

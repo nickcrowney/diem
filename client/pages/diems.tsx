@@ -7,14 +7,12 @@ import styles from '../styles/Home.module.css';
 import dayjs from 'dayjs';
 import hooks from '../services/ApiServices';
 import { useLoginContext } from '../contexts/Context';
-import { LoginContext } from '../contexts/Context';
 import { SocketContext } from '../contexts/Socket';
 
 const currentDate = dayjs().toISOString().slice(0, 10);
 
 const Diems: NextPage = (props) => {
   const [onlineUsers, setOnlineUsers] = useState([]); //Grab onlineStatus emits from other users and use this to render online
-  const { loginInfo } = useContext(LoginContext);
   const [newDiemPop, setNewDiemPop] = useState(false);
   const [data, setData] = useState('');
   const [mainDiem, setDiem] = useState('');
@@ -30,10 +28,9 @@ const Diems: NextPage = (props) => {
     id: 1,
     title: 'Add new diem',
   });
-  const [trap, setTrap] = useState("");
-  useEffect(() => {
-    console.log("RERENDER");
-  }, [trap]);
+  const [trap, setTrap] = useState('');
+  const { loginInfo } = useLoginContext();
+  useEffect(() => {}, [trap]);
 
   socket.on('connect', (arg) => {
     console.log('connected to Sockets on front end');
@@ -44,7 +41,6 @@ const Diems: NextPage = (props) => {
   // //When we recieve current online user update, we set state of current online users
 
   socket.on('onlineUsers', (onlineIds) => {
-
     setOnlineUsers((prev) => onlineIds);
     console.log('Updated Online Users ', onlineIds);
   });
@@ -76,7 +72,6 @@ const Diems: NextPage = (props) => {
             return el.events;
           })
         );
-        console.log("RENDER ONCE DIEM");
 
         setCurrentDiem(resFuture[0]);
         setBackgroundColor({ 'background-color': resFuture[0].color });
@@ -94,6 +89,8 @@ const Diems: NextPage = (props) => {
         newDiemPop={newDiemPop}
         allDiems={allDiems}
         setAllDiems={setAllDiems}
+        loginInfo={loginInfo}
+        setRefresh={setRefresh}
       />
 
       <main className={styles.container}>
@@ -134,6 +131,7 @@ const Diems: NextPage = (props) => {
               setAllDiems={setAllDiems}
               refresh={refresh}
               setRefresh={setRefresh}
+              loginInfo={loginInfo}
             />
           )}
         </div>

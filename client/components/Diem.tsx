@@ -1,22 +1,19 @@
-
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import AddNewEvent from "./AddNewEvent";
-import DiemInfoBar from "./DiemInfoBar";
-import PopAddUsers from "./PopAddUsers";
-import PopRemoveUsers from "./PopRemoveUsers";
-import DiemColorPicker from "./DiemColorPicker";
-import calendar from "../public/images/calendar.png";
-import chat from "../public/images/chat.png";
-import GoogleMap from "./GoogleMap";
-import styles from "./Diem.module.css";
-import DisplayEvents from "./DisplayEvents";
-import hooks from "../services/ApiServices";
-import deleteBin from "../public/deleteBin.svg";
-import Popup from "reactjs-popup";
-import ChatServer from "./ChatServer";
-
-
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import AddNewEvent from './AddNewEvent';
+import DiemInfoBar from './DiemInfoBar';
+import PopAddUsers from './PopAddUsers';
+import PopRemoveUsers from './PopRemoveUsers';
+import DiemColorPicker from './DiemColorPicker';
+import DisplayEvents from './DisplayEvents';
+import ChatServer from './ChatServer';
+import GoogleMap from './GoogleMap';
+import styles from './Diem.module.css';
+import hooks from '../services/ApiServices';
+import calendar from '../public/images/calendar.png';
+import chat from '../public/images/chat.png';
+import deleteBin from '../public/deleteBin.svg';
+import world from '../public/images/world.png';
 
 const Diem: React.FunctionComponent = ({
   onlineUsers,
@@ -29,9 +26,9 @@ const Diem: React.FunctionComponent = ({
   setAllDiems,
   refresh,
   setRefresh,
+  loginInfo,
 }) => {
   const [addRemoveUser, setAddRemoveUser] = useState(false);
-  const [addMap, setMap] = useState(false);
   const [showMapSearch, setShowMapSearch] = useState(false);
   const [mapPin, setMapPin] = useState('');
   const [displayMap, setDisplayMap] = useState(false);
@@ -77,38 +74,13 @@ const Diem: React.FunctionComponent = ({
   useEffect(() => {
     currentDiem &&
       setBackgroundColor({
-        "background-color": currentDiem && currentDiem.color,
+        'background-color': currentDiem && currentDiem.color,
       });
     if (currentDiem.map) setDisplayMap(true);
     if (!currentDiem.map) setDisplayMap(false);
 
     currentDiem.map && setMapPin(currentDiem.map);
   }, [currentDiem, mapPin]);
-
-  function addMapFunction() {
-    setMap((prev) => {
-      return !prev;
-    });
-  }
-
-
-  // const clickDeleteDiem = () => {
-  //   currentDiem.events &&
-  //     currentDiem.events.forEach((el) => {
-  //       console.log(el.id, 'ID OF EL');
-  //       hooks.deleteEvent(el.id);
-  //     });
-  //   currentDiem.id && hooks.deleteDiem(currentDiem.id);
-  //   currentDiem.id &&
-  //     setAllDiems(
-  //       (prev) => (prev = prev.filter((el) => el.id !== currentDiem.id))
-  //     );
-  //   if (currentDiem.length) setCurrentDiem(allDiems[0]); // maybe not using
-  //   else {
-  //     setCurrentDiem(undefined);
-  //   }
-  // };
-
 
   return (
     <div className={styles.diem} style={backgroundColor}>
@@ -120,7 +92,7 @@ const Diem: React.FunctionComponent = ({
         allDiems={allDiems}
         setAllDiems={setAllDiems}
         refresh={refresh}
-        setRefresh={setRefresh}
+        loginInfo={loginInfo}
       />
 
       {addRemoveUser && (
@@ -135,31 +107,26 @@ const Diem: React.FunctionComponent = ({
             currentDiem={currentDiem}
             setCurrentDiem={setCurrentDiem}
           />
-          {/* <div>
-            {currentDiem && (
-              <DisplayEvents
-                setCurrentDiem={setCurrentDiem}
-                currentDiem={currentDiem}
-                state={state}
-                setState={setState}
-              />
-            )}
-          </div> */}
         </div>
       )}
-
-      {displayMap && (
-        <GoogleMap currentDiem={currentDiem} setAllDiems={setAllDiems} />
-      )}
-      {displayMap && (
-        <button
-          onClick={() => {
-            setDisplayMap(false);
-          }}
-        >
-          <Image src={deleteBin} width={20} height={20} />
-        </button>
-      )}
+      <div className={styles.map}>
+        <div>
+          {displayMap && (
+            <GoogleMap currentDiem={currentDiem} setAllDiems={setAllDiems} />
+          )}
+        </div>
+        <div className={styles.map_delete}>
+          {displayMap && (
+            <button
+              onClick={() => {
+                setDisplayMap(false);
+              }}
+            >
+              <Image src={deleteBin} width={25} height={25} />
+            </button>
+          )}
+        </div>
+      </div>
 
       <div className={styles.diem__events}>
         <AddNewEvent
@@ -226,8 +193,6 @@ const Diem: React.FunctionComponent = ({
             )}
           </div>
 
-      
-
           <DiemColorPicker
             backgroundColor={backgroundColor}
             setBackgroundColor={setBackgroundColor}
@@ -242,7 +207,6 @@ const Diem: React.FunctionComponent = ({
           <ChatServer currentDiem={currentDiem} />
         </div>
       )}
-
     </div>
   );
 };

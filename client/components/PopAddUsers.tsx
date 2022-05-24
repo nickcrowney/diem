@@ -1,18 +1,16 @@
-import React, { Component } from "react";
-
-import { useForm, Controller } from "react-hook-form";
-import { useEffect, useState } from "react";
-import styles from "./PopAddUsers.module.css";
-import props from "../services/ApiServices";
-import Image from "next/image";
-import plus from "../public/images/more.png";
-import Select from "react-select";
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import Select from 'react-select';
+import styles from './PopAddUsers.module.css';
+import props from '../services/ApiServices';
+import Image from 'next/image';
+import plus from '../public/images/more.png';
 
 function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
   const customStyles = {
     container: (provided) => ({
       ...provided,
-      width: "300px",
+      width: '300px',
     }),
   };
 
@@ -32,7 +30,7 @@ function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
   }));
 
   const handleChange = (options) => {
-    console.log(options, "OPTIONS");
+    console.log(options, 'OPTIONS');
 
     setSelectedOptions((prev) => {
       const option = options[options.length - 1];
@@ -58,7 +56,7 @@ function PopAddUsers({ users, currentDiem, setCurrentDiem }) {
       return (prev = obj);
     });
     setSelectedOptions([]);
-    reset({ label: "", value: "" });
+    reset({ label: '', value: '' });
   };
 
   return (

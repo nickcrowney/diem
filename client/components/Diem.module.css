@@ -91,3 +91,14 @@
   margin-top: 1rem;
   margin-right: 1rem;
 } */
+.map {
+  position: relative;
+  /* display: flex;
+  flex-direction: row; */
+}
+
+.map_delete {
+  position: absolute;
+  top: 28px;
+  right: 18px;
+}

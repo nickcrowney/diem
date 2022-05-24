@@ -1,12 +1,10 @@
-
-import React, { useState, useEffect, useContext } from "react";
-import hooks from "../services/ApiServices";
-import Message from "./Message";
-import { SocketContext } from "../contexts/Socket";
-import { LoginContext } from "../contexts/Context";
-import styles from "./ChatServer.module.css";
-import { useForm } from "react-hook-form";
-
+import React, { useState, useEffect, useContext } from 'react';
+import { useForm } from 'react-hook-form';
+import hooks from '../services/ApiServices';
+import Message from './Message';
+import { SocketContext } from '../contexts/Socket';
+import { LoginContext } from '../contexts/Context';
+import styles from './ChatServer.module.css';
 
 const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
   const socket = useContext(SocketContext);
@@ -63,7 +61,7 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
               <div className={styles.message_container}>
                 {history &&
                   history.map((el) => {
-                    return <Message el={el} id="right" />;
+                    return <Message message={el} id="right" key={el.id} />;
                   })}
               </div>
             )}
@@ -75,19 +73,15 @@ const ChatServer: React.FunctionComponent = ({ currentDiem }) => {
                 name="message"
                 className={styles.form}
                 onSubmit={handleSubmit((data) => {
-
                   handleSubmitMessage(data);
                 })}
               >
-                {/* <label htmlFor="userLogin">Message Container</label> */}
                 <input
                   type="text"
                   id="inputValue"
                   name="inputValue"
                   className="py-2 px-4 rounded"
-
                   {...register('message')}
-
                   placeholder="enter message"
                 />
                 <input

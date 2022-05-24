@@ -1,11 +1,7 @@
-import { User, Diem, Event } from ".prisma/client";
-import { PrismaClient } from "@prisma/client";
-import { time } from "console";
-//import { profile } from "console";
-import Express, { Request, Response } from "express";
-import { colors } from "react-select/dist/declarations/src/theme";
-import { Namespace } from "socket.io";
-import { diems } from "../data/data";
+import { User, Diem, Event } from '.prisma/client';
+import { PrismaClient } from '@prisma/client';
+import Express, { Request, Response } from 'express';
+import { colors } from 'react-select/dist/declarations/src/theme';
 const prisma = new PrismaClient();
 
 export async function getUsers(req: Request, res: Response) {
@@ -37,15 +33,6 @@ export async function getEvents(req: Request, res: Response) {
   res.json(events);
 }
 
-// export async function getProfiles(req: Request, res: Response) {
-//   const profiles = await prisma.profile.findMany({
-//     // include: {
-//     //   diems: { include: { events: true } },
-//     // },
-//   });
-//   res.json(profiles);
-// }
-
 export async function createUser(req: Request, res: Response) {
   const { name, email, picture } = req.body;
   const user = await prisma.user.create({
@@ -62,7 +49,7 @@ export async function createDiem(req: Request, res: Response) {
   const { title, date, city, user, color } = req.body;
   const diem = await prisma.diem.create({
     data: {
-      title: title, //Only title is required to create diem
+      title: title,
       date: date,
       color: color,
       users: {
@@ -72,18 +59,17 @@ export async function createDiem(req: Request, res: Response) {
       },
     },
   });
-  console.log("NEW DIEM");
-  console.log(title, "title");
-  console.log(city, "city");
+  console.log('NEW DIEM');
+  console.log(title, 'title');
+  console.log(city, 'city');
   res.json(diem);
 }
 
-//TODO
 export async function createEvent(req: Request, res: Response) {
   const { title, id, location, time } = req.body;
   const event = await prisma.event.create({
     data: {
-      title: title, //Only title is required to create diem
+      title: title,
       metaDiem: {
         connect: {
           id: id,
@@ -148,7 +134,6 @@ export async function updateUser(req: Request, res: Response) {
     data: {
       name: name,
       diems: diems,
-      //profile: profile,
     },
   });
   res.json(updatedUser);
@@ -168,20 +153,6 @@ export async function updateUserDiems(req: Request, res: Response) {
   res.json(updatedUser);
 }
 
-//Patch a users's profile
-// export async function updateUserProfile(req: Request, res: Response) {
-//   const { id, profile } = req.body;
-//   const updatedUser = await prisma.user.update({
-//     where: {
-//       id: id,
-//     },
-//     data: {
-//       profile: profile,
-//     },
-//   });
-//   res.json(updatedUser);
-// }
-
 export async function updateDiem(req: Request, res: Response) {
   const { diemId, userId } = req.body;
   const updatedUser = await prisma.diem.update({
@@ -189,14 +160,11 @@ export async function updateDiem(req: Request, res: Response) {
       id: diemId,
     },
     data: {
-      // title: title,
-      // events: events,
       users: {
         connect: {
           id: userId,
         },
       },
-      // date: date,
     },
   });
   res.json(updatedUser);
@@ -209,14 +177,11 @@ export async function removeDiemUser(req: Request, res: Response) {
       id: diemId,
     },
     data: {
-      // title: title,
-      // events: events,
       users: {
         disconnect: {
           id: userId,
         },
       },
-      // date: date,
     },
   });
   res.json(updatedUser);

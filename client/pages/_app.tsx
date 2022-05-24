@@ -1,11 +1,9 @@
-import "../styles/globals.css";
-import type { AppProps } from "next/app";
-import { LoginContext } from "../contexts/Context";
-import { useState } from "react";
-import { OnlineUsersContext } from "../contexts/OnlineUsers";
-//import ChatServer from "../components/ChatServer";
-
-import { SocketContext, socket } from "../contexts/Socket";
+import { useState } from 'react';
+import type { AppProps } from 'next/app';
+import { LoginContext } from '../contexts/Context';
+import { OnlineUsersContext } from '../contexts/OnlineUsers';
+import '../styles/globals.css';
+import { SocketContext, socket } from '../contexts/Socket';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [loginInfo, setLoginInfo] = useState();

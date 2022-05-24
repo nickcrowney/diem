@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
-import hooks from '../services/ApiServices';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import hooks from '../services/ApiServices';
 import styles from '../styles/Home.module.css';
-import { useState } from 'react';
 
 const AddNewEvent = ({
   currentDiem,
@@ -13,8 +12,6 @@ const AddNewEvent = ({
 }) => {
   const [buttonDisplay, setButtonDisplay] = useState('none');
   const { register, handleSubmit, reset } = useForm();
-  const [data, setData] = useState('Add new event');
-  const [eventText, setEventText] = useState('Add new event here...');
 
   useEffect(() => {}, [currentDiem]);
   const submittedEvent = (event) => {
@@ -32,14 +29,9 @@ const AddNewEvent = ({
                 id: res.id,
                 title: res.title,
                 metaDiemId: currentDiem.id,
-                // createdAt: Number(Date.now().toString().slice(0, 10)),
               },
             ];
             setCurrentDiem((prev) => {
-              // { ...currentDiem, events: copy } WHY WONT WORK
-
-              // console.log(prev, 'WHAT');
-              // return prev;
               prev.events = copy;
               return prev;
             });
@@ -48,14 +40,7 @@ const AddNewEvent = ({
           });
         });
   };
-  const openOptions = () => {
-    console.log('options open');
-  };
-  const eventSubmitted = () => {
-    submittedEvent(eventText);
-    setButtonDisplay('none');
-    setEventText('Add new event here...');
-  };
+
   useEffect(() => {}, [backgroundColor]);
   useEffect(() => {}, [state]);
 
